@@ -101,7 +101,6 @@
             background-color: #0284c7;
         }
 
-        /* زر خاص للأطباء الباحثين عن عيادات (الطلب الجديد) */
         .btn-doctor-search {
             background-color: #10b981;
             color: white;
@@ -145,7 +144,7 @@
         }
 
         .filter-card.doctor-mode {
-            border-color: #10b981; /* إطار أخضر خاص بالبحث المباشر للأطباء */
+            border-color: #10b981;
         }
 
         .filter-group {
@@ -241,6 +240,35 @@
 
         .card-info li {
             margin-bottom: 8px;
+        }
+
+        /* تنسيق رقم الهاتف البارز ورابط الواتساب */
+        .whatsapp-box {
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            text-align: center;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #25d366;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 10px 16px;
+            border-radius: 8px;
+            width: 100%;
+            box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3);
+            transition: background-color 0.2s;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #20ba5a;
         }
 
         .no-results {
@@ -371,6 +399,12 @@
                             <li><strong>المنطقة:</strong> مركز المحافظة</li>
                             <li><strong>التفاصيل:</strong> متوفرة ضمن مجمع طبي رصين مع إيجار مناسب.</li>
                         </ul>
+                        <!-- زر الواتساب ورقم الهاتف البارز -->
+                        <div class="whatsapp-box">
+                            <a href="https://wa.me/9647700000000?text=مرحباً، أستفسر عن العيادة الشاغرة في ديالى" target="_blank" class="whatsapp-btn">
+                                💬 07700000000 (تواصل واتساب)
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -388,6 +422,12 @@
                             <li><strong>المنطقة:</strong> الرصافة</li>
                             <li><strong>التفاصيل:</strong> تحتوي على كرسي أسنان حديث وكادر مساعدة.</li>
                         </ul>
+                        <!-- زر الواتساب ورقم الهاتف البارز -->
+                        <div class="whatsapp-box">
+                            <a href="https://wa.me/9647800000000?text=مرحباً، أستفسر عن عيادة الأسنان في بغداد الرصافة" target="_blank" class="whatsapp-btn">
+                                💬 07800000000 (تواصل واتساب)
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -405,6 +445,12 @@
                             <li><strong>المنطقة:</strong> الجانب الأيسر</li>
                             <li><strong>التفاصيل:</strong> موقع حيوي وإقبال مراجعين ممتاز.</li>
                         </ul>
+                        <!-- زر الواتساب ورقم الهاتف البارز -->
+                        <div class="whatsapp-box">
+                            <a href="https://wa.me/9647500000000?text=مرحباً، أستفسر عن عيادة الباطنية في نينوى" target="_blank" class="whatsapp-btn">
+                                💬 07500000000 (تواصل واتساب)
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -438,7 +484,6 @@
             document.getElementById('resultsContainer').style.display = 'block';
             document.getElementById('filterSection').scrollIntoView({ behavior: 'smooth' });
             
-            // إعادة ضبط الخيارات عند تبديل الزر
             document.getElementById('stepSpecialty').value = "";
             document.getElementById('stepGov').value = "";
             document.getElementById('stepGov').disabled = true;
