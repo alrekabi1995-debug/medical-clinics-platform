@@ -21,7 +21,7 @@
         .hero {
             background-color: #0f172a;
             color: #ffffff;
-            padding: 60px 20px 80px;
+            padding: 50px 20px 60px;
             text-align: center;
             border-bottom: 4px solid #f59e0b;
         }
@@ -33,19 +33,19 @@
             border-radius: 20px;
             font-size: 14px;
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .hero p {
             color: #94a3b8;
             max-width: 600px;
-            margin: 0 auto 30px;
+            margin: 0 auto 25px;
             line-height: 1.6;
         }
 
@@ -58,7 +58,7 @@
         }
 
         .btn {
-            padding: 14px 28px;
+            padding: 12px 24px;
             border-radius: 8px;
             font-weight: 700;
             text-decoration: none;
@@ -88,50 +88,52 @@
             background-color: #334155;
         }
 
-        /* Search & Filter Box */
-        .search-container {
-            max-width: 900px;
-            margin: -30px auto 40px;
+        /* Cascading Filter Section */
+        .filter-section {
+            max-width: 1000px;
+            margin: -25px auto 40px;
             padding: 0 20px;
         }
 
-        .search-box {
+        .filter-card {
             background: #ffffff;
-            padding: 15px;
+            padding: 20px;
             border-radius: 12px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
         }
 
-        .search-input {
-            flex: 1;
-            min-width: 220px;
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .filter-group label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #475569;
+        }
+
+        .filter-select {
             border: 1px solid #e2e8f0;
-            padding: 12px 16px;
+            padding: 10px 14px;
             border-radius: 8px;
-            font-size: 15px;
+            font-size: 14px;
             outline: none;
             background-color: #fff;
+            color: #0f172a;
         }
 
-        .search-btn {
-            background-color: #0f172a;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.2s;
+        .filter-select:disabled {
+            background-color: #f1f5f9;
+            color: #94a3b8;
+            cursor: not-allowed;
         }
 
-        .search-btn:hover {
-            background-color: #1e293b;
-        }
-
-        /* Listings Section */
+        /* Listings Results Section */
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -148,11 +150,6 @@
             font-size: 1.5rem;
         }
 
-        .section-header p {
-            color: #64748b;
-            margin-top: 5px;
-        }
-
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -164,12 +161,11 @@
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            transition: transform 0.2s;
+            display: none; /* مخفية افتراضياً حتى تتم مطابقة الخطوات بالكامل */
         }
 
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        .card.active-match {
+            display: block; /* تظهر عند المطابقة التامة */
         }
 
         .card-header {
@@ -201,116 +197,253 @@
         .card-info li {
             margin-bottom: 8px;
         }
+
+        .no-results {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+            grid-column: 1 / -1;
+            display: none;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <span class="badge">وساطة وتنسيق موقعي متخصص</span>
-        <h1>منصة عيادات طبية للتنسيق الطبي</h1>
-        <p>نربط الأطباء بأفضل العيادات الشاغرة في المجمعات والمراكز الطبية المميزة، ونساعد المجمعات في استقطاب الكفاءات الطبية.</p>
+    <main>
+        <section class="hero">
+            <span class="badge">وساطة وتنسيق موقعي متخصص</span>
+            <h1>منصة عيادات طبية للتنسيق الطبي</h1>
+            <p>نربط الأطباء بأفضل العيادات الشاغرة في المجمعات والمراكز الطبية المميزة.</p>
 
-        <div class="cta-container">
-            <!-- زر الأطباء (مربوط باستمارة Tally للأطباء) -->
-            <a href="https://tally.so/r/7RrE0Z" target="_blank" class="btn btn-primary">
-                👨‍⚕️ أنا طبيب أبحث عن عيادة
-            </a>
-            
-            <!-- زر أصحاب المجمعات (مربوط باستمارة Tally للمجمعات) -->
-            <a href="https://tally.so/r/gD6z6l" target="_blank" class="btn btn-secondary">
-                🏢 أصحاب مجمع / طلب طبيب
-            </a>
-        </div>
-    </section>
-
-    <!-- Search & Filter Section -->
-    <div class="search-container">
-        <div class="search-box">
-            <!-- فلتر حسب التخصص -->
-            <select id="filterSpecialty" class="search-input">
-                <option value="">اختر التخصص الطبي...</option>
-                <option value="جلدية وتجميل">جلدية وتجميل</option>
-                <option value="باطنية">باطنية</option>
-                <option value="أسنان">طب وجراحة الأسنان</option>
-            </select>
-
-            <!-- فلتر حسب المنطقة -->
-            <select id="filterLocation" class="search-input">
-                <option value="">اختر المنطقة / الشارع...</option>
-                <option value="شارع 20">شارع 20</option>
-                <option value="وسط المدينة">وسط المدينة</option>
-            </select>
-
-            <!-- زر التصفية -->
-            <button type="button" onclick="filterCards()" class="search-btn">بحث مطابق</button>
-        </div>
-    </div>
-
-    <!-- Listings -->
-    <div class="container">
-        <div class="section-header">
-            <h2>فرص ومواقع عيادات متاحة</h2>
-            <p>مواقع ومساحات شاغرة جاهزة للاستئجار أو التعاقد في أفضل المجمعات الطبية</p>
-        </div>
-
-        <div class="grid" id="listingsGrid">
-            <!-- Card 1 -->
-            <div class="card" data-specialty="جلدية وتجميل باطنية" data-location="شارع 20">
-                <div class="card-header bg-orange">
-                    <span>موقع مميز</span>
-                    <span>شاغرة حالياً</span>
-                </div>
-                <div class="card-body">
-                    <h3>عيادة شاغرة في مجمع طبي متكامل</h3>
-                    <ul class="card-info">
-                        <li><strong>التخصص المطلوب:</strong> جلدية وتجميل / أو باطنية</li>
-                        <li><strong>الموقع:</strong> شارع 20 - موقع حيوي جداً</li>
-                        <li><strong>الخدمات:</strong> مصعد، استعلامات، كادر تمريضي</li>
-                        <li><strong>الحالة:</strong> جاهزة للتشغيل والديكور ممتاز</li>
-                    </ul>
-                </div>
+            <div class="cta-container">
+                <a href="https://tally.so/r/7RrE0Z" target="_blank" class="btn btn-primary">
+                    👨‍⚕️ أنا طبيب أبحث عن عيادة
+                </a>
+                <a href="https://tally.so/r/gD6z6l" target="_blank" class="btn btn-secondary">
+                    🏢 أصحاب مجمع / طلب طبيب
+                </a>
             </div>
+        </section>
 
-            <!-- Card 2 -->
-            <div class="card" data-specialty="أسنان" data-location="وسط المدينة">
-                <div class="card-header bg-blue">
-                    <span>طلب استقطاب طبيب</span>
-                    <span>مجمع طبي قائم</span>
+        <!-- Cascading Filter Section (New Order) -->
+        <div class="filter-section">
+            <div class="filter-card">
+                
+                <!-- 1. اختيار الاختصاص أولاً -->
+                <div class="filter-group">
+                    <label for="stepSpecialty">1. الاختصاص الطبي</label>
+                    <select id="stepSpecialty" class="filter-select" onchange="handleSpecialtyChange()">
+                        <option value="">اختر الاختصاص أولاً...</option>
+                        <option value="جلدية وتجميل">جلدية وتجميل</option>
+                        <option value="باطنية">باطنية</option>
+                        <option value="أسنان">طب وجراحة الأسنان</option>
+                        <option value="نسائية وتوليد">نسائية وتوليد</option>
+                        <option value="أطفال">أطفال</option>
+                    </select>
                 </div>
-                <div class="card-body">
-                    <h3>مطلوب طبيب / طبيبة أسنان لمجمع طبي</h3>
-                    <ul class="card-info">
-                        <li><strong>التخصص المطلوب:</strong> طب وجراحة الأسنان</li>
-                        <li><strong>الموقع:</strong> المجمع الطبي الرئيسي - وسط المدينة</li>
-                        <li><strong>نظام العمل:</strong> نسبة أو إيجار مناسب</li>
-                        <li><strong>الكثافة:</strong> إقبال عالي جداً للمجمع</li>
-                    </ul>
+
+                <!-- 2. اختيار المحافظة ثانياً -->
+                <div class="filter-group">
+                    <label for="stepGov">2. المحافظة</label>
+                    <select id="stepGov" class="filter-select" disabled onchange="handleGovChange()">
+                        <option value="">اختر المحافظة...</option>
+                        <option value="بغداد">بغداد</option>
+                        <option value="نNينوى">نينوى (الموصل)</option>
+                        <option value="البصرة">البصرة</option>
+                        <option value="ديالى">ديالى</option>
+                        <option value="أربيل">أربيل</option>
+                        <option value="السليمانية">السليمانية</option>
+                        <option value="دهوك">دهوك</option>
+                        <option value="كركوك">كركوك</option>
+                        <option value="صلاح الدين">صلاح الدين</option>
+                        <option value="الانبار">الانبار</option>
+                        <option value="بابل">بابل</option>
+                        <option value="كربلاء">كربلاء</option>
+                        <option value="النجف">النجف</option>
+                        <option value="القادسية">القادسية (الديوانية)</option>
+                        <option value="المثنى">المثنى (السماوة)</option>
+                        <option value="ذي قار">ذي قار (الناصرية)</option>
+                        <option value="ميسان">ميسان (العمارة)</option>
+                        <option value="واسط">واسط (الكوت)</option>
+                    </select>
                 </div>
+
+                <!-- 3. اختيار المنطقة / الجانب ثالثاً -->
+                <div class="filter-group">
+                    <label for="stepArea">3. المنطقة / الجانب</label>
+                    <select id="stepArea" class="filter-select" disabled onchange="checkAvailability()">
+                        <option value="">اختر المنطقة أو الجانب...</option>
+                    </select>
+                </div>
+
             </div>
         </div>
-    </div>
 
-    <!-- JavaScript للبحث الذكي حسب الاختصاص والمنطقة -->
+        <!-- Listings Results Section -->
+        <div class="container">
+            <div class="section-header">
+                <h2>نتائج البحث وحالة توفر الطبيب أو العيادة</h2>
+            </div>
+
+            <div class="grid" id="resultsGrid">
+                
+                <!-- بطاقة تجريبية 1 -->
+                <div class="card" data-specialty="جلدية وتجميل" data-gov="ديالى" data-area="شارع 20">
+                    <div class="card-header bg-orange">
+                        <span>موقع مميز</span>
+                        <span>✅ دكتور متوفر حالياً</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>عيادة شاغرة في مجمع طبي متكامل</h3>
+                        <ul class="card-info">
+                            <li><strong>الاختصاص:</strong> جلدية وتجميل</li>
+                            <li><strong>المحافظة:</strong> ديالى</li>
+                            <li><strong>المنطقة:</strong> شارع 20</li>
+                            <li><strong>الحالة:</strong> جاهزة للتشغيل والديكور ممتاز</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- بطاقة تجريبية 2 -->
+                <div class="card" data-specialty="أسنان" data-gov="بغداد" data-area="الرصافة">
+                    <div class="card-header bg-blue">
+                        <span>طلب استقطاب</span>
+                        <span>✅ دكتور متوفر / مجمع قائم</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>مطلوب طبيب / طبيبة أسنان لمجمع طبي</h3>
+                        <ul class="card-info">
+                            <li><strong>الاختصاص:</strong> طب وجراحة الأسنان</li>
+                            <li><strong>المحافظة:</strong> بغداد</li>
+                            <li><strong>المنطقة:</strong> الرصافة</li>
+                            <li><strong>الحالة:</strong> إقبال عالي جداً للمجمع</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- بطاقة تجريبية 3 (نينوى/الموصل) -->
+                <div class="card" data-specialty="باطنية" data-gov="نينوى" data-area="الجانب الأيسر">
+                    <div class="card-header bg-orange">
+                        <span>فرصة متميزة</span>
+                        <span>✅ دكتور متوفر</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>عيادة باطنية شاغرة في مركز طبي</h3>
+                        <ul class="card-info">
+                            <li><strong>الاختصاص:</strong> باطنية</li>
+                            <li><strong>المحافظة:</strong> نينوى</li>
+                            <li><strong>المنطقة:</strong> الجانب الأيسر</li>
+                            <li><strong>الحالة:</strong> كادر تمريضي كامل متوفر</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- رسالة عند عدم وجود نتائج -->
+                <div id="noResultsMsg" class="no-results">
+                    عذراً، لا توجد نتائج مطابقة لهذه الخيارات حالياً. يمكنك التقديم مباشرة عبر الاستمارات في الأعلى لتسجيل طلبك.
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript لتفعيل التسلسل العكسي الدقيق -->
     <script>
-        function filterCards() {
-            const specialty = document.getElementById('filterSpecialty').value;
-            const location = document.getElementById('filterLocation').value;
+        // تعريف مناطق محافظات العراق (الكرخ والرصافة، الأيمن والأيسر، شمال وجنوب والبقية)
+        const areasByGov = {
+            "بغداد": ["الكرخ", "الرصافة", "المنصور", "الكرادة", "الأعظمية", "الكاظمية", "الدورة"],
+            "نينوى": ["الجانب الأيسر", "الجانب الأيمن", "تلكيف", "قضاء الحمدانية"],
+            "البصرة": ["شمال البصرة", "مركز المدينة", "قضاء الزبير", "أبو الخصيب"],
+            "ديالى": ["شارع 20", "بعقوبة المركز", "المفتاحية", "الخالص"],
+            "أربيل": ["عنكاوا", "شارع روهلات", "مركز المدينة", "سوران"],
+            "السليمانية": ["السليمانية المركز", "بختياري", "سفور"],
+            "دهوك": ["مركز دهوك", "سيميل", "زاخو"],
+            "كركوك": ["الحرية", "العلمدار", "تأميم", "الواسططي"],
+            "صلاح الدين": ["تكريت المركز", "سامراء", "الدور", "الطارمية"],
+            "الانبار": ["الرمادي المركز", "الفلوجة", "هيت"],
+            "بابل": ["الحلة المركز", "الإسكندرية", "المحاويل"],
+            "كربلاء": ["مركز المدينة", "العباسية", "الحسينية"],
+            "النجف": ["النجف المركز", "الكوفة", "مفلس"],
+            "القادسية": ["الديوانية المركز", "عفك"],
+            "المثنى": ["السماوة المركز", "الرميثة"],
+            "ذي قار": ["الناصرية المركز", "الشطرة", "سوق الشيوخ"],
+            "ميسان": ["العمارة المركز", "المجر الكبير"],
+            "واسط": ["الكوت المركز", "الحي", "النعمانية"]
+        };
+
+        function handleSpecialtyChange() {
+            const specialtyVal = document.getElementById('stepSpecialty').value;
+            const govSelect = document.getElementById('stepGov');
+            
+            govSelect.value = "";
+            govSelect.disabled = !specialtyVal;
+            resetBelow('stepGov');
+        }
+
+        function handleGovChange() {
+            const govVal = document.getElementById('stepGov').value;
+            const areaSelect = document.getElementById('stepArea');
+            
+            areaSelect.innerHTML = '<option value="">اختر المنطقة أو الجانب...</option>';
+            
+            if (govVal && areasByGov[govVal]) {
+                areasByGov[govVal].forEach(area => {
+                    let opt = document.createElement('option');
+                    opt.value = area;
+                    opt.textContent = area;
+                    areaSelect.appendChild(opt);
+                });
+                areaSelect.disabled = false;
+            } else {
+                areaSelect.disabled = true;
+            }
+            resetBelow('stepArea');
+        }
+
+        function checkAvailability() {
+            const specialty = document.getElementById('stepSpecialty').value;
+            const gov = document.getElementById('stepGov').value;
+            const area = document.getElementById('stepArea').value;
+
             const cards = document.querySelectorAll('.card');
+            const noResultsMsg = document.getElementById('noResultsMsg');
+            let foundCount = 0;
+
+            if (!area) {
+                cards.forEach(c => c.classList.remove('active-match'));
+                noResultsMsg.style.display = 'none';
+                return;
+            }
 
             cards.forEach(card => {
-                const cardSpecialty = card.getAttribute('data-specialty');
-                const cardLocation = card.getAttribute('data-location');
+                const cSpecialty = card.getAttribute('data-specialty');
+                const cGov = card.getAttribute('data-gov');
+                const cArea = card.getAttribute('data-area');
 
-                const matchSpecialty = (specialty === "" || cardSpecialty.includes(specialty));
-                const matchLocation = (location === "" || cardLocation.includes(location));
-
-                if (matchSpecialty && matchLocation) {
-                    card.style.display = "block";
+                if (cSpecialty === specialty && cGov === gov && cArea === area) {
+                    card.classList.add('active-match');
+                    foundCount++;
                 } else {
-                    card.style.display = "none";
+                    card.classList.remove('active-match');
                 }
             });
+
+            if (foundCount === 0) {
+                noResultsMsg.style.display = 'block';
+            } else {
+                noResultsMsg.style.display = 'none';
+            }
+        }
+
+        function resetBelow(level) {
+            if (level === 'stepGov') {
+                document.getElementById('stepArea').innerHTML = '<option value="">اختر المنطقة أو الجانب...</option>';
+                document.getElementById('stepArea').disabled = true;
+            }
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('active-match'));
+            document.getElementById('noResultsMsg').style.display = 'none';
         }
     </script>
 </body>
