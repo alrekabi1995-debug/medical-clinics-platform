@@ -3,79 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة العيادات الطبية</title>
+    <title>منصة التنسيق الطبي | تأمين العيادات والمواقع الطبية</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body class="bg-slate-50 text-gray-800 font-sans">
 
-    <!-- الهيدر -->
-    <header class="bg-blue-600 text-white py-10 px-4 text-center shadow-lg">
-        <h1 class="text-3xl md:text-4xl font-bold mb-2">منصة العيادات الطبية المتخصصة</h1>
-        <p class="text-blue-100 text-sm md:text-base">احجز موعدك بسهولة مع أفضل الأطباء والعيادات</p>
+    <!-- الهيدر الرئيسي -->
+    <header class="bg-slate-900 text-white py-12 px-4 text-center border-b-4 border-amber-500">
+        <span class="bg-amber-500/20 text-amber-400 text-xs font-semibold px-3 py-1 rounded-full border border-amber-500/30">وساطة وتنسيق موقعي متخصص</span>
+        <h1 class="text-3xl md:text-5xl font-bold mt-3 mb-3">منصة التنسيق للمواقع والعيادات الطبية</h1>
+        <p class="text-gray-300 max-w-2xl mx-auto text-sm md:text-base">نربط الأطباء بأفضل العيادات الشاغرة في المجمعات والمراكز الطبية المميزة، ونساعد المجمعات في استقطاب الكفاءات الطبية.</p>
+        
+        <div class="mt-6 flex flex-wrap justify-center gap-4">
+            <a href="https://wa.me/?text=السلام%20عليهم،%20أنا%20طبيب%20وأبحث%20عن%20عيادة%20مناسبة" target="_blank" class="bg-amber-500 text-slate-900 px-6 py-3 rounded-xl font-bold hover:bg-amber-400 transition shadow-lg">
+                <i class="fa-solid fa-user-doctor ml-2"></i>أنا طبيب أبحث عن عيادة
+            </a>
+            <a href="https://wa.me/?text=السلام%20عليهم،%20لدينا%20مجمع/مركز%20طبي%20ونبحث%20عن%20طبيب" target="_blank" class="bg-slate-800 border border-slate-700 text-white px-6 py-3 rounded-xl font-bold hover:bg-slate-700 transition">
+                <i class="fa-solid fa-hospital ml-2"></i>أصحاب مجمع / طلب طبيب
+            </a>
+        </div>
     </header>
 
-    <!-- محرك البحث -->
-    <div class="max-w-4xl mx-auto px-4 -mt-6">
-        <div class="bg-white rounded-xl shadow-md p-4 flex flex-col md:flex-row gap-3 items-center">
-            <input type="text" id="searchInput" onkeyup="filterClinics()" placeholder="ابحث عن دكتور، تخصص، أو عنوان..." class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <button class="w-full md:w-auto bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition">بحث</button>
+    <!-- محرك تصفية العروض -->
+    <div class="max-w-5xl mx-auto px-4 -mt-6">
+        <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col md:flex-row gap-3 items-center border border-slate-100">
+            <input type="text" id="searchInput" onkeyup="filterOffers()" placeholder="ابحث حسب المنطقة، الشارع، أو التخصص المطلوب..." class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <button class="w-full md:w-auto bg-slate-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-slate-800 transition">بحث</button>
         </div>
     </div>
 
-    <!-- قسم العيادات -->
-    <main class="max-w-5xl mx-auto px-4 py-10">
-        <h2 class="text-xl font-bold mb-6 text-slate-800 border-r-4 border-blue-600 pr-3">العيادات المتاحة</h2>
+    <!-- قائمة المساحات والفرص الشاغرة -->
+    <main class="max-w-6xl mx-auto px-4 py-12">
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900 border-r-4 border-amber-500 pr-3">فرص ومواقع عيادات متاحة</h2>
+                <p class="text-gray-500 text-sm mt-1">مواقع ومساحات شاغرة جاهزة للاستئجار أو التعاقد في أفضل المجمعات الطبية</p>
+            </div>
+        </div>
         
-        <div id="clinicsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div id="offersGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
-            <!-- بطاقة عيادة 1 -->
-            <div class="clinic-card bg-white rounded-xl shadow-sm border border-slate-100 p-5 hover:shadow-md transition">
-                <div class="flex items-center space-x-4 space-x-reverse mb-4">
-                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xl shrink-0">
-                        <i class="fa-solid fa-user-doctor"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-lg clinic-title">عيادة الجلدية والليزر</h3>
-                        <p class="text-sm text-gray-500">أحدث أجهزة الليزر والعناية بالبشرة</p>
-                    </div>
+            <!-- بطاقة فرصة 1 -->
+            <div class="offer-card bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition">
+                <div class="bg-amber-500 text-slate-900 px-4 py-2 text-xs font-bold flex justify-between items-center">
+                    <span><i class="fa-solid fa-star ml-1"></i> موقع مميز</span>
+                    <span>شاغرة حالياً</span>
                 </div>
-                <div class="text-sm text-gray-600 space-y-2 mb-4">
-                    <p><i class="fa-solid fa-location-dot text-blue-500 ml-2"></i>العنوان: شارع 20</p>
-                    <p><i class="fa-solid fa-clock text-blue-500 ml-2"></i>الأوقات: 4:00 مساءً - 9:00 مساءً</p>
+                <div class="p-5">
+                    <h3 class="font-bold text-lg text-slate-900 mb-1 offer-title">عيادة شاغرة في مجمع طبي متكامل</h3>
+                    <p class="text-xs text-amber-600 font-semibold mb-3">التخصص المطلوب: جلدية وتجميل / أو باطنية</p>
+                    
+                    <div class="text-sm text-gray-600 space-y-2 mb-5">
+                        <p><i class="fa-solid fa-location-dot text-amber-500 ml-2"></i><strong>الموقع:</strong> شارع 20 - موقع حيوي جداً</p>
+                        <p><i class="fa-solid fa-layer-group text-amber-500 ml-2"></i><strong>الخدمات:</strong> مصعد، استعلامات، كادر تمريضي</p>
+                        <p><i class="fa-solid fa-circle-check text-amber-500 ml-2"></i><strong>الحالة:</strong> جاهزة للتشغيل والديكور ممتازة</p>
+                    </div>
+
+                    <a href="https://wa.me/?text=السلام%20عليهم،%20استفسر%20عن%20تفاصيل%20العيادة%20الشاغرة%20في%20شارع%2020" target="_blank" class="block text-center bg-slate-900 text-amber-400 py-2.5 rounded-lg font-bold hover:bg-slate-800 transition">
+                        <i class="fa-brands fa-whatsapp ml-2"></i>استفسر للتنسيق والمعاينة
+                    </a>
                 </div>
-                <a href="https://wa.me/?text=السلام%20عليهم،%20أود%20حجز%20موعد%20في%20عيادة%20الجلدية%20والليزر" target="_blank" class="block text-center bg-emerald-500 text-white py-2 rounded-lg font-medium hover:bg-emerald-600 transition">
-                    <i class="fa-brands fa-whatsapp ml-2"></i>حجز موعد عبر واتساب
-                </a>
             </div>
 
-            <!-- بطاقة عيادة 2 -->
-            <div class="clinic-card bg-white rounded-xl shadow-sm border border-slate-100 p-5 hover:shadow-md transition">
-                <div class="flex items-center space-x-4 space-x-reverse mb-4">
-                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center font-bold text-xl shrink-0">
-                        <i class="fa-solid fa-heart-pulse"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-lg clinic-title">عيادة الباطنية والقلب</h3>
-                        <p class="text-sm text-gray-500">متابعة الأمراض المزمنة والفحوصات</p>
-                    </div>
+            <!-- بطاقة فرصة 2 -->
+            <div class="offer-card bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition">
+                <div class="bg-blue-600 text-white px-4 py-2 text-xs font-bold flex justify-between items-center">
+                    <span><i class="fa-solid fa-building-user ml-1"></i> طلب استقطاب طبيب</span>
+                    <span>مجمع طبي قائم</span>
                 </div>
-                <div class="text-sm text-gray-600 space-y-2 mb-4">
-                    <p><i class="fa-solid fa-location-dot text-emerald-500 ml-2"></i>العنوان: المجمع الطبي الرئيسي</p>
-                    <p><i class="fa-solid fa-clock text-emerald-500 ml-2"></i>الأوقات: 5:00 مساءً - 10:00 مساءً</p>
+                <div class="p-5">
+                    <h3 class="font-bold text-lg text-slate-900 mb-1 offer-title">مطلوب طبيب / طبيبة أسنان لمجمع طبي</h3>
+                    <p class="text-xs text-blue-600 font-semibold mb-3">التخصص المطلوب: طب وجراحة الأسنان</p>
+                    
+                    <div class="text-sm text-gray-600 space-y-2 mb-5">
+                        <p><i class="fa-solid fa-location-dot text-blue-500 ml-2"></i><strong>الموقع:</strong> المجمع الطبي الرئيسي - وسط المدينة</p>
+                        <p><i class="fa-solid fa-handshake text-blue-500 ml-2"></i><strong>نظام العمل:</strong> نسبة أو إيجار مناسب</p>
+                        <p><i class="fa-solid fa-users text-blue-500 ml-2"></i><strong>الكثافة:</strong> إقبال عالي جداً للمجمع</p>
+                    </div>
+
+                    <a href="https://wa.me/?text=السلام%20عليهم،%20أنا%20طبيب%20أسنان%20وأستفسر%20عن%20عرض%20المجمع%20الطبي%20الرئيسي" target="_blank" class="block text-center bg-emerald-600 text-white py-2.5 rounded-lg font-bold hover:bg-emerald-500 transition">
+                        <i class="fa-brands fa-whatsapp ml-2"></i>تواصل لحجز الموقع
+                    </a>
                 </div>
-                <a href="https://wa.me/?text=السلام%20عليهم،%20أود%20حجز%20موعد%20في%20عيادة%20الباطنية" target="_blank" class="block text-center bg-emerald-500 text-white py-2 rounded-lg font-medium hover:bg-emerald-600 transition">
-                    <i class="fa-brands fa-whatsapp ml-2"></i>حجز موعد عبر واتساب
-                </a>
             </div>
 
         </div>
     </main>
 
+    <!-- فوتر للتواصل المباشر -->
+    <footer class="bg-slate-900 text-gray-400 py-8 border-t border-slate-800 text-center">
+        <p class="text-sm">منصة التنسيق للمواقع والعيادات الطبية © 2026 - جميع الحقوق محفوظة</p>
+        <p class="text-xs text-slate-500 mt-2">نقدم خدمات الوساطة المستقلة والتنسيق المباشر بين الأطباء وإدارات المجمعات الطبية.</p>
+    </footer>
+
     <script>
-        function filterClinics() {
+        function filterOffers() {
             const input = document.getElementById('searchInput').value.toLowerCase();
-            const cards = document.getElementsByClassName('clinic-card');
+            const cards = document.getElementsByClassName('offer-card');
             
             for (let card of cards) {
                 const text = card.textContent.toLowerCase();
