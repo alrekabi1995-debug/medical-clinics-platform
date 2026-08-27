@@ -127,9 +127,9 @@
         /* Cascading Filter Section */
         .filter-section {
             max-width: 1000px;
-            margin: 0 auto 30px;
+            margin: 0 auto 40px;
             padding: 0 20px;
-            display: none; /* تظهر فقط عند الضغط على أزرار الفلترة */
+            display: none;
         }
 
         .filter-card {
@@ -175,11 +175,12 @@
             cursor: not-allowed;
         }
 
-        /* Listings Results Section - ظاهرة افتراضياً في الرئيسية */
+        /* Listings Results Section */
         .container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px 60px;
+            display: none;
         }
 
         .section-header {
@@ -198,13 +199,16 @@
             gap: 20px;
         }
 
-        /* البطاقات تظهر مباشرة في الرئيسية افتراضياً */
         .card {
             background: white;
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            display: block; 
+            display: none;
+        }
+
+        .card.active-match {
+            display: block;
         }
 
         .card-header {
@@ -236,7 +240,7 @@
             margin-bottom: 8px;
         }
 
-        /* تنسيق زر الواتساب ورقم الهاتف البارز */
+        /* تنسيق رقم الهاتف البارز في الصفحة الرئيسية للبطاقة */
         .whatsapp-box {
             margin-top: 15px;
             padding-top: 12px;
@@ -259,7 +263,7 @@
             width: 100%;
             box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
             transition: background-color 0.2s;
-            direction: ltr; /* لعرض الأرقام بصورة صحيحة */
+            direction: ltr; /* لضمان عرض الأرقام بشكل صحيح ومقروء */
         }
 
         .whatsapp-btn:hover {
@@ -295,18 +299,21 @@
             </div>
         </section>
 
-        <!-- أزرار التفعيل الاختياري للبحث المتقدم -->
+        <!-- أزرار التفعيل -->
         <div class="main-trigger-section">
             <button type="button" class="btn btn-trigger" onclick="showSearchFilters('general')">
-                🔍 تصفية حسب المحافظة والاختصاص
+                🔍 استعراض مجمعات وعيادات العراق
+            </button>
+            <button type="button" class="btn btn-doctor-search" onclick="showSearchFilters('doctor')">
+                🩺 أطباء يبحثون عن عيادات (بحث فوري للعيادات المتاحة)
             </button>
         </div>
 
-        <!-- Cascading Filter Section (مخفية افتراضياً حتى يضغط المستخدم زر التصفية) -->
+        <!-- Cascading Filter Section -->
         <div class="filter-section" id="filterSection">
             <div class="filter-card" id="filterCardStyle">
                 
-                <!-- 1. الاختصاصات الطبية -->
+                <!-- 1. الاختصاصات الطبية كافة -->
                 <div class="filter-group">
                     <label for="stepSpecialty">1. الاختصاص الطبي</label>
                     <select id="stepSpecialty" class="filter-select" onchange="handleSpecialtyChange()">
@@ -332,7 +339,7 @@
                     </select>
                 </div>
 
-                <!-- 2. المحافظات -->
+                <!-- 2. محافظات العراق كافة -->
                 <div class="filter-group">
                     <label for="stepGov">2. المحافظة</label>
                     <select id="stepGov" class="filter-select" disabled onchange="handleGovChange()">
@@ -369,15 +376,15 @@
             </div>
         </div>
 
-        <!-- Listings Results Section (تظهر البطاقات وأرقام الهواتف مباشرة في الصفحة الرئيسية) -->
+        <!-- Listings Results Section -->
         <div class="container" id="resultsContainer">
             <div class="section-header">
-                <h2 id="resultsTitle">العيادات الشاغرة والمتاحة حالياً</h2>
+                <h2 id="resultsTitle">نتائج البحث وحالة توفر العيادات</h2>
             </div>
 
             <div class="grid" id="resultsGrid">
                 
-                <!-- بطاقة 1 -->
+                <!-- بطاقة عيادة شاغرة 1 -->
                 <div class="card" data-specialty="جلدية وتجميل" data-gov="ديالى" data-area="مركز المحافظة">
                     <div class="card-header bg-green">
                         <span>عيادة شاغرة مخصصة للطبيب</span>
@@ -391,7 +398,7 @@
                             <li><strong>المنطقة:</strong> مركز المحافظة</li>
                             <li><strong>التفاصيل:</strong> متوفرة ضمن مجمع طبي رصين.</li>
                         </ul>
-                        <!-- رقم الهاتف البارز وزر الواتساب في الصفحة الرئيسية -->
+                        <!-- رقم الهاتف البارز ورابط الواتساب مباشرة في الصفحة الرئيسية للبطاقة -->
                         <div class="whatsapp-box">
                             <a href="https://wa.me/9647700000000?text=مرحباً، أستفسر عن العيادة الشاغرة في ديالى" target="_blank" class="whatsapp-btn">
                                 💬 9647700000000+
@@ -400,7 +407,7 @@
                     </div>
                 </div>
 
-                <!-- بطاقة 2 -->
+                <!-- بطاقة عيادة شاغرة 2 -->
                 <div class="card" data-specialty="طب وجراحة الأسنان" data-gov="بغداد" data-area="الرصافة">
                     <div class="card-header bg-green">
                         <span>عيادة أسنان شاغرة</span>
@@ -414,7 +421,7 @@
                             <li><strong>المنطقة:</strong> الرصافة</li>
                             <li><strong>التفاصيل:</strong> تحتوي على كرسي أسنان حديث.</li>
                         </ul>
-                        <!-- رقم الهاتف البارز وزر الواتساب في الصفحة الرئيسية -->
+                        <!-- رقم الهاتف البارز ورابط الواتساب مباشرة في الصفحة الرئيسية للبطاقة -->
                         <div class="whatsapp-box">
                             <a href="https://wa.me/9647800000000?text=مرحباً، أستفسر عن عيادة الأسنان في بغداد الرصافة" target="_blank" class="whatsapp-btn">
                                 💬 9647800000000+
@@ -423,7 +430,7 @@
                     </div>
                 </div>
 
-                <!-- بطاقة 3 -->
+                <!-- بطاقة عيادة شاغرة 3 -->
                 <div class="card" data-specialty="باطنية" data-gov="نينوى" data-area="الجانب الأيسر">
                     <div class="card-header bg-green">
                         <span>عيادة باطنية شاغرة</span>
@@ -437,7 +444,7 @@
                             <li><strong>المنطقة:</strong> الجانب الأيسر</li>
                             <li><strong>التفاصيل:</strong> موقع حيوي وإقبال ممتاز.</li>
                         </ul>
-                        <!-- رقم الهاتف البارز وزر الواتساب في الصفحة الرئيسية -->
+                        <!-- رقم الهاتف البارز ورابط الواتساب مباشرة في الصفحة الرئيسية للبطاقة -->
                         <div class="whatsapp-box">
                             <a href="https://wa.me/9647500000000?text=مرحباً، أستفسر عن عيادة الباطنية في نينوى" target="_blank" class="whatsapp-btn">
                                 💬 9647500000000+
@@ -446,20 +453,42 @@
                     </div>
                 </div>
 
-                <!-- رسالة عند عدم وجود نتائج أثناء التصفية -->
+                <!-- رسالة عند عدم وجود نتائج -->
                 <div id="noResultsMsg" class="no-results">
-                    عذراً، لا توجد عيادات شاغرة مطابقة لتصفيتك الحالية.
+                    عذراً، لا توجد عيادات شاغرة مطابقة لاختصاصك في هذه المنطقة حالياً. يمكنك ملء الاستمارة في الأعلى ليتم إعلامك فور توفرها.
                 </div>
 
             </div>
         </div>
     </main>
 
-    <!-- JavaScript للفلترة عند الحاجة -->
+    <!-- JavaScript -->
     <script>
-        function showSearchFilters() {
-            const filterSec = document.getElementById('filterSection');
-            filterSec.style.display = filterSec.style.display === 'block' ? 'none' : 'block';
+        let currentSearchMode = 'general';
+
+        function showSearchFilters(mode) {
+            currentSearchMode = mode;
+            const filterCard = document.getElementById('filterCardStyle');
+            const resultsTitle = document.getElementById('resultsTitle');
+
+            if (mode === 'doctor') {
+                filterCard.classList.add('doctor-mode');
+                resultsTitle.textContent = "العيادات الشاغرة المتوفرة حسب اختصاصك ومنطقتك المطلوبة";
+            } else {
+                filterCard.classList.remove('doctor-mode');
+                resultsTitle.textContent = "نتائج البحث العام وحالة توفر العيادات والمجمعات";
+            }
+
+            document.getElementById('filterSection').style.display = 'block';
+            document.getElementById('resultsContainer').style.display = 'block';
+            document.getElementById('filterSection').scrollIntoView({ behavior: 'smooth' });
+            
+            document.getElementById('stepSpecialty').value = "";
+            document.getElementById('stepGov').value = "";
+            document.getElementById('stepGov').disabled = true;
+            document.getElementById('stepArea').innerHTML = '<option value="">اختر المنطقة...</option>';
+            document.getElementById('stepArea').disabled = true;
+            resetCards();
         }
 
         const areasByGov = {
@@ -522,7 +551,7 @@
             let foundCount = 0;
 
             if (!area) {
-                cards.forEach(c => c.style.display = 'block');
+                cards.forEach(c => c.classList.remove('active-match'));
                 noResultsMsg.style.display = 'none';
                 return;
             }
@@ -533,10 +562,10 @@
                 const cArea = card.getAttribute('data-area');
 
                 if (cSpecialty === specialty && cGov === gov && cArea === area) {
-                    card.style.display = 'block';
+                    card.classList.add('active-match');
                     foundCount++;
                 } else {
-                    card.style.display = 'none';
+                    card.classList.remove('active-match');
                 }
             });
 
@@ -552,7 +581,11 @@
                 document.getElementById('stepArea').innerHTML = '<option value="">اختر المنطقة...</option>';
                 document.getElementById('stepArea').disabled = true;
             }
-            document.querySelectorAll('.card').forEach(c => c.style.display = 'block');
+            resetCards();
+        }
+
+        function resetCards() {
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('active-match'));
             document.getElementById('noResultsMsg').style.display = 'none';
         }
     </script>
