@@ -473,6 +473,28 @@
         background-color: #20ba5a;
     }
 
+    .ticker-item-link {
+        cursor: pointer;
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        text-underline-offset: 3px;
+        color: #fbbf24;
+    }
+
+    .ticker-item-link:hover,
+    .ticker-item-link:focus-visible {
+        color: #f59e0b;
+    }
+
+    .card-highlight {
+        animation: card-pulse 1.3s ease-in-out 2;
+    }
+
+    @keyframes card-pulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
+        50% { box-shadow: 0 0 0 6px rgba(14, 165, 233, 0.35); }
+    }
+
     .no-results {
         text-align: center;
         padding: 30px;
@@ -652,7 +674,7 @@
     const areaHierarchy = {
         "بغداد": {
             "الرصافة": ["الرصافة - المركز", "الكرادة", "الاعظمية", "مناطق أخرى"],
-            "الكرخ": ["الكرخ - المركز", "المنصور", "الكاظمية", "الغزالية", "الدورة", "البياع", "الطفيل / الأطراف", "مناطق أخرى"]
+            "الكرخ": ["الكرخ - المركز", "المنصور", "الكاظمية", "الغزالية", "الدورة", "البياع", "أبو غريب", "الطفيل / الأطراف", "مناطق أخرى"]
         },
         "نينوى": {
             "مركز الموصل": ["الجانب الأيمن - المركز", "الجانب الأيسر - المركز", "مناطق أخرى"],
@@ -752,6 +774,15 @@
             headerLabel: "عيادة باطنية شاغرة",
             title: "غرفة فحص باطنية في مركز استشاري",
             details: "موقع حيوي وإقبال ممتاز."
+        },
+        {
+            specialty: "جلدية وتجميل",
+            gov: "بغداد",
+            area: "أبو غريب",
+            statusLabel: "🟢 متوفر فقط",
+            headerLabel: "طبيب جلدية يبحث عن عيادة",
+            title: "طبيب أخصائي جلدية يبحث عن عيادة للعمل",
+            details: "متاح للعمل في الفترة الصباحية حصراً، ضمن مدينة أبو غريب حصراً."
         }
     ];
 
@@ -1068,21 +1099,60 @@
     }
 
     // آخر الأخبار - عدّل هذه القائمة بأخباركم الفعلية
+    // أضف "action" لأي خبر تريد أن يكون قابلاً للنقر ويوجه الزائر مباشرة لبطاقة محددة
     const NEWS_ITEMS = [
-        "🆕 تمت إضافة عيادات جديدة شاغرة في بغداد والبصرة هذا الأسبوع",
-        "👨‍⚕️ زيادة الطلب على تخصص طب الأسنان في محافظة نينوى",
-        "📈 انضمام أكثر من 20 طبيباً جديداً للمنصة خلال الشهر الحالي",
-        "🏥 فرص تعاقد متاحة الآن لأصحاب المجمعات الطبية في إقليم كردستان",
-        "✅ تحديث: تسريع إجراءات التنسيق بين الأطباء والمجمعات الطبية"
+        { text: "🆕 تمت إضافة عيادات جديدة شاغرة في بغداد والبصرة هذا الأسبوع" },
+        { text: "👨‍⚕️ زيادة الطلب على تخصص طب الأسنان في محافظة نينوى" },
+        { text: "📈 انضمام أكثر من 20 طبيباً جديداً للمنصة خلال الشهر الحالي" },
+        { text: "🏥 فرص تعاقد متاحة الآن لأصحاب المجمعات الطبية في إقليم كردستان" },
+        { text: "✅ تحديث: تسريع إجراءات التنسيق بين الأطباء والمجمعات الطبية" },
+        {
+            text: "🩺 طبيب جلدية يبحث عن عيادة للعمل صباحاً في مدينة أبو غريب حصراً — اضغط للتفاصيل",
+            action: { mode: "general", specialty: "جلدية وتجميل", gov: "بغداد", group: "الكرخ", area: "أبو غريب" }
+        }
     ];
 
     function initNewsTicker() {
         const el = document.getElementById('tickerContent');
         if (!el || NEWS_ITEMS.length === 0) return;
 
-        const itemsHtml = NEWS_ITEMS.map(text => `<span class="ticker-item">${text}</span>`).join('');
+        const itemsHtml = NEWS_ITEMS.map((item, idx) => {
+            if (item.action) {
+                return `<span class="ticker-item ticker-item-link" role="button" tabindex="0" data-news-idx="${idx}">${item.text}</span>`;
+            }
+            return `<span class="ticker-item">${item.text}</span>`;
+        }).join('');
         // تكرار المحتوى مرتين لضمان تمرير متصل وسلس بدون فراغ
         el.innerHTML = itemsHtml + itemsHtml;
+
+        el.querySelectorAll('.ticker-item-link').forEach(node => {
+            const idx = Number(node.dataset.newsIdx);
+            const item = NEWS_ITEMS[idx];
+            if (!item || !item.action) return;
+
+            node.addEventListener('click', () => goToNewsCard(item.action));
+            node.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    goToNewsCard(item.action);
+                }
+            });
+        });
+    }
+
+    function goToNewsCard(action) {
+        startSearch(action.mode);
+        selectSpecialty(action.specialty);
+        selectGov(action.gov);
+        selectGroup(action.group);
+        selectArea(action.area);
+
+        const matchedCard = document.querySelector('.card.active-match');
+        if (matchedCard) {
+            matchedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            matchedCard.classList.add('card-highlight');
+            setTimeout(() => matchedCard.classList.remove('card-highlight'), 2600);
+        }
     }
 
     function initWhatsappLinks() {
