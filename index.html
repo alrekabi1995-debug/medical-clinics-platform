@@ -3,31 +3,1343 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>طبيب اختصاصي جلدية وتجميل يبحث عن عيادة في أبو غريب</title>
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="طبيب اختصاصي جلدية وتجميل يبحث عن عيادة في أبو غريب">
-<meta property="og:description" content="طبيب متاح للعمل خلال الفترة الصباحية، يبحث عن عيادة شاغرة ضمن أبو غريب - بغداد. تواصل عبر منصة تطابق.">
-<meta property="og:image" content="https://your-domain-here.com/assets/tatabuq-banner.jpg">
-<meta property="og:url" content="https://your-domain-here.com/previews/doctor-derma-abughraib.html">
-<meta property="og:site_name" content="منصة تطابق">
-<meta property="og:locale" content="ar_IQ">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="طبيب اختصاصي جلدية وتجميل يبحث عن عيادة في أبو غريب">
-<meta name="twitter:description" content="طبيب متاح للعمل خلال الفترة الصباحية، يبحث عن عيادة شاغرة ضمن أبو غريب - بغداد. تواصل عبر منصة تطابق.">
-<meta name="twitter:image" content="https://your-domain-here.com/assets/tatabuq-banner.jpg">
-
-<meta http-equiv="refresh" content="0; url=../tatabuq.html?id=doctor-derma-abughraib">
-<script>window.location.replace("../tatabuq.html?id=doctor-derma-abughraib");</script>
+<title>منصة عيادات طبية للتنسيق الطبي</title>
 <style>
-  body { font-family: Tahoma, Arial, sans-serif; background:#0f172a; color:#fff;
-         display:flex; align-items:center; justify-content:center; height:100vh; margin:0; text-align:center; }
-  a { color:#f59e0b; font-weight:700; }
+    * { box-sizing: border-box; }
+    body {
+        background-color: #f8fafc;
+        color: #0f172a;
+        font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+        margin: 0;
+    }
+
+    .news-ticker-wrap {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 20px;
+        position: relative;
+        z-index: 2;
+        margin-top: -22px;
+    }
+
+    .news-ticker {
+        background-color: #0f172a;
+        border: 1px solid #334155;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px -8px rgba(15, 23, 42, 0.5);
+        display: flex;
+        align-items: stretch;
+        overflow: hidden;
+        direction: rtl;
+    }
+
+    .ticker-label {
+        flex-shrink: 0;
+        background-color: #f59e0b;
+        color: #0f172a;
+        font-weight: 800;
+        font-size: 13px;
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+        z-index: 1;
+        border-radius: 0 12px 12px 0;
+    }
+
+    .ticker-track {
+        flex: 1;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .ticker-content {
+        display: inline-flex;
+        white-space: nowrap;
+        padding-right: 100%;
+        animation: ticker-scroll 75s linear infinite;
+        color: #e2e8f0;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .ticker-track:hover .ticker-content {
+        animation-play-state: paused;
+    }
+
+    .ticker-item {
+        padding: 0 24px;
+        position: relative;
+    }
+
+    .ticker-item::after {
+        content: "•";
+        color: #f59e0b;
+        position: absolute;
+        left: -2px;
+    }
+
+    @keyframes ticker-scroll {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .ticker-content {
+            animation: none;
+        }
+    }
+
+    .hero {
+        background-color: #0f172a;
+        color: #ffffff;
+        padding: 50px 20px 60px;
+        text-align: center;
+        border-bottom: 4px solid #f59e0b;
+    }
+
+    .badge {
+        background-color: rgba(245, 158, 11, 0.2);
+        color: #f59e0b;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+
+    .hero-trust-line {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(90deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+        border: 1px solid rgba(245, 158, 11, 0.4);
+        color: #fbbf24;
+        font-size: 1.05rem;
+        font-weight: 800;
+        letter-spacing: 0.2px;
+        padding: 10px 22px;
+        border-radius: 30px;
+        margin: 0 auto 20px;
+    }
+
+    .hero-trust-line svg {
+        flex-shrink: 0;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 12px;
+    }
+
+    .hero p {
+        color: #94a3b8;
+        max-width: 600px;
+        margin: 0 auto 25px;
+        line-height: 1.6;
+    }
+
+    .cta-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 700;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        border: none;
+    }
+
+    .btn:focus-visible {
+        outline: 3px solid #0ea5e9;
+        outline-offset: 2px;
+    }
+
+    .btn-primary {
+        background-color: #f59e0b;
+        color: #0f172a;
+    }
+
+    .btn-primary:hover {
+        background-color: #d97706;
+    }
+
+    .btn-secondary {
+        background-color: #1e293b;
+        color: #ffffff;
+        border: 1px solid #334155;
+    }
+
+    .btn-secondary:hover {
+        background-color: #334155;
+    }
+
+    .btn-icon {
+        flex-shrink: 0;
+    }
+
+    .btn-trigger {
+        background-color: #0ea5e9;
+        color: white;
+        font-size: 1rem;
+        padding: 14px 30px;
+        box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+    }
+
+    .btn-trigger:hover {
+        background-color: #0284c7;
+    }
+
+    .btn-doctor-search {
+        background-color: #10b981;
+        color: white;
+        font-size: 1rem;
+        padding: 14px 30px;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-doctor-search:hover {
+        background-color: #059669;
+    }
+
+    .btn-trigger[aria-pressed="true"],
+    .btn-doctor-search[aria-pressed="true"] {
+        outline: 3px solid #0f172a;
+        outline-offset: 2px;
+    }
+
+    .main-trigger-section {
+        text-align: center;
+        margin: 35px 0 20px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        padding: 0 20px;
+    }
+
+    .global-whatsapp-banner {
+        max-width: 800px;
+        margin: 25px auto 10px;
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    .global-wa-box {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        border: 2px solid #25d366;
+        padding: 18px 25px;
+        border-radius: 14px;
+        box-shadow: 0 8px 20px rgba(37, 211, 102, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .global-wa-text {
+        color: #ffffff;
+        font-size: 1.05rem;
+        font-weight: 600;
+        text-align: right;
+    }
+
+    .global-wa-text span {
+        color: #25d366;
+        display: block;
+        font-size: 0.85rem;
+        margin-top: 2px;
+    }
+
+    .wa-direct-btn {
+        background-color: #25d366;
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.15rem;
+        padding: 10px 22px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+        direction: ltr;
+    }
+
+    .wa-direct-btn:hover {
+        background-color: #20ba5a;
+    }
+
+    .filter-section {
+        max-width: 900px;
+        margin: 20px auto 40px;
+        padding: 0 20px;
+        display: none;
+    }
+
+    .step-container {
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        border: 2px solid #0ea5e9;
+        margin-bottom: 20px;
+    }
+
+    .step-container.doctor-mode {
+        border-color: #10b981;
+    }
+
+    .step-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .options-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .option-pill {
+        background-color: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        color: #334155;
+        padding: 10px 18px;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .option-pill:hover {
+        background-color: #e2e8f0;
+        border-color: #94a3b8;
+    }
+
+    .option-pill.selected {
+        background-color: #0ea5e9;
+        color: white;
+        border-color: #0ea5e9;
+        box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
+    }
+
+    .doctor-mode .option-pill.selected {
+        background-color: #10b981;
+        border-color: #10b981;
+        box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+    }
+
+    .selection-summary {
+        background-color: #f8fafc;
+        border-right: 4px solid #f59e0b;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #475569;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .reset-steps-btn {
+        background: none;
+        border: none;
+        color: #ef4444;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 13px;
+    }
+
+    .reset-steps-btn:hover {
+        text-decoration: underline;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px 60px;
+        display: none;
+    }
+
+    .section-header {
+        margin-bottom: 24px;
+    }
+
+    .section-header h2 {
+        border-right: 4px solid #f59e0b;
+        padding-right: 10px;
+        font-size: 1.5rem;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+        display: none;
+    }
+
+    .card.active-match {
+        display: block;
+    }
+
+    .card-header {
+        padding: 8px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .bg-green { background-color: #d1fae5; color: #047857; }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-body h3 {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+
+    .card-info {
+        list-style: none;
+        font-size: 14px;
+        color: #475569;
+        padding: 0;
+        margin: 0;
+    }
+
+    .card-info li {
+        margin-bottom: 8px;
+    }
+
+    .whatsapp-box {
+        margin-top: 15px;
+        padding-top: 12px;
+        border-top: 1px dashed #cbd5e1;
+        text-align: center;
+    }
+
+    .whatsapp-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background-color: #25d366;
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.15rem;
+        padding: 12px 16px;
+        border-radius: 8px;
+        width: 100%;
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+        transition: background-color 0.2s;
+        direction: ltr;
+    }
+
+    .whatsapp-btn:hover {
+        background-color: #20ba5a;
+    }
+
+    .share-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background-color: #0ea5e9;
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.95rem;
+        padding: 10px 16px;
+        border-radius: 8px;
+        width: 100%;
+        box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+        transition: background-color 0.2s;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .share-btn:hover {
+        background-color: #0284c7;
+    }
+
+    .ticker-item-link {
+        cursor: pointer;
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        text-underline-offset: 3px;
+        color: #fbbf24;
+    }
+
+    .ticker-item-link:hover,
+    .ticker-item-link:focus-visible {
+        color: #f59e0b;
+    }
+
+    .card-highlight {
+        animation: card-pulse 1.3s ease-in-out 2;
+    }
+
+    @keyframes card-pulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
+        50% { box-shadow: 0 0 0 6px rgba(14, 165, 233, 0.35); }
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 30px;
+        color: #64748b;
+        grid-column: 1 / -1;
+        display: none;
+    }
+
+    .no-results p {
+        font-weight: 600;
+        margin-bottom: 16px;
+    }
 </style>
 </head>
 <body>
-  <p>جاري تحويلك لمنصة تطابق...<br>
-  <a href="../tatabuq.html?id=doctor-derma-abughraib">اضغط هنا إذا لم يتم التحويل تلقائياً</a></p>
+
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <span class="badge">وساطة وتنسيق موقعي متخصص</span>
+        <h1>منصة عيادات طبية للتنسيق الطبي</h1>
+
+        <div class="hero-trust-line">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M12 2L14.9 8.6L22 9.3L16.7 14L18.2 21L12 17.3L5.8 21L7.3 14L2 9.3L9.1 8.6L12 2Z"/>
+            </svg>
+            أول منصة للتنسيق الطبي وتوفير العيادات في العراق منذ 4 سنوات
+        </div>
+
+        <p>نربط الأطباء بأفضل العيادات الشاغرة، ونوفر لأصحاب المجمعات الطبية الكفاءات المطلوبة.</p>
+
+        <div class="cta-container">
+            <a href="https://tally.so/r/7RrE0Z" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="doctorFormLink">
+                👨‍⚕️ أنا طبيب أبحث عن عيادة (استمارة)
+            </a>
+            <a href="https://tally.so/r/gD6z6l" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="managerFormLink">
+                🏢 أصحاب مجمع / طلب طبيب (استمارة)
+            </a>
+        </div>
+    </section>
+
+    <!-- شريط آخر الأخبار - عائم أسفل الـ Hero -->
+    <div class="news-ticker-wrap">
+        <div class="news-ticker">
+            <div class="ticker-label">📢 آخر الأخبار</div>
+            <div class="ticker-track">
+                <div class="ticker-content" id="tickerContent" aria-live="off"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- رقم الواتساب الرسمي البارز -->
+    <div class="global-whatsapp-banner">
+        <div class="global-wa-box">
+            <div class="global-wa-text">
+                للتواصل المباشر والاستفسار الفوري مع إدارة المنصة:
+                <span>خدمة التنسيق الطبي متاحة عبر الواتساب</span>
+            </div>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="wa-direct-btn js-wa-link" data-wa-text="مرحباً، أستفسر عن خدمات منصة التنسيق الطبي">
+                💬 <span class="js-wa-display"></span>
+            </a>
+        </div>
+    </div>
+
+    <!-- أزرار التفعيل -->
+    <div class="main-trigger-section">
+        <button type="button" class="btn btn-trigger" id="btnGeneral" aria-pressed="false" onclick="startSearch('general')">
+            <svg class="btn-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M6 3.5V10.5C6 12.71 7.79 14.5 10 14.5C12.21 14.5 14 12.71 14 10.5V3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6 3.5H4.5M14 3.5H15.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M10 14.5V16.8C10 19.1 11.9 21 14.2 21C16.5 21 18.4 19.1 18.4 16.8V15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="18.4" cy="12.7" r="2.3" stroke="currentColor" stroke-width="1.7"/>
+            </svg>
+            أطباء يبحثون عن عيادات شاغرة
+        </button>
+        <button type="button" class="btn btn-doctor-search" id="btnDoctor" aria-pressed="false" onclick="startSearch('manager')">
+            <svg class="btn-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M4 21V6.8C4 6.36 4.24 5.95 4.63 5.75L11.63 2.13C11.86 2.01 12.14 2.01 12.37 2.13L19.37 5.75C19.76 5.95 20 6.36 20 6.8V21" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 21H22" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M12 7.5V12.5M9.5 10H14.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M8 21V17C8 16.45 8.45 16 9 16H15C15.55 16 16 16.45 16 17V21" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            أصحاب مجمعات يبحثون عن أطباء
+        </button>
+    </div>
+
+    <!-- Step-by-Step Filter Section -->
+    <div class="filter-section" id="filterSection">
+        <div class="step-container" id="stepContainerStyle">
+
+            <!-- ملخص الاختيارات الحالية -->
+            <div class="selection-summary" id="selectionSummary" style="display: none;">
+                <div><strong>خياراتك الحالية:</strong> <span id="summaryText">---</span></div>
+                <button type="button" class="reset-steps-btn" onclick="resetSearchSteps()">إعادة ضبط البحث 🔄</button>
+            </div>
+
+            <!-- الخطوة 1: الاختصاصات -->
+            <div id="step1Box">
+                <div class="step-title" id="step1Title">🩺 الخطوة 1: اختر الاختصاص المطلوب</div>
+                <div class="options-grid" id="specialtiesGrid"></div>
+            </div>
+
+            <!-- الخطوة 2: المحافظات -->
+            <div id="step2Box" style="display: none; margin-top: 25px; padding-top: 20px; border-top: 1px dashed #cbd5e1;">
+                <div class="step-title">📍 الخطوة 2: اختر المحافظة</div>
+                <div class="options-grid" id="govsGrid"></div>
+            </div>
+
+            <!-- الخطوة 3: القسم الرئيسي (الجانب / المركز أو الأقضية) -->
+            <div id="step3Box" style="display: none; margin-top: 25px; padding-top: 20px; border-top: 1px dashed #cbd5e1;">
+                <div class="step-title">🧭 الخطوة 3: اختر القسم الرئيسي</div>
+                <div class="options-grid" id="groupsGrid"></div>
+            </div>
+
+            <!-- الخطوة 4: المنطقة التفصيلية -->
+            <div id="step4Box" style="display: none; margin-top: 25px; padding-top: 20px; border-top: 1px dashed #cbd5e1;">
+                <div class="step-title">🏙️ الخطوة 4: اختر المنطقة أو الحي</div>
+                <div class="options-grid" id="areasGrid"></div>
+            </div>
+
+            <!-- الخطوة 5: وقت العمل -->
+            <div id="step5Box" style="display: none; margin-top: 25px; padding-top: 20px; border-top: 1px dashed #cbd5e1;">
+                <div class="step-title" id="step5Title">⏰ الخطوة 5: اختر وقت العمل المطلوب</div>
+                <div class="options-grid" id="timesGrid"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Listings Results Section -->
+    <main class="container" id="resultsContainer">
+        <div class="section-header">
+            <h2 id="resultsTitle">النتائج وحالة التوفر</h2>
+        </div>
+
+        <div class="grid" id="resultsGrid" aria-live="polite">
+            <!-- تُملأ البطاقات ديناميكياً -->
+        </div>
+    </main>
+</main>
+
+<!-- JavaScript -->
+<script>
+    const WHATSAPP_NUMBER = "9647766529755";
+    const WHATSAPP_DISPLAY = "+964 776 652 9755";
+
+    function buildWaLink(text) {
+        return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+    }
+
+    const SPECIALTIES = [
+        "باطنية", "جراحة عامة", "أطفال", "نسائية وتوليد", "جلدية وتجميل",
+        "قلبية واوعية دموية", "عظام ومفاصل", "أنف وأذن وحنجرة", "عيون",
+        "طب وجراحة الأسنان", "جراحة الكلى والمسالك البولية",
+        "جراحة الجملة العصبية", "أمراض نفسية وعصبية",
+        "أشعة وسونار ومفراس", "مختبرات وتحليلات مرضية",
+        "تخدير وعناية مركزة", "طوارئ وإصابات", "طبيب ممارس عام"
+    ];
+
+    const GOVERNORATES = [
+        { value: "بغداد", label: "بغداد" },
+        { value: "نينوى", label: "نينوى (الموصل)" },
+        { value: "البصرة", label: "البصرة" },
+        { value: "ديالى", label: "ديالى" },
+        { value: "أربيل", label: "أربيل" },
+        { value: "السليمانية", label: "السليمانية" },
+        { value: "دهوك", label: "دهوك" },
+        { value: "كركوك", label: "كركوك" },
+        { value: "صلاح الدين", label: "صلاح الدين" },
+        { value: "الانبار", label: "الانبار" },
+        { value: "بابل", label: "بابل" },
+        { value: "كربلاء", label: "كربلاء" },
+        { value: "النجف", label: "النجف" },
+        { value: "القادسية", label: "القادسية (الديوانية)" },
+        { value: "المثنى", label: "المثنى (السماوة)" },
+        { value: "ذي قار", label: "ذي قار (الناصرية)" },
+        { value: "ميسان", label: "ميسان (العمارة)" },
+        { value: "واسط", label: "واسط (الكوت)" }
+    ];
+
+    const TIME_OPTIONS = [
+        { value: "صباحاً", label: "☀️ صباحاً" },
+        { value: "مساءً", label: "🌙 مساءً" },
+        { value: "كلاهما", label: "🔁 كلاهما (صباحاً ومساءً)" }
+    ];
+
+    const areaHierarchy = {
+        "بغداد": {
+            "الرصافة": ["الرصافة - المركز", "الكرادة", "الاعظمية", "مناطق أخرى"],
+            "الكرخ": ["الكرخ - المركز", "المنصور", "الكاظمية", "الغزالية", "الدورة", "البياع", "أبو غريب", "مناطق أخرى"]
+        },
+        "نينوى": {
+            "مركز الموصل": ["الجانب الأيمن - المركز", "الجانب الأيسر - المركز", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء تلعفر", "قضاء الحمدانية (بخديدة)", "قضاء شيخان", "قضاء سنجار", "قضاء مخمور", "مناطق أخرى"]
+        },
+        "البصرة": {
+            "مركز البصرة": ["مركز المدينة (البصرة القديمة والعشار)", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء الزبير", "قضاء أبي الخصيب", "قضاء الفاو", "قضاء القرنة", "قضاء شط العرب", "ناحية الامام الصادق", "مناطق أخرى"]
+        },
+        "ديالى": {
+            "مركز بعقوبة": ["بعقوبة - مركز المحافظة", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء الخالص", "قضاء المقدادية", "قضاء خانقين", "قضاء كفري", "ناحية بني سعد", "ناحية العظيم", "ناحية بهرز", "مناطق أخرى"]
+        },
+        "أربيل": {
+            "مركز أربيل": ["مركز أربيل", "قضاء عنكاوا", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء سوران", "قضاء كويسنجق", "قضاء شقلاوة", "قضاء راوندوز", "مركسور", "مناطق أخرى"]
+        },
+        "السليمانية": {
+            "مركز السليمانية": ["مركز السليمانية", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء رانیە", "قضاء چمچمال", "قضاء شارباژێر", "قضاء دوكان", "قضاء كفري", "مناطق أخرى"]
+        },
+        "دهوك": {
+            "مركز دهوك": ["مركز دهوك", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء زاخو", "قضاء عقرة", "قضاء سميل", "قضاء آكري", "مناطق أخرى"]
+        },
+        "كركوك": {
+            "مركز كركوك": ["مركز كركوك", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء الحويجة", "قضاء داقوق", "قضاء الدبس", "مناطق أخرى"]
+        },
+        "صلاح الدين": {
+            "مركز تكريت": ["تكريت - مركز المحافظة", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء سامراء", "قضاء بيجي", "قضاء بلد", "قضاء طوزخورماتو", "قضاء الشرقاط", "قضاء الدجيل", "مناطق أخرى"]
+        },
+        "الانبار": {
+            "مركز الرمادي": ["رمادي - مركز المحافظة", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء الفلوجة", "قضاء الرمادي الأطراف", "قضاء القائم", "قضاء هيت", "قضاء حديثة", "قضاء الرطبة", "مناطق أخرى"]
+        },
+        "بابل": {
+            "مركز الحلة": ["الحلة - مركز المحافظة", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء الهندية (طويريج)", "قضاء القاسم", "قضاء المحاويل", "قضاء المدحتية", "مناطق أخرى"]
+        },
+        "كربلاء": {
+            "مركز كربلاء": ["مركز كربلاء", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء الهندية", "قضاء عين تمر", "الأطراف والنواحي", "مناطق أخرى"]
+        },
+        "النجف": {
+            "مركز النجف": ["مركز النجف (الكوفة والمدينة القديمة)", "قضاء الكوفة", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء المناذرة", "ناحية الحيرة", "مناطق أخرى"]
+        },
+        "القادسية": {
+            "مركز الديوانية": ["الديوانية - مركز المحافظة", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء عفك", "قضاء الشامية", "قضاء الحمزة", "مناطق أخرى"]
+        },
+        "المثنى": {
+            "مركز السماوة": ["السماوة - مركز المحافظة", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء الرميثة", "قضاء الخضر", "قضاء الوركاء", "مناطق أخرى"]
+        },
+        "ذي قار": {
+            "مركز الناصرية": ["الناصرية - مركز المحافظة", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء الشطرة", "قضاء الرفاعي", "قضاء سوق الشيوخ", "قضاء قلعة سكر", "قضاء الجبايش", "مناطق أخرى"]
+        },
+        "ميسان": {
+            "مركز العمارة": ["العمارة - مركز المحافظة", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء المجر الكبير", "قضاء قلعة صالح", "قضاء علي الشرقي", "قضاء كحلاء", "مناطق أخرى"]
+        },
+        "واسط": {
+            "مركز الكوت": ["الكوت - مركز المحافظة", "مناطق أخرى"],
+            "الأقضية والنواحي": ["قضاء النعمانية", "قضاء الحي", "قضاء بدرة", "قضاء العزيزية", "قضاء الصويرة", "مناطق أخرى"]
+        }
+    };
+
+    const GENERAL_CLINICS_DATA = [
+        {
+            id: "clinic-derma-baqubah",
+            specialty: "جلدية وتجميل",
+            gov: "ديالى",
+            area: "بعقوبة - مركز المحافظة",
+            time: "كلاهما",
+            statusLabel: "✅ متاحة للحجز الفوري",
+            headerLabel: "عيادة شاغرة مخصصة للطبيب",
+            title: "عيادة جلدية وتجميل مجهزة بالكامل",
+            details: "متوفرة ضمن مجمع طبي رصين."
+        },
+        {
+            id: "clinic-dental-rusafa",
+            specialty: "طب وجراحة الأسنان",
+            gov: "بغداد",
+            area: "الرصافة - المركز",
+            time: "كلاهما",
+            statusLabel: "✅ متوفرة في مجمع طبي",
+            headerLabel: "عيادة أسنان شاغرة",
+            title: "وحدة طب وجراحة الأسنان متكاملة",
+            details: "تحتوي على كرسي أسنان حديث."
+        },
+        {
+            id: "clinic-internal-mosul",
+            specialty: "باطنية",
+            gov: "نينوى",
+            area: "الجانب الأيسر - المركز",
+            time: "كلاهما",
+            statusLabel: "✅ جاهزة للعمل",
+            headerLabel: "عيادة باطنية شاغرة",
+            title: "غرفة فحص باطنية في مركز استشاري",
+            details: "موقع حيوي وإقبال ممتاز."
+        },
+        {
+            id: "doctor-derma-abughraib",
+            specialty: "جلدية وتجميل",
+            gov: "بغداد",
+            area: "أبو غريب",
+            time: "صباحاً",
+            statusLabel: "🟢 متوفر صباحاً فقط",
+            headerLabel: "طبيب جلدية يبحث عن عيادة",
+            title: "طبيب أخصائي جلدية وتجميل يبحث عن عيادة للعمل",
+            details: "متاح للعمل في الفترة الصباحية حصراً، ضمن مدينة أبو غريب حصراً."
+        }
+    ];
+
+    const DOCTORS_DATA = [
+        {
+            id: "doctor-derma-baqubah",
+            specialty: "جلدية وتجميل",
+            gov: "ديالى",
+            area: "بعقوبة - مركز المحافظة",
+            time: "كلاهما",
+            statusLabel: "🟢 متوفر للتعاقد والعمل",
+            headerLabel: "طبيب مختص متاح",
+            title: "د. محمد الركابي - أخصائي جلدية وتجميل",
+            details: "خبرة في الليزر والعلاجات التجميلية، متفرغ للعمل في المجمعات الطبية."
+        },
+        {
+            id: "doctor-dental-karkh",
+            specialty: "طب وجراحة الأسنان",
+            gov: "بغداد",
+            area: "الكرخ - المركز",
+            time: "كلاهما",
+            statusLabel: "🟢 متوفر للدوام المسائي/الصباحي",
+            headerLabel: "طبيب أسنان متاح",
+            title: "د. أحمد العبيدي - طبيب أسنان",
+            details: "خبرة واسعة في التركيبات وعلاج اللثة، جاهز للالتحاق الفوري."
+        },
+        {
+            id: "doctor-internal-mansour",
+            specialty: "باطنية",
+            gov: "بغداد",
+            area: "المنصور",
+            time: "كلاهما",
+            statusLabel: "🟢 متوفر للعمل",
+            headerLabel: "أخصائي باطنية متاح",
+            title: "د. سارة التميمي - أخصائية باطنية وقلبية",
+            details: "حاصلة على البورد، تبحث عن فرصة عمل ضمن مجمع طبي متميز."
+        }
+    ];
+
+    let selectedState = {
+        mode: 'general',
+        specialty: null,
+        gov: null,
+        group: null,
+        area: null,
+        time: null
+    };
+
+    function renderSpecialties() {
+        const grid = document.getElementById('specialtiesGrid');
+        grid.innerHTML = '';
+        SPECIALTIES.forEach(sp => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'option-pill';
+            btn.textContent = sp;
+            if (selectedState.specialty === sp) btn.classList.add('selected');
+            btn.onclick = () => selectSpecialty(sp);
+            grid.appendChild(btn);
+        });
+    }
+
+    function renderGovs() {
+        const grid = document.getElementById('govsGrid');
+        grid.innerHTML = '';
+        GOVERNORATES.forEach(g => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'option-pill';
+            btn.textContent = g.label;
+            if (selectedState.gov === g.value) btn.classList.add('selected');
+            btn.onclick = () => selectGov(g.value);
+            grid.appendChild(btn);
+        });
+    }
+
+    function renderGroups(gov) {
+        const grid = document.getElementById('groupsGrid');
+        grid.innerHTML = '';
+        if (gov && areaHierarchy[gov]) {
+            Object.keys(areaHierarchy[gov]).forEach(groupName => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'option-pill';
+                btn.textContent = groupName;
+                if (selectedState.group === groupName) btn.classList.add('selected');
+                btn.onclick = () => selectGroup(groupName);
+                grid.appendChild(btn);
+            });
+        }
+    }
+
+    function renderAreas(gov, group) {
+        const grid = document.getElementById('areasGrid');
+        grid.innerHTML = '';
+        if (gov && group && areaHierarchy[gov] && areaHierarchy[gov][group]) {
+            areaHierarchy[gov][group].forEach(area => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'option-pill';
+                btn.textContent = area;
+                if (selectedState.area === area) btn.classList.add('selected');
+                btn.onclick = () => selectArea(area);
+                grid.appendChild(btn);
+            });
+        }
+    }
+
+    function renderTimes() {
+        const grid = document.getElementById('timesGrid');
+        grid.innerHTML = '';
+        TIME_OPTIONS.forEach(t => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'option-pill';
+            btn.textContent = t.label;
+            if (selectedState.time === t.value) btn.classList.add('selected');
+            btn.onclick = () => selectTime(t.value);
+            grid.appendChild(btn);
+        });
+    }
+
+    function renderCards() {
+        const grid = document.getElementById('resultsGrid');
+        grid.innerHTML = '';
+        const frag = document.createDocumentFragment();
+
+        const dataSource = selectedState.mode === 'general' ? GENERAL_CLINICS_DATA : DOCTORS_DATA;
+
+        dataSource.forEach((item, idx) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.dataset.specialty = item.specialty;
+            card.dataset.gov = item.gov;
+            card.dataset.area = item.area;
+            card.dataset.time = item.time;
+            card.id = `result-card-${idx}`;
+
+            const waText = selectedState.mode === 'general'
+                ? `مرحباً، أستفسر عن ${item.title} في ${item.gov} - ${item.area}`
+                : `مرحباً، أستفسر عن تعاقد مع ${item.title} (${item.specialty}) في ${item.gov} - ${item.area}`;
+
+            const shareLabel = selectedState.mode === 'general'
+                ? '🔗 نسخ الرابط لمشاركة إعلان البحث عن عيادة'
+                : '🔗 نسخ الرابط لمشاركة إعلان البحث عن أطباء';
+
+            card.innerHTML = `
+                <div class="card-header bg-green">
+                    <span>${item.headerLabel}</span>
+                    <span>${item.statusLabel}</span>
+                </div>
+                <div class="card-body">
+                    <h3>${item.title}</h3>
+                    <ul class="card-info">
+                        <li><strong>الاختصاص:</strong> ${item.specialty}</li>
+                        <li><strong>المحافظة:</strong> ${item.gov}</li>
+                        <li><strong>المنطقة:</strong> ${item.area}</li>
+                        <li><strong>وقت العمل:</strong> ${item.time}</li>
+                        <li><strong>التفاصيل:</strong> ${item.details}</li>
+                    </ul>
+                    <div class="whatsapp-box">
+                        <a href="${buildWaLink(waText)}" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                            💬 ${WHATSAPP_DISPLAY}
+                        </a>
+                        <button type="button" class="share-btn" onclick="shareListing('${item.id}', this)">
+                            ${shareLabel}
+                        </button>
+                    </div>
+                </div>
+            `;
+            frag.appendChild(card);
+        });
+
+        const noResults = document.createElement('div');
+        noResults.id = 'noResultsMsg';
+        noResults.className = 'no-results';
+        const noResultsFormUrl = selectedState.mode === 'general'
+            ? document.getElementById('doctorFormLink').href
+            : document.getElementById('managerFormLink').href;
+        const noResultsFormLabel = selectedState.mode === 'general'
+            ? '📝 املأ استمارة الطبيب ليتم إعلامك فور توفر عيادة'
+            : '📝 املأ استمارة المجمع ليتم إعلامك فور توفر طبيب';
+        noResults.innerHTML = `
+            <p>${selectedState.mode === 'general' ? 'عذراً، لا توجد عيادات شاغرة مطابقة في هذه المنطقة حالياً.' : 'عذراً، لا يوجد أطباء متاحون ضمن هذا الاختصاص والمنطقة حالياً.'}</p>
+            <a href="${noResultsFormUrl}" id="noResultsFormLink" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                ${noResultsFormLabel}
+            </a>
+        `;
+        frag.appendChild(noResults);
+        grid.appendChild(frag);
+    }
+
+    function startSearch(mode) {
+        selectedState.mode = mode;
+        selectedState.specialty = null;
+        selectedState.gov = null;
+        selectedState.group = null;
+        selectedState.area = null;
+        selectedState.time = null;
+
+        const stepContainer = document.getElementById('stepContainerStyle');
+        const resultsTitle = document.getElementById('resultsTitle');
+        const btnGeneral = document.getElementById('btnGeneral');
+        const btnDoctor = document.getElementById('btnDoctor');
+        const step1Title = document.getElementById('step1Title');
+        const step5Title = document.getElementById('step5Title');
+
+        if (mode === 'manager') {
+            stepContainer.classList.add('doctor-mode');
+            resultsTitle.textContent = "الأطباء المتوفرون حسب الاختصاص والمنطقة المطلوبة للمجمع";
+            step1Title.textContent = "🩺 الخطوة 1: اختر الاختصاص الطبي المطلوب للتعاقد";
+            step5Title.textContent = "⏰ الخطوة 5: اختر وقت عمل عيادتكم أو مجمعكم الطبي";
+            btnDoctor.setAttribute('aria-pressed', 'true');
+            btnGeneral.setAttribute('aria-pressed', 'false');
+        } else {
+            stepContainer.classList.remove('doctor-mode');
+            resultsTitle.textContent = "العيادات الشاغرة المتوفرة حسب اختصاصك ومنطقتك";
+            step1Title.textContent = "🩺 الخطوة 1: اختر الاختصاص الطبي";
+            step5Title.textContent = "⏰ الخطوة 5: اختر وقت العمل الذي تريده";
+            btnGeneral.setAttribute('aria-pressed', 'true');
+            btnDoctor.setAttribute('aria-pressed', 'false');
+        }
+
+        document.getElementById('filterSection').style.display = 'block';
+        document.getElementById('resultsContainer').style.display = 'block';
+        document.getElementById('filterSection').scrollIntoView({ behavior: 'smooth' });
+
+        document.getElementById('step2Box').style.display = 'none';
+        document.getElementById('step3Box').style.display = 'none';
+        document.getElementById('step4Box').style.display = 'none';
+        document.getElementById('step5Box').style.display = 'none';
+        document.getElementById('selectionSummary').style.display = 'none';
+
+        renderSpecialties();
+        renderCards();
+    }
+
+    function selectSpecialty(sp) {
+        selectedState.specialty = sp;
+        selectedState.gov = null;
+        selectedState.group = null;
+        selectedState.area = null;
+        selectedState.time = null;
+
+        renderSpecialties();
+        renderGovs();
+
+        document.getElementById('step2Box').style.display = 'block';
+        document.getElementById('step3Box').style.display = 'none';
+        document.getElementById('step4Box').style.display = 'none';
+        document.getElementById('step5Box').style.display = 'none';
+        document.getElementById('step2Box').scrollIntoView({ behavior: 'smooth' });
+
+        updateSummary();
+        resetCards();
+    }
+
+    function selectGov(govVal) {
+        selectedState.gov = govVal;
+        selectedState.group = null;
+        selectedState.area = null;
+        selectedState.time = null;
+
+        renderGovs();
+        renderGroups(govVal);
+
+        document.getElementById('step3Box').style.display = 'block';
+        document.getElementById('step4Box').style.display = 'none';
+        document.getElementById('step5Box').style.display = 'none';
+        document.getElementById('step3Box').scrollIntoView({ behavior: 'smooth' });
+
+        updateSummary();
+        resetCards();
+    }
+
+    function selectGroup(groupVal) {
+        selectedState.group = groupVal;
+        selectedState.area = null;
+        selectedState.time = null;
+
+        renderGroups(selectedState.gov);
+        renderAreas(selectedState.gov, groupVal);
+
+        document.getElementById('step4Box').style.display = 'block';
+        document.getElementById('step5Box').style.display = 'none';
+        document.getElementById('step4Box').scrollIntoView({ behavior: 'smooth' });
+
+        updateSummary();
+        resetCards();
+    }
+
+    function selectArea(areaVal) {
+        selectedState.area = areaVal;
+        selectedState.time = null;
+        renderAreas(selectedState.gov, selectedState.group);
+        renderTimes();
+
+        document.getElementById('step5Box').style.display = 'block';
+        document.getElementById('step5Box').scrollIntoView({ behavior: 'smooth' });
+
+        updateSummary();
+        resetCards();
+    }
+
+    function selectTime(timeVal) {
+        selectedState.time = timeVal;
+        renderTimes();
+
+        updateSummary();
+        checkAvailability();
+        document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function updateSummary() {
+        const summaryDiv = document.getElementById('selectionSummary');
+        const summaryText = document.getElementById('summaryText');
+
+        let parts = [];
+        if (selectedState.specialty) parts.push(`الاختصاص: ${selectedState.specialty}`);
+        if (selectedState.gov) parts.push(`المحافظة: ${selectedState.gov}`);
+        if (selectedState.group) parts.push(`القسم: ${selectedState.group}`);
+        if (selectedState.area) parts.push(`المنطقة: ${selectedState.area}`);
+        if (selectedState.time) parts.push(`وقت العمل: ${selectedState.time}`);
+
+        if (parts.length > 0) {
+            summaryText.textContent = parts.join(' ➔ ');
+            summaryDiv.style.display = 'flex';
+        } else {
+            summaryDiv.style.display = 'none';
+        }
+    }
+
+    function checkAvailability() {
+        const cards = document.querySelectorAll('.card');
+        const noResultsMsg = document.getElementById('noResultsMsg');
+        let foundCount = 0;
+
+        if (!selectedState.area || !selectedState.time) {
+            cards.forEach(c => c.classList.remove('active-match'));
+            noResultsMsg.style.display = 'none';
+            return;
+        }
+
+        cards.forEach(card => {
+            const cSpecialty = card.getAttribute('data-specialty');
+            const cGov = card.getAttribute('data-gov');
+            const cArea = card.getAttribute('data-area');
+            const cTime = card.getAttribute('data-time');
+
+            const timeMatches = cTime === 'كلاهما' || cTime === selectedState.time;
+
+            if (cSpecialty === selectedState.specialty && cGov === selectedState.gov && cArea === selectedState.area && timeMatches) {
+                card.classList.add('active-match');
+                foundCount++;
+            } else {
+                card.classList.remove('active-match');
+            }
+        });
+
+        noResultsMsg.style.display = foundCount === 0 ? 'block' : 'none';
+    }
+
+    function resetSearchSteps() {
+        startSearch(selectedState.mode);
+    }
+
+    function resetCards() {
+        document.querySelectorAll('.card').forEach(c => c.classList.remove('active-match'));
+        const noResultsMsg = document.getElementById('noResultsMsg');
+        if (noResultsMsg) noResultsMsg.style.display = 'none';
+    }
+
+    const NEWS_ITEMS = [
+        { text: "🆕 تمت إضافة عيادات جديدة شاغرة في بغداد والبصرة هذا الأسبوع" },
+        { text: "👨‍⚕️ زيادة الطلب على تخصص طب الأسنان في محافظة نينوى" },
+        { text: "📈 انضمام أكثر من 20 طبيباً جديداً للمنصة خلال الشهر الحالي" },
+        { text: "🏥 فرص تعاقد متاحة الآن لأصحاب المجمعات الطبية في إقليم كردستان" },
+        { text: "✅ تحديث: تسريع إجراءات التنسيق بين الأطباء والمجمعات الطبية" },
+        {
+            text: "🩺 طبيب جلدية يبحث عن عيادة للعمل صباحاً في مدينة أبو غريب حصراً — اضغط للتفاصيل",
+            action: { mode: "general", specialty: "جلدية وتجميل", gov: "بغداد", group: "الكرخ", area: "أبو غريب", time: "صباحاً" }
+        }
+    ];
+
+    function initNewsTicker() {
+        const el = document.getElementById('tickerContent');
+        if (!el || NEWS_ITEMS.length === 0) return;
+
+        const itemsHtml = NEWS_ITEMS.map((item, idx) => {
+            if (item.action) {
+                return `<span class="ticker-item ticker-item-link" role="button" tabindex="0" data-news-idx="${idx}">${item.text}</span>`;
+            }
+            return `<span class="ticker-item">${item.text}</span>`;
+        }).join('');
+        el.innerHTML = itemsHtml + itemsHtml;
+
+        el.querySelectorAll('.ticker-item-link').forEach(node => {
+            const idx = Number(node.dataset.newsIdx);
+            const item = NEWS_ITEMS[idx];
+            if (!item || !item.action) return;
+
+            node.addEventListener('click', () => goToNewsCard(item.action));
+            node.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    goToNewsCard(item.action);
+                }
+            });
+        });
+    }
+
+    function findGroupForArea(gov, area) {
+        if (!gov || !area || !areaHierarchy[gov]) return null;
+        const groups = areaHierarchy[gov];
+        for (const groupName of Object.keys(groups)) {
+            if (groups[groupName].includes(area)) return groupName;
+        }
+        return null;
+    }
+
+    function findListingById(id) {
+        let item = GENERAL_CLINICS_DATA.find(i => i.id === id);
+        if (item) return { item, mode: 'general' };
+        item = DOCTORS_DATA.find(i => i.id === id);
+        if (item) return { item, mode: 'manager' };
+        return null;
+    }
+
+    function buildShareLink(id) {
+        const url = new URL(window.location.href);
+        const basePath = url.pathname.substring(0, url.pathname.lastIndexOf('/') + 1);
+        return `${url.origin}${basePath}previews/${id}.html`;
+    }
+
+    function shareListing(id, btnEl) {
+        const link = buildShareLink(id);
+        const originalText = btnEl.textContent;
+
+        const showCopied = () => {
+            btnEl.textContent = '✅ تم نسخ رابط المعاينة! الصقه في فيسبوك أو واتساب وسيظهر بعنوان وتفاصيل هذا الإعلان';
+            setTimeout(() => { btnEl.textContent = originalText; }, 3200);
+        };
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(link).then(showCopied).catch(() => {
+                window.prompt('انسخ الرابط يدوياً:', link);
+            });
+        } else {
+            window.prompt('انسخ الرابط يدوياً:', link);
+        }
+    }
+
+    function openListingById(id) {
+        const found = findListingById(id);
+        if (!found) return false;
+
+        const { item, mode } = found;
+        const group = findGroupForArea(item.gov, item.area);
+        if (!group) return false;
+
+        startSearch(mode);
+        selectSpecialty(item.specialty);
+        selectGov(item.gov);
+        selectGroup(group);
+        selectArea(item.area);
+        selectTime(item.time);
+
+        const matchedCard = document.querySelector(`[data-specialty="${item.specialty}"][data-gov="${item.gov}"][data-area="${item.area}"]`);
+        if (matchedCard) {
+            setTimeout(() => {
+                matchedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                matchedCard.classList.add('card-highlight');
+                setTimeout(() => matchedCard.classList.remove('card-highlight'), 2600);
+            }, 150);
+        }
+        return true;
+    }
+
+    function goToNewsCard(action) {
+        startSearch(action.mode);
+        selectSpecialty(action.specialty);
+        selectGov(action.gov);
+        selectGroup(action.group);
+        selectArea(action.area);
+        selectTime(action.time);
+
+        const matchedCard = document.querySelector('.card.active-match');
+        if (matchedCard) {
+            matchedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            matchedCard.classList.add('card-highlight');
+            setTimeout(() => matchedCard.classList.remove('card-highlight'), 2600);
+        }
+    }
+
+    function initWhatsappLinks() {
+        document.querySelectorAll('.js-wa-link').forEach(link => {
+            const text = link.dataset.waText || '';
+            link.href = buildWaLink(text);
+        });
+        document.querySelectorAll('.js-wa-display').forEach(span => {
+            span.textContent = WHATSAPP_DISPLAY;
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderCards();
+        initWhatsappLinks();
+        initNewsTicker();
+
+        const params = new URLSearchParams(window.location.search);
+        const listingId = params.get('id');
+        if (listingId) {
+            openListingById(listingId);
+        }
+    });
+</script>
+
 </body>
 </html>
