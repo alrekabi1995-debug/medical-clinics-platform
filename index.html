@@ -88,39 +88,47 @@
             background-color: #334155;
         }
 
-        /* Search Box */
+        /* Search & Filter Box */
         .search-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: -30px auto 40px;
             padding: 0 20px;
         }
 
         .search-box {
             background: #ffffff;
-            padding: 10px;
+            padding: 15px;
             border-radius: 12px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .search-input {
             flex: 1;
+            min-width: 220px;
             border: 1px solid #e2e8f0;
-            padding: 12px 20px;
+            padding: 12px 16px;
             border-radius: 8px;
             font-size: 15px;
             outline: none;
+            background-color: #fff;
         }
 
         .search-btn {
             background-color: #0f172a;
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 12px 25px;
             border-radius: 8px;
             font-weight: 700;
             cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .search-btn:hover {
+            background-color: #1e293b;
         }
 
         /* Listings Section */
@@ -156,6 +164,12 @@
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid #e2e8f0;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
         .card-header {
@@ -198,24 +212,39 @@
         <p>نربط الأطباء بأفضل العيادات الشاغرة في المجمعات والمراكز الطبية المميزة، ونساعد المجمعات في استقطاب الكفاءات الطبية.</p>
 
         <div class="cta-container">
-            <!-- زر الأطباء -->
+            <!-- زر الأطباء (مربوط باستمارة Tally للأطباء) -->
             <a href="https://tally.so/r/7RrE0Z" target="_blank" class="btn btn-primary">
                 👨‍⚕️ أنا طبيب أبحث عن عيادة
             </a>
             
-            <!-- زر أصحاب المجمعات (مربوط بالاستمارة الجديدة) -->
+            <!-- زر أصحاب المجمعات (مربوط باستمارة Tally للمجمعات) -->
             <a href="https://tally.so/r/gD6z6l" target="_blank" class="btn btn-secondary">
                 🏢 أصحاب مجمع / طلب طبيب
             </a>
         </div>
     </section>
 
-    <!-- Search Section -->
+    <!-- Search & Filter Section -->
     <div class="search-container">
-        <form class="search-box">
-            <input type="text" class="search-input" placeholder="ابحث حسب المنطقة، الشارع، أو التخصص المطلوب...">
-            <button type="submit" class="search-btn">بحث</button>
-        </form>
+        <div class="search-box">
+            <!-- فلتر حسب التخصص -->
+            <select id="filterSpecialty" class="search-input">
+                <option value="">اختر التخصص الطبي...</option>
+                <option value="جلدية وتجميل">جلدية وتجميل</option>
+                <option value="باطنية">باطنية</option>
+                <option value="أسنان">طب وجراحة الأسنان</option>
+            </select>
+
+            <!-- فلتر حسب المنطقة -->
+            <select id="filterLocation" class="search-input">
+                <option value="">اختر المنطقة / الشارع...</option>
+                <option value="شارع 20">شارع 20</option>
+                <option value="وسط المدينة">وسط المدينة</option>
+            </select>
+
+            <!-- زر التصفية -->
+            <button type="button" onclick="filterCards()" class="search-btn">بحث مطابق</button>
+        </div>
     </div>
 
     <!-- Listings -->
@@ -225,9 +254,9 @@
             <p>مواقع ومساحات شاغرة جاهزة للاستئجار أو التعاقد في أفضل المجمعات الطبية</p>
         </div>
 
-        <div class="grid">
+        <div class="grid" id="listingsGrid">
             <!-- Card 1 -->
-            <div class="card">
+            <div class="card" data-specialty="جلدية وتجميل باطنية" data-location="شارع 20">
                 <div class="card-header bg-orange">
                     <span>موقع مميز</span>
                     <span>شاغرة حالياً</span>
@@ -244,7 +273,7 @@
             </div>
 
             <!-- Card 2 -->
-            <div class="card">
+            <div class="card" data-specialty="أسنان" data-location="وسط المدينة">
                 <div class="card-header bg-blue">
                     <span>طلب استقطاب طبيب</span>
                     <span>مجمع طبي قائم</span>
@@ -262,5 +291,27 @@
         </div>
     </div>
 
+    <!-- JavaScript للبحث الذكي حسب الاختصاص والمنطقة -->
+    <script>
+        function filterCards() {
+            const specialty = document.getElementById('filterSpecialty').value;
+            const location = document.getElementById('filterLocation').value;
+            const cards = document.querySelectorAll('.card');
+
+            cards.forEach(card => {
+                const cardSpecialty = card.getAttribute('data-specialty');
+                const cardLocation = card.getAttribute('data-location');
+
+                const matchSpecialty = (specialty === "" || cardSpecialty.includes(specialty));
+                const matchLocation = (location === "" || cardLocation.includes(location));
+
+                if (matchSpecialty && matchLocation) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+    </script>
 </body>
 </html>
