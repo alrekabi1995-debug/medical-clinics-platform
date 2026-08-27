@@ -43,7 +43,6 @@
         }
 
         .hero p {
-            content: "";
             color: #94a3b8;
             max-width: 600px;
             margin: 0 auto 25px;
@@ -102,18 +101,36 @@
             background-color: #0284c7;
         }
 
+        /* زر خاص للأطباء الباحثين عن عيادات (الطلب الجديد) */
+        .btn-doctor-search {
+            background-color: #10b981;
+            color: white;
+            font-size: 1rem;
+            padding: 14px 30px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-doctor-search:hover {
+            background-color: #059669;
+        }
+
         /* Main Trigger Container */
         .main-trigger-section {
             text-align: center;
             margin: 35px 0 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 0 20px;
         }
 
-        /* Cascading Filter Section (Hidden initially) */
+        /* Cascading Filter Section */
         .filter-section {
             max-width: 1000px;
             margin: 0 auto 40px;
             padding: 0 20px;
-            display: none; /* مخفي لحين الضغط على الزر */
+            display: none;
         }
 
         .filter-card {
@@ -125,6 +142,10 @@
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
             border: 2px solid #0ea5e9;
+        }
+
+        .filter-card.doctor-mode {
+            border-color: #10b981; /* إطار أخضر خاص بالبحث المباشر للأطباء */
         }
 
         .filter-group {
@@ -155,12 +176,12 @@
             cursor: not-allowed;
         }
 
-        /* Listings Results Section (Hidden initially) */
+        /* Listings Results Section */
         .container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px 60px;
-            display: none; /* مخفي لحين إتمام البحث */
+            display: none;
         }
 
         .section-header {
@@ -201,6 +222,7 @@
 
         .bg-orange { background-color: #fef3c7; color: #b45309; }
         .bg-blue { background-color: #dbeafe; color: #1d4ed8; }
+        .bg-green { background-color: #d1fae5; color: #047857; }
 
         .card-body {
             padding: 20px;
@@ -233,8 +255,8 @@
 </head>
 <body>
 
-    <!-- Hero Section -->
     <main>
+        <!-- Hero Section -->
         <section class="hero">
             <span class="badge">وساطة وتنسيق موقعي متخصص</span>
             <h1>منصة عيادات طبية للتنسيق الطبي</h1>
@@ -250,31 +272,47 @@
             </div>
         </section>
 
-        <!-- زر تفعيل محرك البحث التفاعلي -->
+        <!-- أزرار التفعيل -->
         <div class="main-trigger-section">
-            <button type="button" class="btn btn-trigger" onclick="showSearchFilters()">
-                🔍 أطباء يبحثون عن عيادات (بحث تفاعلي حسب المحافظة والمنطقة)
+            <button type="button" class="btn btn-trigger" onclick="showSearchFilters('general')">
+                🔍 استعراض مجمعات وعيادات العراق
+            </button>
+            <button type="button" class="btn btn-doctor-search" onclick="showSearchFilters('doctor')">
+                🩺 أطباء يبحثون عن عيادات (بحث فوري للعيادات المتاحة)
             </button>
         </div>
 
-        <!-- Cascading Filter Section (يظهر بعد الضغط على الزر) -->
+        <!-- Cascading Filter Section -->
         <div class="filter-section" id="filterSection">
-            <div class="filter-card">
+            <div class="filter-card" id="filterCardStyle">
                 
-                <!-- 1. اختيار الاختصاص أولاً -->
+                <!-- 1. الاختصاصات الطبية كافة -->
                 <div class="filter-group">
                     <label for="stepSpecialty">1. الاختصاص الطبي</label>
                     <select id="stepSpecialty" class="filter-select" onchange="handleSpecialtyChange()">
-                        <option value="">اختر الاختصاص أولاً...</option>
-                        <option value="جلدية وتجميل">جلدية وتجميل</option>
+                        <option value="">اختر أو حدد الاختصاص...</option>
                         <option value="باطنية">باطنية</option>
-                        <option value="أسنان">طب وجراحة الأسنان</option>
-                        <option value="نسائية وتوليد">نسائية وتوليد</option>
+                        <option value="جراحة عامة">جراحة عامة</option>
                         <option value="أطفال">أطفال</option>
+                        <option value="نسائية وتوليد">نسائية وتوليد</option>
+                        <option value="جلدية وتجميل">جلدية وتجميل</option>
+                        <option value="قلبية واوعية دموية">قلبية واوعية دموية</option>
+                        <option value="عظام ومفاصل">عظام ومفاصل</option>
+                        <option value="أنف وأذن وحنجرة">أنف وأذن وحنجرة</option>
+                        <option value="عيون">عيون</option>
+                        <option value="طب وجراحة الأسنان">طب وجراحة الأسنان</option>
+                        <option value="جراحة الكلى والمسالك البولية">جراحة الكلى والمسالك البولية</option>
+                        <option value="جراحة الجملة العصبية">جراحة الجملة العصبية</option>
+                        <option value="أمراض نفسية وعصبية">أمراض نفسية وعصبية</option>
+                        <option value="أشعة وسونار ومفراس">أشعة وسونار ومفراس</option>
+                        <option value="مختبرات وتحليلات مرضية">مختبرات وتحليلات مرضية</option>
+                        <option value="تخدير وعناية مركزة">تخدير وعناية مركزة</option>
+                        <option value="طوارئ وإصابات">طوارئ وإصابات</option>
+                        <option value="طبيب ممارس عام">طبيب ممارس عام</option>
                     </select>
                 </div>
 
-                <!-- 2. اختيار المحافظة ثانياً -->
+                <!-- 2. محافظات العراق كافة -->
                 <div class="filter-group">
                     <label for="stepGov">2. المحافظة</label>
                     <select id="stepGov" class="filter-select" disabled onchange="handleGovChange()">
@@ -300,115 +338,134 @@
                     </select>
                 </div>
 
-                <!-- 3. اختيار المنطقة / الجانب ثالثاً -->
+                <!-- 3. المناطق -->
                 <div class="filter-group">
-                    <label for="stepArea">3. المنطقة / الجانب</label>
+                    <label for="stepArea">3. المنطقة أو الجانب</label>
                     <select id="stepArea" class="filter-select" disabled onchange="checkAvailability()">
-                        <option value="">اختر المنطقة أو الجانب...</option>
+                        <option value="">اختر المنطقة...</option>
                     </select>
                 </div>
 
             </div>
         </div>
 
-        <!-- Listings Results Section (يظهر مع تفعيل البحث) -->
+        <!-- Listings Results Section -->
         <div class="container" id="resultsContainer">
             <div class="section-header">
-                <h2>نتائج البحث وحالة توفر الطبيب أو العيادة</h2>
+                <h2 id="resultsTitle">نتائج البحث وحالة توفر العيادات</h2>
             </div>
 
             <div class="grid" id="resultsGrid">
                 
-                <!-- بطاقة تجريبية 1 -->
-                <div class="card" data-specialty="جلدية وتجميل" data-gov="ديالى" data-area="شارع 20">
-                    <div class="card-header bg-orange">
-                        <span>موقع مميز</span>
-                        <span>✅ دكتور متوفر حالياً</span>
+                <!-- بطاقة عيادة شاغرة 1 -->
+                <div class="card" data-specialty="جلدية وتجميل" data-gov="ديالى" data-area="مركز المحافظة" data-type="doctor-clinic">
+                    <div class="card-header bg-green">
+                        <span>عيادة شاغرة مخصصة للطبيب</span>
+                        <span>✅ متاحة للحجز الفوري</span>
                     </div>
                     <div class="card-body">
-                        <h3>عيادة شاغرة في مجمع طبي متكامل</h3>
+                        <h3>عيادة جلدية وتجميل مجهزة بالكامل</h3>
                         <ul class="card-info">
                             <li><strong>الاختصاص:</strong> جلدية وتجميل</li>
                             <li><strong>المحافظة:</strong> ديالى</li>
-                            <li><strong>المنطقة:</strong> شارع 20</li>
-                            <li><strong>الحالة:</strong> جاهزة للتشغيل والديكور ممتاز</li>
+                            <li><strong>المنطقة:</strong> مركز المحافظة</li>
+                            <li><strong>التفاصيل:</strong> متوفرة ضمن مجمع طبي رصين مع إيجار مناسب.</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- بطاقة تجريبية 2 -->
-                <div class="card" data-specialty="أسنان" data-gov="بغداد" data-area="الرصافة">
-                    <div class="card-header bg-blue">
-                        <span>طلب استقطاب</span>
-                        <span>✅ دكتور متوفر / مجمع قائم</span>
+                <!-- بطاقة عيادة شاغرة 2 -->
+                <div class="card" data-specialty="طب وجراحة الأسنان" data-gov="بغداد" data-area="الرصافة" data-type="doctor-clinic">
+                    <div class="card-header bg-green">
+                        <span>عيادة أسنان شاغرة</span>
+                        <span>✅ متوفرة في مجمع طبي</span>
                     </div>
                     <div class="card-body">
-                        <h3>مطلوب طبيب / طبيبة أسنان لمجمع طبي</h3>
+                        <h3>وحدة طب وجراحة الأسنان متكاملة</h3>
                         <ul class="card-info">
                             <li><strong>الاختصاص:</strong> طب وجراحة الأسنان</li>
                             <li><strong>المحافظة:</strong> بغداد</li>
                             <li><strong>المنطقة:</strong> الرصافة</li>
-                            <li><strong>الحالة:</strong> إقبال عالي جداً للمجمع</li>
+                            <li><strong>التفاصيل:</strong> تحتوي على كرسي أسنان حديث وكادر مساعدة.</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- بطاقة تجريبية 3 (نينوى/الموصل) -->
-                <div class="card" data-specialty="باطنية" data-gov="نينوى" data-area="الجانب الأيسر">
-                    <div class="card-header bg-orange">
-                        <span>فرصة متميزة</span>
-                        <span>✅ دكتور متوفر</span>
+                <!-- بطاقة عيادة شاغرة 3 -->
+                <div class="card" data-specialty="باطنية" data-gov="نينوى" data-area="الجانب الأيسر" data-type="doctor-clinic">
+                    <div class="card-header bg-green">
+                        <span>عيادة باطنية شاغرة</span>
+                        <span>✅ جاهزة للعمل</span>
                     </div>
                     <div class="card-body">
-                        <h3>عيادة باطنية شاغرة في مركز طبي</h3>
+                        <h3>غرفة فحص باطنية في مركز استشاري</h3>
                         <ul class="card-info">
                             <li><strong>الاختصاص:</strong> باطنية</li>
                             <li><strong>المحافظة:</strong> نينوى</li>
                             <li><strong>المنطقة:</strong> الجانب الأيسر</li>
-                            <li><strong>الحالة:</strong> كادر تمريضي كامل متوفر</li>
+                            <li><strong>التفاصيل:</strong> موقع حيوي وإقبال مراجعين ممتاز.</li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- رسالة عند عدم وجود نتائج -->
                 <div id="noResultsMsg" class="no-results">
-                    عذراً، لا توجد نتائج مطابقة لهذه الخيارات حالياً. يمكنك التقديم مباشرة عبر الاستمارات في الأعلى لتسجيل طلبك.
+                    عذراً، لا توجد عيادات شاغرة مطابقة لاختصاصك في هذه المنطقة حالياً. يمكنك ملء الاستمارة في الأعلى ليتم إعلامك فور توفرها.
                 </div>
 
             </div>
         </div>
     </main>
 
-    <!-- JavaScript للتحكم بالظهور والتسلسل العكسي -->
+    <!-- JavaScript -->
     <script>
-        // دالة إظهار قسم البحث والنتائج عند الضغط على الزر الرئيسي
-        function showSearchFilters() {
+        let currentSearchMode = 'general';
+
+        function showSearchFilters(mode) {
+            currentSearchMode = mode;
+            const filterCard = document.getElementById('filterCardStyle');
+            const resultsTitle = document.getElementById('resultsTitle');
+
+            if (mode === 'doctor') {
+                filterCard.classList.add('doctor-mode');
+                resultsTitle.textContent = "العيادات الشاغرة المتوفرة حسب اختصاصك ومنطقتك المطلوبة";
+            } else {
+                filterCard.classList.remove('doctor-mode');
+                resultsTitle.textContent = "نتائج البحث العام وحالة توفر العيادات والمجمعات";
+            }
+
             document.getElementById('filterSection').style.display = 'block';
             document.getElementById('resultsContainer').style.display = 'block';
-            // التمرير السلس نحو خانة البحث
             document.getElementById('filterSection').scrollIntoView({ behavior: 'smooth' });
+            
+            // إعادة ضبط الخيارات عند تبديل الزر
+            document.getElementById('stepSpecialty').value = "";
+            document.getElementById('stepGov').value = "";
+            document.getElementById('stepGov').disabled = true;
+            document.getElementById('stepArea').innerHTML = '<option value="">اختر المنطقة...</option>';
+            document.getElementById('stepArea').disabled = true;
+            resetCards();
         }
 
-        // مناطق محافظات العراق
         const areasByGov = {
-            "بغداد": ["الكرخ", "الرصافة", "المنصور", "الكرادة", "الأعظمية", "الكاظمية", "الدورة"],
-            "نينوى": ["الجانب الأيسر", "الجانب الأيمن", "تلكيف", "قضاء الحمدانية"],
-            "البصرة": ["شمال البصرة", "مركز المدينة", "قضاء الزبير", "أبو الخصيب"],
-            "ديالى": ["شارع 20", "بعقوبة المركز", "المفتاحية", "الخالص"],
-            "أربيل": ["عنكاوا", "شارع روهلات", "مركز المدينة", "سوران"],
-            "السليمانية": ["السليمانية المركز", "بختياري", "سفور"],
-            "دهوك": ["مركز دهوك", "سيميل", "زاخو"],
-            "كركوك": ["الحرية", "العلمدار", "تأميم", "الواسططي"],
-            "صلاح الدين": ["تكريت المركز", "سامراء", "الدور", "الطارمية"],
-            "الانبار": ["الرمادي المركز", "الفلوجة", "هيت"],
-            "بابل": ["الحلة المركز", "الإسكندرية", "المحاويل"],
-            "كربلاء": ["مركز المدينة", "العباسية", "الحسينية"],
-            "النجف": ["النجف المركز", "الكوفة", "مفلس"],
-            "القادسية": ["الديوانية المركز", "عفك"],
-            "المثنى": ["السماوة المركز", "الرميثة"],
-            "ذي قار": ["الناصرية المركز", "الشطرة", "سوق الشيوخ"],
-            "ميسان": ["العمارة المركز", "المجر الكبير"],
-            "واسط": ["الكوت المركز", "الحي", "النعمانية"]
+            "بغداد": ["الكرخ", "الرصافة"],
+            "نينوى": ["الجانب الأيمن", "الجانب الأيسر"],
+            "البصرة": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"],
+            "ديالى": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"],
+            "أربيل": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"],
+            "السليمانية": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"],
+            "دهوك": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"],
+            "كركوك": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"],
+            "صلاح الدين": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"],
+            "الانبار": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"],
+            "بابل": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"],
+            "كربلاء": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"],
+            "النجف": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"],
+            "القادسية": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"],
+            "المثنى": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"],
+            "ذي قار": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"],
+            "ميسان": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"],
+            "واسط": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"]
         };
 
         function handleSpecialtyChange() {
@@ -424,7 +481,7 @@
             const govVal = document.getElementById('stepGov').value;
             const areaSelect = document.getElementById('stepArea');
             
-            areaSelect.innerHTML = '<option value="">اختر المنطقة أو الجانب...</option>';
+            areaSelect.innerHTML = '<option value="">اختر المنطقة...</option>';
             
             if (govVal && areasByGov[govVal]) {
                 areasByGov[govVal].forEach(area => {
@@ -477,9 +534,13 @@
 
         function resetBelow(level) {
             if (level === 'stepGov') {
-                document.getElementById('stepArea').innerHTML = '<option value="">اختر المنطقة أو الجانب...</option>';
+                document.getElementById('stepArea').innerHTML = '<option value="">اختر المنطقة...</option>';
                 document.getElementById('stepArea').disabled = true;
             }
+            resetCards();
+        }
+
+        function resetCards() {
             document.querySelectorAll('.card').forEach(c => c.classList.remove('active-match'));
             document.getElementById('noResultsMsg').style.display = 'none';
         }
