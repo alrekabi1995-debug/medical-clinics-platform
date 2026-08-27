@@ -13,6 +13,86 @@
         margin: 0;
     }
 
+    .news-ticker-wrap {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 20px;
+        position: relative;
+        z-index: 2;
+        margin-top: -22px;
+    }
+
+    .news-ticker {
+        background-color: #0f172a;
+        border: 1px solid #334155;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px -8px rgba(15, 23, 42, 0.5);
+        display: flex;
+        align-items: stretch;
+        overflow: hidden;
+        direction: rtl;
+    }
+
+    .ticker-label {
+        flex-shrink: 0;
+        background-color: #f59e0b;
+        color: #0f172a;
+        font-weight: 800;
+        font-size: 13px;
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+        z-index: 1;
+        border-radius: 0 12px 12px 0;
+    }
+
+    .ticker-track {
+        flex: 1;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .ticker-content {
+        display: inline-flex;
+        white-space: nowrap;
+        padding-right: 100%;
+        animation: ticker-scroll 75s linear infinite;
+        color: #e2e8f0;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .ticker-track:hover .ticker-content {
+        animation-play-state: paused;
+    }
+
+    .ticker-item {
+        padding: 0 24px;
+        position: relative;
+    }
+
+    .ticker-item::after {
+        content: "•";
+        color: #f59e0b;
+        position: absolute;
+        left: -2px;
+    }
+
+    @keyframes ticker-scroll {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .ticker-content {
+            animation: none;
+        }
+    }
+
     .hero {
         background-color: #0f172a;
         color: #ffffff;
@@ -406,6 +486,16 @@
             </a>
         </div>
     </section>
+
+    <!-- شريط آخر الأخبار - عائم أسفل الـ Hero -->
+    <div class="news-ticker-wrap">
+        <div class="news-ticker">
+            <div class="ticker-label">📢 آخر الأخبار</div>
+            <div class="ticker-track">
+                <div class="ticker-content" id="tickerContent" aria-live="off"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- رقم الواتساب الرسمي البارز -->
     <div class="global-whatsapp-banner">
@@ -950,6 +1040,24 @@
         if (noResultsMsg) noResultsMsg.style.display = 'none';
     }
 
+    // آخر الأخبار - عدّل هذه القائمة بأخباركم الفعلية
+    const NEWS_ITEMS = [
+        "🆕 تمت إضافة عيادات جديدة شاغرة في بغداد والبصرة هذا الأسبوع",
+        "👨‍⚕️ زيادة الطلب على تخصص طب الأسنان في محافظة نينوى",
+        "📈 انضمام أكثر من 20 طبيباً جديداً للمنصة خلال الشهر الحالي",
+        "🏥 فرص تعاقد متاحة الآن لأصحاب المجمعات الطبية في إقليم كردستان",
+        "✅ تحديث: تسريع إجراءات التنسيق بين الأطباء والمجمعات الطبية"
+    ];
+
+    function initNewsTicker() {
+        const el = document.getElementById('tickerContent');
+        if (!el || NEWS_ITEMS.length === 0) return;
+
+        const itemsHtml = NEWS_ITEMS.map(text => `<span class="ticker-item">${text}</span>`).join('');
+        // تكرار المحتوى مرتين لضمان تمرير متصل وسلس بدون فراغ
+        el.innerHTML = itemsHtml + itemsHtml;
+    }
+
     function initWhatsappLinks() {
         document.querySelectorAll('.js-wa-link').forEach(link => {
             const text = link.dataset.waText || '';
@@ -963,6 +1071,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         renderCards();
         initWhatsappLinks();
+        initNewsTicker();
     });
 </script>
 
