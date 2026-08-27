@@ -984,6 +984,9 @@
                         <a href="${buildWaLink(waText)}" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
                             💬 ${WHATSAPP_DISPLAY}
                         </a>
+                        <button type="button" class="share-btn" onclick="shareListing('${item.id}', this)">
+                            🔗 نسخ رابط المشاركة (لنشره في السوشيال ميديا)
+                        </button>
                     </div>
                 </div>
             `;
@@ -1228,6 +1231,74 @@
         });
     }
 
+    function findGroupForArea(gov, area) {
+        if (!gov || !area || !areaHierarchy[gov]) return null;
+        const groups = areaHierarchy[gov];
+        for (const groupName of Object.keys(groups)) {
+            if (groups[groupName].includes(area)) return groupName;
+        }
+        return null;
+    }
+
+    function findListingById(id) {
+        let item = GENERAL_CLINICS_DATA.find(i => i.id === id);
+        if (item) return { item, mode: 'general' };
+        item = DOCTORS_DATA.find(i => i.id === id);
+        if (item) return { item, mode: 'manager' };
+        return null;
+    }
+
+    function buildShareLink(id) {
+        const url = new URL(window.location.href);
+        url.hash = '';
+        url.searchParams.set('id', id);
+        return url.toString();
+    }
+
+    function shareListing(id, btnEl) {
+        const link = buildShareLink(id);
+        const originalText = btnEl.textContent;
+
+        const showCopied = () => {
+            btnEl.textContent = '✅ تم نسخ الرابط! يمكنك لصقه الآن في فيسبوك أو انستغرام أو أي منصة';
+            setTimeout(() => { btnEl.textContent = originalText; }, 2800);
+        };
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(link).then(showCopied).catch(() => {
+                window.prompt('انسخ الرابط يدوياً:', link);
+            });
+        } else {
+            window.prompt('انسخ الرابط يدوياً:', link);
+        }
+    }
+
+    function openListingById(id) {
+        const found = findListingById(id);
+        if (!found) return false;
+
+        const { item, mode } = found;
+        const group = findGroupForArea(item.gov, item.area);
+        if (!group) return false;
+
+        startSearch(mode);
+        selectSpecialty(item.specialty);
+        selectGov(item.gov);
+        selectGroup(group);
+        selectArea(item.area);
+        selectTime(item.time);
+
+        const matchedCard = document.querySelector(`[data-specialty="${item.specialty}"][data-gov="${item.gov}"][data-area="${item.area}"]`);
+        if (matchedCard) {
+            setTimeout(() => {
+                matchedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                matchedCard.classList.add('card-highlight');
+                setTimeout(() => matchedCard.classList.remove('card-highlight'), 2600);
+            }, 150);
+        }
+        return true;
+    }
+
     function goToNewsCard(action) {
         startSearch(action.mode);
         selectSpecialty(action.specialty);
@@ -1258,6 +1329,12 @@
         renderCards();
         initWhatsappLinks();
         initNewsTicker();
+
+        const params = new URLSearchParams(window.location.search);
+        const listingId = params.get('id');
+        if (listingId) {
+            openListingById(listingId);
+        }
     });
 </script>
 
