@@ -124,12 +124,67 @@
             padding: 0 20px;
         }
 
+        /* Global WhatsApp Banner (Hero/Top visibility section) */
+        .global-whatsapp-banner {
+            max-width: 800px;
+            margin: 25px auto 10px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .global-wa-box {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border: 2px solid #25d366;
+            padding: 18px 25px;
+            border-radius: 14px;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .global-wa-text {
+            color: #ffffff;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .global-wa-text span {
+            color: #25d366;
+            display: block;
+            font-size: 0.85rem;
+            margin-top: 2px;
+        }
+
+        .wa-direct-btn {
+            background-color: #25d366;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.15rem;
+            padding: 10px 22px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            transition: background-color 0.2s;
+            direction: ltr;
+        }
+
+        .wa-direct-btn:hover {
+            background-color: #20ba5a;
+        }
+
         /* Cascading Filter Section */
         .filter-section {
             max-width: 1000px;
-            margin: 0 auto 40px;
+            margin: 20px auto 40px;
             padding: 0 20px;
-            display: none;
+            display: block;
         }
 
         .filter-card {
@@ -180,7 +235,7 @@
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px 60px;
-            display: none;
+            display: block;
         }
 
         .section-header {
@@ -240,7 +295,6 @@
             margin-bottom: 8px;
         }
 
-        /* تنسيق رقم الهاتف البارز في الصفحة الرئيسية للبطاقة */
         .whatsapp-box {
             margin-top: 15px;
             padding-top: 12px;
@@ -263,7 +317,7 @@
             width: 100%;
             box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
             transition: background-color 0.2s;
-            direction: ltr; /* لضمان عرض الأرقام بشكل صحيح ومقروء */
+            direction: ltr;
         }
 
         .whatsapp-btn:hover {
@@ -299,6 +353,19 @@
             </div>
         </section>
 
+        <!-- رقم الواتساب الرسمي البارز في الصفحة الرئيسية -->
+        <div class="global-whatsapp-banner">
+            <div class="global-wa-box">
+                <div class="global-wa-text">
+                    للتواصل المباشر والاستفسار الفوري مع إدارة المنصة:
+                    <span>خدمة التنسيق الطبي متاحة عبر الواتساب</span>
+                </div>
+                <a href="https://wa.me/9647766529755?text=مرحباً، أستفسر عن خدمات منصة التنسيق الطبي" target="_blank" class="wa-direct-btn">
+                    💬 +964 776 652 9755
+                </a>
+            </div>
+        </div>
+
         <!-- أزرار التفعيل -->
         <div class="main-trigger-section">
             <button type="button" class="btn btn-trigger" onclick="showSearchFilters('general')">
@@ -313,7 +380,7 @@
         <div class="filter-section" id="filterSection">
             <div class="filter-card" id="filterCardStyle">
                 
-                <!-- 1. الاختصاصات الطبية كافة -->
+                <!-- 1. الاختصاصات الطبية -->
                 <div class="filter-group">
                     <label for="stepSpecialty">1. الاختصاص الطبي</label>
                     <select id="stepSpecialty" class="filter-select" onchange="handleSpecialtyChange()">
@@ -339,7 +406,7 @@
                     </select>
                 </div>
 
-                <!-- 2. محافظات العراق كافة -->
+                <!-- 2. محافظات العراق -->
                 <div class="filter-group">
                     <label for="stepGov">2. المحافظة</label>
                     <select id="stepGov" class="filter-select" disabled onchange="handleGovChange()">
