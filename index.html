@@ -70,6 +70,11 @@
             border: none;
         }
 
+        .btn:focus-visible {
+            outline: 3px solid #0ea5e9;
+            outline-offset: 2px;
+        }
+
         .btn-primary {
             background-color: #f59e0b;
             color: #0f172a;
@@ -99,6 +104,12 @@
 
         .btn-trigger:hover {
             background-color: #0284c7;
+        }
+
+        .btn-trigger[aria-pressed="true"],
+        .btn-doctor-search[aria-pressed="true"] {
+            outline: 3px solid #0f172a;
+            outline-offset: 2px;
         }
 
         .btn-doctor-search {
@@ -184,7 +195,7 @@
             max-width: 1000px;
             margin: 20px auto 40px;
             padding: 0 20px;
-            display: block;
+            display: none;
         }
 
         .filter-card {
@@ -224,6 +235,11 @@
             color: #0f172a;
         }
 
+        .filter-select:focus-visible {
+            outline: 3px solid #0ea5e9;
+            outline-offset: 1px;
+        }
+
         .filter-select:disabled {
             background-color: #f1f5f9;
             color: #94a3b8;
@@ -235,7 +251,7 @@
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px 60px;
-            display: block;
+            display: none;
         }
 
         .section-header {
@@ -330,7 +346,15 @@
             color: #64748b;
             grid-column: 1 / -1;
             display: none;
+        }
+
+        .no-results p {
             font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .no-results .btn {
+            display: inline-flex;
         }
     </style>
 </head>
@@ -344,10 +368,10 @@
             <p>نربط الأطباء بأفضل العيادات الشاغرة في المجمعات والمراكز الطبية المميزة.</p>
 
             <div class="cta-container">
-                <a href="https://tally.so/r/7RrE0Z" target="_blank" class="btn btn-primary">
+                <a href="https://tally.so/r/7RrE0Z" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="doctorFormLink">
                     👨‍⚕️ أنا طبيب أبحث عن عيادة (استمارة)
                 </a>
-                <a href="https://tally.so/r/gD6z6l" target="_blank" class="btn btn-secondary">
+                <a href="https://tally.so/r/gD6z6l" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                     🏢 أصحاب مجمع / طلب طبيب (استمارة)
                 </a>
             </div>
@@ -360,18 +384,18 @@
                     للتواصل المباشر والاستفسار الفوري مع إدارة المنصة:
                     <span>خدمة التنسيق الطبي متاحة عبر الواتساب</span>
                 </div>
-                <a href="https://wa.me/9647766529755?text=مرحباً، أستفسر عن خدمات منصة التنسيق الطبي" target="_blank" class="wa-direct-btn">
-                    💬 +964 776 652 9755
+                <a href="#" target="_blank" rel="noopener noreferrer" class="wa-direct-btn js-wa-link" data-wa-text="مرحباً، أستفسر عن خدمات منصة التنسيق الطبي">
+                    💬 <span class="js-wa-display"></span>
                 </a>
             </div>
         </div>
 
         <!-- أزرار التفعيل -->
         <div class="main-trigger-section">
-            <button type="button" class="btn btn-trigger" onclick="showSearchFilters('general')">
+            <button type="button" class="btn btn-trigger" id="btnGeneral" aria-pressed="false" onclick="showSearchFilters('general')">
                 🔍 استعراض مجمعات وعيادات العراق
             </button>
-            <button type="button" class="btn btn-doctor-search" onclick="showSearchFilters('doctor')">
+            <button type="button" class="btn btn-doctor-search" id="btnDoctor" aria-pressed="false" onclick="showSearchFilters('doctor')">
                 🩺 أطباء يبحثون عن عيادات (بحث فوري للعيادات المتاحة)
             </button>
         </div>
@@ -379,30 +403,12 @@
         <!-- Cascading Filter Section -->
         <div class="filter-section" id="filterSection">
             <div class="filter-card" id="filterCardStyle">
-                
+
                 <!-- 1. الاختصاصات الطبية -->
                 <div class="filter-group">
                     <label for="stepSpecialty">1. الاختصاص الطبي</label>
                     <select id="stepSpecialty" class="filter-select" onchange="handleSpecialtyChange()">
                         <option value="">اختر أو حدد الاختصاص...</option>
-                        <option value="باطنية">باطنية</option>
-                        <option value="جراحة عامة">جراحة عامة</option>
-                        <option value="أطفال">أطفال</option>
-                        <option value="نسائية وتوليد">نسائية وتوليد</option>
-                        <option value="جلدية وتجميل">جلدية وتجميل</option>
-                        <option value="قلبية واوعية دموية">قلبية واوعية دموية</option>
-                        <option value="عظام ومفاصل">عظام ومفاصل</option>
-                        <option value="أنف وأذن وحنجرة">أنف وأذن وحنجرة</option>
-                        <option value="عيون">عيون</option>
-                        <option value="طب وجراحة الأسنان">طب وجراحة الأسنان</option>
-                        <option value="جراحة الكلى والمسالك البولية">جراحة الكلى والمسالك البولية</option>
-                        <option value="جراحة الجملة العصبية">جراحة الجملة العصبية</option>
-                        <option value="أمراض نفسية وعصبية">أمراض نفسية وعصبية</option>
-                        <option value="أشعة وسونار ومفراس">أشعة وسونار ومفراس</option>
-                        <option value="مختبرات وتحليلات مرضية">مختبرات وتحليلات مرضية</option>
-                        <option value="تخدير وعناية مركزة">تخدير وعناية مركزة</option>
-                        <option value="طوارئ وإصابات">طوارئ وإصابات</option>
-                        <option value="طبيب ممارس عام">طبيب ممارس عام</option>
                     </select>
                 </div>
 
@@ -411,24 +417,6 @@
                     <label for="stepGov">2. المحافظة</label>
                     <select id="stepGov" class="filter-select" disabled onchange="handleGovChange()">
                         <option value="">اختر المحافظة...</option>
-                        <option value="بغداد">بغداد</option>
-                        <option value="نينوى">نينوى (الموصل)</option>
-                        <option value="البصرة">البصرة</option>
-                        <option value="ديالى">ديالى</option>
-                        <option value="أربيل">أربيل</option>
-                        <option value="السليمانية">السليمانية</option>
-                        <option value="دهوك">دهوك</option>
-                        <option value="كركوك">كركوك</option>
-                        <option value="صلاح الدين">صلاح الدين</option>
-                        <option value="الانبار">الانبار</option>
-                        <option value="بابل">بابل</option>
-                        <option value="كربلاء">كربلاء</option>
-                        <option value="النجف">النجف</option>
-                        <option value="القادسية">القادسية (الديوانية)</option>
-                        <option value="المثنى">المثنى (السماوة)</option>
-                        <option value="ذي قار">ذي قار (الناصرية)</option>
-                        <option value="ميسان">ميسان (العمارة)</option>
-                        <option value="واسط">واسط (الكوت)</option>
                     </select>
                 </div>
 
@@ -449,111 +437,57 @@
                 <h2 id="resultsTitle">نتائج البحث وحالة توفر العيادات</h2>
             </div>
 
-            <div class="grid" id="resultsGrid">
-                
-                <!-- بطاقة عيادة شاغرة 1 -->
-                <div class="card" data-specialty="جلدية وتجميل" data-gov="ديالى" data-area="مركز المحافظة">
-                    <div class="card-header bg-green">
-                        <span>عيادة شاغرة مخصصة للطبيب</span>
-                        <span>✅ متاحة للحجز الفوري</span>
-                    </div>
-                    <div class="card-body">
-                        <h3>عيادة جلدية وتجميل مجهزة بالكامل</h3>
-                        <ul class="card-info">
-                            <li><strong>الاختصاص:</strong> جلدية وتجميل</li>
-                            <li><strong>المحافظة:</strong> ديالى</li>
-                            <li><strong>المنطقة:</strong> مركز المحافظة</li>
-                            <li><strong>التفاصيل:</strong> متوفرة ضمن مجمع طبي رصين.</li>
-                        </ul>
-                        <div class="whatsapp-box">
-                            <a href="https://wa.me/9647766529755?text=مرحباً، أستفسر عن العيادة الشاغرة في ديالى" target="_blank" class="whatsapp-btn">
-                                💬 +964 776 652 9755
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- بطاقة عيادة شاغرة 2 -->
-                <div class="card" data-specialty="طب وجراحة الأسنان" data-gov="بغداد" data-area="الرصافة">
-                    <div class="card-header bg-green">
-                        <span>عيادة أسنان شاغرة</span>
-                        <span>✅ متوفرة في مجمع طبي</span>
-                    </div>
-                    <div class="card-body">
-                        <h3>وحدة طب وجراحة الأسنان متكاملة</h3>
-                        <ul class="card-info">
-                            <li><strong>الاختصاص:</strong> طب وجراحة الأسنان</li>
-                            <li><strong>المحافظة:</strong> بغداد</li>
-                            <li><strong>المنطقة:</strong> الرصافة</li>
-                            <li><strong>التفاصيل:</strong> تحتوي على كرسي أسنان حديث.</li>
-                        </ul>
-                        <div class="whatsapp-box">
-                            <a href="https://wa.me/9647766529755?text=مرحباً، أستفسر عن عيادة الأسنان في بغداد الرصافة" target="_blank" class="whatsapp-btn">
-                                💬 +964 776 652 9755
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- بطاقة عيادة شاغرة 3 -->
-                <div class="card" data-specialty="باطنية" data-gov="نينوى" data-area="الجانب الأيسر">
-                    <div class="card-header bg-green">
-                        <span>عيادة باطنية شاغرة</span>
-                        <span>✅ جاهزة للعمل</span>
-                    </div>
-                    <div class="card-body">
-                        <h3>غرفة فحص باطنية في مركز استشاري</h3>
-                        <ul class="card-info">
-                            <li><strong>الاختصاص:</strong> باطنية</li>
-                            <li><strong>المحافظة:</strong> نينوى</li>
-                            <li><strong>المنطقة:</strong> الجانب الأيسر</li>
-                            <li><strong>التفاصيل:</strong> موقع حيوي وإقبال ممتاز.</li>
-                        </ul>
-                        <div class="whatsapp-box">
-                            <a href="https://wa.me/9647766529755?text=مرحباً، أستفسر عن عيادة الباطنية في نينوى" target="_blank" class="whatsapp-btn">
-                                💬 +964 776 652 9755
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- رسالة عند عدم وجود نتائج -->
-                <div id="noResultsMsg" class="no-results">
-                    عذراً، لا توجد عيادات شاغرة مطابقة لاختصاصك في هذه المنطقة حالياً. يمكنك ملء الاستمارة في الأعلى ليتم إعلامك فور توفرها.
-                </div>
-
+            <div class="grid" id="resultsGrid" aria-live="polite">
+                <!-- تُملأ البطاقات ديناميكياً من مصفوفة CLINICS_DATA -->
             </div>
         </div>
     </main>
 
     <!-- JavaScript -->
     <script>
-        let currentSearchMode = 'general';
+        // ============================================================
+        // إعدادات عامة - عدّل من هنا فقط
+        // ============================================================
+        const WHATSAPP_NUMBER = "9647766529755";       // بدون + أو 00
+        const WHATSAPP_DISPLAY = "+964 776 652 9755";  // الشكل المعروض للمستخدم
 
-        function showSearchFilters(mode) {
-            currentSearchMode = mode;
-            const filterCard = document.getElementById('filterCardStyle');
-            const resultsTitle = document.getElementById('resultsTitle');
-
-            if (mode === 'doctor') {
-                filterCard.classList.add('doctor-mode');
-                resultsTitle.textContent = "العيادات الشاغرة المتوفرة حسب اختصاصك ومنطقتك المطلوبة";
-            } else {
-                filterCard.classList.remove('doctor-mode');
-                resultsTitle.textContent = "نتائج البحث العام وحالة توفر العيادات والمجمعات";
-            }
-
-            document.getElementById('filterSection').style.display = 'block';
-            document.getElementById('resultsContainer').style.display = 'block';
-            document.getElementById('filterSection').scrollIntoView({ behavior: 'smooth' });
-            
-            document.getElementById('stepSpecialty').value = "";
-            document.getElementById('stepGov').value = "";
-            document.getElementById('stepGov').disabled = true;
-            document.getElementById('stepArea').innerHTML = '<option value="">اختر المنطقة...</option>';
-            document.getElementById('stepArea').disabled = true;
-            resetCards();
+        // بناء رابط واتساب موحّد من مكان واحد
+        function buildWaLink(text) {
+            return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
         }
+
+        // ============================================================
+        // الاختصاصات والمحافظات والمناطق
+        // ============================================================
+        const SPECIALTIES = [
+            "باطنية", "جراحة عامة", "أطفال", "نسائية وتوليد", "جلدية وتجميل",
+            "قلبية واوعية دموية", "عظام ومفاصل", "أنف وأذن وحنجرة", "عيون",
+            "طب وجراحة الأسنان", "جراحة الكلى والمسالك البولية",
+            "جراحة الجملة العصبية", "أمراض نفسية وعصبية",
+            "أشعة وسونار ومفراس", "مختبرات وتحليلات مرضية",
+            "تخدير وعناية مركزة", "طوارئ وإصابات", "طبيب ممارس عام"
+        ];
+
+        const GOVERNORATES = [
+            { value: "بغداد", label: "بغداد" },
+            { value: "نينوى", label: "نينوى (الموصل)" },
+            { value: "البصرة", label: "البصرة" },
+            { value: "ديالى", label: "ديالى" },
+            { value: "أربيل", label: "أربيل" },
+            { value: "السليمانية", label: "السليمانية" },
+            { value: "دهوك", label: "دهوك" },
+            { value: "كركوك", label: "كركوك" },
+            { value: "صلاح الدين", label: "صلاح الدين" },
+            { value: "الانبار", label: "الانبار" },
+            { value: "بابل", label: "بابل" },
+            { value: "كربلاء", label: "كربلاء" },
+            { value: "النجف", label: "النجف" },
+            { value: "القادسية", label: "القادسية (الديوانية)" },
+            { value: "المثنى", label: "المثنى (السماوة)" },
+            { value: "ذي قار", label: "ذي قار (الناصرية)" },
+            { value: "ميسان", label: "ميسان (العمارة)" },
+            { value: "واسط", label: "واسط (الكوت)" }
+        ];
 
         const areasByGov = {
             "بغداد": ["الكرخ", "الرصافة"],
@@ -576,10 +510,171 @@
             "واسط": ["مركز المحافظة", "المناطق الأخرى (الأقضية والنواحي)"]
         };
 
+        // ============================================================
+        // بيانات العيادات الشاغرة - مصدر بيانات واحد (سهل الاستبدال بـ API/DB لاحقاً)
+        // ============================================================
+        const CLINICS_DATA = [
+            {
+                specialty: "جلدية وتجميل",
+                gov: "ديالى",
+                area: "مركز المحافظة",
+                statusLabel: "✅ متاحة للحجز الفوري",
+                headerLabel: "عيادة شاغرة مخصصة للطبيب",
+                title: "عيادة جلدية وتجميل مجهزة بالكامل",
+                details: "متوفرة ضمن مجمع طبي رصين."
+            },
+            {
+                specialty: "طب وجراحة الأسنان",
+                gov: "بغداد",
+                area: "الرصافة",
+                statusLabel: "✅ متوفرة في مجمع طبي",
+                headerLabel: "عيادة أسنان شاغرة",
+                title: "وحدة طب وجراحة الأسنان متكاملة",
+                details: "تحتوي على كرسي أسنان حديث."
+            },
+            {
+                specialty: "باطنية",
+                gov: "نينوى",
+                area: "الجانب الأيسر",
+                statusLabel: "✅ جاهزة للعمل",
+                headerLabel: "عيادة باطنية شاغرة",
+                title: "غرفة فحص باطنية في مركز استشاري",
+                details: "موقع حيوي وإقبال ممتاز."
+            }
+        ];
+
+        let currentSearchMode = 'general';
+
+        // ============================================================
+        // بناء عناصر الواجهة ديناميكياً من البيانات أعلاه
+        // ============================================================
+        function populateSpecialtyOptions() {
+            const select = document.getElementById('stepSpecialty');
+            SPECIALTIES.forEach(sp => {
+                const opt = document.createElement('option');
+                opt.value = sp;
+                opt.textContent = sp;
+                select.appendChild(opt);
+            });
+        }
+
+        function populateGovOptions() {
+            const select = document.getElementById('stepGov');
+            GOVERNORATES.forEach(g => {
+                const opt = document.createElement('option');
+                opt.value = g.value;
+                opt.textContent = g.label;
+                select.appendChild(opt);
+            });
+        }
+
+        function renderClinicCards() {
+            const grid = document.getElementById('resultsGrid');
+            const frag = document.createDocumentFragment();
+
+            CLINICS_DATA.forEach((clinic, idx) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.specialty = clinic.specialty;
+                card.dataset.gov = clinic.gov;
+                card.dataset.area = clinic.area;
+                card.id = `clinic-card-${idx}`;
+
+                const waText = `مرحباً، أستفسر عن ${clinic.title} في ${clinic.gov} - ${clinic.area}`;
+
+                card.innerHTML = `
+                    <div class="card-header bg-green">
+                        <span>${clinic.headerLabel}</span>
+                        <span>${clinic.statusLabel}</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>${clinic.title}</h3>
+                        <ul class="card-info">
+                            <li><strong>الاختصاص:</strong> ${clinic.specialty}</li>
+                            <li><strong>المحافظة:</strong> ${clinic.gov}</li>
+                            <li><strong>المنطقة:</strong> ${clinic.area}</li>
+                            <li><strong>التفاصيل:</strong> ${clinic.details}</li>
+                        </ul>
+                        <div class="whatsapp-box">
+                            <a href="${buildWaLink(waText)}" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                                💬 ${WHATSAPP_DISPLAY}
+                            </a>
+                        </div>
+                    </div>
+                `;
+                frag.appendChild(card);
+            });
+
+            const noResults = document.createElement('div');
+            noResults.id = 'noResultsMsg';
+            noResults.className = 'no-results';
+            noResults.innerHTML = `
+                <p>عذراً، لا توجد عيادات شاغرة مطابقة لاختصاصك في هذه المنطقة حالياً.</p>
+                <a href="#" id="noResultsFormLink" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    📝 املأ الاستمارة ليتم إعلامك فور توفر عيادة مناسبة
+                </a>
+            `;
+            frag.appendChild(noResults);
+
+            grid.appendChild(frag);
+        }
+
+        function initWhatsappLinks() {
+            document.querySelectorAll('.js-wa-link').forEach(link => {
+                const text = link.dataset.waText || '';
+                link.href = buildWaLink(text);
+            });
+            document.querySelectorAll('.js-wa-display').forEach(span => {
+                span.textContent = WHATSAPP_DISPLAY;
+            });
+        }
+
+        function initNoResultsFormLink() {
+            const link = document.getElementById('noResultsFormLink');
+            if (link) {
+                // نفس رابط استمارة الطبيب في الأعلى، بمصدر واحد
+                link.href = document.getElementById('doctorFormLink').href;
+            }
+        }
+
+        // ============================================================
+        // منطق التصفية
+        // ============================================================
+        function showSearchFilters(mode) {
+            currentSearchMode = mode;
+            const filterCard = document.getElementById('filterCardStyle');
+            const resultsTitle = document.getElementById('resultsTitle');
+            const btnGeneral = document.getElementById('btnGeneral');
+            const btnDoctor = document.getElementById('btnDoctor');
+
+            if (mode === 'doctor') {
+                filterCard.classList.add('doctor-mode');
+                resultsTitle.textContent = "العيادات الشاغرة المتوفرة حسب اختصاصك ومنطقتك المطلوبة";
+                btnDoctor.setAttribute('aria-pressed', 'true');
+                btnGeneral.setAttribute('aria-pressed', 'false');
+            } else {
+                filterCard.classList.remove('doctor-mode');
+                resultsTitle.textContent = "نتائج البحث العام وحالة توفر العيادات والمجمعات";
+                btnGeneral.setAttribute('aria-pressed', 'true');
+                btnDoctor.setAttribute('aria-pressed', 'false');
+            }
+
+            document.getElementById('filterSection').style.display = 'block';
+            document.getElementById('resultsContainer').style.display = 'block';
+            document.getElementById('filterSection').scrollIntoView({ behavior: 'smooth' });
+
+            document.getElementById('stepSpecialty').value = "";
+            document.getElementById('stepGov').value = "";
+            document.getElementById('stepGov').disabled = true;
+            document.getElementById('stepArea').innerHTML = '<option value="">اختر المنطقة...</option>';
+            document.getElementById('stepArea').disabled = true;
+            resetCards();
+        }
+
         function handleSpecialtyChange() {
             const specialtyVal = document.getElementById('stepSpecialty').value;
             const govSelect = document.getElementById('stepGov');
-            
+
             govSelect.value = "";
             govSelect.disabled = !specialtyVal;
             resetBelow('stepGov');
@@ -588,9 +683,9 @@
         function handleGovChange() {
             const govVal = document.getElementById('stepGov').value;
             const areaSelect = document.getElementById('stepArea');
-            
+
             areaSelect.innerHTML = '<option value="">اختر المنطقة...</option>';
-            
+
             if (govVal && areasByGov[govVal]) {
                 areasByGov[govVal].forEach(area => {
                     let opt = document.createElement('option');
@@ -633,11 +728,7 @@
                 }
             });
 
-            if (foundCount === 0) {
-                noResultsMsg.style.display = 'block';
-            } else {
-                noResultsMsg.style.display = 'none';
-            }
+            noResultsMsg.style.display = foundCount === 0 ? 'block' : 'none';
         }
 
         function resetBelow(level) {
@@ -650,8 +741,20 @@
 
         function resetCards() {
             document.querySelectorAll('.card').forEach(c => c.classList.remove('active-match'));
-            document.getElementById('noResultsMsg').style.display = 'none';
+            const noResultsMsg = document.getElementById('noResultsMsg');
+            if (noResultsMsg) noResultsMsg.style.display = 'none';
         }
+
+        // ============================================================
+        // التهيئة عند تحميل الصفحة
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            populateSpecialtyOptions();
+            populateGovOptions();
+            renderClinicCards();
+            initWhatsappLinks();
+            initNoResultsFormLink();
+        });
     </script>
 </body>
 </html>
