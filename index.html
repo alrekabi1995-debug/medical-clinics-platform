@@ -43,6 +43,7 @@
         }
 
         .hero p {
+            content: "";
             color: #94a3b8;
             max-width: 600px;
             margin: 0 auto 25px;
@@ -67,6 +68,7 @@
             gap: 8px;
             transition: all 0.2s ease;
             cursor: pointer;
+            border: none;
         }
 
         .btn-primary {
@@ -88,11 +90,30 @@
             background-color: #334155;
         }
 
-        /* Cascading Filter Section */
+        .btn-trigger {
+            background-color: #0ea5e9;
+            color: white;
+            font-size: 1rem;
+            padding: 14px 30px;
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+        }
+
+        .btn-trigger:hover {
+            background-color: #0284c7;
+        }
+
+        /* Main Trigger Container */
+        .main-trigger-section {
+            text-align: center;
+            margin: 35px 0 20px;
+        }
+
+        /* Cascading Filter Section (Hidden initially) */
         .filter-section {
             max-width: 1000px;
-            margin: -25px auto 40px;
+            margin: 0 auto 40px;
             padding: 0 20px;
+            display: none; /* مخفي لحين الضغط على الزر */
         }
 
         .filter-card {
@@ -103,6 +124,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
+            border: 2px solid #0ea5e9;
         }
 
         .filter-group {
@@ -133,11 +155,12 @@
             cursor: not-allowed;
         }
 
-        /* Listings Results Section */
+        /* Listings Results Section (Hidden initially) */
         .container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px 60px;
+            display: none; /* مخفي لحين إتمام البحث */
         }
 
         .section-header {
@@ -161,11 +184,11 @@
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            display: none; /* مخفية افتراضياً حتى تتم مطابقة الخطوات بالكامل */
+            display: none;
         }
 
         .card.active-match {
-            display: block; /* تظهر عند المطابقة التامة */
+            display: block;
         }
 
         .card-header {
@@ -219,16 +242,23 @@
 
             <div class="cta-container">
                 <a href="https://tally.so/r/7RrE0Z" target="_blank" class="btn btn-primary">
-                    👨‍⚕️ أنا طبيب أبحث عن عيادة
+                    👨‍⚕️ أنا طبيب أبحث عن عيادة (استمارة)
                 </a>
                 <a href="https://tally.so/r/gD6z6l" target="_blank" class="btn btn-secondary">
-                    🏢 أصحاب مجمع / طلب طبيب
+                    🏢 أصحاب مجمع / طلب طبيب (استمارة)
                 </a>
             </div>
         </section>
 
-        <!-- Cascading Filter Section (New Order) -->
-        <div class="filter-section">
+        <!-- زر تفعيل محرك البحث التفاعلي -->
+        <div class="main-trigger-section">
+            <button type="button" class="btn btn-trigger" onclick="showSearchFilters()">
+                🔍 أطباء يبحثون عن عيادات (بحث تفاعلي حسب المحافظة والمنطقة)
+            </button>
+        </div>
+
+        <!-- Cascading Filter Section (يظهر بعد الضغط على الزر) -->
+        <div class="filter-section" id="filterSection">
             <div class="filter-card">
                 
                 <!-- 1. اختيار الاختصاص أولاً -->
@@ -250,7 +280,7 @@
                     <select id="stepGov" class="filter-select" disabled onchange="handleGovChange()">
                         <option value="">اختر المحافظة...</option>
                         <option value="بغداد">بغداد</option>
-                        <option value="نNينوى">نينوى (الموصل)</option>
+                        <option value="نينوى">نينوى (الموصل)</option>
                         <option value="البصرة">البصرة</option>
                         <option value="ديالى">ديالى</option>
                         <option value="أربيل">أربيل</option>
@@ -281,8 +311,8 @@
             </div>
         </div>
 
-        <!-- Listings Results Section -->
-        <div class="container">
+        <!-- Listings Results Section (يظهر مع تفعيل البحث) -->
+        <div class="container" id="resultsContainer">
             <div class="section-header">
                 <h2>نتائج البحث وحالة توفر الطبيب أو العيادة</h2>
             </div>
@@ -349,9 +379,17 @@
         </div>
     </main>
 
-    <!-- JavaScript لتفعيل التسلسل العكسي الدقيق -->
+    <!-- JavaScript للتحكم بالظهور والتسلسل العكسي -->
     <script>
-        // تعريف مناطق محافظات العراق (الكرخ والرصافة، الأيمن والأيسر، شمال وجنوب والبقية)
+        // دالة إظهار قسم البحث والنتائج عند الضغط على الزر الرئيسي
+        function showSearchFilters() {
+            document.getElementById('filterSection').style.display = 'block';
+            document.getElementById('resultsContainer').style.display = 'block';
+            // التمرير السلس نحو خانة البحث
+            document.getElementById('filterSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // مناطق محافظات العراق
         const areasByGov = {
             "بغداد": ["الكرخ", "الرصافة", "المنصور", "الكرادة", "الأعظمية", "الكاظمية", "الدورة"],
             "نينوى": ["الجانب الأيسر", "الجانب الأيمن", "تلكيف", "قضاء الحمدانية"],
