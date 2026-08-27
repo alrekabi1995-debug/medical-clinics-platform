@@ -219,8 +219,6 @@
             justify-content: space-between;
         }
 
-        .bg-orange { background-color: #fef3c7; color: #b45309; }
-        .bg-blue { background-color: #dbeafe; color: #1d4ed8; }
         .bg-green { background-color: #d1fae5; color: #047857; }
 
         .card-body {
@@ -242,7 +240,7 @@
             margin-bottom: 8px;
         }
 
-        /* تنسيق رقم الهاتف البارز ورابط الواتساب */
+        /* تنسيق رقم الهاتف البارز في الصفحة الرئيسية للبطاقة */
         .whatsapp-box {
             margin-top: 15px;
             padding-top: 12px;
@@ -259,12 +257,13 @@
             color: white;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1.1rem;
-            padding: 10px 16px;
+            font-size: 1.15rem;
+            padding: 12px 16px;
             border-radius: 8px;
             width: 100%;
-            box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
             transition: background-color 0.2s;
+            direction: ltr; /* لضمان عرض الأرقام بشكل صحيح ومقروء */
         }
 
         .whatsapp-btn:hover {
@@ -386,7 +385,7 @@
             <div class="grid" id="resultsGrid">
                 
                 <!-- بطاقة عيادة شاغرة 1 -->
-                <div class="card" data-specialty="جلدية وتجميل" data-gov="ديالى" data-area="مركز المحافظة" data-type="doctor-clinic">
+                <div class="card" data-specialty="جلدية وتجميل" data-gov="ديالى" data-area="مركز المحافظة">
                     <div class="card-header bg-green">
                         <span>عيادة شاغرة مخصصة للطبيب</span>
                         <span>✅ متاحة للحجز الفوري</span>
@@ -397,19 +396,19 @@
                             <li><strong>الاختصاص:</strong> جلدية وتجميل</li>
                             <li><strong>المحافظة:</strong> ديالى</li>
                             <li><strong>المنطقة:</strong> مركز المحافظة</li>
-                            <li><strong>التفاصيل:</strong> متوفرة ضمن مجمع طبي رصين مع إيجار مناسب.</li>
+                            <li><strong>التفاصيل:</strong> متوفرة ضمن مجمع طبي رصين.</li>
                         </ul>
-                        <!-- زر الواتساب ورقم الهاتف البارز -->
+                        <!-- رقم الهاتف البارز ورابط الواتساب مباشرة في الصفحة الرئيسية للبطاقة -->
                         <div class="whatsapp-box">
                             <a href="https://wa.me/9647700000000?text=مرحباً، أستفسر عن العيادة الشاغرة في ديالى" target="_blank" class="whatsapp-btn">
-                                💬 07700000000 (تواصل واتساب)
+                                💬 9647700000000+
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- بطاقة عيادة شاغرة 2 -->
-                <div class="card" data-specialty="طب وجراحة الأسنان" data-gov="بغداد" data-area="الرصافة" data-type="doctor-clinic">
+                <div class="card" data-specialty="طب وجراحة الأسنان" data-gov="بغداد" data-area="الرصافة">
                     <div class="card-header bg-green">
                         <span>عيادة أسنان شاغرة</span>
                         <span>✅ متوفرة في مجمع طبي</span>
@@ -420,19 +419,19 @@
                             <li><strong>الاختصاص:</strong> طب وجراحة الأسنان</li>
                             <li><strong>المحافظة:</strong> بغداد</li>
                             <li><strong>المنطقة:</strong> الرصافة</li>
-                            <li><strong>التفاصيل:</strong> تحتوي على كرسي أسنان حديث وكادر مساعدة.</li>
+                            <li><strong>التفاصيل:</strong> تحتوي على كرسي أسنان حديث.</li>
                         </ul>
-                        <!-- زر الواتساب ورقم الهاتف البارز -->
+                        <!-- رقم الهاتف البارز ورابط الواتساب مباشرة في الصفحة الرئيسية للبطاقة -->
                         <div class="whatsapp-box">
                             <a href="https://wa.me/9647800000000?text=مرحباً، أستفسر عن عيادة الأسنان في بغداد الرصافة" target="_blank" class="whatsapp-btn">
-                                💬 07800000000 (تواصل واتساب)
+                                💬 9647800000000+
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- بطاقة عيادة شاغرة 3 -->
-                <div class="card" data-specialty="باطنية" data-gov="نينوى" data-area="الجانب الأيسر" data-type="doctor-clinic">
+                <div class="card" data-specialty="باطنية" data-gov="نينوى" data-area="الجانب الأيسر">
                     <div class="card-header bg-green">
                         <span>عيادة باطنية شاغرة</span>
                         <span>✅ جاهزة للعمل</span>
@@ -443,12 +442,12 @@
                             <li><strong>الاختصاص:</strong> باطنية</li>
                             <li><strong>المحافظة:</strong> نينوى</li>
                             <li><strong>المنطقة:</strong> الجانب الأيسر</li>
-                            <li><strong>التفاصيل:</strong> موقع حيوي وإقبال مراجعين ممتاز.</li>
+                            <li><strong>التفاصيل:</strong> موقع حيوي وإقبال ممتاز.</li>
                         </ul>
-                        <!-- زر الواتساب ورقم الهاتف البارز -->
+                        <!-- رقم الهاتف البارز ورابط الواتساب مباشرة في الصفحة الرئيسية للبطاقة -->
                         <div class="whatsapp-box">
                             <a href="https://wa.me/9647500000000?text=مرحباً، أستفسر عن عيادة الباطنية في نينوى" target="_blank" class="whatsapp-btn">
-                                💬 07500000000 (تواصل واتساب)
+                                💬 9647500000000+
                             </a>
                         </div>
                     </div>
