@@ -58,7 +58,6 @@
     .ticker-content {
         display: inline-flex;
         white-space: nowrap;
-        padding-right: 100%;
         animation: ticker-scroll 75s linear infinite;
         color: #e2e8f0;
         font-size: 13px;
@@ -82,8 +81,8 @@
     }
 
     @keyframes ticker-scroll {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(100%); }
+        0% { transform: translateX(-50%); }
+        100% { transform: translateX(0%); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -113,14 +112,14 @@
     .hero-trust-line {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
+        gap: 7px;
         background: linear-gradient(90deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
         border: 1px solid rgba(245, 158, 11, 0.4);
         color: #fbbf24;
-        font-size: 1.05rem;
-        font-weight: 800;
+        font-size: 0.85rem;
+        font-weight: 700;
         letter-spacing: 0.2px;
-        padding: 10px 22px;
+        padding: 8px 18px;
         border-radius: 30px;
         margin: 0 auto 20px;
     }
@@ -514,13 +513,13 @@
     <!-- Hero Section -->
     <section class="hero">
         <span class="badge">وساطة وتنسيق موقعي متخصص</span>
-        <h1>منصة عيادات طبية للتنسيق الطبي</h1>
+        <h1>منصة عيادات طبية</h1>
 
         <div class="hero-trust-line">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M12 2L14.9 8.6L22 9.3L16.7 14L18.2 21L12 17.3L5.8 21L7.3 14L2 9.3L9.1 8.6L12 2Z"/>
             </svg>
-            أول منصة للتنسيق الطبي وتوفير العيادات في العراق منذ 4 سنوات
+            أول منصة للوساطة الطبية وتوفير العيادات في العراق منذ 4 سنوات
         </div>
 
         <p>نربط الأطباء بأفضل العيادات الشاغرة، ونوفر لأصحاب المجمعات الطبية الكفاءات المطلوبة.</p>
@@ -1167,11 +1166,6 @@
     // آخر الأخبار - عدّل هذه القائمة بأخباركم الفعلية
     // أضف "action" لأي خبر تريد أن يكون قابلاً للنقر ويوجه الزائر مباشرة لبطاقة محددة
     const NEWS_ITEMS = [
-        { text: "🆕 تمت إضافة عيادات جديدة شاغرة في بغداد والبصرة هذا الأسبوع" },
-        { text: "👨‍⚕️ زيادة الطلب على تخصص طب الأسنان في محافظة نينوى" },
-        { text: "📈 انضمام أكثر من 20 طبيباً جديداً للمنصة خلال الشهر الحالي" },
-        { text: "🏥 فرص تعاقد متاحة الآن لأصحاب المجمعات الطبية في إقليم كردستان" },
-        { text: "✅ تحديث: تسريع إجراءات التنسيق بين الأطباء والمجمعات الطبية" },
         {
             text: "🩺 طبيب جلدية يبحث عن عيادة للعمل صباحاً في مدينة أبو غريب حصراً — اضغط للتفاصيل",
             action: { mode: "general", specialty: "جلدية وتجميل", gov: "بغداد", group: "الكرخ", area: "أبو غريب" }
