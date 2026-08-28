@@ -471,28 +471,6 @@
         background-color: #20ba5a;
     }
 
-    .ticker-item-link {
-        cursor: pointer;
-        text-decoration: underline;
-        text-decoration-style: dotted;
-        text-underline-offset: 3px;
-        color: #fbbf24;
-    }
-
-    .ticker-item-link:hover,
-    .ticker-item-link:focus-visible {
-        color: #f59e0b;
-    }
-
-    .card-highlight {
-        animation: card-pulse 1.3s ease-in-out 2;
-    }
-
-    @keyframes card-pulse {
-        0%, 100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
-        50% { box-shadow: 0 0 0 6px rgba(14, 165, 233, 0.35); }
-    }
-
     .no-results {
         text-align: center;
         padding: 30px;
@@ -535,7 +513,7 @@
     </section>
 
     <!-- أزرار التفعيل -->
-    <div class="main-trigger-section">
+    <main class="main-trigger-section">
         <button type="button" class="btn btn-trigger" id="btnGeneral" aria-pressed="false" onclick="startSearch('general')">
             <svg class="btn-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M6 3.5V10.5C6 12.71 7.79 14.5 10 14.5C12.21 14.5 14 12.71 14 10.5V3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
@@ -554,9 +532,9 @@
             </svg>
             أصحاب مجمعات يبحثون عن أطباء
         </button>
-    </div>
+    </main>
 
-    <!-- شريط آخر الأخبار -->
+    <!-- شريط آخر الأخبار المحدث بالمجمعات الجديدة -->
     <div class="news-ticker-wrap">
         <div class="news-ticker">
             <div class="ticker-label">📢 آخر الأخبار</div>
@@ -601,7 +579,7 @@
                 <div class="options-grid" id="govsGrid"></div>
             </div>
 
-            <!-- الخطوة 3: القسم الرئيسي (الجانب / المركز أو الأقضية) -->
+            <!-- الخطوة 3: القسم الرئيسي -->
             <div id="step3Box" style="display: none; margin-top: 25px; padding-top: 20px; border-top: 1px dashed #cbd5e1;">
                 <div class="step-title">🧭 الخطوة 3: اختر القسم الرئيسي</div>
                 <div class="options-grid" id="groupsGrid"></div>
@@ -617,7 +595,7 @@
     </div>
 
     <!-- Listings Results Section -->
-    <main class="container" id="resultsContainer">
+    <section class="container" id="resultsContainer">
         <div class="section-header">
             <h2 id="resultsTitle">النتائج وحالة التوفر</h2>
         </div>
@@ -625,7 +603,7 @@
         <div class="grid" id="resultsGrid" aria-live="polite">
             <!-- تُملأ البطاقات ديناميكياً -->
         </div>
-    </main>
+    </section>
 </main>
 
 <!-- JavaScript -->
@@ -640,8 +618,8 @@
     const SPECIALTIES = [
         "باطنية", "جراحة عامة", "أطفال", "نسائية وتوليد", "جلدية وتجميل",
         "قلبية واوعية دموية", "عظام ومفاصل", "مفاصل وروماتيزم", "أنف وأذن وحنجرة", "عيون",
-        "طب وجراحة الأسنان", "جراحة الكلى والمسالك البولية",
-        "جراحة الجملة العصبية", "أمراض نفسية وعصبية",
+        "طب وجراحة الأسنان", "طب أسرة", "جراحة الكلى والمسالك البولية",
+        "جراحة الكبرى والعصبية", "أمراض نفسية وعصبية",
         "أشعة وسونار ومفراس", "مختبرات وتحليلات مرضية",
         "تخدير وعناية مركزة", "طوارئ وإصابات", "طبيب ممارس عام"
     ];
@@ -667,12 +645,10 @@
         { value: "واسط", label: "واسط (الكوت)" }
     ];
 
-    // بنية هرمية: محافظة ← قسم رئيسي (جانب/مركز أو أقضية) ← مناطق تفصيلية
-    // كل قسم ينتهي بخيار "مناطق أخرى" ليشمل أي منطقة غير مذكورة صراحةً
     const areaHierarchy = {
         "بغداد": {
             "الرصافة": ["الرصافة - المركز", "الكرادة", "الاعظمية", "مناطق أخرى"],
-            "الكرخ": ["الكرخ - المركز", "المنصور", "الكاظمية", "الغزالية", "الدورة", "البياع", "أبو غريب", "الطفيل / الأطراف", "مناطق أخرى"]
+            "الكرخ": ["الكرخ - المركز", "المنصور", "الكاظمية", "الغزالية", "الدورة", "البياع", "حي الإعلام", "أبو غريب", "الطفيل / الأطراف", "مناطق أخرى"]
         },
         "نينوى": {
             "مركز الموصل": ["الجانب الأيمن - المركز", "الجانب الأيسر - المركز", "مناطق أخرى"],
@@ -680,7 +656,7 @@
         },
         "البصرة": {
             "مركز البصرة": ["مركز المدينة (البصرة القديمة والعشار)", "مناطق أخرى"],
-            "الأقضية والنواحي": ["قضاء الزبير", "قضاء أبي الخصيب", "قضاء الفاو", "قضاء القرنة", "قضاء شط العرب", "ناحية الامام الصادق", "مناطق أخرى"]
+            "الأقضية والنواحي": ["قضاء الزبير", "قضاء أبي الخصيب", "قضاء شط العرب", "قضاء الفاو", "قضاء القرنة", "ناحية الامام الصادق", "مناطق أخرى"]
         },
         "ديالى": {
             "مركز بعقوبة": ["بعقوبة - مركز المحافظة", "مناطق أخرى"],
@@ -744,7 +720,6 @@
         }
     };
 
-    // عيادات البحث العام (للأطباء الباحثين عن عيادات)
     const GENERAL_CLINICS_DATA = [
         {
             specialty: "جلدية وتجميل",
@@ -784,7 +759,6 @@
         }
     ];
 
-    // بيانات الأطباء المتاحين (لأصحاب المجمعات الباحثين عن أطباء)
     const DOCTORS_DATA = [
         {
             specialty: "جلدية وتجميل",
@@ -848,11 +822,76 @@
             headerLabel: "فرصة عمل مميزة",
             title: "مطلوب طبيب مفاصل وروماتيزم - مجمع طبي بمركز العمارة",
             details: "مجمع طبي نشط ونافذ في قلب مركز مدينة ميسان (بين شارع التربية وشارع دجلة)، يعمل بكامل طاقته التشغيلية مع كوادر تمريضية ومعاونين من الدرجة الأولى، وأقسام تشخيصية وسونار ومختبرات داعمة. إقبال يومي مرتفع من المراجعين."
+        },
+        // إعلان مجمع 11 الجديد
+        {
+            specialty: "نسائية وتوليد",
+            gov: "البصرة",
+            area: "قضاء شط العرب",
+            statusLabel: "🟢 دوام مسائي",
+            headerLabel: "إعلان مجمع 11",
+            title: "مجمع طبي متكامل (رقم 11) - قضاء شط العرب",
+            details: "العنوان: البصرة - قضاء شط العرب، شارع الريان، الحوطة. التخصصات المطلوبة: طبيبة نسائية، طبيبة طب أسرة، أو مقيمة قدمى معها إجازة. أوقات العمل: مساءً. (المجمع جديد، في طور الحصول على مختبر، متوفر صيدلاني، ولا يحتوي حالياً على طبيب أسنان)."
+        },
+        {
+            specialty: "طب أسرة",
+            gov: "البصرة",
+            area: "قضاء شط العرب",
+            statusLabel: "🟢 دوام مسائي",
+            headerLabel: "إعلان مجمع 11",
+            title: "مجمع طبي متكامل (رقم 11) - قضاء شط العرب",
+            details: "العنوان: البصرة - قضاء شط العرب، شارع الريان، الحوطة. التخصصات المطلوبة: طبيبة نسائية، طبيبة طب أسرة، أو مقيمة قدمى معها إجازة. أوقات العمل: مساءً. (المجمع جديد، في طور الحصول على مختبر، متوفر صيدلاني، ولا يحتوي حالياً على طبيب أسنان)."
+        },
+        {
+            specialty: "طبيب ممارس عام",
+            gov: "البصرة",
+            area: "قضاء شط العرب",
+            statusLabel: "🟢 دوام مسائي",
+            headerLabel: "إعلان مجمع 11",
+            title: "مجمع طبي متكامل (رقم 11) - قضاء شط العرب",
+            details: "العنوان: البصرة - قضاء شط العرب، شارع الريان، الحوطة. المطلوب: مقيمة قدمى معها إجازة. أوقات العمل: مساءً. (المجمع جديد، في طور الحصول على مختبر، متوفر صيدلاني، ولا يحتوي حالياً على طبيب أسنان)."
+        },
+        // إعلان مجمع 13 الجديد
+        {
+            specialty: "نسائية وتوليد",
+            gov: "بغداد",
+            area: "حي الإعلام",
+            statusLabel: "🟢 صباحاً ومساءً",
+            headerLabel: "إعلان مجمع 13",
+            title: "مجمع طبي متكامل (رقم 13) - حي الإعلام",
+            details: "العنوان: بغداد - الكرخ / حي الإعلام، بالقرب من مسبح الإعلام وأسواق الليرة. أوقات العمل: صباحاً ومساءً. التخصصات المطلوبة: نسائية وتوليد، عيون، جلدية، وصيدلانية. التخصصات المتوفرة حالياً: باطنية، أسنان، وصيدلية."
+        },
+        {
+            specialty: "عيون",
+            gov: "بغداد",
+            area: "حي الإعلام",
+            statusLabel: "🟢 صباحاً ومساءً",
+            headerLabel: "إعلان مجمع 13",
+            title: "مجمع طبي متكامل (رقم 13) - حي الإعلام",
+            details: "العنوان: بغداد - الكرخ / حي الإعلام، بالقرب من مسبح الإعلام وأسواق الليرة. أوقات العمل: صباحاً ومساءً. التخصصات المطلوبة: نسائية وتوليد، عيون، جلدية، وصيدلانية. التخصصات المتوفرة حالياً: باطنية، أسنان، وصيدلية."
+        },
+        {
+            specialty: "جلدية وتجميل",
+            gov: "بغداد",
+            area: "حي الإعلام",
+            statusLabel: "🟢 صباحاً ومساءً",
+            headerLabel: "إعلان مجمع 13",
+            title: "مجمع طبي متكامل (رقم 13) - حي الإعلام",
+            details: "العنوان: بغداد - الكرخ / حي الإعلام، بالقرب من مسبح الإعلام وأسواق الليرة. أوقات العمل: صباحاً ومساءً. التخصصات المطلوبة: نسائية وتوليد، عيون، جلدية، وصيدلانية. التخصصات المتوفرة حالياً: باطنية، أسنان، وصيدلية."
+        },
+        {
+            specialty: "مختبرات وتحليلات مرضية",
+            gov: "بغداد",
+            area: "حي الإعلام",
+            statusLabel: "🟢 صباحاً ومساءً",
+            headerLabel: "إعلان مجمع 13",
+            title: "مجمع طبي متكامل (رقم 13) - حي الإعلام (مطلوب صيدلانية)",
+            details: "العنوان: بغداد - الكرخ / حي الإعلام، بالقرب من مسبح الإعلام وأسواق الليرة. أوقات العمل: صباحاً ومساءً. المطلوب إضافياً: صيدلانية للانضمام إلى الكادر."
         }
     ];
 
     let selectedState = {
-        mode: 'general', // 'general' or 'manager'
+        mode: 'general',
         specialty: null,
         gov: null,
         group: null,
@@ -961,157 +1000,45 @@
             frag.appendChild(card);
         });
 
-        const noResults = document.createElement('div');
-        noResults.id = 'noResultsMsg';
-        noResults.className = 'no-results';
-        const noResultsFormUrl = selectedState.mode === 'general'
-            ? document.getElementById('doctorFormLink').href
-            : document.getElementById('managerFormLink').href;
-        const noResultsFormLabel = selectedState.mode === 'general'
-            ? '📝 املأ استمارة الطبيب ليتم إعلامك فور توفر عيادة'
-            : '📝 املأ استمارة المجمع ليتم إعلامك فور توفر طبيب';
-        noResults.innerHTML = `
-            <p>${selectedState.mode === 'general' ? 'عذراً، لا توجد عيادات شاغرة مطابقة في هذه المنطقة حالياً.' : 'عذراً، لا يوجد أطباء متاحون ضمن هذا الاختصاص والمنطقة حالياً.'}</p>
-            <a href="${noResultsFormUrl}" id="noResultsFormLink" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                ${noResultsFormLabel}
+        const noResDiv = document.createElement('div');
+        noResDiv.className = 'no-results';
+        noResDiv.id = 'noResultsBox';
+        noResDiv.innerHTML = `
+            <p>عذراً، لم نجد نتائج مطابقة لاختياراتك المحددة حالياً.</p>
+            <a href="${buildWaLink('مرحباً، أبحث عن تنسيق طبي ولم أجد طلبي في النتائج المباشرة')}" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" style="max-width: 320px; margin: 0 auto;">
+                💬 تواصل معنا مباشرة لتوفير طلبك
             </a>
         `;
-        frag.appendChild(noResults);
+        frag.appendChild(noResDiv);
         grid.appendChild(frag);
     }
 
-    function startSearch(mode) {
-        selectedState.mode = mode;
-        selectedState.specialty = null;
-        selectedState.gov = null;
-        selectedState.group = null;
-        selectedState.area = null;
+    function updateResultsFilter() {
+        const cards = document.querySelectorAll('.card');
+        let matchCount = 0;
 
-        const stepContainer = document.getElementById('stepContainerStyle');
-        const resultsTitle = document.getElementById('resultsTitle');
-        const btnGeneral = document.getElementById('btnGeneral');
-        const btnDoctor = document.getElementById('btnDoctor');
-        const step1Title = document.getElementById('step1Title');
+        cards.forEach(card => {
+            const matchSp = !selectedState.specialty || card.dataset.specialty === selectedState.specialty;
+            const matchGov = !selectedState.gov || card.dataset.gov === selectedState.gov;
+            const matchArea = !selectedState.area || card.dataset.area === selectedState.area || selectedState.area.includes("مناطق أخرى");
 
-        if (mode === 'manager') {
-            stepContainer.classList.add('doctor-mode');
-            resultsTitle.textContent = "الأطباء المتوفرون حسب الاختصاص والمنطقة المطلوبة للمجمع";
-            step1Title.textContent = "🩺 الخطوة 1: اختر الاختصاص الطبي المطلوب للتعاقد";
-            btnDoctor.setAttribute('aria-pressed', 'true');
-            btnGeneral.setAttribute('aria-pressed', 'false');
-        } else {
-            stepContainer.classList.remove('doctor-mode');
-            resultsTitle.textContent = "العيادات الشاغرة المتوفرة حسب اختصاصك ومنطقتك";
-            step1Title.textContent = "🩺 الخطوة 1: اختر الاختصاص الطبي";
-            btnGeneral.setAttribute('aria-pressed', 'true');
-            btnDoctor.setAttribute('aria-pressed', 'false');
-        }
-
-        document.getElementById('filterSection').style.display = 'block';
-        document.getElementById('resultsContainer').style.display = 'block';
-        document.getElementById('filterSection').scrollIntoView({ behavior: 'smooth' });
-
-        document.getElementById('step2Box').style.display = 'none';
-        document.getElementById('step3Box').style.display = 'none';
-        document.getElementById('step4Box').style.display = 'none';
-        document.getElementById('selectionSummary').style.display = 'none';
-
-        renderSpecialties();
-        renderCards();
-    }
-
-    function selectSpecialty(sp) {
-        selectedState.specialty = sp;
-        selectedState.gov = null;
-        selectedState.group = null;
-        selectedState.area = null;
-
-        renderSpecialties();
-        renderGovs();
-
-        document.getElementById('step2Box').style.display = 'block';
-        document.getElementById('step3Box').style.display = 'none';
-        document.getElementById('step4Box').style.display = 'none';
-        document.getElementById('step2Box').scrollIntoView({ behavior: 'smooth' });
-
-        updateSummary();
-        resetCards();
-    }
-
-    function selectGov(govVal) {
-        selectedState.gov = govVal;
-        selectedState.group = null;
-        selectedState.area = null;
-
-        renderGovs();
-        renderGroups(govVal);
-
-        document.getElementById('step3Box').style.display = 'block';
-        document.getElementById('step4Box').style.display = 'none';
-        document.getElementById('step3Box').scrollIntoView({ behavior: 'smooth' });
-
-        updateSummary();
-        resetCards();
-    }
-
-    function selectGroup(groupVal) {
-        selectedState.group = groupVal;
-        selectedState.area = null;
-
-        renderGroups(selectedState.gov);
-
-        const fullList = (areaHierarchy[selectedState.gov] && areaHierarchy[selectedState.gov][groupVal]) || [];
-        const substantive = fullList.filter(a => a !== 'مناطق أخرى');
-        const hasOther = fullList.includes('مناطق أخرى');
-        const step4Box = document.getElementById('step4Box');
-        const step4Title = document.getElementById('step4Title');
-
-        if (substantive.length <= 1) {
-            // تفادي التكرار: القسم الرئيسي والمنطقة الوحيدة يشيران لنفس المكان،
-            // فنعتمد القسم نفسه كمنطقة تلقائياً، ونُبقي "مناطق أخرى" فقط كبديل اختياري إن وُجد
-            currentAreaOptions = hasOther ? ['مناطق أخرى'] : [];
-            if (step4Title) step4Title.textContent = '🏙️ هل منطقتك مختلفة ضمن هذا القسم؟ (اختياري)';
-
-            if (substantive.length === 1) {
-                selectedState.area = substantive[0];
-            }
-
-            if (currentAreaOptions.length > 0) {
-                renderAreas(currentAreaOptions);
-                step4Box.style.display = 'block';
+            if (matchSp && matchGov && matchArea) {
+                card.classList.add('active-match');
+                matchCount++;
             } else {
-                step4Box.style.display = 'none';
+                card.classList.remove('active-match');
             }
+        });
 
-            updateSummary();
-            checkAvailability();
-            document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
-            return;
+        const noResBox = document.getElementById('noResultsBox');
+        if (noResBox) {
+            noResBox.style.display = matchCount === 0 ? 'block' : 'none';
         }
-
-        currentAreaOptions = fullList;
-        if (step4Title) step4Title.textContent = '🏙️ الخطوة 4: اختر المنطقة أو الحي';
-        renderAreas(currentAreaOptions);
-        step4Box.style.display = 'block';
-        step4Box.scrollIntoView({ behavior: 'smooth' });
-
-        updateSummary();
-        resetCards();
-    }
-
-    function selectArea(areaVal) {
-        selectedState.area = areaVal;
-        renderAreas(currentAreaOptions);
-
-        updateSummary();
-        checkAvailability();
-        document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
     }
 
     function updateSummary() {
-        const summaryDiv = document.getElementById('selectionSummary');
-        const summaryText = document.getElementById('summaryText');
-
+        const summaryEl = document.getElementById('selectionSummary');
+        const textEl = document.getElementById('summaryText');
         let parts = [];
         if (selectedState.specialty) parts.push(`الاختصاص: ${selectedState.specialty}`);
         if (selectedState.gov) parts.push(`المحافظة: ${selectedState.gov}`);
@@ -1119,122 +1046,146 @@
         if (selectedState.area) parts.push(`المنطقة: ${selectedState.area}`);
 
         if (parts.length > 0) {
-            summaryText.textContent = parts.join(' ➔ ');
-            summaryDiv.style.display = 'flex';
+            textEl.textContent = parts.join(' | ');
+            summaryEl.style.display = 'flex';
         } else {
-            summaryDiv.style.display = 'none';
+            summaryEl.style.display = 'none';
         }
     }
 
-    function checkAvailability() {
-        const cards = document.querySelectorAll('.card');
-        const noResultsMsg = document.getElementById('noResultsMsg');
-        let foundCount = 0;
-
-        if (!selectedState.area) {
-            cards.forEach(c => c.classList.remove('active-match'));
-            noResultsMsg.style.display = 'none';
-            return;
+    function selectSpecialty(sp) {
+        selectedState.specialty = selectedState.specialty === sp ? null : sp;
+        renderSpecialties();
+        
+        if (selectedState.specialty) {
+            document.getElementById('step2Box').style.display = 'block';
+            renderGovs();
         }
+        
+        updateSummary();
+        updateResultsFilter();
+    }
 
-        cards.forEach(card => {
-            const cSpecialty = card.getAttribute('data-specialty');
-            const cGov = card.getAttribute('data-gov');
-            const cArea = card.getAttribute('data-area');
+    function selectGov(govVal) {
+        selectedState.gov = selectedState.gov === govVal ? null : govVal;
+        selectedState.group = null;
+        selectedState.area = null;
+        
+        renderGovs();
+        
+        if (selectedState.gov) {
+            document.getElementById('step3Box').style.display = 'block';
+            renderGroups(selectedState.gov);
+            document.getElementById('step4Box').style.display = 'none';
+        } else {
+            document.getElementById('step3Box').style.display = 'none';
+            document.getElementById('step4Box').style.display = 'none';
+        }
+        
+        updateSummary();
+        updateResultsFilter();
+    }
 
-            if (cSpecialty === selectedState.specialty && cGov === selectedState.gov && cArea === selectedState.area) {
-                card.classList.add('active-match');
-                foundCount++;
-            } else {
-                card.classList.remove('active-match');
-            }
-        });
+    function selectGroup(groupName) {
+        selectedState.group = selectedState.group === groupName ? null : groupName;
+        selectedState.area = null;
+        
+        renderGroups(selectedState.gov);
 
-        noResultsMsg.style.display = foundCount === 0 ? 'block' : 'none';
+        if (selectedState.group && areaHierarchy[selectedState.gov]) {
+            currentAreaOptions = areaHierarchy[selectedState.gov][selectedState.group] || [];
+            document.getElementById('step4Box').style.display = 'block';
+            renderAreas(currentAreaOptions);
+        } else {
+            document.getElementById('step4Box').style.display = 'none';
+        }
+        
+        updateSummary();
+        updateResultsFilter();
+    }
+
+    function selectArea(areaName) {
+        selectedState.area = selectedState.area === areaName ? null : areaName;
+        renderAreas(currentAreaOptions);
+        updateSummary();
+        updateResultsFilter();
     }
 
     function resetSearchSteps() {
-        startSearch(selectedState.mode);
+        selectedState.specialty = null;
+        selectedState.gov = null;
+        selectedState.group = null;
+        selectedState.area = null;
+
+        renderSpecialties();
+        document.getElementById('step2Box').style.display = 'none';
+        document.getElementById('step3Box').style.display = 'none';
+        document.getElementById('step4Box').style.display = 'none';
+
+        updateSummary();
+        updateResultsFilter();
     }
 
-    function resetCards() {
-        document.querySelectorAll('.card').forEach(c => c.classList.remove('active-match'));
-        const noResultsMsg = document.getElementById('noResultsMsg');
-        if (noResultsMsg) noResultsMsg.style.display = 'none';
-    }
+    function startSearch(mode) {
+        selectedState.mode = mode;
+        
+        const btnGen = document.getElementById('btnGeneral');
+        const btnDoc = document.getElementById('btnDoctor');
+        const stepContainer = document.getElementById('stepContainerStyle');
+        const resultsTitle = document.getElementById('resultsTitle');
 
-    // آخر الأخبار - عدّل هذه القائمة بأخباركم الفعلية
-    // أضف "action" لأي خبر تريد أن يكون قابلاً للنقر ويوجه الزائر مباشرة لبطاقة محددة
-    const NEWS_ITEMS = [
-        {
-            text: "🩺 طبيب جلدية يبحث عن عيادة للعمل صباحاً في مدينة أبو غريب حصراً — اضغط للتفاصيل",
-            action: { mode: "general", specialty: "جلدية وتجميل", gov: "بغداد", group: "الكرخ", area: "أبو غريب" }
-        },
-        {
-            text: "🏥 فرصة عمل مميزة: مجمع طبي نافذ بمركز مدينة العمارة يستقطب أطباء أربعة اختصاصات (مسالك بولية وتناسلية، نسائية وتوليد وعقم، باطنية، مفاصل وروماتيزم) بدوام مسائي — اضغط للتفاصيل",
-            action: { mode: "manager", specialty: "باطنية", gov: "ميسان", group: "مركز العمارة", area: "العمارة - مركز المحافظة" }
+        if (mode === 'general') {
+            btnGen.setAttribute('aria-pressed', 'true');
+            btnDoc.setAttribute('aria-pressed', 'false');
+            btnGen.style.boxShadow = '0 0 0 3px #0f172a';
+            btnDoc.style.boxShadow = 'none';
+            stepContainer.className = 'step-container';
+            resultsTitle.textContent = "العيادات الشاغرة المتاحة حسب اختياراتك";
+        } else {
+            btnDoc.setAttribute('aria-pressed', 'true');
+            btnGen.setAttribute('aria-pressed', 'false');
+            btnDoc.style.boxShadow = '0 0 0 3px #0f172a';
+            btnGen.style.boxShadow = 'none';
+            stepContainer.className = 'step-container doctor-mode';
+            resultsTitle.textContent = "الأطباء والكفاءات المتاحة للتعاقد حسب اختياراتك";
         }
-    ];
 
-    function initNewsTicker() {
-        const el = document.getElementById('tickerContent');
-        if (!el || NEWS_ITEMS.length === 0) return;
+        document.getElementById('filterSection').style.display = 'block';
+        document.getElementById('resultsContainer').style.display = 'block';
 
-        const itemsHtml = NEWS_ITEMS.map((item, idx) => {
-            if (item.action) {
-                return `<span class="ticker-item ticker-item-link" role="button" tabindex="0" data-news-idx="${idx}">${item.text}</span>`;
-            }
-            return `<span class="ticker-item">${item.text}</span>`;
-        }).join('');
-        // تكرار المحتوى مرتين لضمان تمرير متصل وسلس بدون فراغ
-        el.innerHTML = itemsHtml + itemsHtml;
+        renderCards();
+        renderSpecialties();
+        updateResultsFilter();
 
-        el.querySelectorAll('.ticker-item-link').forEach(node => {
-            const idx = Number(node.dataset.newsIdx);
-            const item = NEWS_ITEMS[idx];
-            if (!item || !item.action) return;
-
-            node.addEventListener('click', () => goToNewsCard(item.action));
-            node.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    goToNewsCard(item.action);
-                }
-            });
-        });
-    }
-
-    function goToNewsCard(action) {
-        startSearch(action.mode);
-        selectSpecialty(action.specialty);
-        selectGov(action.gov);
-        selectGroup(action.group);
-        selectArea(action.area);
-
-        const matchedCard = document.querySelector('.card.active-match');
-        if (matchedCard) {
-            matchedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            matchedCard.classList.add('card-highlight');
-            setTimeout(() => matchedCard.classList.remove('card-highlight'), 2600);
-        }
-    }
-
-    function initWhatsappLinks() {
-        document.querySelectorAll('.js-wa-link').forEach(link => {
-            const text = link.dataset.waText || '';
-            link.href = buildWaLink(text);
-        });
-        document.querySelectorAll('.js-wa-display').forEach(span => {
-            span.textContent = WHATSAPP_DISPLAY;
-        });
+        document.getElementById('filterSection').scrollIntoView({ behavior: 'smooth' });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        renderCards();
-        initWhatsappLinks();
-        initNewsTicker();
+        document.querySelectorAll('.js-wa-link').forEach(el => {
+            const text = el.getAttribute('data-wa-text') || 'مرحباً، أستفسر عن خدمات منصة التنسيق الطبي';
+            el.href = buildWaLink(text);
+        });
+        document.querySelectorAll('.js-wa-display').forEach(el => {
+            el.textContent = WHATSAPP_DISPLAY;
+        });
+
+        const tickerContent = document.getElementById('tickerContent');
+        const newsItems = [
+            "🔴 إعلان مجمع 11 (البصرة - شط العرب، شارع الريان): مطلوب طبيبة نسائية، طب أسرة، أو مقيمة قدمى (دوام مسائي)",
+            "🔴 إعلان مجمع 13 (بغداد - حي الإعلام): مطلوب نسائية، عيون، جلدية، وصيدلانية (صباحاً ومساءً)",
+            "تحديثات يومية للعيادات الشاغرة في عموم محافظات العراق",
+            "فرص تعاقد فورية للأطباء الأخصائيين والممارسين ضمن المجمعات الطبية",
+            "أكثر من 4 سنوات من الثقة والوساطة الطبية الموثوقة",
+            "تواصل معنا عبر الواتساب للاستفسار السريع وتثبيت الحجوزات"
+        ];
+        let tickerHtml = '';
+        for (let i = 0; i < 2; i++) {
+            newsItems.forEach(item => {
+                tickerHtml += `<div class="ticker-item">${item}</div>`;
+            });
+        }
+        tickerContent.innerHTML = tickerHtml;
     });
 </script>
-
 </body>
 </html>
