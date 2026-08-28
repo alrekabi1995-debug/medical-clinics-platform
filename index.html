@@ -1133,6 +1133,7 @@
         const btnDoc = document.getElementById('btnDoctor');
         const stepContainer = document.getElementById('stepContainerStyle');
         const resultsTitle = document.getElementById('resultsTitle');
+        const step1Title = document.getElementById('step1Title');
 
         if (mode === 'general') {
             btnGen.setAttribute('aria-pressed', 'true');
@@ -1140,6 +1141,7 @@
             btnGen.style.boxShadow = '0 0 0 3px #0f172a';
             btnDoc.style.boxShadow = 'none';
             stepContainer.className = 'step-container';
+            step1Title.textContent = "🩺 الخطوة 1: اختر الاختصاص الطبي المطلوب للتعاقد";
             resultsTitle.textContent = "العيادات الشاغرة المتاحة حسب اختياراتك";
         } else {
             btnDoc.setAttribute('aria-pressed', 'true');
@@ -1147,7 +1149,8 @@
             btnDoc.style.boxShadow = '0 0 0 3px #0f172a';
             btnGen.style.boxShadow = 'none';
             stepContainer.className = 'step-container doctor-mode';
-            resultsTitle.textContent = "الأطباء والكفاءات المتاحة للتعاقد حسب اختياراتك";
+            step1Title.textContent = "🩺 الخطوة 1: اختر اختصاصك الطبي للبحث عن مجمع يحتاج اختصاصك";
+            resultsTitle.textContent = "أصحاب مجمعات طبية بحاجة للاطباء حسب الاختصاص والمنطقة المطلوبة";
         }
 
         document.getElementById('filterSection').style.display = 'block';
