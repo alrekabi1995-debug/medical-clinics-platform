@@ -637,7 +637,8 @@
         { specialty: "طب وجراحة الأسنان", gov: "بغداد", area: "الكرخ - المركز", statusLabel: "🟢 متوفر للعمل", headerLabel: "طبيب أسنان متاح", title: "طبيب أسنان", details: "خبرة واسعة في التركيبات وعلاج اللثة، جاهز للالتحاق الفوري." },
         { specialty: "باطنية", gov: "بغداد", area: "المنصور", statusLabel: "🟢 متوفر للعمل", headerLabel: "أخصائي باطنية متاح", title: "أخصائية باطنية وقلبية", details: "حاصلة على البورد، تبحث عن فرصة عمل ضمن مجمع طبي متميز." },
         { specialty: "جراحة الكلى والمسالك البولية", gov: "ميسان", area: "العمارة - مركز المحافظة", statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب مسالك بولية وتناسلية - مجمع طبي بمركز العمارة", details: "مجمع طبي نشط ونافذ في قلب مركز مدينة ميسان، يعمل بكامل طاقته التشغيلية." },
-        { specialty: "نسائية وتوليد", gov: "ميسان", area: "العمارة - مركز المحافظة", statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة نسائية وتوليد وعقم - مجمع طبي بمركز العمارة", details: "مجمع طبي نشط ونافذ في قلب مركز مدينة ميسان، يعمل بكامل طاقته التشغيلية." }
+        { specialty: "نسائية وتوليد", gov: "ميسان", area: "العمارة - مركز المحافظة", statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة نسائية وتوليد وعقم - مجمع طبي بمركز العمارة", details: "مجمع طبي نشط ونافذ في قلب مركز مدينة ميسان، يعمل بكامل طاقته التشغيلية." },
+        { specialty: "باطنية", gov: "ميسان", area: "العمارة - مركز المحافظة", statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب باطنية - مجمع طبي بمركز العمارة", details: "مجمع طبي نشط ونافذ في قلب مركز مدينة ميسان، يعمل بكامل طاقته التشغيلية." }
     ];
 
     let selectedState = {
@@ -832,6 +833,7 @@
         const dataSet = selectedState.mode === 'general' ? GENERAL_CLINICS_DATA : DOCTORS_DATA;
 
         let filtered = dataSet.filter(item => {
+            if (selectedState.mode === 'manager' && item.headerLabel !== 'فرصة عمل مميزة') return false;
             if (selectedState.specialty && item.specialty !== selectedState.specialty) return false;
             if (selectedState.gov && item.gov !== selectedState.gov) return false;
             if (selectedState.area && item.area !== selectedState.area) return false;
