@@ -85,12 +85,6 @@
         100% { transform: translateX(0%); }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-        .ticker-content {
-            animation: none;
-        }
-    }
-
     .hero {
         background-color: #0f172a;
         color: #ffffff;
@@ -118,14 +112,9 @@
         color: #fbbf24;
         font-size: 0.85rem;
         font-weight: 700;
-        letter-spacing: 0.2px;
         padding: 8px 18px;
         border-radius: 30px;
         margin: 0 auto 20px;
-    }
-
-    .hero-trust-line svg {
-        flex-shrink: 0;
     }
 
     .hero h1 {
@@ -156,39 +145,13 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        transition: all 0.2s ease;
         cursor: pointer;
         border: none;
     }
 
-    .btn:focus-visible {
-        outline: 3px solid #0ea5e9;
-        outline-offset: 2px;
-    }
-
-    .btn-primary {
-        background-color: #f59e0b;
-        color: #0f172a;
-    }
-
-    .btn-primary:hover {
-        background-color: #d97706;
-    }
-
-    .btn-secondary {
-        background-color: #1e293b;
-        color: #ffffff;
-        border: 1px solid #334155;
-    }
-
-    .btn-secondary:hover {
-        background-color: #334155;
-    }
-
-    .btn-icon {
-        flex-shrink: 0;
-    }
-
+    .btn-primary { background-color: #f59e0b; color: #0f172a; }
+    .btn-secondary { background-color: #1e293b; color: #ffffff; border: 1px solid #334155; }
+    
     .btn-trigger {
         background-color: #0ea5e9;
         color: white;
@@ -197,26 +160,12 @@
         box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
     }
 
-    .btn-trigger:hover {
-        background-color: #0284c7;
-    }
-
     .btn-doctor-search {
         background-color: #10b981;
         color: white;
         font-size: 1rem;
         padding: 14px 30px;
         box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-    }
-
-    .btn-doctor-search:hover {
-        background-color: #059669;
-    }
-
-    .btn-trigger[aria-pressed="true"],
-    .btn-doctor-search[aria-pressed="true"] {
-        outline: 3px solid #0f172a;
-        outline-offset: 2px;
     }
 
     .main-trigger-section {
@@ -274,12 +223,7 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
         direction: ltr;
-    }
-
-    .wa-direct-btn:hover {
-        background-color: #20ba5a;
     }
 
     .filter-section {
@@ -298,18 +242,13 @@
         margin-bottom: 20px;
     }
 
-    .step-container.doctor-mode {
-        border-color: #10b981;
-    }
+    .step-container.doctor-mode { border-color: #10b981; }
 
     .step-title {
         font-size: 1.15rem;
         font-weight: 700;
         color: #1e293b;
         margin-bottom: 15px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
     }
 
     .options-grid {
@@ -327,25 +266,17 @@
         font-size: 14px;
         font-weight: 600;
         cursor: pointer;
-        transition: all 0.2s ease;
-    }
-
-    .option-pill:hover {
-        background-color: #e2e8f0;
-        border-color: #94a3b8;
     }
 
     .option-pill.selected {
         background-color: #0ea5e9;
         color: white;
         border-color: #0ea5e9;
-        box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
     }
 
     .doctor-mode .option-pill.selected {
         background-color: #10b981;
         border-color: #10b981;
-        box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
     }
 
     .selection-summary {
@@ -372,19 +303,11 @@
         font-size: 13px;
     }
 
-    .reset-steps-btn:hover {
-        text-decoration: underline;
-    }
-
     .container {
         max-width: 1100px;
         margin: 0 auto;
         padding: 0 20px 60px;
         display: none;
-    }
-
-    .section-header {
-        margin-bottom: 24px;
     }
 
     .section-header h2 {
@@ -407,9 +330,7 @@
         display: none;
     }
 
-    .card.active-match {
-        display: block;
-    }
+    .card.active-match { display: block; }
 
     .card-header {
         padding: 8px 16px;
@@ -420,27 +341,12 @@
     }
 
     .bg-green { background-color: #d1fae5; color: #047857; }
+    .bg-red { background-color: #fee2e2; color: #991b1b; }
 
-    .card-body {
-        padding: 20px;
-    }
-
-    .card-body h3 {
-        font-size: 1.1rem;
-        margin-bottom: 12px;
-    }
-
-    .card-info {
-        list-style: none;
-        font-size: 14px;
-        color: #475569;
-        padding: 0;
-        margin: 0;
-    }
-
-    .card-info li {
-        margin-bottom: 8px;
-    }
+    .card-body { padding: 20px; }
+    .card-body h3 { font-size: 1.1rem; margin-bottom: 12px; }
+    .card-info { list-style: none; font-size: 14px; color: #475569; padding: 0; margin: 0; }
+    .card-info li { margin-bottom: 8px; }
 
     .whatsapp-box {
         margin-top: 15px;
@@ -462,13 +368,7 @@
         padding: 12px 16px;
         border-radius: 8px;
         width: 100%;
-        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
-        transition: background-color 0.2s;
         direction: ltr;
-    }
-
-    .whatsapp-btn:hover {
-        background-color: #20ba5a;
     }
 
     .no-results {
@@ -478,135 +378,83 @@
         grid-column: 1 / -1;
         display: none;
     }
-
-    .no-results p {
-        font-weight: 600;
-        margin-bottom: 16px;
-    }
 </style>
 </head>
 <body>
 
 <main>
-    <!-- Hero Section -->
     <section class="hero">
         <span class="badge">وساطة وتنسيق موقعي متخصص</span>
         <h1>منصة عيادات طبية</h1>
-
-        <div class="hero-trust-line">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M12 2L14.9 8.6L22 9.3L16.7 14L18.2 21L12 17.3L5.8 21L7.3 14L2 9.3L9.1 8.6L12 2Z"/>
-            </svg>
-            أول منصة للوساطة الطبية وتوفير العيادات في العراق منذ 4 سنوات
-        </div>
-
+        <div class="hero-trust-line">أول منصة للوساطة الطبية وتوفير العيادات في العراق منذ 4 سنوات</div>
         <p>نربط الأطباء بأفضل العيادات الشاغرة، ونوفر لأصحاب المجمعات الطبية الكفاءات المطلوبة.</p>
-
         <div class="cta-container">
-            <a href="https://tally.so/r/7RrE0Z" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="doctorFormLink">
-                👨‍⚕️ أنا طبيب أبحث عن عيادة (استمارة)
-            </a>
-            <a href="https://tally.so/r/gD6z6l" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="managerFormLink">
-                🏢 أصحاب مجمع / طلب طبيب (استمارة)
-            </a>
+            <a href="https://tally.so/r/7RrE0Z" target="_blank" class="btn btn-primary">👨‍⚕️ أنا طبيب أبحث عن عيادة (استمارة)</a>
+            <a href="https://tally.so/r/gD6z6l" target="_blank" class="btn btn-secondary">🏢 أصحاب مجمع / طلب طبيب (استمارة)</a>
         </div>
     </section>
 
-    <!-- أزرار التفعيل -->
-    <main class="main-trigger-section">
-        <button type="button" class="btn btn-trigger" id="btnGeneral" aria-pressed="false" onclick="startSearch('general')">
-            <svg class="btn-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M6 3.5V10.5C6 12.71 7.79 14.5 10 14.5C12.21 14.5 14 12.71 14 10.5V3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M6 3.5H4.5M14 3.5H15.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-                <path d="M10 14.5V16.8C10 19.1 11.9 21 14.2 21C16.5 21 18.4 19.1 18.4 16.8V15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="18.4" cy="12.7" r="2.3" stroke="currentColor" stroke-width="1.7"/>
-            </svg>
+    <div class="main-trigger-section">
+        <button type="button" class="btn btn-trigger" id="btnGeneral" onclick="startSearch('general')">
             أطباء يبحثون عن عيادات شاغرة
         </button>
-        <button type="button" class="btn btn-doctor-search" id="btnDoctor" aria-pressed="false" onclick="startSearch('manager')">
-            <svg class="btn-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M4 21V6.8C4 6.36 4.24 5.95 4.63 5.75L11.63 2.13C11.86 2.01 12.14 2.01 12.37 2.13L19.37 5.75C19.76 5.95 20 6.36 20 6.8V21" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M2 21H22" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-                <path d="M12 7.5V12.5M9.5 10H14.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-                <path d="M8 21V17C8 16.45 8.45 16 9 16H15C15.55 16 16 16.45 16 17V21" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+        <button type="button" class="btn btn-doctor-search" id="btnDoctor" onclick="startSearch('manager')">
             أصحاب مجمعات يبحثون عن أطباء
         </button>
-    </main>
+    </div>
 
-    <!-- شريط آخر الأخبار المحدث بالمجمعات الجديدة -->
     <div class="news-ticker-wrap">
         <div class="news-ticker">
             <div class="ticker-label">📢 آخر الأخبار</div>
             <div class="ticker-track">
-                <div class="ticker-content" id="tickerContent" aria-live="off"></div>
+                <div class="ticker-content" id="tickerContent"></div>
             </div>
         </div>
     </div>
 
-    <!-- رقم الواتساب الرسمي البارز -->
     <div class="global-whatsapp-banner">
         <div class="global-wa-box">
             <div class="global-wa-text">
                 للتواصل المباشر والاستفسار الفوري مع إدارة المنصة:
                 <span>خدمة التنسيق الطبي متاحة عبر الواتساب</span>
             </div>
-            <a href="#" target="_blank" rel="noopener noreferrer" class="wa-direct-btn js-wa-link" data-wa-text="مرحباً، أستفسر عن خدمات منصة التنسيق الطبي">
-                💬 <span class="js-wa-display"></span>
-            </a>
+            <a href="#" target="_blank" class="wa-direct-btn js-wa-link">💬 <span class="js-wa-display"></span></a>
         </div>
     </div>
 
-    <!-- Step-by-Step Filter Section -->
     <div class="filter-section" id="filterSection">
         <div class="step-container" id="stepContainerStyle">
-
-            <!-- ملخص الاختيارات الحالية -->
             <div class="selection-summary" id="selectionSummary" style="display: none;">
                 <div><strong>خياراتك الحالية:</strong> <span id="summaryText">---</span></div>
                 <button type="button" class="reset-steps-btn" onclick="resetSearchSteps()">إعادة ضبط البحث 🔄</button>
             </div>
-
-            <!-- الخطوة 1: الاختصاصات -->
             <div id="step1Box">
                 <div class="step-title" id="step1Title">🩺 الخطوة 1: اختر الاختصاص المطلوب</div>
                 <div class="options-grid" id="specialtiesGrid"></div>
             </div>
-
-            <!-- الخطوة 2: المحافظات -->
             <div id="step2Box" style="display: none; margin-top: 25px; padding-top: 20px; border-top: 1px dashed #cbd5e1;">
                 <div class="step-title">📍 الخطوة 2: اختر المحافظة</div>
                 <div class="options-grid" id="govsGrid"></div>
             </div>
-
-            <!-- الخطوة 3: القسم الرئيسي -->
             <div id="step3Box" style="display: none; margin-top: 25px; padding-top: 20px; border-top: 1px dashed #cbd5e1;">
                 <div class="step-title">🧭 الخطوة 3: اختر القسم الرئيسي</div>
                 <div class="options-grid" id="groupsGrid"></div>
             </div>
-
-            <!-- الخطوة 4: المنطقة التفصيلية -->
             <div id="step4Box" style="display: none; margin-top: 25px; padding-top: 20px; border-top: 1px dashed #cbd5e1;">
-                <div class="step-title" id="step4Title">🏙️ الخطوة 4: اختر المنطقة أو الحي</div>
+                <div class="step-title">🏙️ الخطوة 4: اختر المنطقة أو الحي</div>
                 <div class="options-grid" id="areasGrid"></div>
             </div>
-
         </div>
     </div>
 
-    <!-- Listings Results Section -->
     <section class="container" id="resultsContainer">
         <div class="section-header">
             <h2 id="resultsTitle">النتائج وحالة التوفر</h2>
         </div>
-
-        <div class="grid" id="resultsGrid" aria-live="polite">
-            <!-- تُملأ البطاقات ديناميكياً -->
-        </div>
+        <div class="grid" id="resultsGrid"></div>
     </section>
 </main>
 
-<!-- JavaScript -->
 <script>
     const WHATSAPP_NUMBER = "9647766529755";
     const WHATSAPP_DISPLAY = "+964 776 652 9755";
@@ -652,7 +500,7 @@
         },
         "نينوى": {
             "مركز الموصل": ["الجانب الأيمن - المركز", "الجانب الأيسر - المركز", "مناطق أخرى"],
-            "الأقضية والنواحي": ["قضاء تلعفر", "قضاء الحمدانية (بخديدة)", "قضاء شيخان", "قضاء سنجار", "قضاء مخمور", "مناطق أخرى"]
+            "الأقضية والنواحي": ["قضاء تلعفر", "قضاء الحمدانية", "قضاء شيخان", "قضاء سنجار", "قضاء مخمور", "مناطق أخرى"]
         },
         "البصرة": {
             "مركز البصرة": ["مركز المدينة (البصرة القديمة والعشار)", "مناطق أخرى"],
@@ -720,42 +568,556 @@
         }
     };
 
+    // البيانات المستخرجة بدقة بناءً على المدخلات الـ 61 مع إخفاء الأسماء وإظهار التسلسل وحالة "الطبيب غير متوفر"
     const GENERAL_CLINICS_DATA = [
         {
-            specialty: "جلدية وتجميل",
-            gov: "ديالى",
-            area: "بعقوبة - مركز المحافظة",
-            statusLabel: "✅ متاحة للحجز الفوري",
-            headerLabel: "عيادة شاغرة مخصصة للطبيب",
-            title: "عيادة جلدية وتجميل مجهزة بالكامل",
-            details: "متوفرة ضمن مجمع طبي رصين."
+            specialty: "جراحة عامة",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 1",
+            title: "طبيب أخصائي (جراحة عامة وناظورية) - تسلسل 1",
+            details: "سكن الغزالية، يطلب العمل في حي الجامعة، يشترط عيادة مؤثثة."
+        },
+        {
+            specialty: "طب أسرة",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 2",
+            title: "طبيب أخصائي (طب أسرة) - تسلسل 2",
+            details: "سكن علي الصالح، يطلب عيادة مؤثثة ومدفوعة الأجر، أوقات العمل مساءً."
+        },
+        {
+            specialty: "باطنية",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 3",
+            title: "طبيب أخصائي (باطنية / جهاز هضمي) - تسلسل 3",
+            details: "سكن الكاظمية، يطلب العمل في الكاظمية / شارع 60، أوقات العمل مساءً."
+        },
+        {
+            specialty: "طبيب ممارس عام",
+            gov: "البصرة",
+            area: "البصرة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 4",
+            title: "طبيب ممارس عام - تسلسل 4",
+            details: "سكن البصرة، يفضل العمل بنظام الساعة المدفوعة الأجر في مجمعات طبية."
         },
         {
             specialty: "طب وجراحة الأسنان",
             gov: "بغداد",
-            area: "الرصافة - المركز",
-            statusLabel: "✅ متوفرة في مجمع طبي",
-            headerLabel: "عيادة أسنان شاغرة",
-            title: "وحدة طب وجراحة الأسنان متكاملة",
-            details: "تحتوي على كرسي أسنان حديث."
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 5",
+            title: "طبيبة أسنان (تقويم أسنان فقط) - تسلسل 5",
+            details: "سكن بغداد حي الجامعة، تطلب العمل في المنصور الحارثية الكرادة."
+        },
+        {
+            specialty: "طب وجراحة الأسنان",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 6",
+            title: "طبيبة أسنان (أمراض وجراحة اللثة) - تسلسل 6",
+            details: "سكن الأعظمية حي الربيع، تشترط عيادة مؤثثة ومدفوعة الإيجار."
+        },
+        {
+            specialty: "أشعة وسونار ومفراس",
+            gov: "أربيل",
+            area: "أربيل",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 7",
+            title: "أخصائي (أشعة وسونار) - تسلسل 7",
+            details: "سكن اشتي، يطلب عيادة أشعة وسونار في أربيل، تشترط عيادة مؤثثة."
+        },
+        {
+            specialty: "جراحة عامة",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 8",
+            title: "طبيب أخصائي (جراحة عامة) - تسلسل 8",
+            details: "سكن بغداد الكرخ الكاظمية، يطلب العمل في السيدية أو المناطق القريبة."
+        },
+        {
+            specialty: "أطفال",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 9",
+            title: "طبيب أخصائي (طب الأطفال) - تسلسل 9",
+            details: "سكن بغداد الشعب، يطلب العمل في بغداد الشعب، أوقات العمل مساءً."
+        },
+        {
+            specialty: "أطفال",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 10",
+            title: "طبيب مقيم أقدم (أطفال) - تسلسل 10",
+            details: "سكن الزعفرانية، تطلب العمل في الزعفرانية، أوقات العمل عصراً ومساءً."
+        },
+        {
+            specialty: "أطفال",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 11",
+            title: "طبيب أخصائي (أطفال دبلوم عالي) - تسلسل 11",
+            details: "سكن بغداد العامرية، أوقات العمل صباحاً يومين أو 3 أيام."
+        },
+        {
+            specialty: "جراحة عامة",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 12",
+            title: "طبيب أخصائي (جراحة عامة وناظورية) - تسلسل 12",
+            details: "سكن بغداد الغزالية، يطلب حي الجامعة شارع 66 وأبو غريب."
+        },
+        {
+            specialty: "طب أسرة",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 13",
+            title: "طبيبة أخصائية (طب مجتمع - رعاية حوامل) - تسلسل 13",
+            details: "سكن اليرموك، أوقات العمل صباحاً ومساءً، تطلب حي الجامعة واليرموك."
+        },
+        {
+            specialty: "عظام ومفاصل",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 14",
+            title: "طبيب أخصائي (المفاصل والتأهيل الطبي) - تسلسل 14",
+            details: "سكن البلديات، يطلب العمل في بغداد الجديدة، تشترط عيادة مؤثثة."
+        },
+        {
+            specialty: "عظام ومفاصل",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 15",
+            title: "طبيب أخصائي (جراحة العظام والكسور) - تسلسل 15",
+            details: "سكن بغداد البنوك، يطلب العمل في الرصافة، أوقات العمل صباحاً."
+        },
+        {
+            specialty: "نسائية وتوليد",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 16",
+            title: "طبيبة أخصائية (نسائية وتوليد بورد) - تسلسل 16",
+            details: "سكن المنصور، أوقات العمل مساءً، تطلب نفق الشرطة والمناطق المحيطة."
+        },
+        {
+            specialty: "نسائية وتوليد",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 17",
+            title: "طبيبة ممارسة (نسائية) - تسلسل 17",
+            details: "سكن بغداد الخضراء، أوقات العمل صباحاً، تطلب اطراف بغداد عالية الكثافة."
+        },
+        {
+            specialty: "أطفال",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 18",
+            title: "طبيب أخصائي (بورد أطفال) - تسلسل 18",
+            details: "سكن الكاظمية، أوقات العمل مساءً، يطلب العمل في الكرخ."
+        },
+        {
+            specialty: "جراحة الكلى والمسالك البولية",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 19",
+            title: "طبيب أخصائي (جراحة بولية) - تسلسل 19",
+            details: "سكن بغداد المنصور، أوقات العمل مساءً، يطلب العمل في بغداد."
+        },
+        {
+            specialty: "جراحة الكلى والمسالك البولية",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 20",
+            title: "طبيب أخصائي (جراحة بولية) - تسلسل 20",
+            details: "سكن بغداد، أوقات العمل مساءً، يطلب العمل في بغداد."
+        },
+        {
+            specialty: "طب وجراحة الأسنان",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 21",
+            title: "طبيب أخصائي (جراحة وجه وفكين) - تسلسل 21",
+            details: "سكن بغداد حي القادسية، أوقات العمل مساءً، يطلب بغداد الكرخ."
+        },
+        {
+            specialty: "جراحة عامة",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 22",
+            title: "طبيب أخصائي (جراحة عامة) - تسلسل 22",
+            details: "سكن بغداد الغزالية، أوقات العمل مساءً، يطلب الكاظمية أو حي الجامعة."
+        },
+        {
+            specialty: "تخدير وعناية مركزة",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 23",
+            title: "طبيب ممارس (تخدير وعلاج الألم والمفاصل) - تسلسل 23",
+            details: "سكن بغداد القادسية، أوقات العمل مساءً، يطلب بغداد الكرخ."
+        },
+        {
+            specialty: "عيون",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 24",
+            title: "طبيبة أخصائية (طب وجراحة العيون) - تسلسل 24",
+            details: "سكن بغداد المنصور، أوقات العمل مساءً، تطلب الكاظمية والحرية."
+        },
+        {
+            specialty: "طب وجراحة الأسنان",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 25",
+            title: "طبيبة أسنان (أمراض وجراحة اللثة) - تسلسل 25",
+            details: "سكن بغداد الأعظمية حي الربيع، تطلب كرخ منصور ورصافة أعظمية."
+        },
+        {
+            specialty: "طب أسرة",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 26",
+            title: "طبيب أخصائي (دبلوم عالي طب أسرة / تجميل) - تسلسل 26",
+            details: "سكن بغداد السيدية، يطلب السيدية / حي الإعلام."
+        },
+        {
+            specialty: "أشعة وسونار ومفراس",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 27",
+            title: "طبيب أخصائي (أشعة علاجية وأورام) - تسلسل 27",
+            details: "سكن بغداد أبو غريب، أوقات العمل مساءً، يطلب العامرية وحي الجامعة."
+        },
+        {
+            specialty: "طبيب ممارس عام",
+            gov: "البصرة",
+            area: "البصرة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 28",
+            title: "طبيبة ممارسة وتجميل لاجراحي - تسلسل 28",
+            details: "سكن البصرة، تطلب العمل في البصرة."
+        },
+        {
+            specialty: "نسائية وتوليد",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 29",
+            title: "طبيبة ممارسة (نسائية) - تسلسل 29",
+            details: "سكن الدورة، أوقات العمل مساءً، تطلب ناحية الرشيد."
+        },
+        {
+            specialty: "جراحة عامة",
+            gov: "كربلاء",
+            area: "كربلاء",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 30",
+            title: "طبيب أخصائي (جراحة عامة وناظورية) - تسلسل 30",
+            details: "سكن كربلاء، أوقات العمل مساءً، يطلب كربلاء... الإسكان."
+        },
+        {
+            specialty: "أشعة وسونار ومفراس",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 31",
+            title: "طبيب أخصائي (أشعة وسونار ورنين) - تسلسل 31",
+            details: "سكن السيدية، يطلب السيدية الإعلام حي الحسين الدورة."
+        },
+        {
+            specialty: "تخدير وعناية مركزة",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 32",
+            title: "طبيب أخصائي (تخدير وعناية مركزة وعلاج الألم) - تسلسل 32",
+            details: "سكن بغداد القادسية، أوقات العمل مساءً، يطلب البياع."
+        },
+        {
+            specialty: "نسائية وتوليد",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 33",
+            title: "طبيبة ممارسة (نسائية) - تسلسل 33",
+            details: "سكن بغداد الأعظمية، تطلب بغداد / الشعب / الأعظمية / البنوك."
+        },
+        {
+            specialty: "طب أسرة",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 34",
+            title: "طبيبة أخصائية (طب أسرة بورد عربي) - تسلسل 34",
+            details: "سكن بغداد الدورة، أوقات العمل مساءً، تطلب الدورة / أبو طيارة."
+        },
+        {
+            specialty: "نسائية وتوليد",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 35",
+            title: "طبيبة أخصائية (نسائية وتوليد) - تسلسل 35",
+            details: "سكن الدورة، أوقات العمل صباحاً، تطلب الكرخ."
+        },
+        {
+            specialty: "طب أسرة",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 36",
+            title: "طبيب أخصائي (دبلوم عالي طب أسرة) - تسلسل 36",
+            details: "سكن بغداد الأعظمية، أوقات العمل مساءً، يطلب الأعظمية."
+        },
+        {
+            specialty: "عظام ومفاصل",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 37",
+            title: "طبيب أخصائي (كسور) - تسلسل 37",
+            details: "سكن البنوك، أوقات العمل صباحاً، يطلب الأمين المشتل جسر ديالى."
+        },
+        {
+            specialty: "تخدير وعناية مركزة",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 38",
+            title: "طبيب ممارس أقدم (تخدير وعناية مركزة) - تسلسل 38",
+            details: "سكن بغداد الكرخ حي الجامعة، أوقات العمل صباحاً، يطلب حي الجامعة."
+        },
+        {
+            specialty: "طب أسرة",
+            gov: "واسط",
+            area: "الكوت",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 39",
+            title: "طبيب أخصائي (بورد عربي طب أسرة) - تسلسل 39",
+            details: "سكن الكوت، أوقات العمل مساءً، يطلب الكوت واسط."
+        },
+        {
+            specialty: "طبيب ممارس عام",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 40",
+            title: "طبيب ممارس عام - تسلسل 40",
+            details: "سكن بسماية، يطلب البلديات - الامين - المشتل - مدينة الصدر."
+        },
+        {
+            specialty: "أشعة وسونار ومفراس",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 41",
+            title: "طبيب أخصائي (سونار وأشعة) - تسلسل 41",
+            details: "سكن حي البنوك، أوقات العمل صباحاً، يطلب شارع فلسطين."
         },
         {
             specialty: "باطنية",
-            gov: "نينوى",
-            area: "الجانب الأيسر - المركز",
-            statusLabel: "✅ جاهزة للعمل",
-            headerLabel: "عيادة باطنية شاغرة",
-            title: "غرفة فحص باطنية في مركز استشاري",
-            details: "موقع حيوي وإقبال ممتاز."
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 42",
+            title: "طبيب أخصائي (باطنية) - تسلسل 42",
+            details: "سكن بغداد ساحة ميسلون، أوقات العمل مساءً، يطلب البلديات والحبيبية."
+        },
+        {
+            specialty: "أطفال",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 43",
+            title: "طبيب أخصائي (بورد أطفال) - تسلسل 43",
+            details: "سكن الإعلام، أوقات العمل مساءً، يطلب الإعلام."
+        },
+        {
+            specialty: "نسائية وتوليد",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 44",
+            title: "طبيبة أخصائية (نسائية وتوليد بورد عربي) - تسلسل 44",
+            details: "سكن السيدية، تطلب السيدية أو الدورة."
+        },
+        {
+            specialty: "أشعة وسونار ومفراس",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 45",
+            title: "طبيب أخصائي (سونار) - تسلسل 45",
+            details: "سكن السيدية، يطلب السيدية."
+        },
+        {
+            specialty: "تغذية وعلاج سكري",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 46",
+            title: "طبيب أخصائي (تغذية وعلاج سكري ونمو) - تسلسل 46",
+            details: "سكن بغداد / الصالحية، أوقات العمل مساءً، يطلب الحارثية."
+        },
+        {
+            specialty: "نسائية وتوليد",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 47",
+            title: "طبيبة ممارسة (نسائية وتوليد) - تسلسل 47",
+            details: "سكن بغداد المشتل، أوقات العمل مساءً، تطلب الأمين النواب."
+        },
+        {
+            specialty: "نسائية وتوليد",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 48",
+            title: "طبيبة أخصائية (نسائية وتوليد) - تسلسل 48",
+            details: "سكن حي العامل، تطلب مناطق الكرخ الجنوبي أو الأطراف."
+        },
+        {
+            specialty: "نسائية وتوليد",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 49",
+            title: "طبيبة أخصائية (نسائية وتوليد بورد) - تسلسل 49",
+            details: "سكن بغداد الجديدة، أوقات العمل صباحاً، تطلب بغداد الجديدة."
+        },
+        {
+            specialty: "جراحة عامة",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 50",
+            title: "طبيبة أخصائية (جراحة عامة وناظورية) - تسلسل 50",
+            details: "سكن بغداد الغزالية، أوقات العمل مساءً، تطلب حي الجامعة."
+        },
+        {
+            specialty: "جراحة الكبرى والعصبية",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 51",
+            title: "طبيب أخصائي (جراحة الجملة العصبية) - تسلسل 51",
+            details: "سكن حي الوحدة / شارع النضال، يطلب كرادة داخل / شارع النضال."
         },
         {
             specialty: "جلدية وتجميل",
             gov: "بغداد",
-            area: "أبو غريب",
-            statusLabel: "🟢 متوفر فقط",
-            headerLabel: "طبيب جلدية يبحث عن عيادة",
-            title: "طبيب أخصائي جلدية يبحث عن عيادة للعمل",
-            details: "متاح للعمل في الفترة الصباحية حصراً، ضمن مدينة أبو غريب حصراً."
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 52",
+            title: "طبيب أخصائي (ماجستير أمراض جلدية وحساسية) - تسلسل 52",
+            details: "سكن الأعظمية، أوقات العمل مساءً، يطلب الرصافة/الأعظمية/الوزيرية."
+        },
+        {
+            specialty: "جراحة الكلى والمسالك البولية",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 53",
+            title: "طبيب أخصائي (جراحة بولية تخصص دقيق نواظير) - تسلسل 53",
+            details: "سكن المنصور، أوقات العمل مساءً، يطلب بغداد بشكل عام."
+        },
+        {
+            specialty: "قلبية واوعية دموية",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 54",
+            title: "طبيب أخصائي (قلبية وأيكو) - تسلسل 54",
+            details: "أوقات العمل مساءً، يطلب الكرخ."
+        },
+        {
+            specialty: "نسائية وتوليد",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 55",
+            title: "طبيبة ممارسة (نسائية وتوليد) - تسلسل 55",
+            details: "سكن حي الجامعة، أوقات العمل صباحاً، تطلب اطراف بغداد جانب الكرخ."
+        },
+        {
+            specialty: "باطنية",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 56",
+            title: "طبيب أخصائي (أمراض باطنية قلبية صدرية) - تسلسل 56",
+            details: "سكن بغداد الكرخ - حي العدل، أوقات العمل مساءً، يطلب الكرخ قرب الكاظمية."
+        },
+        {
+            specialty: "جراحة عامة",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 57",
+            title: "طبيب أخصائي (Cardiothoracic and vascular surgery) - تسلسل 57",
+            details: "سكن بغداد، أوقات العمل مساءً، يطلب الواثق."
+        },
+        {
+            specialty: "جراحة عامة",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 58",
+            title: "طبيب أخصائي (Cardiothoracic and vascular surgery) - تسلسل 58",
+            details: "أوقات العمل مساءً، يطلب الواثق أو المغرب أو بيروت."
+        },
+        {
+            specialty: "باطنية",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 59",
+            title: "طبيب أخصائي (بورد عربي باطنية) - تسلسل 59",
+            details: "سكن بغداد حي القادسية، يطلب القادسية، اليرموك، حي الجامعة، البياع."
+        },
+        {
+            specialty: "أطفال",
+            gov: "بغداد",
+            area: "الكرخ",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 60",
+            title: "طبيبة أخصائية (أطفال بورد عربي) - تسلسل 60",
+            details: "سكن بغداد حي الجامعة، أوقات العمل صباحاً، تطلب بغداد كرخ أي منطقة."
+        },
+        {
+            specialty: "جلدية وتجميل",
+            gov: "بغداد",
+            area: "الرصافة",
+            statusLabel: "🔴 الطبيب غير متوفر",
+            headerLabel: "طبيب تسلسل 61",
+            title: "طبيبة ممارسة (جلدية) - تسلسل 61",
+            details: "سكن الشالجية، تطلب العطيفية، الشالجية، المنصور والمناطق القريبة."
         }
     ];
 
@@ -764,18 +1126,18 @@
             specialty: "جلدية وتجميل",
             gov: "ديالى",
             area: "بعقوبة - مركز المحافظة",
-            statusLabel: "🟢 متوفر للتعاقد والعمل",
+            statusLabel: "🟢 متوفر للعمل",
             headerLabel: "طبيب مختص متاح",
-            title: "د. محمد الركابي - أخصائي جلدية وتجميل",
+            title: "أخصائي جلدية وتجميل",
             details: "خبرة في الليزر والعلاجات التجميلية، متفرغ للعمل في المجمعات الطبية."
         },
         {
             specialty: "طب وجراحة الأسنان",
             gov: "بغداد",
             area: "الكرخ - المركز",
-            statusLabel: "🟢 متوفر للدوام المسائي/الصباحي",
+            statusLabel: "🟢 متوفر للعمل",
             headerLabel: "طبيب أسنان متاح",
-            title: "د. أحمد العبيدي - طبيب أسنان",
+            title: "طبيب أسنان",
             details: "خبرة واسعة في التركيبات وعلاج اللثة، جاهز للالتحاق الفوري."
         },
         {
@@ -784,109 +1146,26 @@
             area: "المنصور",
             statusLabel: "🟢 متوفر للعمل",
             headerLabel: "أخصائي باطنية متاح",
-            title: "د. سارة التميمي - أخصائية باطنية وقلبية",
+            title: "أخصائية باطنية وقلبية",
             details: "حاصلة على البورد، تبحث عن فرصة عمل ضمن مجمع طبي متميز."
         },
         {
             specialty: "جراحة الكلى والمسالك البولية",
             gov: "ميسان",
             area: "العمارة - مركز المحافظة",
-            statusLabel: "🟢 دوام مسائي",
+            statusLabel: "🟢 متوفر للعمل",
             headerLabel: "فرصة عمل مميزة",
             title: "مطلوب طبيب مسالك بولية وتناسلية - مجمع طبي بمركز العمارة",
-            details: "مجمع طبي نشط ونافذ في قلب مركز مدينة ميسان (بين شارع التربية وشارع دجلة)، يعمل بكامل طاقته التشغيلية مع كوادر تمريضية ومعاونين من الدرجة الأولى، وأقسام تشخيصية وسونار ومختبرات داعمة. إقبال يومي مرتفع من المراجعين."
+            details: "مجمع طبي نشط ونافذ في قلب مركز مدينة ميسان، يعمل بكامل طاقته التشغيلية."
         },
         {
             specialty: "نسائية وتوليد",
             gov: "ميسان",
             area: "العمارة - مركز المحافظة",
-            statusLabel: "🟢 دوام مسائي",
+            statusLabel: "🟢 متوفر للعمل",
             headerLabel: "فرصة عمل مميزة",
             title: "مطلوب طبيب/ة نسائية وتوليد وعقم - مجمع طبي بمركز العمارة",
-            details: "مجمع طبي نشط ونافذ في قلب مركز مدينة ميسان (بين شارع التربية وشارع دجلة)، يعمل بكامل طاقته التشغيلية مع كوادر تمريضية ومعاونين من الدرجة الأولى، وأقسام تشخيصية وسونار ومختبرات داعمة. إقبال يومي مرتفع من المراجعين."
-        },
-        {
-            specialty: "باطنية",
-            gov: "ميسان",
-            area: "العمارة - مركز المحافظة",
-            statusLabel: "🟢 دوام مسائي",
-            headerLabel: "فرصة عمل مميزة",
-            title: "مطلوب طبيب أمراض باطنية - مجمع طبي بمركز العمارة",
-            details: "مجمع طبي نشط ونافذ في قلب مركز مدينة ميسان (بين شارع التربية وشارع دجلة)، يعمل بكامل طاقته التشغيلية مع كوادر تمريضية ومعاونين من الدرجة الأولى، وأقسام تشخيصية وسونار ومختبرات داعمة. إقبال يومي مرتفع من المراجعين."
-        },
-        {
-            specialty: "مفاصل وروماتيزم",
-            gov: "ميسان",
-            area: "العمارة - مركز المحافظة",
-            statusLabel: "🟢 دوام مسائي",
-            headerLabel: "فرصة عمل مميزة",
-            title: "مطلوب طبيب مفاصل وروماتيزم - مجمع طبي بمركز العمارة",
-            details: "مجمع طبي نشط ونافذ في قلب مركز مدينة ميسان (بين شارع التربية وشارع دجلة)، يعمل بكامل طاقته التشغيلية مع كوادر تمريضية ومعاونين من الدرجة الأولى، وأقسام تشخيصية وسونار ومختبرات داعمة. إقبال يومي مرتفع من المراجعين."
-        },
-        // إعلان مجمع 11 الجديد
-        {
-            specialty: "نسائية وتوليد",
-            gov: "البصرة",
-            area: "قضاء شط العرب",
-            statusLabel: "🟢 دوام مسائي",
-            headerLabel: "إعلان مجمع 11",
-            title: "مجمع طبي متكامل (رقم 11) - قضاء شط العرب",
-            details: "العنوان: البصرة - قضاء شط العرب، شارع الريان، الحوطة. التخصصات المطلوبة: طبيبة نسائية، طبيبة طب أسرة، أو مقيمة قدمى معها إجازة. أوقات العمل: مساءً. (المجمع جديد، في طور الحصول على مختبر، متوفر صيدلاني، ولا يحتوي حالياً على طبيب أسنان)."
-        },
-        {
-            specialty: "طب أسرة",
-            gov: "البصرة",
-            area: "قضاء شط العرب",
-            statusLabel: "🟢 دوام مسائي",
-            headerLabel: "إعلان مجمع 11",
-            title: "مجمع طبي متكامل (رقم 11) - قضاء شط العرب",
-            details: "العنوان: البصرة - قضاء شط العرب، شارع الريان، الحوطة. التخصصات المطلوبة: طبيبة نسائية، طبيبة طب أسرة، أو مقيمة قدمى معها إجازة. أوقات العمل: مساءً. (المجمع جديد، في طور الحصول على مختبر، متوفر صيدلاني، ولا يحتوي حالياً على طبيب أسنان)."
-        },
-        {
-            specialty: "طبيب ممارس عام",
-            gov: "البصرة",
-            area: "قضاء شط العرب",
-            statusLabel: "🟢 دوام مسائي",
-            headerLabel: "إعلان مجمع 11",
-            title: "مجمع طبي متكامل (رقم 11) - قضاء شط العرب",
-            details: "العنوان: البصرة - قضاء شط العرب، شارع الريان، الحوطة. المطلوب: مقيمة قدمى معها إجازة. أوقات العمل: مساءً. (المجمع جديد، في طور الحصول على مختبر، متوفر صيدلاني، ولا يحتوي حالياً على طبيب أسنان)."
-        },
-        // إعلان مجمع 13 الجديد
-        {
-            specialty: "نسائية وتوليد",
-            gov: "بغداد",
-            area: "حي الإعلام",
-            statusLabel: "🟢 صباحاً ومساءً",
-            headerLabel: "إعلان مجمع 13",
-            title: "مجمع طبي متكامل (رقم 13) - حي الإعلام",
-            details: "العنوان: بغداد - الكرخ / حي الإعلام، بالقرب من مسبح الإعلام وأسواق الليرة. أوقات العمل: صباحاً ومساءً. التخصصات المطلوبة: نسائية وتوليد، عيون، جلدية، وصيدلانية. التخصصات المتوفرة حالياً: باطنية، أسنان، وصيدلية."
-        },
-        {
-            specialty: "عيون",
-            gov: "بغداد",
-            area: "حي الإعلام",
-            statusLabel: "🟢 صباحاً ومساءً",
-            headerLabel: "إعلان مجمع 13",
-            title: "مجمع طبي متكامل (رقم 13) - حي الإعلام",
-            details: "العنوان: بغداد - الكرخ / حي الإعلام، بالقرب من مسبح الإعلام وأسواق الليرة. أوقات العمل: صباحاً ومساءً. التخصصات المطلوبة: نسائية وتوليد، عيون، جلدية، وصيدلانية. التخصصات المتوفرة حالياً: باطنية، أسنان، وصيدلية."
-        },
-        {
-            specialty: "جلدية وتجميل",
-            gov: "بغداد",
-            area: "حي الإعلام",
-            statusLabel: "🟢 صباحاً ومساءً",
-            headerLabel: "إعلان مجمع 13",
-            title: "مجمع طبي متكامل (رقم 13) - حي الإعلام",
-            details: "العنوان: بغداد - الكرخ / حي الإعلام، بالقرب من مسبح الإعلام وأسواق الليرة. أوقات العمل: صباحاً ومساءً. التخصصات المطلوبة: نسائية وتوليد، عيون، جلدية، وصيدلانية. التخصصات المتوفرة حالياً: باطنية، أسنان، وصيدلية."
-        },
-        {
-            specialty: "مختبرات وتحليلات مرضية",
-            gov: "بغداد",
-            area: "حي الإعلام",
-            statusLabel: "🟢 صباحاً ومساءً",
-            headerLabel: "إعلان مجمع 13",
-            title: "مجمع طبي متكامل (رقم 13) - حي الإعلام (مطلوب صيدلانية)",
-            details: "العنوان: بغداد - الكرخ / حي الإعلام، بالقرب من مسبح الإعلام وأسواق الليرة. أوقات العمل: صباحاً ومساءً. المطلوب إضافياً: صيدلانية للانضمام إلى الكادر."
+            details: "مجمع طبي نشط ونافذ في قلب مركز مدينة ميسان، يعمل بكامل طاقته التشغيلية."
         }
     ];
 
@@ -930,115 +1209,128 @@
         const grid = document.getElementById('groupsGrid');
         grid.innerHTML = '';
         if (gov && areaHierarchy[gov]) {
-            Object.keys(areaHierarchy[gov]).forEach(groupName => {
+            document.getElementById('step3Box').style.display = 'block';
+            Object.keys(areaHierarchy[gov]).forEach(grp => {
                 const btn = document.createElement('button');
                 btn.type = 'button';
                 btn.className = 'option-pill';
-                btn.textContent = groupName;
-                if (selectedState.group === groupName) btn.classList.add('selected');
-                btn.onclick = () => selectGroup(groupName);
+                btn.textContent = grp;
+                if (selectedState.group === grp) btn.classList.add('selected');
+                btn.onclick = () => selectGroup(grp);
                 grid.appendChild(btn);
             });
+        } else {
+            document.getElementById('step3Box').style.display = 'none';
         }
     }
 
-    let currentAreaOptions = [];
-
-    function renderAreas(list) {
+    function renderAreas(gov, grp) {
         const grid = document.getElementById('areasGrid');
         grid.innerHTML = '';
-        list.forEach(area => {
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'option-pill';
-            btn.textContent = area;
-            if (selectedState.area === area) btn.classList.add('selected');
-            btn.onclick = () => selectArea(area);
-            grid.appendChild(btn);
-        });
-    }
-
-    function renderCards() {
-        const grid = document.getElementById('resultsGrid');
-        grid.innerHTML = '';
-        const frag = document.createDocumentFragment();
-
-        const dataSource = selectedState.mode === 'general' ? GENERAL_CLINICS_DATA : DOCTORS_DATA;
-
-        dataSource.forEach((item, idx) => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.dataset.specialty = item.specialty;
-            card.dataset.gov = item.gov;
-            card.dataset.area = item.area;
-            card.id = `result-card-${idx}`;
-
-            const waText = selectedState.mode === 'general'
-                ? `مرحباً، أستفسر عن ${item.title} في ${item.gov} - ${item.area}`
-                : `مرحباً، أستفسر عن تعاقد مع ${item.title} (${item.specialty}) في ${item.gov} - ${item.area}`;
-
-            card.innerHTML = `
-                <div class="card-header bg-green">
-                    <span>${item.headerLabel}</span>
-                    <span>${item.statusLabel}</span>
-                </div>
-                <div class="card-body">
-                    <h3>${item.title}</h3>
-                    <ul class="card-info">
-                        <li><strong>الاختصاص:</strong> ${item.specialty}</li>
-                        <li><strong>المحافظة:</strong> ${item.gov}</li>
-                        <li><strong>المنطقة:</strong> ${item.area}</li>
-                        <li><strong>التفاصيل:</strong> ${item.details}</li>
-                    </ul>
-                    <div class="whatsapp-box">
-                        <a href="${buildWaLink(waText)}" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
-                            💬 ${WHATSAPP_DISPLAY}
-                        </a>
-                    </div>
-                </div>
-            `;
-            frag.appendChild(card);
-        });
-
-        const noResDiv = document.createElement('div');
-        noResDiv.className = 'no-results';
-        noResDiv.id = 'noResultsBox';
-        noResDiv.innerHTML = `
-            <p>عذراً، لم نجد نتائج مطابقة لاختياراتك المحددة حالياً.</p>
-            <a href="${buildWaLink('مرحباً، أبحث عن تنسيق طبي ولم أجد طلبي في النتائج المباشرة')}" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" style="max-width: 320px; margin: 0 auto;">
-                💬 تواصل معنا مباشرة لتوفير طلبك
-            </a>
-        `;
-        frag.appendChild(noResDiv);
-        grid.appendChild(frag);
-    }
-
-    function updateResultsFilter() {
-        const cards = document.querySelectorAll('.card');
-        let matchCount = 0;
-
-        cards.forEach(card => {
-            const matchSp = !selectedState.specialty || card.dataset.specialty === selectedState.specialty;
-            const matchGov = !selectedState.gov || card.dataset.gov === selectedState.gov;
-            const matchArea = !selectedState.area || card.dataset.area === selectedState.area || selectedState.area.includes("مناطق أخرى");
-
-            if (matchSp && matchGov && matchArea) {
-                card.classList.add('active-match');
-                matchCount++;
-            } else {
-                card.classList.remove('active-match');
-            }
-        });
-
-        const noResBox = document.getElementById('noResultsBox');
-        if (noResBox) {
-            noResBox.style.display = matchCount === 0 ? 'block' : 'none';
+        if (gov && grp && areaHierarchy[gov] && areaHierarchy[gov][grp]) {
+            document.getElementById('step4Box').style.display = 'block';
+            areaHierarchy[gov][grp].forEach(ar => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'option-pill';
+                btn.textContent = ar;
+                if (selectedState.area === ar) btn.classList.add('selected');
+                btn.onclick = () => selectArea(ar);
+                grid.appendChild(btn);
+            });
+        } else {
+            document.getElementById('step4Box').style.display = 'none';
         }
+    }
+
+    function startSearch(mode) {
+        selectedState.mode = mode;
+        selectedState.specialty = null;
+        selectedState.gov = null;
+        selectedState.group = null;
+        selectedState.area = null;
+
+        document.getElementById('filterSection').style.display = 'block';
+        document.getElementById('resultsContainer').style.display = 'block';
+
+        const stepContainer = document.getElementById('stepContainerStyle');
+        const btnGen = document.getElementById('btnGeneral');
+        const btnDoc = document.getElementById('btnDoctor');
+
+        if (mode === 'general') {
+            stepContainer.classList.remove('doctor-mode');
+            btnGen.style.outline = "3px solid #0f172a";
+            btnDoc.style.outline = "none";
+            document.getElementById('step1Title').textContent = "🩺 الخطوة 1: اختر الاختصاص المطلوب";
+            document.getElementById('resultsTitle').textContent = "الأطباء الباحثون عن عيادة شاغرة (61 طبيباً واختصاصاً)";
+        } else {
+            stepContainer.classList.add('doctor-mode');
+            btnGen.style.outline = "none";
+            btnDoc.style.outline = "3px solid #0f172a";
+            document.getElementById('step1Title').textContent = "🩺 الخطوة 1: اختر تخصص الطبيب المطلوب";
+            document.getElementById('resultsTitle').textContent = "أصحاب المجمعات الذين يبحثون عن أطباء";
+        }
+
+        document.getElementById('step2Box').style.display = 'none';
+        document.getElementById('step3Box').style.display = 'none';
+        document.getElementById('step4Box').style.display = 'none';
+        document.getElementById('selectionSummary').style.display = 'none';
+
+        renderSpecialties();
+        renderGovs();
+        renderResults();
+    }
+
+    function selectSpecialty(sp) {
+        selectedState.specialty = sp;
+        selectedState.gov = null;
+        selectedState.group = null;
+        selectedState.area = null;
+
+        document.getElementById('step2Box').style.display = 'block';
+        document.getElementById('step3Box').style.display = 'none';
+        document.getElementById('step4Box').style.display = 'none';
+
+        renderSpecialties();
+        renderGovs();
+        updateSummary();
+        renderResults();
+    }
+
+    function selectGov(gov) {
+        selectedState.gov = gov;
+        selectedState.group = null;
+        selectedState.area = null;
+
+        document.getElementById('step3Box').style.display = 'none';
+        document.getElementById('step4Box').style.display = 'none';
+
+        renderGovs();
+        renderGroups(gov);
+        updateSummary();
+        renderResults();
+    }
+
+    function selectGroup(grp) {
+        selectedState.group = grp;
+        selectedState.area = null;
+
+        renderGroups(selectedState.gov);
+        renderAreas(selectedState.gov, grp);
+        updateSummary();
+        renderResults();
+    }
+
+    function selectArea(ar) {
+        selectedState.area = ar;
+        renderAreas(selectedState.gov, selectedState.group);
+        updateSummary();
+        renderResults();
     }
 
     function updateSummary() {
-        const summaryEl = document.getElementById('selectionSummary');
-        const textEl = document.getElementById('summaryText');
+        const summary = document.getElementById('selectionSummary');
+        const summaryText = document.getElementById('summaryText');
         let parts = [];
         if (selectedState.specialty) parts.push(`الاختصاص: ${selectedState.specialty}`);
         if (selectedState.gov) parts.push(`المحافظة: ${selectedState.gov}`);
@@ -1046,149 +1338,97 @@
         if (selectedState.area) parts.push(`المنطقة: ${selectedState.area}`);
 
         if (parts.length > 0) {
-            textEl.textContent = parts.join(' | ');
-            summaryEl.style.display = 'flex';
+            summary.style.display = 'flex';
+            summaryText.textContent = parts.join(' | ');
         } else {
-            summaryEl.style.display = 'none';
+            summary.style.display = 'none';
         }
-    }
-
-    function selectSpecialty(sp) {
-        selectedState.specialty = selectedState.specialty === sp ? null : sp;
-        renderSpecialties();
-        
-        if (selectedState.specialty) {
-            document.getElementById('step2Box').style.display = 'block';
-            renderGovs();
-        }
-        
-        updateSummary();
-        updateResultsFilter();
-    }
-
-    function selectGov(govVal) {
-        selectedState.gov = selectedState.gov === govVal ? null : govVal;
-        selectedState.group = null;
-        selectedState.area = null;
-        
-        renderGovs();
-        
-        if (selectedState.gov) {
-            document.getElementById('step3Box').style.display = 'block';
-            renderGroups(selectedState.gov);
-            document.getElementById('step4Box').style.display = 'none';
-        } else {
-            document.getElementById('step3Box').style.display = 'none';
-            document.getElementById('step4Box').style.display = 'none';
-        }
-        
-        updateSummary();
-        updateResultsFilter();
-    }
-
-    function selectGroup(groupName) {
-        selectedState.group = selectedState.group === groupName ? null : groupName;
-        selectedState.area = null;
-        
-        renderGroups(selectedState.gov);
-
-        if (selectedState.group && areaHierarchy[selectedState.gov]) {
-            currentAreaOptions = areaHierarchy[selectedState.gov][selectedState.group] || [];
-            document.getElementById('step4Box').style.display = 'block';
-            renderAreas(currentAreaOptions);
-        } else {
-            document.getElementById('step4Box').style.display = 'none';
-        }
-        
-        updateSummary();
-        updateResultsFilter();
-    }
-
-    function selectArea(areaName) {
-        selectedState.area = selectedState.area === areaName ? null : areaName;
-        renderAreas(currentAreaOptions);
-        updateSummary();
-        updateResultsFilter();
     }
 
     function resetSearchSteps() {
-        selectedState.specialty = null;
-        selectedState.gov = null;
-        selectedState.group = null;
-        selectedState.area = null;
-
-        renderSpecialties();
-        document.getElementById('step2Box').style.display = 'none';
-        document.getElementById('step3Box').style.display = 'none';
-        document.getElementById('step4Box').style.display = 'none';
-
-        updateSummary();
-        updateResultsFilter();
+        startSearch(selectedState.mode);
     }
 
-    function startSearch(mode) {
-        selectedState.mode = mode;
-        
-        const btnGen = document.getElementById('btnGeneral');
-        const btnDoc = document.getElementById('btnDoctor');
-        const stepContainer = document.getElementById('stepContainerStyle');
-        const resultsTitle = document.getElementById('resultsTitle');
-        const step1Title = document.getElementById('step1Title');
+    function renderResults() {
+        const grid = document.getElementById('resultsGrid');
+        grid.innerHTML = '';
 
-        if (mode === 'general') {
-            btnGen.setAttribute('aria-pressed', 'true');
-            btnDoc.setAttribute('aria-pressed', 'false');
-            btnGen.style.boxShadow = '0 0 0 3px #0f172a';
-            btnDoc.style.boxShadow = 'none';
-            stepContainer.className = 'step-container';
-            step1Title.textContent = "🩺 الخطوة 1: اختر الاختصاص الطبي المطلوب للتعاقد";
-            resultsTitle.textContent = "العيادات الشاغرة المتاحة حسب اختياراتك";
-        } else {
-            btnDoc.setAttribute('aria-pressed', 'true');
-            btnGen.setAttribute('aria-pressed', 'false');
-            btnDoc.style.boxShadow = '0 0 0 3px #0f172a';
-            btnGen.style.boxShadow = 'none';
-            stepContainer.className = 'step-container doctor-mode';
-            step1Title.textContent = "🩺 الخطوة 1: اختر اختصاصك الطبي للبحث عن مجمع يحتاج اختصاصك";
-            resultsTitle.textContent = "أصحاب مجمعات طبية بحاجة للاطباء حسب الاختصاص والمنطقة المطلوبة";
+        const dataSet = selectedState.mode === 'general' ? GENERAL_CLINICS_DATA : DOCTORS_DATA;
+
+        let filtered = dataSet.filter(item => {
+            if (selectedState.specialty && item.specialty !== selectedState.specialty) return false;
+            if (selectedState.gov && item.gov !== selectedState.gov) return false;
+            if (selectedState.area && item.area !== selectedState.area) return false;
+            return true;
+        });
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `
+                <div class="no-results" style="display: block;">
+                    <p>عذراً، لا توجد نتائج مطابقة لاختياراتك الحالية.</p>
+                    <a href="${buildWaLink('مرحباً، أبحث عن تنسيق طبي حسب اختياراتي ولم أجدها مباشرة في المنصة')}" target="_blank" class="whatsapp-btn">
+                        تواصل معنا عبر الواتساب للتنسيق المباشر 💬
+                    </a>
+                </div>
+            `;
+            return;
         }
 
-        document.getElementById('filterSection').style.display = 'block';
-        document.getElementById('resultsContainer').style.display = 'block';
+        filtered.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card active-match';
+            
+            const isRed = item.statusLabel && item.statusLabel.includes('غير متوفر');
+            const badgeClass = isRed ? 'bg-red' : 'bg-green';
 
-        renderCards();
-        renderSpecialties();
-        updateResultsFilter();
-
-        document.getElementById('filterSection').scrollIntoView({ behavior: 'smooth' });
+            card.innerHTML = `
+                <div class="card-header ${badgeClass}">
+                    <span>${item.headerLabel}</span>
+                    <span>${item.statusLabel}</span>
+                </div>
+                <div class="card-body">
+                    <h3>${item.title}</h3>
+                    <ul class="card-info">
+                        <li><strong>التخصص:</strong> ${item.specialty}</li>
+                        <li><strong>المحافظة:</strong> ${item.gov} - ${item.area}</li>
+                        <li><strong>التفاصيل:</strong> ${item.details}</li>
+                    </ul>
+                    <div class="whatsapp-box">
+                        <a href="${buildWaLink('مرحباً، أستفسر عن التفاصيل بخصوص: ' + item.title)}" target="_blank" class="whatsapp-btn">
+                            💬 ${WHATSAPP_DISPLAY}
+                        </a>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.js-wa-link').forEach(el => {
-            const text = el.getAttribute('data-wa-text') || 'مرحباً، أستفسر عن خدمات منصة التنسيق الطبي';
-            el.href = buildWaLink(text);
-        });
-        document.querySelectorAll('.js-wa-display').forEach(el => {
-            el.textContent = WHATSAPP_DISPLAY;
-        });
+    const tickerItems = [
+        "مجمع طبي متكامل (رقم 11) - قضاء شط العرب - البصرة (متوفر صيدلاني ومسائي)",
+        "مجمع طبي متكامل (رقم 13) - حي الإعلام - بغداد (أوقات العمل صباحاً ومساءً)",
+        "تم تحديث بيانات منصة الكوادر الطبية بالكامل لتضم جميع السجلات الـ 61 بدقة",
+        "تنسيق فوري ومباشر لأصحاب المجمعات الطبية والأطباء الباحثين عن عيادات شاغرة"
+    ];
 
-        const tickerContent = document.getElementById('tickerContent');
-        const newsItems = [
-            "🔴 إعلان مجمع 11 (البصرة - شط العرب، شارع الريان): مطلوب طبيبة نسائية، طب أسرة، أو مقيمة قدمى (دوام مسائي)",
-            "🔴 إعلان مجمع 13 (بغداد - حي الإعلام): مطلوب نسائية، عيون، جلدية، وصيدلانية (صباحاً ومساءً)",
-            "تحديثات يومية للعيادات الشاغرة في عموم محافظات العراق",
-            "فرص تعاقد فورية للأطباء الأخصائيين والممارسين ضمن المجمعات الطبية",
-            "أكثر من 4 سنوات من الثقة والوساطة الطبية الموثوقة",
-            "تواصل معنا عبر الواتساب للاستفسار السريع وتثبيت الحجوزات"
-        ];
-        let tickerHtml = '';
-        for (let i = 0; i < 2; i++) {
-            newsItems.forEach(item => {
-                tickerHtml += `<div class="ticker-item">${item}</div>`;
+    function initTicker() {
+        const content = document.getElementById('tickerContent');
+        let html = '';
+        for (let i = 0; i < 3; i++) {
+            tickerItems.forEach(text => {
+                html += `<div class="ticker-item">${text}</div>`;
             });
         }
-        tickerContent.innerHTML = tickerHtml;
-    });
+        content.innerHTML = html;
+    }
+
+    window.onload = () => {
+        initTicker();
+        document.querySelectorAll('.js-wa-display').forEach(el => el.textContent = WHATSAPP_DISPLAY);
+        document.querySelectorAll('.js-wa-link').forEach(el => {
+            el.href = buildWaLink('مرحباً، أستفسر عن خدمات منصة التنسيق الطبي');
+        });
+    };
 </script>
 </body>
 </html>
