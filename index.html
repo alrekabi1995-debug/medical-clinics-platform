@@ -349,6 +349,23 @@
     .card-body h3 { font-size: 1.1rem; margin-bottom: 12px; }
     .card-info { list-style: none; font-size: 14px; color: #475569; padding: 0; margin: 0; }
     .card-info li { margin-bottom: 8px; }
+    .details-block { margin-top: 10px; }
+    .details-block > strong { display: block; font-size: 14px; color: #334155; margin-bottom: 6px; }
+    .details-list { list-style: none; font-size: 14px; color: #475569; padding: 0; margin: 0; }
+    .details-list li {
+        position: relative;
+        padding-right: 16px;
+        margin-bottom: 7px;
+        line-height: 1.5;
+    }
+    .details-list li::before {
+        content: "•";
+        color: #0ea5e9;
+        position: absolute;
+        right: 0;
+        font-weight: 800;
+    }
+    .doctor-card .details-list li::before { color: #10b981; }
 
     .whatsapp-box {
         margin-top: 15px;
@@ -403,7 +420,7 @@
 
     <div class="main-trigger-section">
         <button type="button" class="btn btn-trigger" id="btnGeneral" onclick="startSearch('general')">
-            أطباء يبحثون عن عيادات شاغرة
+            أطباء بحاجة لعيادات طبية
         </button>
         <button type="button" class="btn btn-doctor-search" id="btnDoctor" onclick="startSearch('manager')">
             مجمعات طبية بحاجة للأطباء
@@ -937,6 +954,27 @@
         startSearch(selectedState.mode);
     }
 
+    function formatDetailsAsList(text) {
+        if (!text) return '<li>-</li>';
+        // إذا كان النص مُنسّقاً مسبقاً بفواصل أسطر (<br>) نحوّل كل سطر إلى نقطة مباشرة
+        if (text.includes('<br>')) {
+            return text.split('<br>')
+                .map(s => s.trim())
+                .filter(Boolean)
+                .map(s => `<li>${s}</li>`)
+                .join('');
+        }
+        // غير ذلك، نقسم النص إلى جمل بناءً على النقاط الفاصلة بين الجمل
+        const parts = text
+            .split(/(?<=\.)\s+(?=\S)/)
+            .map(s => s.trim())
+            .filter(Boolean);
+        if (parts.length <= 1) {
+            return `<li>${text}</li>`;
+        }
+        return parts.map(s => `<li>${s}</li>`).join('');
+    }
+
     function renderResults() {
         const grid = document.getElementById('resultsGrid');
         grid.innerHTML = '';
@@ -995,8 +1033,11 @@
                     <ul class="card-info">
                         <li><strong>التخصص:</strong> ${item.specialty}</li>
                         <li><strong>المحافظة:</strong> ${item.gov} - ${item.areas.join('، ')}</li>
-                        <li><strong>التفاصيل:</strong> ${item.details}</li>
                     </ul>
+                    <div class="details-block">
+                        <strong>التفاصيل:</strong>
+                        <ul class="details-list">${formatDetailsAsList(item.details)}</ul>
+                    </div>
                     <div class="whatsapp-box">
                         <a href="${buildWaLink('مرحباً، أستفسر عن التفاصيل بخصوص: ' + item.title)}" target="_blank" class="whatsapp-btn">
                             💬 ${WHATSAPP_DISPLAY}
