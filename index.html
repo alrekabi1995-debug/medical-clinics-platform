@@ -395,6 +395,52 @@
         background-color: #128c7e;
     }
 
+    .btn-latest {
+        background-color: #f59e0b;
+        color: #0f172a;
+        font-size: 1rem;
+        padding: 14px 30px;
+        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+    }
+
+    .card.new-item { border: 2px solid #f59e0b; position: relative; }
+
+    .new-ribbon {
+        background-color: #f59e0b;
+        color: #0f172a;
+        font-size: 12px;
+        font-weight: 800;
+        text-align: center;
+        padding: 5px 10px;
+    }
+
+    .type-tag {
+        display: inline-block;
+        background-color: #eef2ff;
+        color: #4338ca;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+    }
+
+    .back-to-browse-wrap {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .back-to-browse-btn {
+        background: none;
+        border: 1px solid #cbd5e1;
+        color: #334155;
+        font-weight: 700;
+        padding: 8px 18px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 13px;
+    }
+
     .no-results {
         text-align: center;
         padding: 30px;
@@ -424,6 +470,9 @@
         </button>
         <button type="button" class="btn btn-doctor-search" id="btnDoctor" onclick="startSearch('manager')">
             مجمعات طبية بحاجة للأطباء
+        </button>
+        <button type="button" class="btn btn-latest" id="btnLatest" onclick="showLatestAdditions()">
+            🆕 آخر الإضافات
         </button>
     </div>
 
@@ -760,13 +809,13 @@
         { specialty: "باطنية", gov: "بغداد", areas: ["مناطق أخرى"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة باطنية - مجمع طبي (بغداد) - تسلسل 21", details: "المشتل، شارع المطبك، قرب الأمانة" },
         { specialty: "أطفال", gov: "بغداد", areas: ["مناطق أخرى"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة أطفال - مجمع طبي (بغداد) - تسلسل 21", details: "المشتل، شارع المطبك، قرب الأمانة" },
         { specialty: "جراحة الكلى والمسالك البولية", gov: "بغداد", areas: ["مناطق أخرى"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة جراحة الكلى والمسالك البولية - مجمع طبي (بغداد) - تسلسل 21", details: "المشتل، شارع المطبك، قرب الأمانة" },
-        { specialty: "نسائية وتوليد", gov: "الانبار", areas: ["قضاء القائم"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيبة نسائية - مجمع طبي (الانبار) - تسلسل 22", details: "الأنبار - القائم / مقابل مول القائم - كراج العبيدي القديم" },
-        { specialty: "باطنية", gov: "الانبار", areas: ["قضاء القائم"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب باطني - مجمع طبي (الانبار) - تسلسل 22", details: "الأنبار - القائم / مقابل مول القائم - كراج العبيدي القديم" },
-        { specialty: "أطفال", gov: "الانبار", areas: ["قضاء القائم"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب أطفال - مجمع طبي (الانبار) - تسلسل 22", details: "الأنبار - القائم / مقابل مول القائم - كراج العبيدي القديم" },
-        { specialty: "نسائية وتوليد", gov: "بغداد", areas: ["مدينة الصدر"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة نسائية - مجمع طبي (بغداد) - تسلسل 23", details: "بغداد - مدينة الصدر - شارع الداخل / قطاع 55 مقابل قطاع 15، قرب مطعم هايلاند" },
-        { specialty: "جلدية وتجميل", gov: "بغداد", areas: ["مدينة الصدر"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة جلدية - مجمع طبي (بغداد) - تسلسل 23", details: "بغداد - مدينة الصدر - شارع الداخل / قطاع 55 مقابل قطاع 15، قرب مطعم هايلاند" },
-        { specialty: "طبيب ممارس عام", gov: "بغداد", areas: ["الدورة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب عام (GB) - مجمع طبي (بغداد) - تسلسل 25", details: "بغداد - الدورة - البوعيثة / مجمع حديث" },
-        { specialty: "طبيب ممارس عام", gov: "بغداد", areas: ["الدورة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوبة طبيبة عامة (GB) - مجمع طبي (بغداد) - تسلسل 25", details: "بغداد - الدورة - البوعيثة / مجمع حديث" },
+        { isNew: true, specialty: "نسائية وتوليد", gov: "الانبار", areas: ["قضاء القائم"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيبة نسائية - مجمع طبي (الانبار) - تسلسل 22", details: "الأنبار - القائم / مقابل مول القائم - كراج العبيدي القديم" },
+        { isNew: true, specialty: "باطنية", gov: "الانبار", areas: ["قضاء القائم"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب باطني - مجمع طبي (الانبار) - تسلسل 22", details: "الأنبار - القائم / مقابل مول القائم - كراج العبيدي القديم" },
+        { isNew: true, specialty: "أطفال", gov: "الانبار", areas: ["قضاء القائم"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب أطفال - مجمع طبي (الانبار) - تسلسل 22", details: "الأنبار - القائم / مقابل مول القائم - كراج العبيدي القديم" },
+        { isNew: true, specialty: "نسائية وتوليد", gov: "بغداد", areas: ["مدينة الصدر"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة نسائية - مجمع طبي (بغداد) - تسلسل 23", details: "بغداد - مدينة الصدر - شارع الداخل / قطاع 55 مقابل قطاع 15، قرب مطعم هايلاند" },
+        { isNew: true, specialty: "جلدية وتجميل", gov: "بغداد", areas: ["مدينة الصدر"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة جلدية - مجمع طبي (بغداد) - تسلسل 23", details: "بغداد - مدينة الصدر - شارع الداخل / قطاع 55 مقابل قطاع 15، قرب مطعم هايلاند" },
+        { isNew: true, specialty: "طبيب ممارس عام", gov: "بغداد", areas: ["الدورة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب عام (GB) - مجمع طبي (بغداد) - تسلسل 25", details: "بغداد - الدورة - البوعيثة / مجمع حديث" },
+        { isNew: true, specialty: "طبيب ممارس عام", gov: "بغداد", areas: ["الدورة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوبة طبيبة عامة (GB) - مجمع طبي (بغداد) - تسلسل 25", details: "بغداد - الدورة - البوعيثة / مجمع حديث" },
     ];
 
     let selectedState = {
@@ -856,6 +905,8 @@
         const stepContainer = document.getElementById('stepContainerStyle');
         const btnGen = document.getElementById('btnGeneral');
         const btnDoc = document.getElementById('btnDoctor');
+        const btnLat = document.getElementById('btnLatest');
+        if (btnLat) btnLat.style.outline = "none";
 
         if (mode === 'general') {
             stepContainer.classList.remove('doctor-mode');
@@ -973,6 +1024,83 @@
             return `<li>${text}</li>`;
         }
         return parts.map(s => `<li>${s}</li>`).join('');
+    }
+
+    function renderLatestCard(item) {
+        const isRed = item.statusLabel && item.statusLabel.includes('غير متوفر');
+        const isYellow = item.statusLabel && item.statusLabel.includes('قيد التفاوض');
+        const badgeClass = isRed ? 'bg-red' : (isYellow ? 'bg-yellow' : 'bg-green');
+        const typeLabel = item._type === 'clinic' ? '🏢 مجمع بحاجة لطبيب' : '👨‍⚕️ طبيب بحاجة لعيادة';
+
+        const extraPhoneHtml = item.extraPhone ? `
+                    <a href="${buildWaLink('مرحباً، أستفسر عن التفاصيل بخصوص: ' + item.title)}" target="_blank" class="whatsapp-btn extra-phone">
+                        💬 ${item.extraPhone}
+                    </a>` : '';
+
+        return `
+            <div class="card active-match new-item">
+                <div class="new-ribbon">🆕 إضافة جديدة</div>
+                <div class="card-header ${badgeClass}">
+                    <span>${item.headerLabel}</span>
+                    <span>${item.statusLabel}</span>
+                </div>
+                <div class="card-body">
+                    <div class="type-tag">${typeLabel}</div>
+                    <h3>${item.title}</h3>
+                    <ul class="card-info">
+                        <li><strong>التخصص:</strong> ${item.specialty}</li>
+                        <li><strong>المحافظة:</strong> ${item.gov} - ${item.areas.join('، ')}</li>
+                    </ul>
+                    <div class="details-block">
+                        <strong>التفاصيل:</strong>
+                        <ul class="details-list">${formatDetailsAsList(item.details)}</ul>
+                    </div>
+                    <div class="whatsapp-box">
+                        <a href="${buildWaLink('مرحباً، أستفسر عن التفاصيل بخصوص: ' + item.title)}" target="_blank" class="whatsapp-btn">
+                            💬 ${WHATSAPP_DISPLAY}
+                        </a>${extraPhoneHtml}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function showLatestAdditions() {
+        document.getElementById('filterSection').style.display = 'none';
+        document.getElementById('resultsContainer').style.display = 'block';
+
+        document.getElementById('btnGeneral').style.outline = "none";
+        document.getElementById('btnDoctor').style.outline = "none";
+        document.getElementById('btnLatest').style.outline = "3px solid #0f172a";
+
+        const combined = [
+            ...GENERAL_CLINICS_DATA.filter(i => i.isNew).map(i => ({ ...i, _type: 'doctor' })),
+            ...DOCTORS_DATA.filter(i => i.isNew).map(i => ({ ...i, _type: 'clinic' }))
+        ];
+
+        const grid = document.getElementById('resultsGrid');
+
+        const backButtonHtml = `
+            <div class="back-to-browse-wrap" style="grid-column: 1 / -1;">
+                <button type="button" class="back-to-browse-btn" onclick="startSearch('general')">⬅ رجوع لتصفح كل العيادات والأطباء</button>
+            </div>
+        `;
+
+        if (combined.length === 0) {
+            grid.innerHTML = `
+                ${backButtonHtml}
+                <div class="no-results" style="display: block;">
+                    <p>لا توجد إضافات جديدة حالياً.</p>
+                </div>
+            `;
+            return;
+        }
+
+        grid.innerHTML = backButtonHtml + combined.map(renderLatestCard).join('');
+
+        setTimeout(() => {
+            document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
     }
 
     function renderResults() {
