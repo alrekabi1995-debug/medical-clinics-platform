@@ -738,6 +738,53 @@
         font-size: 13px;
     }
 
+    .admin-fab {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 60;
+        background-color: #7c2d12;
+        color: #ffffff;
+        border: 2px solid #f59e0b;
+        border-radius: 30px;
+        padding: 12px 18px;
+        font-size: 14px;
+        font-weight: 800;
+        cursor: pointer;
+        box-shadow: 0 6px 16px rgba(124, 45, 18, 0.4);
+    }
+
+    .admin-toggle-btn {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        padding: 10px 14px;
+        background-color: #fef2f2;
+        color: #991b1b;
+        border: 1px dashed #ef4444;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .admin-toggle-btn.on {
+        background-color: #991b1b;
+        color: #ffffff;
+        border-style: solid;
+    }
+
+    .list-remove {
+        flex-shrink: 0;
+        background: none;
+        border: 1px solid #ef4444;
+        color: #ef4444;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 6px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
     .no-results {
         text-align: center;
         padding: 30px;
@@ -1468,6 +1515,43 @@
     }
     initAdIds();
 
+    // ================= وضع الأدمن (خاص، غير مرئي للزوار) =================
+    // يُفعَّل مرة واحدة بفتح الرابط منتهياً بـ #admin ثم يبقى محفوظاً في هذا المتصفح فقط
+    let ADMIN = false;
+    function checkAdmin() {
+        if (location.hash === '#admin') {
+            try { localStorage.setItem('mtp_admin', '1'); } catch (e) {}
+            try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+        }
+        try { return localStorage.getItem('mtp_admin') === '1'; } catch (e) { return false; }
+    }
+
+    function getNegotiatingIds() {
+        try { return JSON.parse(localStorage.getItem('mtp_negotiating') || '[]'); } catch (e) { return []; }
+    }
+    function setNegotiatingIds(arr) {
+        try { localStorage.setItem('mtp_negotiating', JSON.stringify(arr)); } catch (e) {}
+    }
+    function isNegotiating(id) {
+        return getNegotiatingIds().includes(id);
+    }
+    function toggleNegotiating(id) {
+        const arr = getNegotiatingIds();
+        const i = arr.indexOf(id);
+        if (i >= 0) arr.splice(i, 1); else arr.push(id);
+        setNegotiatingIds(arr);
+        // أعِد رسم أي عرض مفتوح حالياً حتى يظهر التبديل فوراً
+        if (location.hash === '#negotiations') showNegotiations();
+        else if (location.hash.indexOf('#ad=') === 0) handleHash();
+        else if (selectedState.mode) renderResults();
+    }
+    function adminToggleBtnHtml(item) {
+        if (!ADMIN) return '';
+        const on = isNegotiating(item._id);
+        const label = on ? '✅ قيد تفاوض — إلغاء العلامة' : '🤝 وضع علامة: قيد تفاوض';
+        return `<button type="button" class="admin-toggle-btn${on ? ' on' : ''}" onclick="toggleNegotiating('${item._id}')">${label}</button>`;
+    }
+
     function adUrl(id) {
         return location.href.split('#')[0] + '#ad=' + id;
     }
@@ -1601,7 +1685,7 @@
                     <div class="whatsapp-box">
                         <a href="${buildWaLink('مرحباً، أستفسر عن التفاصيل بخصوص: ' + item.title)}" target="_blank" class="whatsapp-btn">
                             💬 ${WHATSAPP_DISPLAY}
-                        </a>${extraPhoneHtml}${isRed ? '' : shareHtml(item)}
+                        </a>${extraPhoneHtml}${isRed ? '' : shareHtml(item)}${adminToggleBtnHtml(item)}
                     </div>
                 </div>
         `;
@@ -1750,6 +1834,7 @@
         const h = location.hash || '';
         const m = h.match(/^#ad=([\w-]+)$/);
         if (m) { showSingleAd(m[1]); return; }
+        if (h === '#negotiations') { showNegotiations(); return; }
         const mt = h.match(/^#match=([^&]+)$/);
         if (mt) {
             const parts = mt[1].split('~').map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } });
@@ -2026,6 +2111,56 @@
         }
     }
 
+    // ================= صفحة "قيد التفاوض" — خاصة بالأدمن فقط =================
+    function showNegotiations() {
+        if (!ADMIN) { goHome(); return; }
+        const ids = getNegotiatingIds();
+        const items = ids.map(id => adIndex[id]).filter(Boolean);
+
+        document.getElementById('filterSection').style.display = 'none';
+        document.getElementById('resultsContainer').style.display = 'block';
+        ['btnGeneral', 'btnDoctor', 'btnLatest', 'btnMatches'].forEach(b => {
+            const el = document.getElementById(b);
+            if (el) el.style.outline = 'none';
+        });
+
+        let body = '';
+        if (!items.length) {
+            body = `<div class="no-results" style="display: block;"><p>لا توجد إعلانات موسومة "قيد التفاوض" حالياً.</p></div>`;
+        } else {
+            items.forEach(({ item, type }) => {
+                const label = type === 'clinic' ? ('🏢 ' + adLocation(item, 'clinic')) : ('👨‍⚕️ ' + rowTitle(item, 'doctor') + ' — ' + adLocation(item, 'doctor'));
+                body += `
+                    <div class="list-row">
+                        <span class="list-num">${seqOf(item)}</span>
+                        <div class="list-main">
+                            <div class="list-loc">${label}</div>
+                        </div>
+                        <a class="list-open" href="#ad=${item._id}">التفاصيل</a>
+                        <button type="button" class="list-remove" onclick="toggleNegotiating('${item._id}')">إزالة</button>
+                    </div>`;
+            });
+        }
+
+        const text = ['🔒 قيد التفاوض (ملاحظة خاصة)', ''].concat(items.map(({ item, type }) =>
+            '▪️ ' + (type === 'clinic' ? 'مجمع' : 'طبيب') + ` [${seqOf(item)}] ` + adLocation(item, type === 'clinic' ? 'clinic' : 'doctor')
+        )).join('\n');
+
+        document.getElementById('resultsGrid').innerHTML = `
+            <div class="back-to-browse-wrap" style="grid-column: 1 / -1;">
+                <button type="button" class="back-to-browse-btn" onclick="goHome()">⬅ رجوع للصفحة الرئيسية</button>
+            </div>
+            <div class="list-view admin-view" style="grid-column: 1 / -1;">
+                <div class="list-head">
+                    <h2>🔒 قيد التفاوض — خاص بك فقط</h2>
+                    <div class="list-meta">مرئي فقط على هذا المتصفح، ولا يظهر لأي زائر آخر. عدد الإعلانات: <strong>${items.length}</strong></div>
+                </div>
+                ${items.length ? `<button type="button" class="share-opt share-wide" style="margin-bottom:14px;" onclick="copyText(${JSON.stringify(text)}, 'تم نسخ القائمة')">📋 نسخ القائمة لحفظها عندك</button>` : ''}
+                <div class="match-rows">${body}</div>
+            </div>
+        `;
+    }
+
     function showList(type, sp, gov) {
         const data = buildListData(type, sp, gov);
         const url = location.href.split('#')[0] + listHashFor(type, sp, gov);
@@ -2300,6 +2435,16 @@
         document.querySelectorAll('.js-wa-link').forEach(el => {
             el.href = buildWaLink('مرحباً، أستفسر عن خدمات منصة التنسيق الطبي');
         });
+        ADMIN = checkAdmin();
+        if (ADMIN) {
+            const fab = document.createElement('button');
+            fab.type = 'button';
+            fab.className = 'admin-fab';
+            fab.id = 'negFab';
+            fab.textContent = '🔒 قيد التفاوض';
+            fab.onclick = () => { location.hash = '#negotiations'; };
+            document.body.appendChild(fab);
+        }
         handleHash();
         window.addEventListener('hashchange', handleHash);
     };
