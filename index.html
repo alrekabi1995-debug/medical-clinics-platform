@@ -720,6 +720,23 @@
         color: #0f172a;
     }
 
+    .summary-btns {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .back-step-btn {
+        background: none;
+        border: 1px solid #0ea5e9;
+        color: #0ea5e9;
+        font-weight: 700;
+        padding: 6px 14px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 13px;
+    }
+
     .no-results {
         text-align: center;
         padding: 30px;
@@ -781,7 +798,10 @@
         <div class="step-container" id="stepContainerStyle">
             <div class="selection-summary" id="selectionSummary" style="display: none;">
                 <div><strong>خياراتك الحالية:</strong> <span id="summaryText">---</span></div>
-                <button type="button" class="reset-steps-btn" onclick="resetSearchSteps()">إعادة ضبط البحث 🔄</button>
+                <div class="summary-btns">
+                    <button type="button" class="back-step-btn" id="backStepBtn" onclick="goBackStep()">⬅ خطوة للخلف</button>
+                    <button type="button" class="reset-steps-btn" onclick="resetSearchSteps()">إعادة ضبط البحث 🔄</button>
+                </div>
             </div>
             <div id="step1Box">
                 <div class="step-title" id="step1Title">🩺 الخطوة 1: اختر الاختصاص المطلوب</div>
@@ -1361,6 +1381,45 @@
         } else {
             summary.style.display = 'none';
         }
+    }
+
+    function goBackStep() {
+        // من داخل عرض مستقل (تطابقات/قائمة اختصاص/إعلان مفرد) — الخطوة السابقة هي العودة لصفحة الاختيار
+        if (location.hash) {
+            try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+            startSearch(selectedState.mode === 'match' ? 'match' : (selectedState.mode === 'manager' ? 'manager' : 'general'));
+            return;
+        }
+        if (selectedState.area) selectedState.area = null;
+        else if (selectedState.group) selectedState.group = null;
+        else if (selectedState.gov) selectedState.gov = null;
+        else if (selectedState.specialty) selectedState.specialty = null;
+        else { goHome(); return; }
+
+        renderSpecialties();
+
+        if (selectedState.specialty) {
+            document.getElementById('step2Box').style.display = 'block';
+            renderGovs();
+        } else {
+            document.getElementById('step2Box').style.display = 'none';
+        }
+
+        if (selectedState.gov) {
+            renderGroups(selectedState.gov);
+        } else {
+            document.getElementById('step3Box').style.display = 'none';
+            document.getElementById('step4Box').style.display = 'none';
+        }
+
+        if (selectedState.gov && selectedState.group) {
+            renderAreas(selectedState.gov, selectedState.group);
+        } else {
+            document.getElementById('step4Box').style.display = 'none';
+        }
+
+        updateSummary();
+        renderResults();
     }
 
     function resetSearchSteps() {
