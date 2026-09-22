@@ -773,6 +773,26 @@
         border-style: solid;
     }
 
+    .match-confirm-btn {
+        grid-column: 1 / -1;
+        margin-top: 6px;
+        background-color: #f59e0b;
+        color: #0f172a;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 13px;
+        font-weight: 800;
+        cursor: pointer;
+    }
+    .match-confirmed {
+        grid-column: 1 / -1;
+        margin-top: 6px;
+        color: #047857;
+        font-weight: 800;
+        font-size: 13px;
+    }
+
     .list-remove {
         flex-shrink: 0;
         background: none;
@@ -1545,6 +1565,50 @@
         else if (location.hash.indexOf('#ad=') === 0) handleHash();
         else if (selectedState.mode) renderResults();
     }
+    // تطابقات مؤكدة من صفحة "التطابقات المحتملة" (زوج طبيب + مجمع معاً)
+    function getNegotiatingPairs() {
+        try { return JSON.parse(localStorage.getItem('mtp_negotiating_pairs') || '[]'); } catch (e) { return []; }
+    }
+    function setNegotiatingPairs(arr) {
+        try { localStorage.setItem('mtp_negotiating_pairs', JSON.stringify(arr)); } catch (e) {}
+    }
+    function pairKey(docId, cId) { return docId + '::' + cId; }
+    function isPairConfirmed(docId, cId) {
+        const k = pairKey(docId, cId);
+        return getNegotiatingPairs().some(p => pairKey(p.d, p.c) === k);
+    }
+    function confirmMatch(docId, cId) {
+        const arr = getNegotiatingPairs();
+        const k = pairKey(docId, cId);
+        if (!arr.some(p => pairKey(p.d, p.c) === k)) arr.push({ d: docId, c: cId });
+        setNegotiatingPairs(arr);
+        // نضمن أن كلا الطرفين موسومان أيضاً بشكل فردي (يظهران بعلامة "قيد تفاوض" في بطاقتيهما)
+        const flat = getNegotiatingIds();
+        [docId, cId].forEach(id => { if (!flat.includes(id)) flat.push(id); });
+        setNegotiatingIds(flat);
+        if (location.hash.startsWith('#match=')) {
+            const m = location.hash.match(/^#match=([^&]+)$/);
+            if (m) {
+                const parts = m[1].split('~').map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } });
+                showMatches(parts[0], parts[1] || '', false);
+            }
+        } else if (location.hash === '#negotiations') {
+            showNegotiations();
+        }
+    }
+    function removeConfirmedPair(docId, cId) {
+        const k = pairKey(docId, cId);
+        setNegotiatingPairs(getNegotiatingPairs().filter(p => pairKey(p.d, p.c) !== k));
+        if (location.hash === '#negotiations') showNegotiations();
+    }
+    function confirmMatchBtnHtml(doctorId, complexId) {
+        if (!ADMIN) return '';
+        if (isPairConfirmed(doctorId, complexId)) {
+            return `<span class="match-confirmed">✅ منقول إلى قيد التفاوض</span>`;
+        }
+        return `<button type="button" class="match-confirm-btn" onclick="confirmMatch('${doctorId}','${complexId}')">✔ تأكيد ونقل إلى قيد التفاوض</button>`;
+    }
+
     function adminToggleBtnHtml(item) {
         if (!ADMIN) return '';
         const on = isNegotiating(item._id);
@@ -2051,6 +2115,7 @@
                             <a class="list-open" href="#ad=${p.complex._id}">تفاصيل المجمع</a>
                         </div>
                         <div class="list-tags match-badges">${badges.join('')}</div>
+                        ${confirmMatchBtnHtml(p.doctor._id, p.complex._id)}
                     </div>`;
             });
         }
@@ -2114,7 +2179,13 @@
     // ================= صفحة "قيد التفاوض" — خاصة بالأدمن فقط =================
     function showNegotiations() {
         if (!ADMIN) { goHome(); return; }
-        const ids = getNegotiatingIds();
+        const pairs = getNegotiatingPairs()
+            .map(p => ({ doctor: adIndex[p.d], complex: adIndex[p.c] }))
+            .filter(p => p.doctor && p.complex);
+        const pairedIds = new Set();
+        pairs.forEach(p => { pairedIds.add(p.doctor.item._id); pairedIds.add(p.complex.item._id); });
+
+        const ids = getNegotiatingIds().filter(id => !pairedIds.has(id));
         const items = ids.map(id => adIndex[id]).filter(Boolean);
 
         document.getElementById('filterSection').style.display = 'none';
@@ -2124,13 +2195,29 @@
             if (el) el.style.outline = 'none';
         });
 
-        let body = '';
-        if (!items.length) {
-            body = `<div class="no-results" style="display: block;"><p>لا توجد إعلانات موسومة "قيد التفاوض" حالياً.</p></div>`;
-        } else {
-            items.forEach(({ item, type }) => {
-                const label = type === 'clinic' ? ('🏢 ' + adLocation(item, 'clinic')) : ('👨‍⚕️ ' + rowTitle(item, 'doctor') + ' — ' + adLocation(item, 'doctor'));
-                body += `
+        let pairsBody = '';
+        pairs.forEach(({ doctor, complex }) => {
+            pairsBody += `
+                    <div class="match-pair">
+                        <div class="match-side">
+                            <div class="list-num">${seqOf(doctor.item)}</div>
+                            <div class="match-loc">👨‍⚕️ ${adLocation(doctor.item, 'doctor')}</div>
+                            <a class="list-open" href="#ad=${doctor.item._id}">تفاصيل الطبيب</a>
+                        </div>
+                        <div class="match-arrow">⇄</div>
+                        <div class="match-side">
+                            <div class="list-num">${seqOf(complex.item)}</div>
+                            <div class="match-loc">🏢 ${adLocation(complex.item, 'clinic')}</div>
+                            <a class="list-open" href="#ad=${complex.item._id}">تفاصيل المجمع</a>
+                        </div>
+                        <button type="button" class="list-remove" onclick="removeConfirmedPair('${doctor.item._id}','${complex.item._id}')">إزالة هذا التطابق</button>
+                    </div>`;
+        });
+
+        let singleBody = '';
+        items.forEach(({ item, type }) => {
+            const label = type === 'clinic' ? ('🏢 ' + adLocation(item, 'clinic')) : ('👨‍⚕️ ' + rowTitle(item, 'doctor') + ' — ' + adLocation(item, 'doctor'));
+            singleBody += `
                     <div class="list-row">
                         <span class="list-num">${seqOf(item)}</span>
                         <div class="list-main">
@@ -2139,12 +2226,31 @@
                         <a class="list-open" href="#ad=${item._id}">التفاصيل</a>
                         <button type="button" class="list-remove" onclick="toggleNegotiating('${item._id}')">إزالة</button>
                     </div>`;
+        });
+
+        const textLines = ['🔒 قيد التفاوض (ملاحظة خاصة)', ''];
+        if (pairs.length) {
+            textLines.push('🤝 تطابقات مؤكدة:');
+            pairs.forEach(({ doctor, complex }) => {
+                textLines.push(`▪️ طبيب [${seqOf(doctor.item)}] ${adLocation(doctor.item, 'doctor')}  ⇄  مجمع [${seqOf(complex.item)}] ${adLocation(complex.item, 'clinic')}`);
+            });
+            textLines.push('');
+        }
+        if (items.length) {
+            textLines.push('🔖 إعلانات موسومة منفردة:');
+            items.forEach(({ item, type }) => {
+                textLines.push('▪️ ' + (type === 'clinic' ? 'مجمع' : 'طبيب') + ` [${seqOf(item)}] ` + adLocation(item, type === 'clinic' ? 'clinic' : 'doctor'));
             });
         }
+        const text = textLines.join('\n');
+        const total = pairs.length + items.length;
 
-        const text = ['🔒 قيد التفاوض (ملاحظة خاصة)', ''].concat(items.map(({ item, type }) =>
-            '▪️ ' + (type === 'clinic' ? 'مجمع' : 'طبيب') + ` [${seqOf(item)}] ` + adLocation(item, type === 'clinic' ? 'clinic' : 'doctor')
-        )).join('\n');
+        const pairsSection = pairs.length ? `
+                <div class="list-group">🤝 تطابقات مؤكدة <span class="list-count">${pairs.length}</span></div>
+                <div class="match-rows">${pairsBody}</div>` : '';
+        const singleSection = items.length ? `
+                <div class="list-group">🔖 إعلانات موسومة منفردة <span class="list-count">${items.length}</span></div>
+                <div class="match-rows">${singleBody}</div>` : '';
 
         document.getElementById('resultsGrid').innerHTML = `
             <div class="back-to-browse-wrap" style="grid-column: 1 / -1;">
@@ -2153,10 +2259,12 @@
             <div class="list-view admin-view" style="grid-column: 1 / -1;">
                 <div class="list-head">
                     <h2>🔒 قيد التفاوض — خاص بك فقط</h2>
-                    <div class="list-meta">مرئي فقط على هذا المتصفح، ولا يظهر لأي زائر آخر. عدد الإعلانات: <strong>${items.length}</strong></div>
+                    <div class="list-meta">مرئي فقط على هذا المتصفح، ولا يظهر لأي زائر آخر. الإجمالي: <strong>${total}</strong></div>
                 </div>
-                ${items.length ? `<button type="button" class="share-opt share-wide" style="margin-bottom:14px;" onclick="copyText(${JSON.stringify(text)}, 'تم نسخ القائمة')">📋 نسخ القائمة لحفظها عندك</button>` : ''}
-                <div class="match-rows">${body}</div>
+                ${total ? `<button type="button" class="share-opt share-wide" style="margin-bottom:14px;" onclick="copyText(${JSON.stringify(text)}, 'تم نسخ القائمة')">📋 نسخ القائمة لحفظها عندك</button>` : ''}
+                ${!total ? `<div class="no-results" style="display: block;"><p>لا توجد إعلانات أو تطابقات موسومة "قيد التفاوض" حالياً.</p></div>` : ''}
+                ${pairsSection}
+                ${singleSection}
             </div>
         `;
     }
