@@ -805,6 +805,30 @@
         cursor: pointer;
     }
 
+    .no-strict-match {
+        padding: 14px 10px;
+        color: #64748b;
+        font-size: 14px;
+        border-bottom: 1px dashed #cbd5e1;
+    }
+
+    .matches-more {
+        margin-top: 10px;
+        border: 1px dashed #cbd5e1;
+        border-radius: 10px;
+        padding: 4px 10px;
+    }
+    .matches-more summary {
+        cursor: pointer;
+        padding: 10px 4px;
+        font-weight: 700;
+        color: #4338ca;
+        font-size: 14px;
+        list-style: none;
+    }
+    .matches-more summary::-webkit-details-marker { display: none; }
+    .matches-more[open] summary { border-bottom: 1px dashed #cbd5e1; margin-bottom: 4px; }
+
     .no-results {
         text-align: center;
         padding: 30px;
@@ -1832,7 +1856,7 @@
             });
         }
         results.sort((a, b) => (b.areaOverlap - a.areaOverlap) || (b.sameGroup - a.sameGroup) || (b.sameGov - a.sameGov) || (a.timeUnknown - b.timeUnknown));
-        return results.slice(0, 8);
+        return results;
     }
 
     function matchRowHtml(m) {
@@ -1860,10 +1884,21 @@
         const matches = findMatches(item, type);
         if (!matches.length) return '';
         const heading = type === 'doctor' ? '🔎 مجمعات قد تناسبك' : '🔎 أطباء قد يناسبونكم';
+        const strict = matches.filter(m => m.areaOverlap);
+        const other = matches.filter(m => !m.areaOverlap);
+        const strictHtml = strict.length
+            ? strict.map(matchRowHtml).join('')
+            : `<div class="no-strict-match">لا توجد مطابقات في نفس المنطقة تحديداً حالياً.</div>`;
+        const otherHtml = other.length ? `
+                <details class="matches-more"${strict.length ? '' : ' open'}>
+                    <summary>🔍 احتمال تطابقات أخرى (نفس جانب المدينة أو المحافظة) — ${other.length}</summary>
+                    ${other.map(matchRowHtml).join('')}
+                </details>` : '';
         return `
             <div class="matches-box">
                 <div class="matches-title">${heading}</div>
-                ${matches.map(matchRowHtml).join('')}
+                ${strictHtml}
+                ${otherHtml}
             </div>`;
     }
 
@@ -2091,17 +2126,16 @@
         const native = (typeof navigator !== 'undefined' && navigator.share)
             ? `<button type="button" class="share-opt share-native" onclick="shareMatches('native')">📲 مشاركة عبر التطبيقات</button>` : '';
 
-        let body = '';
-        if (!pairs.length) {
-            body = `<div class="no-results" style="display: block;"><p>لا توجد تطابقات محتملة حالياً لهذا الاختصاص${gov ? ' في ' + gov : ''}.</p></div>`;
-        } else {
-            pairs.forEach(p => {
-                const badges = [];
-                if (p.areaOverlap) badges.push('<span class="list-tag match-good">نفس المنطقة</span>');
-                else if (p.sameGroup) badges.push('<span class="list-tag match-good">نفس جانب المدينة</span>');
-                else if (p.sameGov) badges.push('<span class="list-tag match-caution">محافظة واحدة، جانب مختلف</span>');
-                if (p.timeUnknown) badges.push('<span class="list-tag match-warn">⚠️ وقت العمل غير مؤكد</span>');
-                body += `
+        function pairBadges(p) {
+            const badges = [];
+            if (p.areaOverlap) badges.push('<span class="list-tag match-good">نفس المنطقة</span>');
+            else if (p.sameGroup) badges.push('<span class="list-tag match-good">نفس جانب المدينة</span>');
+            else if (p.sameGov) badges.push('<span class="list-tag match-caution">محافظة واحدة، جانب مختلف</span>');
+            if (p.timeUnknown) badges.push('<span class="list-tag match-warn">⚠️ وقت العمل غير مؤكد</span>');
+            return badges.join('');
+        }
+        function pairRowHtml(p) {
+            return `
                     <div class="match-pair">
                         <div class="match-side">
                             <div class="list-num">${seqOf(p.doctor)}</div>
@@ -2114,10 +2148,28 @@
                             <div class="match-loc">🏢 ${adLocation(p.complex, 'clinic')}</div>
                             <a class="list-open" href="#ad=${p.complex._id}">تفاصيل المجمع</a>
                         </div>
-                        <div class="list-tags match-badges">${badges.join('')}</div>
+                        <div class="list-tags match-badges">${pairBadges(p)}</div>
                         ${confirmMatchBtnHtml(p.doctor._id, p.complex._id)}
                     </div>`;
-            });
+        }
+
+        const strictPairs = pairs.filter(p => p.areaOverlap);
+        const otherPairs = pairs.filter(p => !p.areaOverlap);
+
+        let body = '';
+        if (!pairs.length) {
+            body = `<div class="no-results" style="display: block;"><p>لا توجد تطابقات محتملة حالياً لهذا الاختصاص${gov ? ' في ' + gov : ''}.</p></div>`;
+        } else {
+            body = strictPairs.length
+                ? strictPairs.map(pairRowHtml).join('')
+                : `<div class="no-strict-match">لا توجد تطابقات في نفس المنطقة تحديداً${gov ? ' في ' + gov : ''}.</div>`;
+            if (otherPairs.length) {
+                body += `
+                <details class="matches-more"${strictPairs.length ? '' : ' open'}>
+                    <summary>🔍 احتمال تطابقات أخرى (نفس جانب المدينة أو المحافظة) — ${otherPairs.length}</summary>
+                    ${otherPairs.map(pairRowHtml).join('')}
+                </details>`;
+            }
         }
 
         const nav = `
