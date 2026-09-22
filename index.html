@@ -642,6 +642,7 @@
     }
     .list-tag.match-good { background: #10b981; color: #ffffff; }
     .list-tag.match-warn { background: #fef3c7; color: #92400e; }
+    .list-tag.match-caution { background: #fee2e2; color: #991b1b; }
 
     .btn-matches {
         background-color: #8b5cf6;
@@ -1617,6 +1618,23 @@
 
     // عرض إعلان واحد عند فتح رابط مُشارَك (#ad=...)
     // ================= فرص مطابقة لك =================
+    // اسم "القسم الرئيسي" لمنطقة معينة داخل محافظتها (مثال: الحرية -> الكرخ، الكرادة -> الرصافة)
+    function groupOf(gov, area) {
+        const groups = areaHierarchy[gov];
+        if (!groups) return null;
+        if (groups[area]) return area; // بعض السجلات تضع اسم القسم نفسه كمنطقة (مثل "الكرخ" وحدها)
+        for (const g in groups) {
+            if (groups[g].includes(area)) return g;
+        }
+        return null;
+    }
+
+    function sharesGroup(gov, areasA, areasB) {
+        const groupsA = new Set(areasA.map(a => groupOf(gov, a)).filter(Boolean));
+        if (!groupsA.size) return false;
+        return areasB.some(a => groupsA.has(groupOf(gov, a)));
+    }
+
     function timeOfDoctor(item) {
         const s = item.statusLabel || '';
         if (s.includes('صباحاً')) return 'صباحاً';
@@ -1649,7 +1667,8 @@
                 if (!tc.ok) return;
                 const sameGov = c.gov === item.gov;
                 const areaOverlap = sameGov && item.areas.some(a => c.areas.includes(a));
-                results.push({ other: c, otherType: 'clinic', shared, sameGov, areaOverlap, timeUnknown: tc.unknown });
+                const sameGroup = sameGov && !areaOverlap && sharesGroup(item.gov, item.areas, c.areas);
+                results.push({ other: c, otherType: 'clinic', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown });
             });
         } else {
             GENERAL_CLINICS_DATA.forEach(d => {
@@ -1660,10 +1679,11 @@
                 if (!tc.ok) return;
                 const sameGov = d.gov === item.gov;
                 const areaOverlap = sameGov && item.areas.some(a => d.areas.includes(a));
-                results.push({ other: d, otherType: 'doctor', shared, sameGov, areaOverlap, timeUnknown: tc.unknown });
+                const sameGroup = sameGov && !areaOverlap && sharesGroup(item.gov, item.areas, d.areas);
+                results.push({ other: d, otherType: 'doctor', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown });
             });
         }
-        results.sort((a, b) => (b.areaOverlap - a.areaOverlap) || (b.sameGov - a.sameGov) || (a.timeUnknown - b.timeUnknown));
+        results.sort((a, b) => (b.areaOverlap - a.areaOverlap) || (b.sameGroup - a.sameGroup) || (b.sameGov - a.sameGov) || (a.timeUnknown - b.timeUnknown));
         return results.slice(0, 8);
     }
 
@@ -1674,7 +1694,8 @@
             : ('👨‍⚕️ ' + rowTitle(it, 'doctor') + ' — ' + adLocation(it, 'doctor'));
         const badges = [];
         if (m.areaOverlap) badges.push('<span class="list-tag match-good">نفس المنطقة</span>');
-        else if (m.sameGov) badges.push('<span class="list-tag">نفس المحافظة</span>');
+        else if (m.sameGroup) badges.push('<span class="list-tag match-good">نفس جانب المدينة</span>');
+        else if (m.sameGov) badges.push('<span class="list-tag match-caution">محافظة واحدة، جانب مختلف</span>');
         if (m.timeUnknown) badges.push('<span class="list-tag match-warn">⚠️ وقت العمل غير مؤكد</span>');
         return `
                     <div class="list-row">
@@ -1870,14 +1891,15 @@
                 pairs.push({ doctor: d, complex: m.other, sameGov: m.sameGov, areaOverlap: m.areaOverlap, timeUnknown: m.timeUnknown });
             });
         });
-        pairs.sort((a, b) => (b.areaOverlap - a.areaOverlap) || (b.sameGov - a.sameGov) || (a.timeUnknown - b.timeUnknown));
+        pairs.sort((a, b) => (b.areaOverlap - a.areaOverlap) || (b.sameGroup - a.sameGroup) || (b.sameGov - a.sameGov) || (a.timeUnknown - b.timeUnknown));
         return pairs;
     }
 
     function pairText(p, sp) {
         const badges = [];
         if (p.areaOverlap) badges.push('نفس المنطقة');
-        else if (p.sameGov) badges.push('نفس المحافظة');
+        else if (p.sameGroup) badges.push('نفس جانب المدينة');
+        else if (p.sameGov) badges.push('محافظة واحدة، جانب مختلف');
         if (p.timeUnknown) badges.push('⚠️ وقت العمل غير مؤكد');
         const tag = badges.length ? ' (' + badges.join('، ') + ')' : '';
         return `▪️ طبيب [${seqOf(p.doctor)}] ${adLocation(p.doctor, 'doctor')}  ⇄  مجمع [${seqOf(p.complex)}] ${adLocation(p.complex, 'clinic')}${tag}`;
@@ -1927,7 +1949,8 @@
             pairs.forEach(p => {
                 const badges = [];
                 if (p.areaOverlap) badges.push('<span class="list-tag match-good">نفس المنطقة</span>');
-                else if (p.sameGov) badges.push('<span class="list-tag">نفس المحافظة</span>');
+                else if (p.sameGroup) badges.push('<span class="list-tag match-good">نفس جانب المدينة</span>');
+                else if (p.sameGov) badges.push('<span class="list-tag match-caution">محافظة واحدة، جانب مختلف</span>');
                 if (p.timeUnknown) badges.push('<span class="list-tag match-warn">⚠️ وقت العمل غير مؤكد</span>');
                 body += `
                     <div class="match-pair">
