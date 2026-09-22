@@ -698,6 +698,28 @@
         box-shadow: 0 6px 16px rgba(15, 23, 42, 0.35);
     }
 
+    .latest-tabs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 4px;
+    }
+    .latest-tab {
+        background-color: #f1f5f9;
+        border: 2px solid #e2e8f0;
+        color: #334155;
+        padding: 10px 18px;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .latest-tab.active {
+        background-color: #f59e0b;
+        border-color: #f59e0b;
+        color: #0f172a;
+    }
+
     .no-results {
         text-align: center;
         padding: 30px;
@@ -1264,6 +1286,7 @@
         document.getElementById('selectionSummary').style.display = 'none';
         lastListHash = '';
         lastMatchHash = '';
+        latestFilter = 'all';
         updateListButton();
 
         renderSpecialties();
@@ -2035,7 +2058,10 @@
             .slice(0, n);
     }
 
-    function showLatestAdditions() {
+    let latestFilter = 'all';
+
+    function showLatestAdditions(filter) {
+        if (filter) latestFilter = filter;
         document.getElementById('filterSection').style.display = 'none';
         document.getElementById('resultsContainer').style.display = 'block';
 
@@ -2043,12 +2069,24 @@
         document.getElementById('btnDoctor').style.outline = "none";
         document.getElementById('btnLatest').style.outline = "3px solid #0f172a";
 
-        const combined = [
-            ...latestItems(GENERAL_CLINICS_DATA, 5).map(i => ({ ...i, _type: 'doctor' })),
-            ...latestItems(DOCTORS_DATA, 5).map(i => ({ ...i, _type: 'clinic' }))
-        ];
+        let combined = [];
+        if (latestFilter !== 'clinic') {
+            combined = combined.concat(latestItems(GENERAL_CLINICS_DATA, 5).map(i => ({ ...i, _type: 'doctor' })));
+        }
+        if (latestFilter !== 'doctor') {
+            combined = combined.concat(latestItems(DOCTORS_DATA, 5).map(i => ({ ...i, _type: 'clinic' })));
+        }
 
         const grid = document.getElementById('resultsGrid');
+
+        const tab = (val, label) => `<button type="button" class="latest-tab${latestFilter === val ? ' active' : ''}" onclick="showLatestAdditions('${val}')">${label}</button>`;
+        const tabsHtml = `
+            <div class="latest-tabs" style="grid-column: 1 / -1;">
+                ${tab('all', '📋 الكل')}
+                ${tab('clinic', '🏢 المجمعات المضافة مؤخراً')}
+                ${tab('doctor', '👨‍⚕️ الأطباء المضافون مؤخراً')}
+            </div>
+        `;
 
         const backButtonHtml = `
             <div class="back-to-browse-wrap" style="grid-column: 1 / -1;">
@@ -2058,6 +2096,7 @@
 
         if (combined.length === 0) {
             grid.innerHTML = `
+                ${tabsHtml}
                 ${backButtonHtml}
                 <div class="no-results" style="display: block;">
                     <p>لا توجد إضافات جديدة حالياً.</p>
@@ -2066,7 +2105,7 @@
             return;
         }
 
-        grid.innerHTML = backButtonHtml + combined.map(renderLatestCard).join('');
+        grid.innerHTML = tabsHtml + backButtonHtml + combined.map(renderLatestCard).join('');
 
         setTimeout(() => {
             document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
