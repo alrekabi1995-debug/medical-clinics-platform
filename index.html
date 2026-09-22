@@ -679,6 +679,25 @@
     }
     .match-badges { width: 100%; }
 
+    .home-fab {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 60;
+        background-color: #0f172a;
+        color: #ffffff;
+        border: 2px solid #f59e0b;
+        border-radius: 30px;
+        padding: 12px 18px;
+        font-size: 14px;
+        font-weight: 800;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        box-shadow: 0 6px 16px rgba(15, 23, 42, 0.35);
+    }
+
     .no-results {
         text-align: center;
         padding: 30px;
@@ -767,6 +786,7 @@
     <section class="container" id="resultsContainer">
         <div class="grid" id="resultsGrid"></div>
     </section>
+    <button type="button" class="home-fab" id="homeFab" onclick="goHome()">🏠 الصفحة الرئيسية</button>
 </main>
 
 <script>
@@ -1182,6 +1202,20 @@
         } else {
             document.getElementById('step4Box').style.display = 'none';
         }
+    }
+
+    function goHome() {
+        try { if (location.hash) history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+        document.getElementById('filterSection').style.display = 'none';
+        document.getElementById('resultsContainer').style.display = 'none';
+        ['btnGeneral', 'btnDoctor', 'btnLatest', 'btnMatches'].forEach(b => {
+            const el = document.getElementById(b);
+            if (el) el.style.outline = 'none';
+        });
+        selectedState = { mode: 'general', specialty: null, gov: null, group: null, area: null };
+        lastListHash = '';
+        lastMatchHash = '';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function startSearch(mode) {
