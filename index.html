@@ -2434,6 +2434,7 @@
             return badges.join('');
         }
         function mapLinkHtml(p) {
+            if (!ADMIN) return '';
             const link = mapLinkFor(p.doctor, p.complex);
             if (!link) return '';
             return `<a class="map-link-btn" href="${link}" target="_blank">🗺️ عرض المسافة على الخريطة</a>`;
