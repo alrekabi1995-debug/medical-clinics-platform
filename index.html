@@ -829,6 +829,93 @@
     .matches-more summary::-webkit-details-marker { display: none; }
     .matches-more[open] summary { border-bottom: 1px dashed #cbd5e1; margin-bottom: 4px; }
 
+    .seq-search-wrap {
+        max-width: 500px;
+        margin: 20px auto 0;
+        padding: 0 20px;
+        display: flex;
+        gap: 8px;
+    }
+    .seq-search-input {
+        flex: 1;
+        padding: 12px 16px;
+        border-radius: 8px;
+        border: 2px solid #cbd5e1;
+        font-size: 15px;
+        text-align: center;
+        direction: ltr;
+    }
+    .seq-search-btn {
+        background-color: #0f172a;
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 20px;
+        font-weight: 800;
+        font-size: 14px;
+        cursor: pointer;
+        white-space: nowrap;
+    }
+
+    .seq-mode-wrap {
+        max-width: 500px;
+        margin: 8px auto 0;
+        padding: 0 20px;
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+    }
+    .seq-mode-pill {
+        background: none;
+        border: 1px solid #cbd5e1;
+        color: #64748b;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .seq-mode-pill.active {
+        background-color: #0f172a;
+        border-color: #0f172a;
+        color: #ffffff;
+    }
+    .seq-result-group {
+        grid-column: 1 / -1;
+        font-weight: 800;
+        font-size: 14px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        margin-top: 6px;
+    }
+    .seq-result-group.doctor-group { background: #ecfdf5; color: #047857; }
+    .seq-result-group.clinic-group { background: #eef2ff; color: #3730a3; }
+
+    .both-details {
+        grid-column: 1 / -1;
+        width: 100%;
+        margin-top: 8px;
+        border: 1px dashed #cbd5e1;
+        border-radius: 10px;
+        padding: 4px 10px;
+    }
+    .both-details summary {
+        cursor: pointer;
+        padding: 10px 4px;
+        font-weight: 700;
+        color: #0f172a;
+        font-size: 14px;
+        list-style: none;
+    }
+    .both-details summary::-webkit-details-marker { display: none; }
+    .both-details[open] summary { border-bottom: 1px dashed #cbd5e1; margin-bottom: 10px; }
+    .both-details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 14px;
+        padding-bottom: 10px;
+    }
+
     .no-results {
         text-align: center;
         padding: 30px;
@@ -865,6 +952,16 @@
         <button type="button" class="btn btn-matches" id="btnMatches" onclick="startSearch('match')">
             🔗 التطابقات المحتملة
         </button>
+    </div>
+
+    <div class="seq-search-wrap">
+        <input type="text" inputmode="numeric" class="seq-search-input" id="seqSearchInput" placeholder="ابحث برقم التسلسل (مثال: 57)" onkeydown="if(event.key==='Enter') searchBySeq()">
+        <button type="button" class="seq-search-btn" onclick="searchBySeq()">🔍 بحث</button>
+    </div>
+    <div class="seq-mode-wrap" id="seqModeWrap">
+        <button type="button" class="seq-mode-pill active" data-mode="all" onclick="setSeqMode('all')">الكل</button>
+        <button type="button" class="seq-mode-pill" data-mode="doctor" onclick="setSeqMode('doctor')">👨‍⚕️ أطباء فقط</button>
+        <button type="button" class="seq-mode-pill" data-mode="clinic" onclick="setSeqMode('clinic')">🏢 مجمعات فقط</button>
     </div>
 
     <div class="news-ticker-wrap">
@@ -1355,6 +1452,10 @@
         selectedState = { mode: 'general', specialty: null, gov: null, group: null, area: null };
         lastListHash = '';
         lastMatchHash = '';
+        seqMode = 'all';
+        document.querySelectorAll('#seqModeWrap .seq-mode-pill').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-mode') === 'all');
+        });
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -1908,6 +2009,73 @@
             </div>`;
     }
 
+    // ================= بحث برقم التسلسل (مع فصل سلس بين الأطباء والمجمعات) =================
+    let seqMode = 'all';
+
+    function setSeqMode(mode) {
+        seqMode = mode;
+        document.querySelectorAll('#seqModeWrap .seq-mode-pill').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-mode') === mode);
+        });
+        // إن كانت هناك نتيجة معروضة حالياً، أعِد رسمها فوراً بالفلتر الجديد
+        const m = (location.hash || '').match(/^#seq=(\d+)/);
+        if (m) showSeqResults(parseInt(m[1], 10));
+    }
+
+    function findBySeq(num) {
+        const doc = GENERAL_CLINICS_DATA.find(i => seqNum(i) === num);
+        const clinic = DOCTORS_DATA.find(i => seqNum(i) === num);
+        return { doc, clinic };
+    }
+
+    function searchBySeq(numArg) {
+        const input = document.getElementById('seqSearchInput');
+        const raw = (numArg !== undefined ? numArg : (input ? input.value : '')).toString().trim();
+        const num = parseInt(raw, 10);
+        if (!raw || isNaN(num)) { showToast('اكتب رقم تسلسل صحيح'); return; }
+        location.hash = '#seq=' + num;
+    }
+
+    function showSeqResults(num) {
+        let { doc, clinic } = findBySeq(num);
+        if (seqMode === 'doctor') clinic = null;
+        if (seqMode === 'clinic') doc = null;
+
+        document.getElementById('filterSection').style.display = 'none';
+        document.getElementById('resultsContainer').style.display = 'block';
+        ['btnGeneral', 'btnDoctor', 'btnLatest', 'btnMatches'].forEach(b => {
+            const el = document.getElementById(b);
+            if (el) el.style.outline = 'none';
+        });
+
+        const nav = `
+            <div class="back-to-browse-wrap" style="grid-column: 1 / -1;">
+                <button type="button" class="back-to-browse-btn" onclick="goHome()">⬅ رجوع للصفحة الرئيسية</button>
+            </div>
+        `;
+
+        let body = '';
+        if (!doc && !clinic) {
+            const scope = seqMode === 'doctor' ? 'طبيب' : (seqMode === 'clinic' ? 'مجمع' : 'طبيب أو مجمع');
+            body = `<div class="no-results" style="display: block;"><p>لا يوجد ${scope} برقم التسلسل ${num}${seqMode !== 'all' ? ' ضمن هذا الفلتر' : ''}.</p></div>`;
+        } else {
+            // فصل سلس: عنوان قسم مميز فوق كل نوع عند وجود الاثنين معاً
+            if (doc) {
+                if (doc && clinic) body += `<div class="seq-result-group doctor-group">👨‍⚕️ نتيجة الأطباء</div>`;
+                body += `<div class="card active-match">${cardInner(doc, 'doctor', { typeTag: true })}</div>`;
+            }
+            if (clinic) {
+                if (doc && clinic) body += `<div class="seq-result-group clinic-group">🏢 نتيجة المجمعات</div>`;
+                body += `<div class="card active-match">${cardInner(clinic, 'clinic', { typeTag: true })}</div>`;
+            }
+        }
+
+        document.getElementById('resultsGrid').innerHTML = nav + body;
+        setTimeout(() => {
+            document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+    }
+
     function showSingleAd(id) {
         const a = adIndex[id];
         document.getElementById('filterSection').style.display = 'none';
@@ -1939,6 +2107,8 @@
         const h = location.hash || '';
         const m = h.match(/^#ad=([\w-]+)$/);
         if (m) { showSingleAd(m[1]); return; }
+        const sq = h.match(/^#seq=(\d+)$/);
+        if (sq) { showSeqResults(parseInt(sq[1], 10)); return; }
         if (h === '#negotiations') { showNegotiations(); return; }
         const mt = h.match(/^#match=([^&]+)$/);
         if (mt) {
@@ -2122,6 +2292,20 @@
         showMatches(sp, selectedState.gov, false);
     }
 
+    // يعرض تفاصيل الطبيب والمجمع كاملة معاً في مكانهما، دون مغادرة الصفحة
+    function bothDetailsHtml(doctorId, complexId) {
+        const d = adIndex[doctorId], c = adIndex[complexId];
+        if (!d || !c) return '';
+        return `
+                <details class="both-details">
+                    <summary>📋 عرض تفاصيل الطبيب والمجمع معاً</summary>
+                    <div class="both-details-grid">
+                        <div class="card active-match">${cardInner(d.item, d.type, { typeTag: true })}</div>
+                        <div class="card active-match">${cardInner(c.item, c.type, { typeTag: true })}</div>
+                    </div>
+                </details>`;
+    }
+
     function showMatches(sp, gov, scroll) {
         const pairs = getMatchPairs(sp, gov);
         const url = location.href.split('#')[0] + matchHashFor(sp, gov);
@@ -2155,6 +2339,7 @@
                             <a class="list-open" href="#ad=${p.complex._id}">تفاصيل المجمع</a>
                         </div>
                         <div class="list-tags match-badges">${pairBadges(p)}</div>
+                        ${bothDetailsHtml(p.doctor._id, p.complex._id)}
                         ${confirmMatchBtnHtml(p.doctor._id, p.complex._id)}
                     </div>`;
         }
@@ -2268,6 +2453,7 @@
                             <div class="match-loc">🏢 ${adLocation(complex.item, 'clinic')}</div>
                             <a class="list-open" href="#ad=${complex.item._id}">تفاصيل المجمع</a>
                         </div>
+                        ${bothDetailsHtml(doctor.item._id, complex.item._id)}
                         <button type="button" class="list-remove" onclick="removeConfirmedPair('${doctor.item._id}','${complex.item._id}')">إزالة هذا التطابق</button>
                     </div>`;
         });
