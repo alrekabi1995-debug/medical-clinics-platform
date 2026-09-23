@@ -2078,7 +2078,7 @@
                 const key = d._id + '|' + m.other._id;
                 if (seen.has(key)) return;
                 seen.add(key);
-                pairs.push({ doctor: d, complex: m.other, sameGov: m.sameGov, areaOverlap: m.areaOverlap, timeUnknown: m.timeUnknown });
+                pairs.push({ doctor: d, complex: m.other, sameGov: m.sameGov, areaOverlap: m.areaOverlap, sameGroup: m.sameGroup, timeUnknown: m.timeUnknown });
             });
         });
         pairs.sort((a, b) => (b.areaOverlap - a.areaOverlap) || (b.sameGroup - a.sameGroup) || (b.sameGov - a.sameGov) || (a.timeUnknown - b.timeUnknown));
