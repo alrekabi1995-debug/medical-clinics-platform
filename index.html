@@ -938,6 +938,23 @@
         margin-inline-start: 6px;
     }
 
+    .admin-matches-btn {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        padding: 10px 14px;
+        background-color: #ecfdf5;
+        color: #047857;
+        border: 1px dashed #10b981;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .admin-matches-slot { margin-top: 8px; }
+
+    .list-tag.match-fee { background: #f59e0b; color: #0f172a; }
+
     .no-results {
         text-align: center;
         padding: 30px;
@@ -1458,6 +1475,7 @@
         { isNew: true, hours: "مساءً", specialties: ["أطفال", "نسائية وتوليد", "باطنية", "جلدية وتجميل", "جراحة عامة"], gov: "بغداد", areas: ["مدينة الصدر"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (أطفال، نسائية وتوليد، باطنية، جلدية وتجميل، جراحة عامة) - مجمع طبي (بغداد - الرصافة - مدينة الصدر) - تسلسل 95", details: "<strong>الموقع:</strong> بغداد - الرصافة - مدينة الصدر - قرب ملعب قطاع 61.<br><strong>الحالة الحالية:</strong> المجمع أو العيادة جديدة.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد أطباء اختصاص آخرون حالياً." },
         { isNew: true, isClass: true, hours: "مساءً", specialties: ["جراحة عامة", "مفاصل وروماتيزم", "تغذية وعلاج سكري", "الغدد الصماء والسكري"], gov: "بغداد", areas: ["العطيفية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (جراحة عامة، مفاصل وروماتيزم، تغذية وعلاج سكري، الغدد الصماء والسكري) - مجمع طبي (بغداد - الكرخ - العطيفية - العطيفية الثانية) - تسلسل 96", details: "<strong>الموقع:</strong> بغداد - الكرخ - العطيفية - العطيفية الثانية - شارع جامع براثا، قرب المحكمة.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس).<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد أطباء اختصاص آخرون في المجمع (دون تفاصيل إضافية)." },
         { isNew: true, hours: "أي وقت", specialties: ["نسائية وتوليد", "باطنية", "قلبية واوعية دموية", "جراحة عامة", "الغدد الصماء والسكري", "جراحة الكبرى والعصبية", "جراحة الكلى والمسالك البولية", "أنف وأذن وحنجرة", "جلدية وتجميل", "جراحة العظام والكسور", "أطفال", "جراحة أوعية دموية ودوالي", "أورام"], gov: "بغداد", areas: ["المنصور"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء بعدة اختصاصات - مجمع طبي (بغداد - الكرخ - المنصور - الرواد) - تسلسل 97", details: "<strong>الموقع:</strong> بغداد - الكرخ - المنصور - الرواد، قرب مشمشة.<br><strong>الحالة الحالية:</strong> المجمع أو العيادة جديدة.<br><strong>أوقات العمل المطلوبة:</strong> أي وقت<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد أطباء اختصاص آخرون في المجمع (دون تفاصيل إضافية)." },
+        { isNew: true, coordFee: 500, hours: "مساءً", specialties: ["أطفال", "باطنية", "جراحة الكلى والمسالك البولية"], gov: "بغداد", areas: ["شهداء البياع"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (أطفال، باطنية، جراحة الكلى والمسالك البولية) - مجمع طبي (بغداد - الكرخ - شهداء البياع) - تسلسل 98", details: "<strong>الموقع:</strong> بغداد - الكرخ - شهداء البياع - شارع المعتز، قرب مطعم سندريلا.<br><strong>الحالة الحالية:</strong> المجمع أو العيادة جديدة.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> كشفية فقط.<br><strong>عدد المراجعين:</strong> عالٍ.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد صيدلاني بالمجمع." },
     ];
 
     let selectedState = {
@@ -1993,7 +2011,7 @@
                             💬 ${WHATSAPP_DISPLAY}
                         </a>${extraPhoneHtml}${isRed ? '' : shareHtml(item)}${adminToggleBtnHtml(item)}
                     </div>
-                    ${ADMIN ? matchesHtml(item, type) : ''}
+                    ${ADMIN ? adminMatchesButtonHtml(item, type) : ''}
                 </div>
         `;
     }
@@ -2046,6 +2064,29 @@
         return { ok: false, unknown: false };
     }
 
+    // عوامل ترتيب المقترحات (كما طلب الأدمن): أولاً من يدفع أجور تنسيق أعلى،
+    // ثم المجمع الشغال المصنّف "كلاس"، ثم الأقرب مسافة.
+    // "coordFee" حقل خاص بسجل المجمع فقط (تُحصَّل أجور التنسيق من صاحب المجمع بعد مباشرة
+    // الطبيب، وليس من الطبيب)، ولا يُعرض هذا الرقم لأي زائر — للترتيب الداخلي وشارة الأدمن فقط
+    function coordFeeOf(item) {
+        return typeof item.coordFee === 'number' ? item.coordFee : 0;
+    }
+    function isWorkingClass(item) {
+        return !!(item.isClass && /المجمع شغال/.test(item.details || ''));
+    }
+    function rankScore(item) {
+        return { fee: coordFeeOf(item), working: isWorkingClass(item) ? 1 : 0 };
+    }
+    function compareByPriority(a, b, aKm, bKm) {
+        const ra = rankScore(a), rb = rankScore(b);
+        if (rb.fee !== ra.fee) return rb.fee - ra.fee;
+        if (rb.working !== ra.working) return rb.working - ra.working;
+        if (aKm !== null && bKm !== null) return aKm - bKm;
+        if (aKm !== null) return -1;
+        if (bKm !== null) return 1;
+        return 0;
+    }
+
     function findMatches(item, type) {
         if (type === 'doctor' && item.workplace === 'hospital') return []; // يطلب مستشفى أهلي حصراً؛ لا توجد مستشفيات ضمن قوائم المنصة
         const specs = specsOf(item);
@@ -2080,11 +2121,17 @@
                 results.push({ other: d, otherType: 'doctor', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown, km, eqPts });
             });
         }
-        // الأقرب فالأقرب أولاً (المسافة التقريبية)، وما لا نملك له إحداثيات يُرتَّب بحسب المؤشرات القديمة
+        // ترتيب المجمعات المقترحة لطبيب: أجور التنسيق الأعلى، ثم المجمع الشغال الكلاس، ثم الأقرب.
+        // ترتيب الأطباء المقترحين لمجمع: الأقرب فالأقرب فقط (لا معنى لأجور التنسيق هنا).
         results.sort((a, b) => {
-            if (a.km !== null && b.km !== null) return a.km - b.km;
-            if (a.km !== null) return -1;
-            if (b.km !== null) return 1;
+            if (type === 'doctor') {
+                const byPriority = compareByPriority(a.other, b.other, a.km, b.km);
+                if (byPriority !== 0) return byPriority;
+            } else {
+                if (a.km !== null && b.km !== null) return a.km - b.km;
+                if (a.km !== null) return -1;
+                if (b.km !== null) return 1;
+            }
             return (b.areaOverlap - a.areaOverlap) || (b.sameGroup - a.sameGroup) || (b.sameGov - a.sameGov) || (a.timeUnknown - b.timeUnknown);
         });
         return results;
@@ -2096,6 +2143,8 @@
             ? ('🏢 مجمع ' + (adLocation(it, 'clinic')))
             : ('👨‍⚕️ ' + rowTitle(it, 'doctor') + ' — ' + adLocation(it, 'doctor'));
         const badges = [];
+        if (m.otherType === 'clinic' && ADMIN && coordFeeOf(it) > 0) badges.push(`<span class="list-tag match-fee">💰 أجور تنسيق أعلى</span>`);
+        if (m.otherType === 'clinic' && ADMIN && isWorkingClass(it)) badges.push(`<span class="list-tag match-good">🏆 مجمع شغال كلاس</span>`);
         const distLabel = distanceLabel(m.km, m.eqPts);
         if (distLabel) badges.push(`<span class="list-tag match-dist">📍 ${distLabel}</span>`);
         if (m.areaOverlap) badges.push('<span class="list-tag match-good">نفس المنطقة</span>');
@@ -2111,6 +2160,28 @@
                         </div>
                         <a class="list-open" href="#ad=${it._id}">التفاصيل</a>
                     </div>`;
+    }
+
+    function adminMatchesButtonHtml(item, type) {
+        const label = type === 'doctor' ? '🔎 عرض المجمعات المقترحة' : '🔎 عرض الأطباء المقترحين';
+        return `
+                    <button type="button" class="admin-matches-btn" onclick="toggleAdminMatches('${item._id}')">${label}</button>
+                    <div class="admin-matches-slot" id="admin-matches-${item._id}" style="display: none;"></div>`;
+    }
+
+    function toggleAdminMatches(id) {
+        const slot = document.getElementById('admin-matches-' + id);
+        if (!slot) return;
+        if (slot.style.display === 'none') {
+            if (!slot.getAttribute('data-loaded')) {
+                const a = adIndex[id];
+                if (a) slot.innerHTML = matchesHtml(a.item, a.type);
+                slot.setAttribute('data-loaded', '1');
+            }
+            slot.style.display = 'block';
+        } else {
+            slot.style.display = 'none';
+        }
     }
 
     function matchesHtml(item, type) {
@@ -2386,11 +2457,10 @@
                 pairs.push({ doctor: d, complex: m.other, sameGov: m.sameGov, areaOverlap: m.areaOverlap, sameGroup: m.sameGroup, timeUnknown: m.timeUnknown, km: m.km, eqPts: m.eqPts });
             });
         });
-        // الأقرب فالأقرب أولاً
+        // أجور التنسيق الأعلى أولاً، ثم المجمع الشغال الكلاس، ثم الأقرب مسافة
         pairs.sort((a, b) => {
-            if (a.km !== null && b.km !== null) return a.km - b.km;
-            if (a.km !== null) return -1;
-            if (b.km !== null) return 1;
+            const byPriority = compareByPriority(a.complex, b.complex, a.km, b.km);
+            if (byPriority !== 0) return byPriority;
             return (b.areaOverlap - a.areaOverlap) || (b.sameGroup - a.sameGroup) || (b.sameGov - a.sameGov) || (a.timeUnknown - b.timeUnknown);
         });
         return pairs;
@@ -2461,6 +2531,8 @@
 
         function pairBadges(p) {
             const badges = [];
+            if (ADMIN && coordFeeOf(p.complex) > 0) badges.push(`<span class="list-tag match-fee">💰 أجور تنسيق أعلى</span>`);
+            if (ADMIN && isWorkingClass(p.complex)) badges.push(`<span class="list-tag match-good">🏆 مجمع شغال كلاس</span>`);
             const distLabel = distanceLabel(p.km, p.eqPts);
             if (distLabel) badges.push(`<span class="list-tag match-dist">📍 ${distLabel}</span>`);
             if (p.areaOverlap) badges.push('<span class="list-tag match-good">نفس المنطقة</span>');
