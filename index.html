@@ -1161,14 +1161,14 @@
     // وليست عناوين GPS دقيقة)
     const AREA_COORDS = {
         // بغداد - الرصافة
-        "الرصافة - المركز": [33.335, 44.415], "الكرادة": [33.305, 44.430], "الاعظمية": [33.375, 44.365],
+        "الرصافة": [33.335, 44.415], "الرصافة - المركز": [33.335, 44.415], "الكرادة": [33.305, 44.430], "الاعظمية": [33.375, 44.365],
         "الوزيرية": [33.345, 44.400], "بغداد الجديدة": [33.345, 44.465], "البلديات": [33.330, 44.455],
         "المشتل": [33.310, 44.470], "العبيدي": [33.360, 44.480], "الكمالية": [33.350, 44.475],
         "ناحية الوحدة": [33.240, 44.530], "مدينة الصدر": [33.370, 44.455], "الشعب": [33.385, 44.410],
         "الراشدية": [33.480, 44.420], "زيونة": [33.320, 44.440], "الطارمية": [33.650, 44.380],
         "الزعفرانية": [33.220, 44.460],
         // بغداد - الكرخ
-        "الكرخ - المركز": [33.315, 44.360], "المنصور": [33.313, 44.362], "الكاظمية": [33.378, 44.339],
+        "الكرخ": [33.315, 44.360], "الكرخ - المركز": [33.315, 44.360], "المنصور": [33.313, 44.362], "الكاظمية": [33.378, 44.339],
         "الغزالية": [33.335, 44.310], "الدورة": [33.250, 44.400], "البياع": [33.285, 44.355],
         "حي الإعلام": [33.350, 44.320], "أبو غريب": [33.305, 44.185], "السيدية": [33.265, 44.375],
         "العامرية": [33.295, 44.330], "الخضراء": [33.325, 44.345], "التاجي": [33.520, 44.340],
@@ -1203,9 +1203,18 @@
     }
 
     // مسافة تقريبية بالكيلومترات (Haversine) بين أول منطقة لكل طرف
+    // إن سقط الطرفان على نفس النقطة تماماً (تقاطع في التقريب، غالباً بسبب الاعتماد على مركز
+    // المحافظة كبديل لمنطقة غير مدرَجة)، لا نستطيع قياس مسافة حقيقية، فنضع تقديراً ثابتاً (5 كم)
+    // مع توضيح أن النقطتين متطابقتان بدل عرض صفر مضلِّل
+    function pointsEqual(itemA, itemB) {
+        const a = itemCoords(itemA), b = itemCoords(itemB);
+        return !!(a && b && a[0] === b[0] && a[1] === b[1]);
+    }
+
     function distanceKm(itemA, itemB) {
         const a = itemCoords(itemA), b = itemCoords(itemB);
         if (!a || !b) return null;
+        if (a[0] === b[0] && a[1] === b[1]) return 5;
         const R = 6371;
         const dLat = (b[0] - a[0]) * Math.PI / 180;
         const dLng = (b[1] - a[1]) * Math.PI / 180;
@@ -1214,8 +1223,9 @@
         return R * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
     }
 
-    function distanceLabel(km) {
+    function distanceLabel(km, equal) {
         if (km === null) return null;
+        if (equal) return '≈ ' + Math.round(km) + ' كم (نقاط متساوية)';
         if (km < 1) return 'أقل من كم';
         return '≈ ' + Math.round(km) + ' كم';
     }
@@ -1223,6 +1233,9 @@
     function mapLinkFor(itemA, itemB) {
         const a = itemCoords(itemA), b = itemCoords(itemB);
         if (!a || !b) return null;
+        // إن كانت النقطتان متطابقتين تماماً (تقاطع افتراضي لمحافظة لا نملك إحداثيات منطقتها)
+        // فلا فائدة من خريطة تُظهر نفس النقطة مرتين، بل قد تُربك (كما في حالة تشابه نقطة الانطلاق والوصول)
+        if (a[0] === b[0] && a[1] === b[1]) return null;
         return `https://www.google.com/maps/dir/?api=1&origin=${a[0]},${a[1]}&destination=${b[0]},${b[1]}`;
     }
 
@@ -2044,7 +2057,8 @@
                 const areaOverlap = sameGov && item.areas.some(a => c.areas.includes(a));
                 const sameGroup = sameGov && !areaOverlap && sharesGroup(item.gov, item.areas, c.areas);
                 const km = distanceKm(item, c);
-                results.push({ other: c, otherType: 'clinic', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown, km });
+                const eqPts = pointsEqual(item, c);
+                results.push({ other: c, otherType: 'clinic', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown, km, eqPts });
             });
         } else {
             GENERAL_CLINICS_DATA.forEach(d => {
@@ -2057,7 +2071,8 @@
                 const areaOverlap = sameGov && item.areas.some(a => d.areas.includes(a));
                 const sameGroup = sameGov && !areaOverlap && sharesGroup(item.gov, item.areas, d.areas);
                 const km = distanceKm(item, d);
-                results.push({ other: d, otherType: 'doctor', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown, km });
+                const eqPts = pointsEqual(item, d);
+                results.push({ other: d, otherType: 'doctor', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown, km, eqPts });
             });
         }
         // الأقرب فالأقرب أولاً (المسافة التقريبية)، وما لا نملك له إحداثيات يُرتَّب بحسب المؤشرات القديمة
@@ -2076,7 +2091,7 @@
             ? ('🏢 مجمع ' + (adLocation(it, 'clinic')))
             : ('👨‍⚕️ ' + rowTitle(it, 'doctor') + ' — ' + adLocation(it, 'doctor'));
         const badges = [];
-        const distLabel = distanceLabel(m.km);
+        const distLabel = distanceLabel(m.km, m.eqPts);
         if (distLabel) badges.push(`<span class="list-tag match-dist">📍 ${distLabel}</span>`);
         if (m.areaOverlap) badges.push('<span class="list-tag match-good">نفس المنطقة</span>');
         else if (m.sameGroup) badges.push('<span class="list-tag match-good">نفس جانب المدينة</span>');
@@ -2363,7 +2378,7 @@
                 const key = d._id + '|' + m.other._id;
                 if (seen.has(key)) return;
                 seen.add(key);
-                pairs.push({ doctor: d, complex: m.other, sameGov: m.sameGov, areaOverlap: m.areaOverlap, sameGroup: m.sameGroup, timeUnknown: m.timeUnknown, km: m.km });
+                pairs.push({ doctor: d, complex: m.other, sameGov: m.sameGov, areaOverlap: m.areaOverlap, sameGroup: m.sameGroup, timeUnknown: m.timeUnknown, km: m.km, eqPts: m.eqPts });
             });
         });
         // الأقرب فالأقرب أولاً
@@ -2378,7 +2393,7 @@
 
     function pairText(p, sp) {
         const badges = [];
-        const distLabel = distanceLabel(p.km);
+        const distLabel = distanceLabel(p.km, p.eqPts);
         if (distLabel) badges.push(distLabel);
         if (p.areaOverlap) badges.push('نفس المنطقة');
         else if (p.sameGroup) badges.push('نفس جانب المدينة');
@@ -2441,7 +2456,7 @@
 
         function pairBadges(p) {
             const badges = [];
-            const distLabel = distanceLabel(p.km);
+            const distLabel = distanceLabel(p.km, p.eqPts);
             if (distLabel) badges.push(`<span class="list-tag match-dist">📍 ${distLabel}</span>`);
             if (p.areaOverlap) badges.push('<span class="list-tag match-good">نفس المنطقة</span>');
             else if (p.sameGroup) badges.push('<span class="list-tag match-good">نفس جانب المدينة</span>');
