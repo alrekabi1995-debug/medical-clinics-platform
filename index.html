@@ -916,6 +916,22 @@
         padding-bottom: 10px;
     }
 
+    .list-tag.match-dist { background: #0ea5e9; color: #ffffff; }
+
+    .map-link-btn {
+        grid-column: 1 / -1;
+        display: inline-block;
+        margin-top: 6px;
+        color: #0ea5e9;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        border: 1px solid #0ea5e9;
+        border-radius: 8px;
+        padding: 6px 12px;
+        text-align: center;
+    }
+
     .no-results {
         text-align: center;
         padding: 30px;
@@ -1134,6 +1150,76 @@
             "الأقضية والنواحي": ["قضاء النعمانية", "قضاء الحي", "قضاء بدرة", "قضاء العزيزية", "قضاء الصويرة", "مناطق أخرى"]
         }
     };
+
+    // إحداثيات تقريبية لمراكز المناطق (لأغراض ترتيب "الأقرب فالأقرب" وعرض خريطة تقريبية فقط،
+    // وليست عناوين GPS دقيقة)
+    const AREA_COORDS = {
+        // بغداد - الرصافة
+        "الرصافة - المركز": [33.335, 44.415], "الكرادة": [33.305, 44.430], "الاعظمية": [33.375, 44.365],
+        "الوزيرية": [33.345, 44.400], "بغداد الجديدة": [33.345, 44.465], "البلديات": [33.330, 44.455],
+        "المشتل": [33.310, 44.470], "العبيدي": [33.360, 44.480], "الكمالية": [33.350, 44.475],
+        "ناحية الوحدة": [33.240, 44.530], "مدينة الصدر": [33.370, 44.455], "الشعب": [33.385, 44.410],
+        "الراشدية": [33.480, 44.420], "زيونة": [33.320, 44.440], "الطارمية": [33.650, 44.380],
+        "الزعفرانية": [33.220, 44.460],
+        // بغداد - الكرخ
+        "الكرخ - المركز": [33.315, 44.360], "المنصور": [33.313, 44.362], "الكاظمية": [33.378, 44.339],
+        "الغزالية": [33.335, 44.310], "الدورة": [33.250, 44.400], "البياع": [33.285, 44.355],
+        "حي الإعلام": [33.350, 44.320], "أبو غريب": [33.305, 44.185], "السيدية": [33.265, 44.375],
+        "العامرية": [33.295, 44.330], "الخضراء": [33.325, 44.345], "التاجي": [33.520, 44.340],
+        "الحرية": [33.370, 44.345], "الدولعي": [33.380, 44.350], "الرحمانية": [33.395, 44.320],
+        "حي الجامعة": [33.310, 44.340], "اليرموك": [33.305, 44.345], "أطراف الكرخ": [33.300, 44.330],
+        "حي الجهاد": [33.290, 44.330], "حي العامل": [33.275, 44.340], "شهداء البياع": [33.280, 44.360],
+        "مدينة جكوك": [33.270, 44.345], "مدينة الحارثية": [33.320, 44.355], "الشرطة الرابعة": [33.315, 44.350],
+        "حي الحسين": [33.295, 44.360], "علي الصالح": [33.260, 44.390], "أبو دشير": [33.240, 44.395],
+        "الشماعية": [33.235, 44.400], "العطيفية": [33.360, 44.355], "المحمودية": [33.050, 44.350],
+        // مناطق ذُكرت في السجلات ولم تكن ضمن القوائم الرسمية
+        "حي العسكري": [32.616, 44.024], "مشروع المسيب": [32.780, 44.310], "موصل حي النجار": [36.335, 43.128],
+        "قضاء جلولاء": [34.320, 44.930], "الموصل الجديدة": [36.310, 43.150], "ذي قار قضاء الغراف": [31.380, 46.130],
+        "الرفاعي": [31.590, 46.130], "قضاء الفلوجة": [33.349, 43.784], "قضاء القائم": [34.379, 41.132],
+        "قضاء شط العرب": [30.480, 47.850], "العمارة - مركز المحافظة": [31.835, 47.147]
+    };
+    const GOV_COORDS = {
+        "بغداد": [33.315, 44.366], "نينوى": [36.335, 43.128], "البصرة": [30.509, 47.783], "ديالى": [33.745, 44.648],
+        "أربيل": [36.190, 44.009], "السليمانية": [35.555, 45.435], "دهوك": [36.867, 42.989], "كركوك": [35.468, 44.392],
+        "صلاح الدين": [34.611, 43.679], "الانبار": [33.420, 43.300], "بابل": [32.470, 44.420], "كربلاء": [32.616, 44.024],
+        "النجف": [31.997, 44.324], "القادسية": [31.990, 44.930], "المثنى": [31.317, 45.294], "ذي قار": [31.055, 46.257],
+        "ميسان": [31.835, 47.147], "واسط": [32.512, 45.818]
+    };
+
+    function coordsFor(gov, area) {
+        if (area && AREA_COORDS[area]) return AREA_COORDS[area];
+        if (gov && GOV_COORDS[gov]) return GOV_COORDS[gov];
+        return null;
+    }
+
+    function itemCoords(item) {
+        return coordsFor(item.gov, item.areas && item.areas[0]);
+    }
+
+    // مسافة تقريبية بالكيلومترات (Haversine) بين أول منطقة لكل طرف
+    function distanceKm(itemA, itemB) {
+        const a = itemCoords(itemA), b = itemCoords(itemB);
+        if (!a || !b) return null;
+        const R = 6371;
+        const dLat = (b[0] - a[0]) * Math.PI / 180;
+        const dLng = (b[1] - a[1]) * Math.PI / 180;
+        const lat1 = a[0] * Math.PI / 180, lat2 = b[0] * Math.PI / 180;
+        const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+        return R * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+    }
+
+    function distanceLabel(km) {
+        if (km === null) return null;
+        if (km < 1) return 'أقل من كم';
+        return '≈ ' + Math.round(km) + ' كم';
+    }
+
+    function mapLinkFor(itemA, itemB) {
+        const a = itemCoords(itemA), b = itemCoords(itemB);
+        if (!a || !b) return null;
+        return `https://www.google.com/maps/dir/?api=1&origin=${a[0]},${a[1]}&destination=${b[0]},${b[1]}`;
+    }
+
 
     const GENERAL_CLINICS_DATA = [
         { specialty: "جلدية وتجميل", gov: "بغداد", areas: ["أبو غريب"], statusLabel: "🟢 متوفر صباحاً فقط", headerLabel: "طبيب تسلسل 3", title: "طبيب أخصائي (جلدية وتجميل) يبحث عن عيادة للعمل - تسلسل 3", details: "متاح للعمل في الفترة الصباحية حصراً، ضمن مدينة أبو غريب حصراً." },
@@ -1949,7 +2035,8 @@
                 const sameGov = c.gov === item.gov;
                 const areaOverlap = sameGov && item.areas.some(a => c.areas.includes(a));
                 const sameGroup = sameGov && !areaOverlap && sharesGroup(item.gov, item.areas, c.areas);
-                results.push({ other: c, otherType: 'clinic', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown });
+                const km = distanceKm(item, c);
+                results.push({ other: c, otherType: 'clinic', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown, km });
             });
         } else {
             GENERAL_CLINICS_DATA.forEach(d => {
@@ -1961,10 +2048,17 @@
                 const sameGov = d.gov === item.gov;
                 const areaOverlap = sameGov && item.areas.some(a => d.areas.includes(a));
                 const sameGroup = sameGov && !areaOverlap && sharesGroup(item.gov, item.areas, d.areas);
-                results.push({ other: d, otherType: 'doctor', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown });
+                const km = distanceKm(item, d);
+                results.push({ other: d, otherType: 'doctor', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown, km });
             });
         }
-        results.sort((a, b) => (b.areaOverlap - a.areaOverlap) || (b.sameGroup - a.sameGroup) || (b.sameGov - a.sameGov) || (a.timeUnknown - b.timeUnknown));
+        // الأقرب فالأقرب أولاً (المسافة التقريبية)، وما لا نملك له إحداثيات يُرتَّب بحسب المؤشرات القديمة
+        results.sort((a, b) => {
+            if (a.km !== null && b.km !== null) return a.km - b.km;
+            if (a.km !== null) return -1;
+            if (b.km !== null) return 1;
+            return (b.areaOverlap - a.areaOverlap) || (b.sameGroup - a.sameGroup) || (b.sameGov - a.sameGov) || (a.timeUnknown - b.timeUnknown);
+        });
         return results;
     }
 
@@ -1974,6 +2068,8 @@
             ? ('🏢 مجمع ' + (adLocation(it, 'clinic')))
             : ('👨‍⚕️ ' + rowTitle(it, 'doctor') + ' — ' + adLocation(it, 'doctor'));
         const badges = [];
+        const distLabel = distanceLabel(m.km);
+        if (distLabel) badges.push(`<span class="list-tag match-dist">📍 ${distLabel}</span>`);
         if (m.areaOverlap) badges.push('<span class="list-tag match-good">نفس المنطقة</span>');
         else if (m.sameGroup) badges.push('<span class="list-tag match-good">نفس جانب المدينة</span>');
         else if (m.sameGov) badges.push('<span class="list-tag match-caution">محافظة واحدة، جانب مختلف</span>');
@@ -1993,8 +2089,9 @@
         const matches = findMatches(item, type);
         if (!matches.length) return '';
         const heading = type === 'doctor' ? '🔎 مجمعات قد تناسبك' : '🔎 أطباء قد يناسبونكم';
-        const strict = matches.filter(m => m.areaOverlap);
-        const other = matches.filter(m => !m.areaOverlap);
+        const isClose = m => m.areaOverlap || (m.km !== null && m.km <= 6);
+        const strict = matches.filter(isClose);
+        const other = matches.filter(m => !isClose(m));
         const strictHtml = strict.length
             ? strict.map(matchRowHtml).join('')
             : `<div class="no-strict-match">لا توجد مطابقات في نفس المنطقة تحديداً حالياً.</div>`;
@@ -2250,15 +2347,23 @@
                 const key = d._id + '|' + m.other._id;
                 if (seen.has(key)) return;
                 seen.add(key);
-                pairs.push({ doctor: d, complex: m.other, sameGov: m.sameGov, areaOverlap: m.areaOverlap, sameGroup: m.sameGroup, timeUnknown: m.timeUnknown });
+                pairs.push({ doctor: d, complex: m.other, sameGov: m.sameGov, areaOverlap: m.areaOverlap, sameGroup: m.sameGroup, timeUnknown: m.timeUnknown, km: m.km });
             });
         });
-        pairs.sort((a, b) => (b.areaOverlap - a.areaOverlap) || (b.sameGroup - a.sameGroup) || (b.sameGov - a.sameGov) || (a.timeUnknown - b.timeUnknown));
+        // الأقرب فالأقرب أولاً
+        pairs.sort((a, b) => {
+            if (a.km !== null && b.km !== null) return a.km - b.km;
+            if (a.km !== null) return -1;
+            if (b.km !== null) return 1;
+            return (b.areaOverlap - a.areaOverlap) || (b.sameGroup - a.sameGroup) || (b.sameGov - a.sameGov) || (a.timeUnknown - b.timeUnknown);
+        });
         return pairs;
     }
 
     function pairText(p, sp) {
         const badges = [];
+        const distLabel = distanceLabel(p.km);
+        if (distLabel) badges.push(distLabel);
         if (p.areaOverlap) badges.push('نفس المنطقة');
         else if (p.sameGroup) badges.push('نفس جانب المدينة');
         else if (p.sameGov) badges.push('محافظة واحدة، جانب مختلف');
@@ -2320,11 +2425,18 @@
 
         function pairBadges(p) {
             const badges = [];
+            const distLabel = distanceLabel(p.km);
+            if (distLabel) badges.push(`<span class="list-tag match-dist">📍 ${distLabel}</span>`);
             if (p.areaOverlap) badges.push('<span class="list-tag match-good">نفس المنطقة</span>');
             else if (p.sameGroup) badges.push('<span class="list-tag match-good">نفس جانب المدينة</span>');
             else if (p.sameGov) badges.push('<span class="list-tag match-caution">محافظة واحدة، جانب مختلف</span>');
             if (p.timeUnknown) badges.push('<span class="list-tag match-warn">⚠️ وقت العمل غير مؤكد</span>');
             return badges.join('');
+        }
+        function mapLinkHtml(p) {
+            const link = mapLinkFor(p.doctor, p.complex);
+            if (!link) return '';
+            return `<a class="map-link-btn" href="${link}" target="_blank">🗺️ عرض المسافة على الخريطة</a>`;
         }
         function pairRowHtml(p) {
             return `
@@ -2341,13 +2453,15 @@
                             <a class="list-open" href="#ad=${p.complex._id}">تفاصيل المجمع</a>
                         </div>
                         <div class="list-tags match-badges">${pairBadges(p)}</div>
+                        ${mapLinkHtml(p)}
                         ${bothDetailsHtml(p.doctor._id, p.complex._id)}
                         ${confirmMatchBtnHtml(p.doctor._id, p.complex._id)}
                     </div>`;
         }
 
-        const strictPairs = pairs.filter(p => p.areaOverlap);
-        const otherPairs = pairs.filter(p => !p.areaOverlap);
+        const isClose = p => p.areaOverlap || (p.km !== null && p.km <= 6);
+        const strictPairs = pairs.filter(isClose);
+        const otherPairs = pairs.filter(p => !isClose(p));
 
         let body = '';
         if (!pairs.length) {
