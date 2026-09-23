@@ -1993,6 +1993,7 @@
                             💬 ${WHATSAPP_DISPLAY}
                         </a>${extraPhoneHtml}${isRed ? '' : shareHtml(item)}${adminToggleBtnHtml(item)}
                     </div>
+                    ${ADMIN ? matchesHtml(item, type) : ''}
                 </div>
         `;
     }
