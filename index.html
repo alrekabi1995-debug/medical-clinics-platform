@@ -955,6 +955,17 @@
 
     .list-tag.match-fee { background: #f59e0b; color: #0f172a; }
 
+    .admin-seq-info {
+        background: #fef2f2;
+        color: #991b1b;
+        border: 1px dashed #ef4444;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 13px;
+        font-weight: 800;
+        margin-bottom: 16px;
+    }
+
     .no-results {
         text-align: center;
         padding: 30px;
@@ -1024,6 +1035,7 @@
 
     <div class="filter-section" id="filterSection">
         <div class="step-container" id="stepContainerStyle">
+            <div class="admin-seq-info" id="adminSeqInfo" style="display: none;"></div>
             <div class="selection-summary" id="selectionSummary" style="display: none;">
                 <div><strong>خياراتك الحالية:</strong> <span id="summaryText">---</span></div>
                 <div class="summary-btns">
@@ -1637,6 +1649,7 @@
         lastMatchHash = '';
         latestFilter = 'all';
         updateListButton();
+        updateAdminSeqInfo(mode);
 
         renderSpecialties();
         renderGovs();
@@ -2851,6 +2864,23 @@
             .slice()
             .sort((a, b) => seqNum(b) - seqNum(a))
             .slice(0, n);
+    }
+
+    function maxSeqOf(data) {
+        const nums = data.map(seqNum).filter(n => n !== null);
+        return nums.length ? Math.max(...nums) : null;
+    }
+
+    function updateAdminSeqInfo(mode) {
+        const box = document.getElementById('adminSeqInfo');
+        if (!box) return;
+        if (!ADMIN || (mode !== 'general' && mode !== 'manager')) { box.style.display = 'none'; return; }
+        if (mode === 'general') {
+            box.textContent = '🔢 آخر تسلسل مسجَّل للأطباء: ' + maxSeqOf(GENERAL_CLINICS_DATA);
+        } else {
+            box.textContent = '🔢 آخر تسلسل مسجَّل للمجمعات: ' + maxSeqOf(DOCTORS_DATA);
+        }
+        box.style.display = 'block';
     }
 
     let latestFilter = 'all';
