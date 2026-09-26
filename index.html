@@ -89,7 +89,10 @@
     .ticker-item {
         padding: 0 24px;
         position: relative;
+        color: inherit;
+        text-decoration: none;
     }
+    a.ticker-item:hover { color: var(--gold); }
 
     .ticker-item::after {
         content: "•";
@@ -3289,24 +3292,38 @@
         });
     }
 
+    // سطر الخبر يوضح صراحةً ماذا يريد الطبيب أو المجمع، مع رقم التسلسل للسؤال عنه
     function tickerLineFor(item, type) {
+        const seq = seqOf(item);
         if (type === 'doctor') {
-            const title = rowTitle(item, 'doctor');
-            return `🩺 ${title} - ${adLocation(item, 'doctor')}`;
+            const title = item.title || '';
+            const female = /^طبيبة/.test(title);
+            const verb = female ? 'تبحث' : 'يبحث';
+            const vm = title.match(/(?:ت|ي)بحث عن (عيادة|مجمع طبي|مستشفى أهلي)/);
+            const venue = item.workplace === 'hospital' ? 'مستشفى أهلي' : (vm ? vm[1] : 'عيادة');
+            const t = timeOfDoctor(item);
+            const where = item.areas.filter(a => a !== 'مناطق أخرى').join(' أو ') || item.gov;
+            return `🩺 ${rowTitle(item, 'doctor')} ${verb} عن ${venue} للعمل في ${where}${t ? ' (' + t + ')' : ''} — تسلسل ${seq}`;
         }
         const specs = specsOf(item);
-        const specsLine = specs.length > 3 ? specs.slice(0, 3).join('، ') + ' وغيرها' : specs.join('، ');
-        const shortLoc = item.gov + (item.areas && item.areas[0] ? ' - ' + item.areas[0] : '');
-        return `🏥 مجمع طبي بحاجة لـ${specsLine} - ${shortLoc}`;
+        const specsLine = specs.length > 4 ? specs.slice(0, 4).join('، ') + ' وغيرها' : specs.join('، ');
+        const kind = item.venueType === 'hospital' ? '🏥 مستشفى أهلي' : '🏢 مجمع طبي';
+        let place = item.areas && item.areas[0] ? item.areas[0] : '';
+        if (!place || place === 'مناطق أخرى') {
+            const parts = adLocation(item, 'clinic').split('،')[0].split(' - ');
+            place = parts[parts.length - 1];
+        }
+        const hrs = item.hours ? ' (' + item.hours + ')' : '';
+        return `${kind} في ${item.gov === 'بغداد' ? 'بغداد - ' : item.gov + ' - '}${place} يطلب أطباء: ${specsLine}${hrs} — تسلسل ${seq}`;
     }
 
     function buildTickerItems() {
-        const lines = [
-            ...latestItems(GENERAL_CLINICS_DATA, 5).map(i => tickerLineFor(i, 'doctor')),
-            ...latestItems(DOCTORS_DATA, 5).map(i => tickerLineFor(i, 'clinic'))
+        const items = [
+            ...latestItems(GENERAL_CLINICS_DATA, 5).map(i => ({ text: tickerLineFor(i, 'doctor'), id: i._id })),
+            ...latestItems(DOCTORS_DATA, 5).map(i => ({ text: tickerLineFor(i, 'clinic'), id: i._id }))
         ];
-        lines.push('📢 تنسيق فوري ومباشر لأصحاب المجمعات الطبية والأطباء الباحثين عن فرص عمل');
-        return lines;
+        items.push({ text: '📢 تنسيق فوري ومباشر لأصحاب المجمعات الطبية والأطباء الباحثين عن فرص عمل', id: null });
+        return items;
     }
 
     function initTicker() {
@@ -3314,8 +3331,10 @@
         const items = buildTickerItems();
         let html = '';
         for (let i = 0; i < 2; i++) {
-            items.forEach(text => {
-                html += `<div class="ticker-item">${text}</div>`;
+            items.forEach(it => {
+                html += it.id
+                    ? `<a class="ticker-item" href="#ad=${it.id}">${it.text}</a>`
+                    : `<div class="ticker-item">${it.text}</div>`;
             });
         }
         content.innerHTML = html;
