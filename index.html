@@ -967,6 +967,26 @@
         margin-bottom: 16px;
     }
 
+    .sug-share {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin: 4px 0 12px;
+    }
+    .sug-share .share-opt { background: #ffffff; }
+    .sug-share .share-opt.share-wide { background: #047857; color: #ffffff; border-color: #047857; }
+    .sug-head {
+        background: #ecfdf5;
+        border: 2px solid #10b981;
+        border-radius: 14px;
+        padding: 14px 16px;
+        margin-bottom: 4px;
+    }
+    .sug-head h2 { margin: 0 0 6px; font-size: 1.2rem; color: #065f46; }
+    .sug-head p { margin: 0; color: #334155; font-size: 14px; line-height: 1.6; }
+    .sug-ad { grid-column: 1 / -1; }
+    .sug-ad > summary { cursor: pointer; font-weight: 700; color: #334155; padding: 8px 4px; }
+
     .no-results {
         text-align: center;
         padding: 30px;
@@ -1327,6 +1347,8 @@
         { isNew: true, specialty: "باطنية", gov: "بغداد", areas: ["الرصافة"], statusLabel: "🟢 متوفر مساءً", headerLabel: "طبيب تسلسل 54", title: "طبيب مقيم أقدم باطنية - يبحث عن مجمع طبي للعمل - تسلسل 54", details: "طبيب مقيم أقدم باطنية، طالب دراسات بورد عراقي (المرحلة الأخيرة) في مستشفى الكندي التعليمي، وله خبرة مع منظمتي أطباء بلا حدود الفرنسية والهلال الأحمر العراقي.<br>يبحث عن العمل في مجمع طبي ضمن الرصافة، في الفترة المسائية بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>يمتلك وسيلة نقل.<br>لا يشترط أن تكون العيادة شغالة.<br>نظام العمل المفضل: نظام الراتب المقطوع وبدون مقطوعة لو العيادة شغالة." },
         { isNew: true, specialty: "أمراض نفسية وعصبية", gov: "بغداد", areas: ["زيونة"], statusLabel: "🟢 متوفرة مساءً", headerLabel: "طبيبة تسلسل 55", title: "طبيبة ممارسة أمراض نفسية وعصبية - تبحث عن مجمع طبي للعمل - تسلسل 55", details: "طبيبة ممارسة أمراض نفسية وعصبية.<br>تبحث عن العمل في مجمع طبي ضمن زيونة، في الفترة المسائية، وهي من تتكفل بدفع الإيجار على أن تكون العيادة موثثة فقط.<br>تمتلك وسيلة نقل.<br>لا تشترط أن تكون العيادة شغالة.<br>نظام العمل المفضل: نظام الكشفية.<br>متاحة للاتفاق الفوري على كافة التفاصيل." },
         { isNew: true, specialty: "جلدية وتجميل", gov: "بغداد", areas: ["الخضراء", "العامرية", "المنصور"], statusLabel: "🟢 متوفرة مساءً", headerLabel: "طبيبة تسلسل 56", title: "طبيبة أخصائية جلدية وتجميل (بورد) - تبحث عن عيادة للعمل - تسلسل 56", details: "طبيبة أخصائية جلدية وتجميل (بورد)، تعمل حالياً في مستشفى أبو غريب (حالياً في إجازة أمومة)، وليس لديها عيادة سابقة.<br>تبحث عن العمل في الخضراء أو العامرية أو المنصور (وأيضاً حي العدل وحي القادسية)، في الفترة المسائية بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>تمتلك وسيلة نقل.<br>تبحث عن عيادة شغالة.<br>نظام العمل المفضل: نظام الكشفية.<br>متاحة للاتفاق الفوري على كافة التفاصيل." },
+        { isNew: true, specialty: "باطنية", gov: "بغداد", areas: ["الكرادة"], statusLabel: "🟢 متوفرة مساءً", headerLabel: "طبيبة تسلسل 57", title: "طبيبة مقيمة أقدم باطنية - تبحث عن مجمع طبي للعمل - تسلسل 57", details: "طبيبة مقيمة أقدم باطنية، عملت في طوارئ مستشفى العلوية الأهلي ومستشفى الزهراء الأهلي ومستشفى المؤيد الأهلي.<br>تبحث عن العمل في مجمع طبي ضمن الكرادة (جانب الرصافة)، في الفترة المسائية بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>تمتلك وسيلة نقل، وتعمل حالياً في مستشفى الفضيلية العام.<br>لا يهم أن تكون العيادة شغالة أو جديدة.<br>نظام العمل المفضل: نظام الراتب المقطوع وبدون مقطوعة لو العيادة شغالة.<br>متاحة للاتفاق الفوري على كافة التفاصيل." },
+        { isNew: true, specialty: "جراحة العظام والكسور", gov: "بغداد", areas: ["مدينة الحارثية"], statusLabel: "🟢 متوفر مساءً", headerLabel: "طبيب تسلسل 58", title: "طبيب أخصائي جراحة العظام والكسور (بورد) - يبحث عن مجمع طبي للعمل - تسلسل 58", details: "طبيب أخصائي جراحة العظام والكسور (بورد).<br>يبحث عن العمل في مجمع طبي ضمن الحارثية، في الفترة المسائية بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>يمتلك وسيلة نقل، ويعمل حالياً في مستشفى حكومي.<br>يبحث عن عيادة شغالة.<br>نظام العمل المفضل: نظام الكشفية.<br>متاح للاتفاق الفوري على كافة التفاصيل." },
         { specialty: "جراحة عامة", gov: "بغداد", areas: ["الكرخ"], statusLabel: "🔴 غير متوفر حالياً / محجوز", headerLabel: "طبيب Code A", title: "طبيب أخصائي (جراحة عامة وناظورية) - Code A", details: "سكن الغزالية، يطلب العمل في حي الجامعة، يشترط عيادة مؤثثة." },
         { specialty: "طب أسرة", gov: "بغداد", areas: ["الكرخ"], statusLabel: "🔴 غير متوفر حالياً / محجوز", headerLabel: "طبيب Code B", title: "طبيب أخصائي (طب أسرة) - Code B", details: "سكن علي الصالح، يطلب عيادة مؤثثة ومدفوعة الأجر، أوقات العمل مساءً." },
         { specialty: "باطنية", gov: "بغداد", areas: ["الكرخ"], statusLabel: "🔴 غير متوفر حالياً / محجوز", headerLabel: "طبيب Code C", title: "طبيب أخصائي (باطنية / جهاز هضمي) - Code C", details: "سكن الكاظمية، يطلب العمل في الكاظمية / شارع 60، أوقات العمل مساءً." },
@@ -2244,10 +2266,135 @@
                 </details>` : '';
         return `
             <div class="matches-box">
-                <div class="matches-title">${heading}</div>
+                <div class="matches-title">${heading} (${matches.length})</div>
+                ${sugShareHtml(item, type)}
                 ${strictHtml}
                 ${otherHtml}
             </div>`;
+    }
+
+    // ================= نسخ/إرسال المقترحات للطبيب أو للمجمع =================
+    // رابط خاص يفتح صفحة المقترحات مباشرة (#sug=...) — يصلح لإرساله للطبيب أو لصاحب المجمع
+    function sugUrl(id) {
+        return location.href.split('#')[0] + '#sug=' + id;
+    }
+
+    function sugShareHtml(item, type) {
+        const id = item._id;
+        const what = type === 'doctor' ? 'المجمعات المقترحة' : 'الأطباء المقترحين';
+        const native = (typeof navigator !== 'undefined' && navigator.share)
+            ? `<button type="button" class="share-opt share-native" onclick="shareSuggestions('native','${id}')">📲 إرسال عبر التطبيقات</button>` : '';
+        return `
+                <div class="sug-share">
+                    ${native}
+                    <button type="button" class="share-opt share-wide" onclick="shareSuggestions('text','${id}')">📋 نسخ كل ${what} كنص</button>
+                    <button type="button" class="share-opt" onclick="shareSuggestions('whatsapp','${id}')">💬 إرسال بالواتساب</button>
+                    <button type="button" class="share-opt" onclick="shareSuggestions('link','${id}')">🔗 نسخ رابط المقترحات</button>
+                </div>`;
+    }
+
+    function suggestionLine(m) {
+        const it = m.other;
+        const bits = [];
+        const dist = distanceLabel(m.km, m.eqPts);
+        if (m.areaOverlap) bits.push('نفس المنطقة');
+        else if (dist) bits.push(dist);
+        if (m.otherType === 'clinic') {
+            if (it.hours) bits.push('الوقت: ' + it.hours);
+            if (it.isClass) bits.push('مجمع كلاس');
+            const shared = m.shared.length > 3 ? m.shared.slice(0, 3).join('، ') + ' وغيرها' : m.shared.join('، ');
+            return `▪️ مجمع [${seqOf(it)}] ${adLocation(it, 'clinic')} — مطلوب: ${shared}${bits.length ? ' (' + bits.join('، ') + ')' : ''}`;
+        }
+        const t = timeOfDoctor(it);
+        if (t) bits.push(t);
+        return `▪️ طبيب [${seqOf(it)}] ${rowTitle(it, 'doctor')} — ${adLocation(it, 'doctor')}${bits.length ? ' (' + bits.join('، ') + ')' : ''}`;
+    }
+
+    function suggestionsText(item, type) {
+        const matches = findMatches(item, type);
+        const isClose = m => m.areaOverlap || (m.km !== null && m.km <= 6);
+        const strict = matches.filter(isClose);
+        const other = matches.filter(m => !isClose(m));
+        const lines = [];
+        if (type === 'doctor') {
+            lines.push(`🏢 المجمعات الطبية المقترحة لكم — ${rowTitle(item, 'doctor')} (تسلسل ${seqOf(item)})`);
+        } else {
+            lines.push(`👨‍⚕️ الأطباء المقترحون لمجمعكم (تسلسل ${seqOf(item)}) — ${adLocation(item, 'clinic')}`);
+        }
+        lines.push(`عدد المقترحات: ${matches.length}`);
+        if (!matches.length) {
+            lines.push('');
+            lines.push('لا توجد مقترحات مطابقة حالياً، وسنبلغكم فور توفر فرصة مناسبة.');
+        }
+        if (strict.length) {
+            lines.push('');
+            lines.push('📍 الأقرب إليكم:');
+            strict.forEach(m => lines.push(suggestionLine(m)));
+        }
+        if (other.length) {
+            lines.push('');
+            lines.push('🔍 خيارات أخرى (نفس جانب المدينة أو المحافظة):');
+            other.forEach(m => lines.push(suggestionLine(m)));
+        }
+        lines.push('');
+        lines.push('للتفاصيل والتنسيق أرسلوا رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
+        lines.push('🔗 المقترحات كاملة: ' + sugUrl(item._id));
+        return lines.join('\n');
+    }
+
+    function shareSuggestions(kind, id) {
+        const a = adIndex[id];
+        if (!a) return;
+        const text = suggestionsText(a.item, a.type);
+        const url = sugUrl(id);
+        if (kind === 'text') { copyText(text, 'تم نسخ المقترحات'); return; }
+        if (kind === 'link') { copyText(url, 'تم نسخ رابط المقترحات'); return; }
+        if (kind === 'native') {
+            if (navigator.share) navigator.share({ title: 'مقترحات منصة عيادات طبية', text: text.replace(/\n🔗 المقترحات كاملة: .*$/, ''), url }).catch(() => {});
+            return;
+        }
+        if (kind === 'whatsapp') {
+            const enc = encodeURIComponent(text);
+            if (enc.length > 3800) copyText(text, 'المقترحات طويلة، تم نسخها — الصقها في المحادثة');
+            else window.open('https://wa.me/?text=' + enc, '_blank', 'noopener');
+        }
+    }
+
+    // صفحة المقترحات التي يفتحها الطبيب أو صاحب المجمع من الرابط المرسَل له
+    function showSuggestions(id) {
+        const a = adIndex[id];
+        document.getElementById('filterSection').style.display = 'none';
+        document.getElementById('resultsContainer').style.display = 'block';
+        ['btnGeneral', 'btnDoctor', 'btnLatest', 'btnMatches'].forEach(b => {
+            const el = document.getElementById(b);
+            if (el) el.style.outline = 'none';
+        });
+        const grid = document.getElementById('resultsGrid');
+        const nav = `
+            <div class="back-to-browse-wrap" style="grid-column: 1 / -1;">
+                <button type="button" class="back-to-browse-btn" onclick="goHome()">⬅ الصفحة الرئيسية</button>
+            </div>`;
+        if (!a) {
+            grid.innerHTML = nav + `<div class="no-results" style="display: block;"><p>هذا الإعلان لم يعد متاحاً (ربما تم حجزه أو سحبه).</p></div>`;
+            return;
+        }
+        const isDoc = a.type === 'doctor';
+        const head = `
+            <div class="sug-head" style="grid-column: 1 / -1;">
+                <h2>${isDoc ? '🏢 المجمعات الطبية المقترحة لكم' : '👨‍⚕️ الأطباء المقترحون لمجمعكم'}</h2>
+                <p>${isDoc ? rowTitle(a.item, 'doctor') + ' — ' + adLocation(a.item, 'doctor') : adLocation(a.item, 'clinic')} (تسلسل ${seqOf(a.item)})<br>
+                للتفاصيل والتنسيق أرسلوا رقم التسلسل على واتساب المنصة ${WHATSAPP_DISPLAY}</p>
+            </div>`;
+        const m = matchesHtml(a.item, a.type) || `<div class="no-results" style="display: block;"><p>لا توجد مقترحات مطابقة حالياً، وسنبلغكم فور توفر فرصة مناسبة.</p></div>`;
+        const ad = `
+            <details class="sug-ad">
+                <summary>📄 عرض الإعلان الأصلي</summary>
+                <div class="card active-match">${cardInner(a.item, a.type, { typeTag: true })}</div>
+            </details>`;
+        grid.innerHTML = nav + head + m + ad;
+        setTimeout(() => {
+            document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
     }
 
     // ================= بحث برقم التسلسل (مع فصل سلس بين الأطباء والمجمعات) =================
@@ -2348,6 +2495,8 @@
         const h = location.hash || '';
         const m = h.match(/^#ad=([\w-]+)$/);
         if (m) { showSingleAd(m[1]); return; }
+        const sg = h.match(/^#sug=([\w-]+)$/);
+        if (sg) { showSuggestions(sg[1]); return; }
         const sq = h.match(/^#seq=(\d+)$/);
         if (sq) { showSeqResults(parseInt(sq[1], 10)); return; }
         if (h === '#negotiations') { showNegotiations(); return; }
@@ -2379,7 +2528,7 @@
         if (type === 'doctor') return item.gov + ' - ' + item.areas.join('، ');
         const d = item.details || '';
         const m = d.match(/<strong>الموقع:<\/strong>\s*([^<]*)/);
-        let loc = (m ? m[1] : d.replace(/<[^>]+>/g, '')).trim();
+        let loc = (m ? m[1] : d.split('<br>')[0].replace(/<[^>]+>/g, '')).trim();
         loc = loc.replace(/[.،\s]+$/, '');
         if (!normAr(loc).includes(normAr(item.gov))) loc = item.gov + ' - ' + loc;
         return loc;
