@@ -172,6 +172,29 @@
     }
 
     .btn-primary { background-color: #f59e0b; color: #0f172a; }
+    .cta-label {
+        color: #fbbf24;
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+    .form-btn {
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 12px 26px;
+        min-width: 300px;
+        border-radius: 12px;
+    }
+    .form-btn-title { font-size: 1.05rem; font-weight: 800; }
+    .form-btn-sub { font-size: 0.85rem; font-weight: 500; opacity: 0.85; }
+    @media (max-width: 600px) {
+        .cta-label { font-size: 0.85rem; margin-bottom: 10px; }
+        .cta-container { gap: 10px; }
+        .form-btn { min-width: 0; width: 100%; padding: 10px 12px; gap: 2px; }
+        .form-btn-title { font-size: 1rem; }
+        .form-btn-sub { font-size: 0.78rem; }
+    }
     .btn-secondary { background-color: #ffffff; color: var(--navy); border: none; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); }
     
     .btn-trigger {
@@ -1077,6 +1100,8 @@
         .seq-search-wrap, .seq-mode-wrap, .news-ticker-wrap, .secondary-actions,
         .global-whatsapp-banner, .filter-section, .container { padding-left: 16px; padding-right: 16px; }
         .seq-search-input { font-size: 16px; } /* يمنع التكبير التلقائي في آيفون */
+        .seq-search-input { min-width: 0; padding: 12px 10px; }
+        .seq-search-btn { padding: 12px 16px; }
         .secondary-actions .btn { font-size: 0.9rem; padding: 12px 8px; }
 
         .step-container { padding: 16px; }
@@ -1112,9 +1137,16 @@
         <h1>منصة عيادات طبية</h1>
         <div class="hero-trust-line">أول منصة للوساطة الطبية وتوفير العيادات في العراق منذ 4 سنوات</div>
         <p>ننسّق بين الأطباء وأفضل العيادات الشاغرة، ونوفر لأصحاب المجمعات الطبية الكفاءات المطلوبة.</p>
+        <div class="cta-label">سجّل طلبك عبر الاستمارة المناسبة لك</div>
         <div class="cta-container">
-            <a href="https://tally.so/r/7RrE0Z" target="_blank" class="btn btn-primary">أنا طبيب أبحث عن عيادة أو مستشفى أهلي</a>
-            <a href="https://tally.so/r/gD6z6l" target="_blank" class="btn btn-secondary">أنا صاحب مجمع طبي أو مستشفى أهلي وأبحث عن أطباء</a>
+            <a href="https://tally.so/r/7RrE0Z" target="_blank" class="btn btn-primary form-btn">
+                <span class="form-btn-title">📝 استمارة الأطباء</span>
+                <span class="form-btn-sub">أنا طبيب أبحث عن عيادة أو مستشفى أهلي</span>
+            </a>
+            <a href="https://tally.so/r/gD6z6l" target="_blank" class="btn btn-secondary form-btn">
+                <span class="form-btn-title">📝 استمارة المجمعات والمستشفيات</span>
+                <span class="form-btn-sub">أنا صاحب مجمع طبي أو مستشفى أهلي وأبحث عن أطباء</span>
+            </a>
         </div>
     </section>
 
