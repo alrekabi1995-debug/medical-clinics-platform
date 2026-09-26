@@ -863,6 +863,74 @@
         border-style: solid;
     }
 
+    .neg-modal-back {
+        position: fixed; inset: 0; z-index: 100;
+        background: rgba(15, 23, 42, 0.6);
+        display: flex; align-items: center; justify-content: center;
+        padding: 16px;
+    }
+    .neg-modal {
+        background: #ffffff; border-radius: 16px; width: 100%; max-width: 460px;
+        max-height: 90vh; overflow-y: auto; padding: 18px;
+        border-top: 5px solid var(--gold); text-align: right;
+    }
+    .neg-modal-title { font-size: 1.15rem; font-weight: 800; color: var(--navy); }
+    .neg-modal-self { font-size: 13px; color: #64748b; margin: 2px 0 10px; }
+    .neg-modal-sec { font-weight: 800; color: #334155; font-size: 14px; margin-top: 14px; }
+    .neg-modal-hint { font-size: 12px; color: #64748b; margin: 10px 0 6px; }
+    .neg-picks { display: flex; flex-direction: column; gap: 6px; }
+    .neg-pick {
+        text-align: right; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;
+        padding: 8px 10px; font-size: 13px; color: #334155; cursor: pointer;
+    }
+    .neg-pick b {
+        background: var(--navy); color: #ffffff; border-radius: 6px;
+        padding: 1px 7px; margin-left: 6px; font-size: 12px;
+    }
+    .neg-pick:hover { border-color: var(--gold); }
+    .neg-modal-cancel {
+        display: block; width: 100%; margin-top: 16px; background: none;
+        border: 1px solid #cbd5e1; color: #475569; border-radius: 8px;
+        padding: 9px; font-weight: 700; cursor: pointer;
+    }
+
+    .neg-box {
+        margin-top: 10px;
+        background: #fffbeb;
+        border: 1px solid #fcd34d;
+        border-radius: 10px;
+        padding: 10px;
+        text-align: right;
+    }
+    .neg-head { font-weight: 800; color: #92400e; margin-bottom: 6px; }
+    .neg-sub { font-size: 13px; font-weight: 700; color: #334155; margin: 8px 0 4px; }
+    .neg-empty { font-size: 13px; color: #92400e; margin-bottom: 6px; }
+    .neg-partner {
+        display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+        background: #ffffff; border: 1px solid #fde68a; border-radius: 8px;
+        padding: 6px 8px; margin-bottom: 6px; font-size: 13px;
+    }
+    .neg-partner a { font-weight: 800; color: var(--doc); text-decoration: none; }
+    .neg-partner-loc { color: #475569; flex: 1; min-width: 140px; }
+    .neg-unlink {
+        background: none; border: 1px solid #ef4444; color: #ef4444;
+        border-radius: 6px; font-size: 12px; padding: 3px 8px; cursor: pointer;
+    }
+    .neg-note {
+        background: #ffffff; border: 1px dashed #f59e0b; border-radius: 8px;
+        padding: 6px 8px; font-size: 13px; color: #334155;
+    }
+    .neg-form { display: flex; gap: 6px; margin-top: 8px; }
+    .neg-form input {
+        flex: 1; min-width: 0; padding: 8px 10px; font-size: 14px;
+        border: 1px solid #cbd5e1; border-radius: 8px;
+    }
+    .neg-btn {
+        background: var(--navy); color: #ffffff; border: none; border-radius: 8px;
+        padding: 8px 12px; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap;
+    }
+    @media (max-width: 600px) { .neg-form input { font-size: 16px; } }
+
     .match-confirm-btn {
         grid-column: 1 / -1;
         margin-top: 6px;
@@ -1474,7 +1542,7 @@
         { isNew: true, workplace: "hospital", specialty: "أطفال", gov: "بغداد", areas: ["الخضراء", "العامرية"], statusLabel: "🟢 متوفر مساءً", headerLabel: "طبيب تسلسل 30", title: "طبيب أخصائي أطفال وحديثي ولادة (بورد عربي) - يبحث عن مستشفى أهلي للعمل - تسلسل 30", details: "طبيب أخصائي أطفال وحديثي ولادة حاصل على شهادة (البورد العربي)، خريج 2019، ولديه عيادة سابقة.<br>يطلب العمل حصراً في مستشفى أهلي، في الخضراء أو العامرية أو نفق الشرطة أو حي العدل، في الفترة المسائية.<br>يمتلك وسيلة نقل، ويعمل حالياً في مستشفى حكومي.<br>نظام العمل المفضل: نظام الكشفية.<br>متاح للاتفاق الفوري على كافة التفاصيل." },
         { isNew: true, specialty: "طب أسرة", gov: "الانبار", areas: ["قضاء الفلوجة"], statusLabel: "🟢 متوفرة للعمل", headerLabel: "طبيبة تسلسل 31", title: "طبيبة مقيمة قدمى (طب أسرة) - تبحث عن عيادة للعمل - تسلسل 31", details: "طبيبة مقيمة قدمى في طب الأسرة، ولديها خبرة في عيادات التجميل اللاجراحي.<br>تبحث عن العمل في الفلوجة أو الكرمة، في أي وقت، بشرط أن تكون العيادة موثثة، وهي تتكفل بدفع الإيجار.<br>تمتلك وسيلة نقل، وتعمل حالياً في مستشفى حكومي.<br>تبحث عن عيادة شغالة.<br>نظام العمل المفضل: نظام الكشفية.<br>متاحة للاتفاق الفوري على كافة التفاصيل." },
         { isNew: true, specialty: "أطفال", gov: "بغداد", areas: ["حي الإعلام"], statusLabel: "🟢 متوفرة مساءً", headerLabel: "طبيبة تسلسل 32", title: "طبيبة أخصائية أطفال (دكتوراه) - تبحث عن عيادة للعمل - تسلسل 32", details: "طبيبة أخصائية أطفال حاصلة على شهادة الدكتوراه في طب الأطفال.<br>تبحث عن العمل في مجمع طبي في حي الإعلام والمناطق القريبة منه، في الفترة المسائية بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>لديها خبرة وعيادة سابقة وترغب بتغييرها، وتمتلك وسيلة نقل، وتعمل في مستشفى حكومي.<br>تبحث عن عيادة شغالة.<br>نظام العمل المفضل: نظام الكشفية." },
-        { isNew: true, workplace: "hospital", specialty: "طبيب ممارس عام", gov: "بغداد", areas: ["الحرية"], statusLabel: "🟢 متوفرة للعمل", headerLabel: "طبيبة تسلسل 33", title: "طبيبة مقيمة دورية (بكالوريوس طب وجراحة عامة) - تبحث عن مستشفى أهلي للعمل - تسلسل 33", details: "طبيبة مقيمة دورية (بكالوريوس طب وجراحة عامة).<br>تطلب العمل حصراً في مستشفى أهلي في الحرية أو أي منطقة متوسطة البعد عنها، في الفترة الصباحية أو المسائية.<br>نظام العمل المفضل: نظام الراتب الثابت المقطوع.<br>متاحة للاتفاق الفوري على كافة التفاصيل." },
+        { isNew: true, workplace: "hospital", specialty: "طبيب ممارس عام", gov: "بغداد", areas: ["الحرية"], statusLabel: "🔴 غير متوفر حالياً / محجوز", headerLabel: "طبيبة تسلسل 33", title: "طبيبة مقيمة دورية (بكالوريوس طب وجراحة عامة) - تبحث عن مستشفى أهلي للعمل - تسلسل 33", details: "طبيبة مقيمة دورية (بكالوريوس طب وجراحة عامة).<br>تطلب العمل حصراً في مستشفى أهلي في الحرية أو أي منطقة متوسطة البعد عنها، في الفترة الصباحية أو المسائية.<br>نظام العمل المفضل: نظام الراتب الثابت المقطوع.<br>متاحة للاتفاق الفوري على كافة التفاصيل." },
         { isNew: true, specialty: "نسائية وتوليد", gov: "بغداد", areas: ["الحرية"], statusLabel: "🟢 متوفرة للعمل", headerLabel: "طبيبة تسلسل 34", title: "طبيبة ممارسة نسائية وتوليد (مقيمة قدمى) - تبحث عن عيادة للعمل - تسلسل 34", details: "طبيبة ممارسة نسائية وتوليد (مقيمة قدمى)، عملت في عدة مستشفيات ومجمعات طبية.<br>تبحث عن العمل في عيادة قريبة من الحرية، في الفترة الصباحية أو المسائية بشرط أن تكون العيادة موثثة ومدفوعة الإيجار، مع توفير خط توصيل.<br>لا تعمل في المستشفيات الحكومية.<br>تبحث عن عيادة شغالة.<br>نظام العمل المفضل: نظام الراتب المقطوع وبدون مقطوعة لو العيادة شغالة.<br>متاحة للاتفاق الفوري على كافة التفاصيل." },
         { isNew: true, specialty: "عيون", gov: "بغداد", areas: ["حي الجهاد", "العامرية", "حي الجامعة", "الخضراء", "الغزالية"], statusLabel: "🟢 متوفرة مساءً", headerLabel: "طبيبة تسلسل 35", title: "طبيبة ممارسة عيون - تبحث عن مجمع طبي للعمل - تسلسل 35", details: "طبيبة ممارسة عيون، عملت في عدة مستشفيات وترغب بالانتقال بسبب بُعد مكان العمل عن السكن.<br>تبحث عن العمل في مجمع طبي في حي الجهاد أو العامرية أو حي الجامعة أو الخضراء أو الغزالية، في الفترة المسائية بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>تمتلك وسيلة نقل، وتعمل حالياً في مركز صحي للعيون.<br>لا يهم أن تكون العيادة شغالة أو جديدة.<br>نظام العمل المفضل: نظام الكشفية.<br>متاحة للاتفاق الفوري على كافة التفاصيل." },
         { isNew: true, specialty: "طب أسرة", gov: "بغداد", areas: ["الخضراء", "حي الجامعة", "اليرموك", "المنصور"], statusLabel: "🟢 متوفر للعمل", headerLabel: "طبيب تسلسل 36", title: "طبيب استشاري (دبلوم عالي طب أسرة) - يبحث عن عيادة للعمل - تسلسل 36", details: "طبيب استشاري (دبلوم عالي طب أسرة)، متقاعد.<br>يبحث عن العمل في الخضراء أو حي الجامعة أو اليرموك أو حي العدل أو المنصور، في أي وقت، بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>يمتلك وسيلة نقل.<br>نظام العمل المفضل: نظام الراتب المقطوع بشروط واتفاق، ولا مانع من أن يكون عدد المراجعين قليل أو كثير.<br>متاح للاتفاق الفوري على كافة التفاصيل." },
@@ -2001,12 +2069,132 @@
     function toggleNegotiating(id) {
         const arr = getNegotiatingIds();
         const i = arr.indexOf(id);
-        if (i >= 0) arr.splice(i, 1); else arr.push(id);
+        if (i >= 0) {
+            const partners = negotiationPartners(id);
+            const note = getNegNote(id);
+            if ((partners.length || note) && !confirm('إلغاء علامة التفاوض سيحذف أيضاً الربط مع الطرف الآخر وملاحظة التفاوض الخارجي. متابعة؟')) return;
+            arr.splice(i, 1);
+            setNegotiatingPairs(getNegotiatingPairs().filter(p => p.d !== id && p.c !== id));
+            setNegNote(id, '');
+            // الطرف الآخر: إن لم يبقَ له أي ربط أو ملاحظة، تُرفع عنه العلامة أيضاً
+            partners.forEach(pa => {
+                const pid = pa.item._id;
+                if (!negotiationPartners(pid).length && !getNegNote(pid)) {
+                    const k = arr.indexOf(pid);
+                    if (k >= 0) arr.splice(k, 1);
+                }
+            });
+        } else {
+            // لا نضع العلامة مباشرة: نسأل أولاً "التفاوض مع من؟"
+            openNegModal(id);
+            return;
+        }
         setNegotiatingIds(arr);
-        // أعِد رسم أي عرض مفتوح حالياً حتى يظهر التبديل فوراً
-        if (location.hash === '#negotiations') showNegotiations();
-        else if (location.hash.indexOf('#ad=') === 0) handleHash();
-        else if (selectedState.mode) renderResults();
+        refreshCurrentView();
+    }
+
+    // ================= نافذة "التفاوض مع من؟" =================
+    function openNegModal(id) {
+        const a = adIndex[id];
+        if (!a) return;
+        closeNegModal();
+        const isDoc = a.type === 'doctor';
+        const otherWord = isDoc ? 'المجمع' : 'الطبيب';
+        const self = isDoc ? a.item.headerLabel : ((a.item.venueType === 'hospital' ? 'مستشفى' : 'مجمع') + ' تسلسل ' + seqOf(a.item));
+        // في هذه النافذة الأهم هو الأقرب مكاناً، لذا نرتب المقترحين حسب المنطقة ثم المسافة
+        const picks = findMatches(a.item, a.type).slice().sort((x, y) => (y.areaOverlap - x.areaOverlap) || ((x.km ?? 9999) - (y.km ?? 9999))).slice(0, 8).map(m => {
+            const n = seqOf(m.other);
+            const lbl = m.otherType === 'clinic' ? adLocation(m.other, 'clinic').split('،')[0] : rowTitle(m.other, 'doctor');
+            return `<button type="button" class="neg-pick" onclick="negModalLink('${id}', ${n})"><b>${n}</b> ${escHtml(lbl)}</button>`;
+        }).join('');
+        const wrap = document.createElement('div');
+        wrap.className = 'neg-modal-back';
+        wrap.id = 'negModal';
+        wrap.innerHTML = `
+            <div class="neg-modal" role="dialog" aria-modal="true">
+                <div class="neg-modal-title">🤝 التفاوض مع من؟</div>
+                <div class="neg-modal-self">${escHtml(self)}</div>
+
+                <div class="neg-modal-sec">🔗 ${otherWord} من المنصة</div>
+                <div class="neg-form">
+                    <input type="text" inputmode="numeric" id="negModalSeq" placeholder="اكتب رقم تسلسل ${otherWord}" onkeydown="if(event.key==='Enter') negModalLink('${id}')">
+                    <button type="button" class="neg-btn" onclick="negModalLink('${id}')">ربط</button>
+                </div>
+                ${picks ? `<div class="neg-modal-hint">أو اختر من المقترحين:</div><div class="neg-picks">${picks}</div>` : ''}
+
+                <div class="neg-modal-sec">🌐 تفاوض خارجي (طرف غير مسجّل في المنصة)</div>
+                <div class="neg-form">
+                    <input type="text" id="negModalNote" placeholder="مثال: مجمع خارج المنصة في المنصور" onkeydown="if(event.key==='Enter') negModalExternal('${id}')">
+                    <button type="button" class="neg-btn" onclick="negModalExternal('${id}')">حفظ</button>
+                </div>
+
+                <button type="button" class="neg-modal-cancel" onclick="closeNegModal()">إلغاء</button>
+            </div>`;
+        wrap.addEventListener('click', e => { if (e.target === wrap) closeNegModal(); });
+        document.body.appendChild(wrap);
+        setTimeout(() => { const i = document.getElementById('negModalSeq'); if (i) i.focus(); }, 50);
+    }
+    function closeNegModal() {
+        const m = document.getElementById('negModal');
+        if (m) m.remove();
+    }
+    function markNegotiating(id) {
+        const arr = getNegotiatingIds();
+        if (!arr.includes(id)) { arr.push(id); setNegotiatingIds(arr); }
+    }
+    function negModalLink(id, numArg) {
+        const a = adIndex[id];
+        if (!a) return;
+        const raw = numArg !== undefined ? String(numArg) : (document.getElementById('negModalSeq').value || '').trim();
+        const num = parseInt(raw, 10);
+        if (isNaN(num)) { showToast('اكتب رقم تسلسل صحيح'); return; }
+        const pool = a.type === 'doctor' ? DOCTORS_DATA : GENERAL_CLINICS_DATA;
+        const other = pool.find(i => seqNum(i) === num);
+        if (!other) { showToast(a.type === 'doctor' ? 'لا يوجد مجمع بهذا التسلسل' : 'لا يوجد طبيب بهذا التسلسل'); return; }
+        closeNegModal();
+        markNegotiating(id);
+        if (a.type === 'doctor') confirmMatch(id, other._id); else confirmMatch(other._id, id);
+        showToast('تم وضع العلامة والربط مع تسلسل ' + num);
+    }
+    function negModalExternal(id) {
+        const text = (document.getElementById('negModalNote').value || '').trim();
+        if (!text) { showToast('اكتب مع من التفاوض الخارجي'); return; }
+        closeNegModal();
+        markNegotiating(id);
+        setNegNote(id, text);
+        showToast('تم وضع العلامة كتفاوض خارجي');
+        refreshCurrentView();
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNegModal(); });
+
+    // أعِد رسم أي عرض مفتوح حالياً حتى يظهر التغيير فوراً
+    function refreshCurrentView() {
+        const h = location.hash || '';
+        if (h === '#negotiations') showNegotiations();
+        else if (/^#(ad|seq|sug)=/.test(h)) handleHash();
+        else if (h.indexOf('#match=') === 0) handleHash();
+        else if (selectedState.mode && document.getElementById('resultsContainer').style.display === 'block') renderResults();
+    }
+
+    // ملاحظة "تفاوض خارجي" لكل إعلان (مع طرف غير مسجّل في المنصة)
+    function getNegNotes() {
+        try { return JSON.parse(localStorage.getItem('mtp_negotiating_notes') || '{}'); } catch (e) { return {}; }
+    }
+    function getNegNote(id) { return getNegNotes()[id] || ''; }
+    function setNegNote(id, text) {
+        const all = getNegNotes();
+        if (text) all[id] = text; else delete all[id];
+        try { localStorage.setItem('mtp_negotiating_notes', JSON.stringify(all)); } catch (e) {}
+    }
+    // الأطراف المرتبطة بهذا الإعلان في تفاوض (من التطابقات المؤكدة)
+    function negotiationPartners(id) {
+        return getNegotiatingPairs()
+            .filter(p => p.d === id || p.c === id)
+            .map(p => adIndex[p.d === id ? p.c : p.d])
+            .filter(Boolean);
+    }
+    function escHtml(t) {
+        return String(t).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
     }
     // تطابقات مؤكدة من صفحة "التطابقات المحتملة" (زوج طبيب + مجمع معاً)
     function getNegotiatingPairs() {
@@ -2035,14 +2223,35 @@
                 const parts = m[1].split('~').map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } });
                 showMatches(parts[0], parts[1] || '', false);
             }
-        } else if (location.hash === '#negotiations') {
-            showNegotiations();
+        } else {
+            refreshCurrentView();
         }
     }
     function removeConfirmedPair(docId, cId) {
         const k = pairKey(docId, cId);
         setNegotiatingPairs(getNegotiatingPairs().filter(p => pairKey(p.d, p.c) !== k));
-        if (location.hash === '#negotiations') showNegotiations();
+        refreshCurrentView();
+    }
+
+    // ربط إعلان "قيد التفاوض" برقم تسلسل الطرف الآخر من المنصة
+    function linkNegotiation(id, btn) {
+        const a = adIndex[id];
+        if (!a) return;
+        const box = btn.closest('.neg-box');
+        const num = parseInt((box.querySelector('.neg-seq-input').value || '').trim(), 10);
+        if (isNaN(num)) { showToast('اكتب رقم تسلسل صحيح'); return; }
+        const pool = a.type === 'doctor' ? DOCTORS_DATA : GENERAL_CLINICS_DATA;
+        const other = pool.find(i => seqNum(i) === num);
+        if (!other) { showToast(a.type === 'doctor' ? 'لا يوجد مجمع بهذا التسلسل' : 'لا يوجد طبيب بهذا التسلسل'); return; }
+        if (a.type === 'doctor') confirmMatch(id, other._id); else confirmMatch(other._id, id);
+        showToast('تم الربط مع تسلسل ' + num);
+    }
+    function saveNegNote(id, btn) {
+        const box = btn.closest('.neg-box');
+        const text = (box.querySelector('.neg-note-input').value || '').trim();
+        setNegNote(id, text);
+        showToast(text ? 'تم حفظ ملاحظة التفاوض الخارجي' : 'تم حذف الملاحظة');
+        refreshCurrentView();
     }
     function confirmMatchBtnHtml(doctorId, complexId) {
         if (!ADMIN) return '';
@@ -2054,9 +2263,42 @@
 
     function adminToggleBtnHtml(item) {
         if (!ADMIN) return '';
-        const on = isNegotiating(item._id);
-        const label = on ? '✅ قيد تفاوض — إلغاء العلامة' : '🤝 وضع علامة: قيد تفاوض';
-        return `<button type="button" class="admin-toggle-btn${on ? ' on' : ''}" onclick="toggleNegotiating('${item._id}')">${label}</button>`;
+        const id = item._id;
+        const on = isNegotiating(id);
+        if (!on) {
+            return `<button type="button" class="admin-toggle-btn" onclick="toggleNegotiating('${id}')">🤝 وضع علامة: قيد تفاوض</button>`;
+        }
+        const isDoc = (adIndex[id] || {}).type === 'doctor';
+        const otherWord = isDoc ? 'مجمع' : 'طبيب';
+        const partners = negotiationPartners(id);
+        const note = getNegNote(id);
+        const partnersHtml = partners.map(pa => {
+            const loc = pa.type === 'clinic' ? adLocation(pa.item, 'clinic') : rowTitle(pa.item, 'doctor') + ' — ' + adLocation(pa.item, 'doctor');
+            const dId = isDoc ? id : pa.item._id, cId = isDoc ? pa.item._id : id;
+            return `
+                            <div class="neg-partner">
+                                <a href="#ad=${pa.item._id}">${pa.type === 'clinic' ? (pa.item.venueType === 'hospital' ? '🏥 مستشفى' : '🏢 مجمع') + ' تسلسل ' + seqOf(pa.item) : '👨‍⚕️ ' + pa.item.headerLabel}</a>
+                                <span class="neg-partner-loc">${loc}</span>
+                                <button type="button" class="neg-unlink" onclick="removeConfirmedPair('${dId}','${cId}')">فك الربط</button>
+                            </div>`;
+        }).join('');
+        const summary = partners.length || note ? '' : `<div class="neg-empty">لم يُحدَّد الطرف الآخر بعد — اربطه برقم تسلسله أو اكتب ملاحظة تفاوض خارجي.</div>`;
+        return `
+                        <div class="neg-box">
+                            <div class="neg-head">🤝 قيد التفاوض</div>
+                            ${summary}
+                            ${partners.length ? `<div class="neg-sub">مع ${otherWord} من المنصة:</div>${partnersHtml}` : ''}
+                            ${note ? `<div class="neg-sub">🌐 تفاوض خارجي:</div><div class="neg-note">${escHtml(note)}</div>` : ''}
+                            <div class="neg-form">
+                                <input type="text" inputmode="numeric" class="neg-seq-input" placeholder="تسلسل ال${otherWord}">
+                                <button type="button" class="neg-btn" onclick="linkNegotiation('${id}', this)">🔗 ربط</button>
+                            </div>
+                            <div class="neg-form">
+                                <input type="text" class="neg-note-input" placeholder="تفاوض خارجي (مثال: مجمع خارج المنصة في المنصور)" value="${escHtml(note)}">
+                                <button type="button" class="neg-btn" onclick="saveNegNote('${id}', this)">💾 حفظ</button>
+                            </div>
+                            <button type="button" class="admin-toggle-btn on" onclick="toggleNegotiating('${id}')">✅ إلغاء علامة التفاوض</button>
+                        </div>`;
     }
 
     function adUrl(id) {
@@ -2164,7 +2406,8 @@
         opts = opts || {};
         const isRed = item.statusLabel && item.statusLabel.includes('غير متوفر');
         const isYellow = item.statusLabel && item.statusLabel.includes('قيد التفاوض');
-        const badgeClass = isRed ? 'bg-red' : (isYellow ? 'bg-yellow' : 'bg-green');
+        const negAdmin = ADMIN && item._id && isNegotiating(item._id);
+        const badgeClass = isRed ? 'bg-red' : ((isYellow || negAdmin) ? 'bg-yellow' : 'bg-green');
         const isHospVenue = type === 'clinic' && item.venueType === 'hospital';
         const typeLabel = type === 'clinic' ? (isHospVenue ? '🏥 مستشفى أهلي بحاجة لطبيب' : '🏢 مجمع بحاجة لطبيب') : '👨‍⚕️ طبيب بحاجة لعيادة';
         const typeTag = opts.typeTag ? `<div class="type-tag${isHospVenue ? ' hospital-venue-tag' : ''}">${typeLabel}</div>` : '';
@@ -3010,6 +3253,7 @@
                             <div class="match-loc">🏢 ${adLocation(complex.item, 'clinic')}</div>
                             <a class="list-open" href="#ad=${complex.item._id}">تفاصيل المجمع</a>
                         </div>
+                        ${(getNegNote(doctor.item._id) || getNegNote(complex.item._id)) ? `<div class="list-tags match-badges">${[doctor, complex].filter(x => getNegNote(x.item._id)).map(x => `<span class="list-tag match-warn">🌐 ${x.type === 'doctor' ? 'الطبيب' : 'المجمع'} — تفاوض خارجي: ${escHtml(getNegNote(x.item._id))}</span>`).join('')}</div>` : ''}
                         ${bothDetailsHtml(doctor.item._id, complex.item._id)}
                         <button type="button" class="list-remove" onclick="removeConfirmedPair('${doctor.item._id}','${complex.item._id}')">إزالة هذا التطابق</button>
                     </div>`;
@@ -3023,6 +3267,7 @@
                         <span class="list-num">${seqOf(item)}</span>
                         <div class="list-main">
                             <div class="list-loc">${label}</div>
+                            <div class="list-tags">${getNegNote(item._id) ? `<span class="list-tag match-warn">🌐 تفاوض خارجي: ${escHtml(getNegNote(item._id))}</span>` : '<span class="list-tag">الطرف الآخر غير محدد</span>'}</div>
                         </div>
                         <a class="list-open" href="#ad=${item._id}">التفاصيل</a>
                         <button type="button" class="list-remove" onclick="toggleNegotiating('${item._id}')">إزالة</button>
@@ -3040,7 +3285,8 @@
         if (items.length) {
             textLines.push('🔖 إعلانات موسومة منفردة:');
             items.forEach(({ item, type }) => {
-                textLines.push('▪️ ' + (type === 'clinic' ? 'مجمع' : 'طبيب') + ` [${seqOf(item)}] ` + adLocation(item, type === 'clinic' ? 'clinic' : 'doctor'));
+                const nt = getNegNote(item._id);
+                textLines.push('▪️ ' + (type === 'clinic' ? 'مجمع' : 'طبيب') + ` [${seqOf(item)}] ` + adLocation(item, type === 'clinic' ? 'clinic' : 'doctor') + (nt ? ' — تفاوض خارجي: ' + nt : ''));
             });
         }
         const text = textLines.join('\n');
@@ -3050,7 +3296,7 @@
                 <div class="list-group">🤝 تطابقات مؤكدة <span class="list-count">${pairs.length}</span></div>
                 <div class="match-rows">${pairsBody}</div>` : '';
         const singleSection = items.length ? `
-                <div class="list-group">🔖 إعلانات موسومة منفردة <span class="list-count">${items.length}</span></div>
+                <div class="list-group">🔖 قيد التفاوض (تفاوض خارجي أو طرف غير محدد) <span class="list-count">${items.length}</span></div>
                 <div class="match-rows">${singleBody}</div>` : '';
 
         document.getElementById('resultsGrid').innerHTML = `
