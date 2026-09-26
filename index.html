@@ -227,11 +227,13 @@
     .main-trigger-section {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        grid-auto-flow: column; /* عمود للأطباء وعمود للمجمعات والمستشفيات */
         max-width: 900px;
         margin: 35px auto 10px;
     }
     @media (max-width: 600px) {
-        .main-trigger-section { grid-template-columns: 1fr; }
+        .main-trigger-section { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; }
     }
     .main-trigger-section .btn { justify-content: center; text-align: center; }
 
@@ -1222,14 +1224,14 @@
         <button type="button" class="btn btn-trigger" id="btnGeneral" onclick="startSearch('general')">
             أطباء بحاجة لعيادات طبية
         </button>
+        <button type="button" class="btn btn-hospdoc" id="btnHospDoc" onclick="startSearch('hospdoc')">
+            أطباء يطلبون العمل في مستشفى أهلي
+        </button>
         <button type="button" class="btn btn-doctor-search" id="btnDoctor" onclick="startSearch('manager')">
             مجمعات طبية بحاجة للأطباء
         </button>
         <button type="button" class="btn btn-hospital" id="btnHospital" onclick="startSearch('hospital')">
             مستشفيات أهلية بحاجة للأطباء
-        </button>
-        <button type="button" class="btn btn-hospdoc" id="btnHospDoc" onclick="startSearch('hospdoc')">
-            أطباء يطلبون العمل في مستشفى أهلي
         </button>
     </div>
 
