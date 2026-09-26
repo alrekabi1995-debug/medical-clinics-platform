@@ -897,6 +897,8 @@
     .qf-chip.on { background: var(--navy); border-color: var(--navy); color: #ffffff; }
     .qf-count { margin-inline-start: auto; font-size: 13px; color: #64748b; font-weight: 700; }
     .empty-form-btn { margin: 6px 0 10px; width: 100%; justify-content: center; }
+    .admin-reserved { border-color: #fca5a5; background: #fff7f7; }
+    .admin-reserved summary { color: #991b1b !important; }
     .backup-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .backup-hint { font-size: 12px; color: #64748b; margin: 6px 0 14px; }
 
@@ -1753,7 +1755,7 @@
         { isNew: true, isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد", "طب أسرة"], gov: "بغداد", areas: ["ناحية الوحدة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، طب أسرة) - مجمع طبي (بغداد - بسماية) - تسلسل 81", details: "<strong>الموقع:</strong> بغداد - بسماية - قرب ملعب أبو ثيلة الرياضي.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس).<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، طب أسرة.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد أطباء اختصاص آخرون حالياً." },
         { isNew: true, hours: "مساءً", specialties: ["باطنية", "جلدية وتجميل", "جراحة الكلى والمسالك البولية", "قلبية واوعية دموية"], gov: "بغداد", areas: ["أبو غريب"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (باطنية، جلدية وتجميل، جراحة الكلى والمسالك البولية، قلبية واوعية دموية) - مجمع طبي (بغداد - الكرخ - أبو غريب) - تسلسل 82", details: "<strong>الموقع:</strong> بغداد - الكرخ - أبو غريب - شارع الزيتون، قرب صيدلية حسنين.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> باطنية، جلدية وتجميل، جراحة الكلى والمسالك البولية، قلبية واوعية دموية.<br><strong>الأطباء المتواجدون حالياً:</strong> أختصاص أطفال ، مفاصل وروماتيزم ، نسائية ، جراح." },
         { isNew: true, hours: "صباحاً ومساءً", specialties: ["طبيب ممارس عام", "نسائية وتوليد"], gov: "بغداد", areas: ["الكرخ - المركز"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (طبيب ممارس عام، نسائية وتوليد) - مجمع طبي (بغداد - الكرخ - الرسالة الثانية) - تسلسل 83", details: "<strong>الموقع:</strong> بغداد - الكرخ - الرسالة الثانية.<br><strong>أوقات العمل المطلوبة:</strong> صباحاً ومساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> طبيب ممارس عام، نسائية وتوليد.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد أطباء اختصاص آخرون في المجمع (دون تفاصيل إضافية)." },
-        { isNew: true, isClass: true, hours: "مساءً", specialties: ["الغدد الصماء والسكري", "تغذية وعلاج سكري", "جراحة أوعية دموية ودوالي", "قلبية واوعية دموية", "نسائية وتوليد"], gov: "بغداد", areas: ["الوزيرية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (الغدد الصماء والسكري، تغذية وعلاج سكري، جراحة أوعية دموية ودوالي، قلبية واوعية دموية، نسائية وتوليد) - مجمع طبي (بغداد - الرصافة - الوزيرية - قرب الفيزا التركية) - تسلسل 84", details: "<strong>الموقع:</strong> بغداد - الرصافة - الوزيرية - قرب الفيزا التركية.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس).<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> الغدد الصماء والسكري، تغذية وعلاج سكري، جراحة أوعية دموية ودوالي، قلبية واوعية دموية، نسائية وتوليد.<br><strong>الأطباء المتواجدون حالياً:</strong> .صيدلاني." },
+        { isNew: true, isClass: true, venueType: "hospital", hours: "مساءً", specialties: ["الغدد الصماء والسكري", "تغذية وعلاج سكري", "جراحة أوعية دموية ودوالي", "قلبية واوعية دموية", "نسائية وتوليد"], gov: "بغداد", areas: ["الوزيرية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (الغدد الصماء والسكري، تغذية وعلاج سكري، جراحة أوعية دموية ودوالي، قلبية واوعية دموية، نسائية وتوليد) - مستشفى أهلي (بغداد - الرصافة - الوزيرية - قرب الفيزا التركية) - تسلسل 84", details: "<strong>الموقع:</strong> بغداد - الرصافة - الوزيرية - قرب الفيزا التركية.<br><strong>الحالة الحالية:</strong> المستشفى مصنّف (كلاس).<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> الغدد الصماء والسكري، تغذية وعلاج سكري، جراحة أوعية دموية ودوالي، قلبية واوعية دموية، نسائية وتوليد.<br><strong>الأطباء المتواجدون حالياً:</strong> صيدلاني." },
         { isNew: true, hours: "صباحاً ومساءً", specialties: ["أشعة وسونار ومفراس", "أطفال", "أمراض نفسية وعصبية", "أنف وأذن وحنجرة", "باطنية", "تخدير وعناية مركزة", "تغذية وعلاج سكري", "جراحة الكبرى والعصبية", "جراحة الكلى والمسالك البولية", "جراحة عامة", "جلدية وتجميل", "طب وجراحة الأسنان", "طبيب ممارس عام", "طوارئ وإصابات", "عيون", "مختبرات وتحليلات مرضية", "مفاصل وروماتيزم"], gov: "بغداد", areas: ["الغزالية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء بعدة اختصاصات - مجمع طبي (بغداد - الكرخ - الغزالية - شارع المرور) - تسلسل 85", details: "<strong>الموقع:</strong> بغداد - الكرخ - الغزالية - شارع المرور.<br><strong>الحالة الحالية:</strong> المجمع أو العيادة جديدة.<br><strong>أوقات العمل المطلوبة:</strong> صباحاً ومساءً<br><strong>آلية الراتب والعمل:</strong> كشفية فقط.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد أطباء اختصاص آخرون حالياً." },
         { isNew: true, hours: "مساءً", specialties: ["أطفال", "أنف وأذن وحنجرة", "الغدد الصماء والسكري", "باطنية", "تغذية وعلاج سكري", "جراحة عامة", "قلبية واوعية دموية", "نسائية وتوليد"], gov: "ذي قار", areas: ["الرفاعي"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء بعدة اختصاصات - مجمع طبي (ذي قار - الرفاعي) - تسلسل 86", details: "<strong>الموقع:</strong> ذي قار - الرفاعي.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> كشفية فقط.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد أطباء اختصاص آخرون حالياً." },
         { isNew: true, isClass: true, hours: "أي وقت", specialties: ["أطفال", "باطنية", "قلبية واوعية دموية", "نسائية وتوليد"], gov: "بغداد", areas: ["الاعظمية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (أطفال، باطنية، قلبية واوعية دموية، نسائية وتوليد) - مجمع طبي (بغداد - الرصافة - الاعظمية - شارع عمر) - تسلسل 87", details: "<strong>الموقع:</strong> بغداد - الرصافة - الاعظمية - شارع عمر.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس).<br><strong>أوقات العمل المطلوبة:</strong> أي وقت<br><strong>آلية الراتب والعمل:</strong> كشفية فقط.<br><strong>الاختصاصات المطلوبة:</strong> أطفال، باطنية، قلبية واوعية دموية، نسائية وتوليد.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد أطباء اختصاص آخرون في المجمع (دون تفاصيل إضافية)." },
@@ -2598,14 +2600,22 @@
         return (doctorItem.workplace === 'hospital') === (complexItem.venueType === 'hospital');
     }
 
-    function findMatches(item, type) {
+    // tier: 0 = مطابقة أساسية، 1 = مستشفى لطبيب طلب عيادة/مجمع (أو العكس) — تُعرض في الأخير،
+    // 2 = مجمع/مستشفى محجوز — للأدمن فقط وفي آخر القائمة (opts.includeReserved)
+    function findMatches(item, type, opts) {
+        opts = opts || {};
         const specs = specsOf(item);
         const results = [];
         if (type === 'doctor') {
             const docTime = timeOfDoctor(item);
             DOCTORS_DATA.forEach(c => {
-                if (c.statusLabel && c.statusLabel.includes('غير متوفر')) return;
-                if (!venueAccepts(c, item)) return;
+                let tier = 0;
+                const reserved = c.statusLabel && c.statusLabel.includes('غير متوفر');
+                if (reserved && !opts.includeReserved) return;
+                // طبيب "مستشفى حصراً" لا يُقترح له إلا مستشفى
+                if (item.workplace === 'hospital' && c.venueType !== 'hospital') return;
+                if (item.workplace !== 'hospital' && c.venueType === 'hospital') tier = 1;
+                if (reserved) tier = 2;
                 const shared = specsOf(c).filter(s => specs.includes(s));
                 if (!shared.length) return;
                 const tc = timeCompat(docTime, timeOfComplex(c));
@@ -2616,12 +2626,15 @@
                 const sameGroup = sameGov && !areaOverlap && sharesGroup(item.gov, item.areas, c.areas);
                 const km = distanceKm(item, c);
                 const eqPts = pointsEqual(item, c);
-                results.push({ other: c, otherType: 'clinic', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown, km, eqPts });
+                results.push({ other: c, otherType: 'clinic', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown, km, eqPts, tier });
             });
         } else {
             GENERAL_CLINICS_DATA.forEach(d => {
+                let tier = 0;
                 if (d.statusLabel && d.statusLabel.includes('غير متوفر')) return;
-                if (!venueAccepts(item, d)) return;
+                // طبيب "مستشفى حصراً" لا يُقترح لمجمع عادي؛ والمستشفى يُقترح له أطباء العيادات في الأخير
+                if (d.workplace === 'hospital' && item.venueType !== 'hospital') return;
+                if (d.workplace !== 'hospital' && item.venueType === 'hospital') tier = 1;
                 const shared = specsOf(d).filter(s => specs.includes(s));
                 if (!shared.length) return;
                 const tc = timeCompat(timeOfDoctor(d), timeOfComplex(item));
@@ -2632,12 +2645,13 @@
                 const sameGroup = sameGov && !areaOverlap && sharesGroup(item.gov, item.areas, d.areas);
                 const km = distanceKm(item, d);
                 const eqPts = pointsEqual(item, d);
-                results.push({ other: d, otherType: 'doctor', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown, km, eqPts });
+                results.push({ other: d, otherType: 'doctor', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown, km, eqPts, tier });
             });
         }
         // ترتيب المجمعات المقترحة لطبيب: أجور التنسيق الأعلى، ثم المجمع الشغال الكلاس، ثم الأقرب.
         // ترتيب الأطباء المقترحين لمجمع: الأقرب فالأقرب فقط (لا معنى لأجور التنسيق هنا).
         results.sort((a, b) => {
+            if (a.tier !== b.tier) return a.tier - b.tier;
             if (type === 'doctor') {
                 const byPriority = compareByPriority(a.other, b.other, a.km, b.km);
                 if (byPriority !== 0) return byPriority;
@@ -2657,6 +2671,8 @@
             ? ('🏢 مجمع ' + (adLocation(it, 'clinic')))
             : ('👨‍⚕️ ' + rowTitle(it, 'doctor') + ' — ' + adLocation(it, 'doctor'));
         const badges = [];
+        if (m.tier === 2) badges.push('<span class="list-tag match-caution">🔴 محجوز حالياً</span>');
+        if (m.otherType === 'clinic' && it.venueType === 'hospital') badges.push('<span class="list-tag">🏥 مستشفى أهلي</span>');
         if (m.otherType === 'clinic' && ADMIN && isNotYetOpen(it)) badges.push(`<span class="list-tag match-wait">🚧 قيد الإنشاء - يفتح خلال ${daysUntilOpen(it)} يوم</span>`);
         if (m.otherType === 'clinic' && ADMIN && coordFeeOf(it) > 0) badges.push(`<span class="list-tag match-fee">💰 أجور تنسيق أعلى</span>`);
         if (m.otherType === 'clinic' && ADMIN && isWorkingClass(it)) badges.push(`<span class="list-tag match-good">🏆 مجمع شغال كلاس</span>`);
@@ -2700,12 +2716,16 @@
     }
 
     function matchesHtml(item, type) {
-        const matches = findMatches(item, type);
-        if (!matches.length) return '';
+        const all = findMatches(item, type, { includeReserved: ADMIN });
+        const matches = all.filter(m => m.tier !== 2);
+        const reservedM = all.filter(m => m.tier === 2);
+        if (!matches.length && !reservedM.length) return '';
         const heading = type === 'doctor' ? '🔎 مجمعات قد تناسبك' : '🔎 أطباء قد يناسبونكم';
         const isClose = m => m.areaOverlap || (m.km !== null && m.km <= 6);
-        const strict = matches.filter(isClose);
-        const other = matches.filter(m => !isClose(m));
+        const base = matches.filter(m => !m.tier);
+        const tier1 = matches.filter(m => m.tier === 1);
+        const strict = base.filter(isClose);
+        const other = base.filter(m => !isClose(m));
         const strictHtml = strict.length
             ? strict.map(matchRowHtml).join('')
             : `<div class="no-strict-match">لا توجد مطابقات في نفس المنطقة تحديداً حالياً.</div>`;
@@ -2714,12 +2734,25 @@
                     <summary>🔍 احتمال تطابقات أخرى (نفس جانب المدينة أو المحافظة) — ${other.length}</summary>
                     ${other.map(matchRowHtml).join('')}
                 </details>` : '';
+        const t1Title = type === 'doctor' ? '🏥 مستشفيات أهلية قد تناسبك أيضاً' : '👨‍⚕️ أطباء آخرون (طلبوا عيادة أو مجمعاً)';
+        const tier1Html = tier1.length ? `
+                <details class="matches-more"${base.length ? '' : ' open'}>
+                    <summary>${t1Title} — ${tier1.length}</summary>
+                    ${tier1.map(matchRowHtml).join('')}
+                </details>` : '';
+        const reservedHtml = reservedM.length ? `
+                <details class="matches-more admin-reserved">
+                    <summary>🔒 مجمعات ومستشفيات محجوزة (للأدمن فقط) — ${reservedM.length}</summary>
+                    ${reservedM.map(matchRowHtml).join('')}
+                </details>` : '';
         return `
             <div class="matches-box">
                 <div class="matches-title">${heading} (${matches.length})</div>
-                ${sugShareHtml(item, type)}
-                ${strictHtml}
+                ${matches.length ? sugShareHtml(item, type) : ''}
+                ${base.length ? strictHtml : ''}
                 ${otherHtml}
+                ${tier1Html}
+                ${reservedHtml}
             </div>`;
     }
 
@@ -2753,7 +2786,7 @@
             if (it.hours) bits.push('الوقت: ' + it.hours);
             if (it.isClass) bits.push('مجمع كلاس');
             const shared = m.shared.length > 3 ? m.shared.slice(0, 3).join('، ') + ' وغيرها' : m.shared.join('، ');
-            return `▪️ مجمع [${seqOf(it)}] ${adLocation(it, 'clinic')} — مطلوب: ${shared}${bits.length ? ' (' + bits.join('، ') + ')' : ''}`;
+            return `▪️ ${it.venueType === 'hospital' ? 'مستشفى' : 'مجمع'} [${seqOf(it)}] ${adLocation(it, 'clinic')} — مطلوب: ${shared}${bits.length ? ' (' + bits.join('، ') + ')' : ''}`;
         }
         const t = timeOfDoctor(it);
         if (t) bits.push(t);
@@ -2763,8 +2796,9 @@
     function suggestionsText(item, type) {
         const matches = findMatches(item, type);
         const isClose = m => m.areaOverlap || (m.km !== null && m.km <= 6);
-        const strict = matches.filter(isClose);
-        const other = matches.filter(m => !isClose(m));
+        const strict = matches.filter(m => !m.tier && isClose(m));
+        const other = matches.filter(m => !m.tier && !isClose(m));
+        const tier1 = matches.filter(m => m.tier === 1);
         const lines = [];
         if (type === 'doctor') {
             lines.push(`🏢 المجمعات الطبية المقترحة لكم — ${rowTitle(item, 'doctor')} (تسلسل ${seqOf(item)})`);
@@ -2785,6 +2819,11 @@
             lines.push('');
             lines.push('🔍 خيارات أخرى (نفس جانب المدينة أو المحافظة):');
             other.forEach(m => lines.push(suggestionLine(m)));
+        }
+        if (tier1.length) {
+            lines.push('');
+            lines.push(type === 'doctor' ? '🏥 مستشفيات أهلية مناسبة أيضاً:' : '👨‍⚕️ أطباء آخرون (طلبوا عيادة أو مجمعاً):');
+            tier1.forEach(m => lines.push(suggestionLine(m)));
         }
         lines.push('');
         lines.push('للتفاصيل والتنسيق أرسلوا رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
@@ -3088,11 +3127,12 @@
                 const key = d._id + '|' + m.other._id;
                 if (seen.has(key)) return;
                 seen.add(key);
-                pairs.push({ doctor: d, complex: m.other, sameGov: m.sameGov, areaOverlap: m.areaOverlap, sameGroup: m.sameGroup, timeUnknown: m.timeUnknown, km: m.km, eqPts: m.eqPts });
+                pairs.push({ doctor: d, complex: m.other, sameGov: m.sameGov, areaOverlap: m.areaOverlap, sameGroup: m.sameGroup, timeUnknown: m.timeUnknown, km: m.km, eqPts: m.eqPts, tier: m.tier });
             });
         });
         // أجور التنسيق الأعلى أولاً، ثم المجمع الشغال الكلاس، ثم الأقرب مسافة
         pairs.sort((a, b) => {
+            if (a.tier !== b.tier) return a.tier - b.tier; // المستشفيات في الأخير
             const byPriority = compareByPriority(a.complex, b.complex, a.km, b.km);
             if (byPriority !== 0) return byPriority;
             return (b.areaOverlap - a.areaOverlap) || (b.sameGroup - a.sameGroup) || (b.sameGov - a.sameGov) || (a.timeUnknown - b.timeUnknown);
@@ -3204,8 +3244,9 @@
         }
 
         const isClose = p => p.areaOverlap || (p.km !== null && p.km <= 6);
-        const strictPairs = pairs.filter(isClose);
-        const otherPairs = pairs.filter(p => !isClose(p));
+        const strictPairs = pairs.filter(p => !p.tier && isClose(p));
+        const otherPairs = pairs.filter(p => !p.tier && !isClose(p));
+        const hospPairs = pairs.filter(p => p.tier === 1);
 
         let body = '';
         if (!pairs.length) {
@@ -3219,6 +3260,13 @@
                 <details class="matches-more"${strictPairs.length ? '' : ' open'}>
                     <summary>🔍 احتمال تطابقات أخرى (نفس جانب المدينة أو المحافظة) — ${otherPairs.length}</summary>
                     ${otherPairs.map(pairRowHtml).join('')}
+                </details>`;
+            }
+            if (hospPairs.length) {
+                body += `
+                <details class="matches-more">
+                    <summary>🏥 مستشفيات أهلية مناسبة أيضاً — ${hospPairs.length}</summary>
+                    ${hospPairs.map(pairRowHtml).join('')}
                 </details>`;
             }
         }
