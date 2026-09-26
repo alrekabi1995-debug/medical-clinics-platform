@@ -182,6 +182,35 @@
         padding: 0 20px;
     }
 
+    /* الأزرار الرئيسية الأربعة: شبكة متناسقة بعرض ثابت */
+    .main-trigger-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        max-width: 900px;
+        margin: 35px auto 10px;
+    }
+    @media (max-width: 600px) {
+        .main-trigger-section { grid-template-columns: 1fr; }
+    }
+    .main-trigger-section .btn { justify-content: center; text-align: center; }
+
+    /* زرّا آخر الإضافات والتطابقات تحت شريط الأخبار */
+    .secondary-actions {
+        max-width: 900px;
+        margin: 16px auto 0;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    .secondary-actions .btn {
+        justify-content: center;
+        text-align: center;
+        padding: 12px 14px;
+        font-size: 0.95rem;
+        border-radius: 12px;
+    }
+
     .global-whatsapp-banner {
         max-width: 800px;
         margin: 25px auto 10px;
@@ -398,6 +427,26 @@
         margin-top: 8px;
         background-color: #128c7e;
     }
+
+    .btn-hospital {
+        background-color: #dc2626;
+        color: white;
+        font-size: 1rem;
+        padding: 14px 30px;
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    }
+    .btn-hospdoc {
+        background-color: #0f766e;
+        color: white;
+        font-size: 1rem;
+        padding: 14px 30px;
+        box-shadow: 0 4px 12px rgba(15, 118, 110, 0.3);
+    }
+    .step-container.hospital-mode { border-color: #dc2626; }
+    .hospital-mode .option-pill.selected { background-color: #dc2626; border-color: #dc2626; }
+    .step-container.hospdoc-mode { border-color: #0f766e; }
+    .hospdoc-mode .option-pill.selected { background-color: #0f766e; border-color: #0f766e; }
+    .type-tag.hospital-venue-tag { background-color: #fee2e2; color: #991b1b; }
 
     .btn-latest {
         background-color: #f59e0b;
@@ -994,6 +1043,47 @@
         grid-column: 1 / -1;
         display: none;
     }
+
+    /* ================= تحسينات الهواتف ================= */
+    body { padding-bottom: 80px; }
+    .home-fab.hidden-fab { display: none; }
+    @media (max-width: 600px) {
+        .hero { padding: 28px 16px 32px; }
+        .hero h1 { font-size: 1.7rem; margin: 8px 0 10px; }
+        .hero p { font-size: 0.95rem; margin-bottom: 18px; }
+        .hero-trust-line { font-size: 0.8rem; padding: 7px 14px; margin-bottom: 14px; }
+        .cta-container .btn { width: 100%; justify-content: center; text-align: center; font-size: 0.95rem; }
+
+        .main-trigger-section { margin: 22px auto 6px; padding: 0 16px; gap: 10px; }
+        .main-trigger-section .btn { padding: 12px 16px; font-size: 0.95rem; }
+        .seq-search-wrap, .seq-mode-wrap, .news-ticker-wrap, .secondary-actions,
+        .global-whatsapp-banner, .filter-section, .container { padding-left: 16px; padding-right: 16px; }
+        .seq-search-input { font-size: 16px; } /* يمنع التكبير التلقائي في آيفون */
+        .secondary-actions .btn { font-size: 0.9rem; padding: 12px 8px; }
+
+        .step-container { padding: 16px; }
+        .step-title { font-size: 1.05rem; }
+        .option-pill { padding: 9px 14px; font-size: 13px; }
+        .selection-summary { flex-direction: column; align-items: stretch; }
+        .summary-btns { justify-content: space-between; }
+
+        .grid { grid-template-columns: 1fr; gap: 14px; }
+        .card-body { padding: 16px; }
+        .list-view { padding: 14px; }
+        .list-row { gap: 8px; }
+
+        /* بطاقة التطابق: الطبيب فوق، السهم في المنتصف، المجمع تحت */
+        .match-pair { padding: 14px 4px; gap: 8px; }
+        .match-side { min-width: 100%; }
+        .match-arrow { width: 100%; text-align: center; transform: rotate(90deg); line-height: 1; }
+
+        .global-wa-box { flex-direction: column; text-align: center; padding: 16px; }
+        .global-wa-text { text-align: center; }
+
+        .home-fab, .admin-fab { padding: 10px 14px; font-size: 13px; bottom: 14px; }
+        .home-fab { left: 14px; }
+        .admin-fab { right: 14px; }
+    }
 </style>
 </head>
 <body>
@@ -1017,11 +1107,11 @@
         <button type="button" class="btn btn-doctor-search" id="btnDoctor" onclick="startSearch('manager')">
             مجمعات طبية بحاجة للأطباء
         </button>
-        <button type="button" class="btn btn-latest" id="btnLatest" onclick="showLatestAdditions()">
-            🆕 آخر الإضافات
+        <button type="button" class="btn btn-hospital" id="btnHospital" onclick="startSearch('hospital')">
+            🏥 مستشفيات أهلية بحاجة للأطباء
         </button>
-        <button type="button" class="btn btn-matches" id="btnMatches" onclick="startSearch('match')">
-            🔗 التطابقات المحتملة
+        <button type="button" class="btn btn-hospdoc" id="btnHospDoc" onclick="startSearch('hospdoc')">
+            👨‍⚕️ أطباء يطلبون العمل في مستشفى أهلي
         </button>
     </div>
 
@@ -1042,6 +1132,15 @@
                 <div class="ticker-content" id="tickerContent"></div>
             </div>
         </div>
+    </div>
+
+    <div class="secondary-actions">
+        <button type="button" class="btn btn-latest" id="btnLatest" onclick="showLatestAdditions()">
+            🆕 آخر الإضافات
+        </button>
+        <button type="button" class="btn btn-matches" id="btnMatches" onclick="startSearch('match')">
+            🔗 التطابقات المحتملة
+        </button>
     </div>
 
     <div class="global-whatsapp-banner">
@@ -1515,7 +1614,15 @@
         { isNew: true, isClass: true, venueType: "hospital", coordFee: 850, hours: "أي وقت", specialties: ["جراحة عامة", "عيون", "أنف وأذن وحنجرة", "الغدد الصماء والسكري", "جلدية وتجميل"], gov: "بغداد", areas: ["الوزيرية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (جراحة عامة، عيون، أنف وأذن وحنجرة، الغدد الصماء والسكري، جراحة تجميلية) - مستشفى أهلي (بغداد - الرصافة - الوزيرية) - تسلسل 99", details: "<strong>الموقع:</strong> بغداد - الرصافة - الوزيرية، قرب محمد القاسم.<br><strong>الحالة الحالية:</strong> المستشفى مصنّف (كلاس).<br><strong>أوقات العمل المطلوبة:</strong> أي وقت<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>عدد المراجعين:</strong> عالٍ.<br><strong>التجهيزات:</strong> متوفرة مسبقاً في المستشفى.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد أطباء اختصاص آخرون في المستشفى (دون تفاصيل إضافية)." },
         { isNew: true, coordFee: 1000, hours: "صباحاً ومساءً", specialties: ["نسائية وتوليد", "مختبرات وتحليلات مرضية", "طبيب ممارس عام", "جلدية وتجميل", "طب وجراحة الأسنان"], gov: "بغداد", areas: ["الرصافة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، مختبرات وتحليلات مرضية، طبيب ممارس عام، جلدية وتجميل، طب وجراحة الأسنان) - مجمع طبي (بغداد - الرصافة) - تسلسل 100", details: "<strong>الموقع:</strong> بغداد - الرصافة - قرب كلية الإمام الصادق عليه السلام.<br><strong>الحالة الحالية:</strong> المجمع أو العيادة جديدة.<br><strong>أوقات العمل المطلوبة:</strong> صباحاً ومساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد أطباء اختصاص آخرون حالياً." },
         { isNew: true, coordFee: 650, hours: "أي وقت", specialties: ["نسائية وتوليد", "باطنية"], gov: "بغداد", areas: ["الدورة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، باطنية) - مجمع طبي (بغداد - الكرخ - الدورة - البوعيثة) - تسلسل 101", details: "<strong>الموقع:</strong> بغداد - الكرخ - الدورة - البوعيثة، الشارع العام، بداية المنطقة.<br><strong>الحالة الحالية:</strong> المجمع أو العيادة جديدة.<br><strong>أوقات العمل المطلوبة:</strong> أي وقت<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>عدد المراجعين:</strong> عالٍ.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد طبيب جراحة العظام والكسور والمفاصل، وطبيب أنف وأذن وحنجرة، وصيدلاني (وهو صاحب المجمع نفسه)." },
+        { isNew: true, coordFee: 500, hours: "أي وقت", specialties: ["أطفال", "نسائية وتوليد", "باطنية", "جلدية وتجميل"], gov: "بغداد", areas: ["الحرية", "الدولعي"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (أطفال، نسائية وتوليد، باطنية، جلدية وتجميل) - مجمع طبي (بغداد - الكرخ - الحرية - الدولعي) - تسلسل 102", details: "<strong>الموقع:</strong> بغداد - الكرخ - الحرية - الدولعي، الشارع العام قرب سوق الدولعي.<br><strong>الحالة الحالية:</strong> المجمع أو العيادة جديدة (فتح جديد).<br><strong>أوقات العمل المطلوبة:</strong> أي وقت<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> أطفال، نسائية وتوليد، باطنية، جلدية وتجميل.<br><strong>عدد المراجعين:</strong> عالٍ.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد أطباء اختصاص حالياً، ويوجد صيدلاني (وهو صاحب المجمع)." },
+        { isNew: true, isClass: true, coordFee: 1100, hours: "مساءً", specialties: ["جلدية وتجميل", "أطفال", "جراحة عامة", "باطنية", "طب أسرة", "تغذية وعلاج سكري", "أمراض نفسية وعصبية"], gov: "بغداد", areas: ["الدورة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء بعدة اختصاصات - مجمع طبي (بغداد - الكرخ - الدورة - شارع الطعمة) - تسلسل 103", details: "<strong>الموقع:</strong> بغداد - الكرخ - الدورة - شارع الطعمة - الفلكة الأولى، قرب جامع خالد بن الوليد.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس)، والمجمع شغال.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> جلدية وتجميل، أطفال، جراحة عامة، باطنية، طب أسرة، تغذية وعلاج سكري، أمراض نفسية وعصبية.<br><strong>ملاحظة:</strong> لا مانع من طبيب أطفال بورد حديث، وباقي التفاصيل تُناقش خلال الاجتماع.<br><strong>الأطباء المتواجدون حالياً:</strong> طبيب مفاصل وروماتيزم، وطبيب أنف وأذن وحنجرة، وصيدلية (صيدلاني)." },
+        { isNew: true, coordFee: 500, hours: "مساءً", specialties: ["باطنية", "نسائية وتوليد", "أطفال"], gov: "بغداد", areas: ["مناطق أخرى"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (باطنية، نسائية وتوليد، أطفال) - مجمع طبي (بغداد - الكرخ - ناحية الرشيد) - تسلسل 104", details: "<strong>الموقع:</strong> بغداد - الكرخ - مناطق أخرى - ناحية الرشيد، مقابل مدرسة حماة للبنات.<br><strong>الحالة الحالية:</strong> المجمع أو العيادة جديدة.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> باطنية، نسائية وتوليد، أطفال.<br><strong>عدد المراجعين:</strong> عالٍ.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد أطباء اختصاص حالياً، ويوجد صيدلاني (وهو صاحب المجمع)." },
+        { isNew: true, isClass: true, coordFee: 500, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال", "جلدية وتجميل"], gov: "بغداد", areas: ["مدينة الصدر"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، أطفال، جلدية وتجميل) - مجمع طبي (بغداد - الرصافة - مدينة الصدر - شارع السفارة) - تسلسل 105", details: "<strong>الموقع:</strong> بغداد - الرصافة - مدينة الصدر - شارع السفارة، قطاع 76.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس)، والمجمع شغال.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> كشفية فقط.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، أطفال، جلدية وتجميل.<br><strong>الأطباء المتواجدون حالياً:</strong> عيادة أسنان، وصيدلاني." },
     ];
+
+    const ALL_MODE_BTNS = ['btnGeneral', 'btnDoctor', 'btnHospital', 'btnHospDoc', 'btnLatest', 'btnMatches'];
+    // الأوضاع التي تعرض الأطباء (والباقي يعرض المجمعات/المستشفيات)
+    function isDoctorMode(mode) { return mode === 'general' || mode === 'hospdoc'; }
 
     let selectedState = {
         mode: 'general',
@@ -1612,7 +1719,7 @@
         try { if (location.hash) history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
         document.getElementById('filterSection').style.display = 'none';
         document.getElementById('resultsContainer').style.display = 'none';
-        ['btnGeneral', 'btnDoctor', 'btnLatest', 'btnMatches'].forEach(b => {
+        ALL_MODE_BTNS.forEach(b => {
             const el = document.getElementById(b);
             if (el) el.style.outline = 'none';
         });
@@ -1638,33 +1745,19 @@
         document.getElementById('resultsContainer').style.display = 'block';
 
         const stepContainer = document.getElementById('stepContainerStyle');
-        const btnGen = document.getElementById('btnGeneral');
-        const btnDoc = document.getElementById('btnDoctor');
-        const btnLat = document.getElementById('btnLatest');
-        if (btnLat) btnLat.style.outline = "none";
-
-        const btnMatch = document.getElementById('btnMatches');
-        if (btnMatch) btnMatch.style.outline = "none";
-
-        if (mode === 'match') {
-            stepContainer.classList.remove('doctor-mode');
-            btnGen.style.outline = "none";
-            btnDoc.style.outline = "none";
-            if (btnMatch) btnMatch.style.outline = "3px solid #0f172a";
-            document.getElementById('step1Title').textContent = "🩺 اختر الاختصاص لعرض التطابقات المحتملة بين الأطباء والمجمعات";
-        } else if (mode === 'general') {
-            stepContainer.classList.remove('doctor-mode');
-            btnGen.style.outline = "3px solid #0f172a";
-            btnDoc.style.outline = "none";
-            document.getElementById('step1Title').textContent = "🩺 الخطوة 1: اختر الاختصاص المطلوب";
-
-        } else {
-            stepContainer.classList.add('doctor-mode');
-            btnGen.style.outline = "none";
-            btnDoc.style.outline = "3px solid #0f172a";
-            document.getElementById('step1Title').textContent = "🩺 الخطوة 1: اختر تخصصك الطبي";
-
-        }
+        stepContainer.classList.remove('doctor-mode', 'hospital-mode', 'hospdoc-mode');
+        ALL_MODE_BTNS.forEach(b => { const el = document.getElementById(b); if (el) el.style.outline = 'none'; });
+        const modeUi = {
+            match: { btn: 'btnMatches', cls: '', title: "🩺 اختر الاختصاص لعرض التطابقات المحتملة بين الأطباء والمجمعات" },
+            general: { btn: 'btnGeneral', cls: '', title: "🩺 الخطوة 1: اختر الاختصاص المطلوب" },
+            manager: { btn: 'btnDoctor', cls: 'doctor-mode', title: "🩺 الخطوة 1: اختر تخصصك الطبي" },
+            hospital: { btn: 'btnHospital', cls: 'hospital-mode', title: "🏥 الخطوة 1: اختر تخصصك لعرض المستشفيات الأهلية التي تطلبه" },
+            hospdoc: { btn: 'btnHospDoc', cls: 'hospdoc-mode', title: "👨‍⚕️ الخطوة 1: اختر الاختصاص لعرض الأطباء الراغبين بالعمل في مستشفى أهلي" }
+        }[mode] || { btn: 'btnGeneral', cls: '', title: "🩺 الخطوة 1: اختر الاختصاص المطلوب" };
+        if (modeUi.cls) stepContainer.classList.add(modeUi.cls);
+        const activeBtn = document.getElementById(modeUi.btn);
+        if (activeBtn) activeBtn.style.outline = "3px solid #0f172a";
+        document.getElementById('step1Title').textContent = modeUi.title;
 
         document.getElementById('step2Box').style.display = 'none';
         document.getElementById('step3Box').style.display = 'none';
@@ -1754,7 +1847,7 @@
         // من داخل عرض مستقل (تطابقات/قائمة اختصاص/إعلان مفرد) — الخطوة السابقة هي العودة لصفحة الاختيار
         if (location.hash) {
             try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
-            startSearch(selectedState.mode === 'match' ? 'match' : (selectedState.mode === 'manager' ? 'manager' : 'general'));
+            startSearch(selectedState.mode || 'general');
             return;
         }
         if (selectedState.area) selectedState.area = null;
@@ -2021,8 +2114,9 @@
         const isRed = item.statusLabel && item.statusLabel.includes('غير متوفر');
         const isYellow = item.statusLabel && item.statusLabel.includes('قيد التفاوض');
         const badgeClass = isRed ? 'bg-red' : (isYellow ? 'bg-yellow' : 'bg-green');
-        const typeLabel = type === 'clinic' ? '🏢 مجمع بحاجة لطبيب' : '👨‍⚕️ طبيب بحاجة لعيادة';
-        const typeTag = opts.typeTag ? `<div class="type-tag">${typeLabel}</div>` : '';
+        const isHospVenue = type === 'clinic' && item.venueType === 'hospital';
+        const typeLabel = type === 'clinic' ? (isHospVenue ? '🏥 مستشفى أهلي بحاجة لطبيب' : '🏢 مجمع بحاجة لطبيب') : '👨‍⚕️ طبيب بحاجة لعيادة';
+        const typeTag = opts.typeTag ? `<div class="type-tag${isHospVenue ? ' hospital-venue-tag' : ''}">${typeLabel}</div>` : '';
         const hospitalTag = (type === 'doctor' && item.workplace === 'hospital') ? '<div class="type-tag hospital-tag">🏥 يطلب مستشفى أهلي حصراً</div>' : '';
 
         const extraPhoneHtml = item.extraPhone ? `
@@ -2365,7 +2459,7 @@
         const a = adIndex[id];
         document.getElementById('filterSection').style.display = 'none';
         document.getElementById('resultsContainer').style.display = 'block';
-        ['btnGeneral', 'btnDoctor', 'btnLatest', 'btnMatches'].forEach(b => {
+        ALL_MODE_BTNS.forEach(b => {
             const el = document.getElementById(b);
             if (el) el.style.outline = 'none';
         });
@@ -2431,7 +2525,7 @@
 
         document.getElementById('filterSection').style.display = 'none';
         document.getElementById('resultsContainer').style.display = 'block';
-        ['btnGeneral', 'btnDoctor', 'btnLatest', 'btnMatches'].forEach(b => {
+        ALL_MODE_BTNS.forEach(b => {
             const el = document.getElementById(b);
             if (el) el.style.outline = 'none';
         });
@@ -2468,7 +2562,7 @@
         const a = adIndex[id];
         document.getElementById('filterSection').style.display = 'none';
         document.getElementById('resultsContainer').style.display = 'block';
-        ['btnGeneral', 'btnDoctor', 'btnLatest'].forEach(b => { document.getElementById(b).style.outline = 'none'; });
+        ALL_MODE_BTNS.forEach(b => { const el = document.getElementById(b); if (el) el.style.outline = 'none'; });
         const grid = document.getElementById('resultsGrid');
         const nav = `
             <div class="back-to-browse-wrap" style="grid-column: 1 / -1;">
@@ -2601,7 +2695,7 @@
         const box = document.getElementById('listActionBox');
         const btn = document.getElementById('btnList');
         if (!box || !btn) return;
-        if (selectedState.mode === 'match' || !selectedState.specialty) { box.style.display = 'none'; return; }
+        if (selectedState.mode === 'match' || selectedState.mode === 'hospital' || selectedState.mode === 'hospdoc' || !selectedState.specialty) { box.style.display = 'none'; return; }
         const where = selectedState.gov ? ' في ' + selectedState.gov : '';
         btn.textContent = selectedState.mode === 'manager'
             ? `📋 قائمة كل المجمعات المطلوب فيها «${selectedState.specialty}»${where}`
@@ -2843,7 +2937,7 @@
 
         document.getElementById('filterSection').style.display = 'none';
         document.getElementById('resultsContainer').style.display = 'block';
-        ['btnGeneral', 'btnDoctor', 'btnLatest', 'btnMatches'].forEach(b => {
+        ALL_MODE_BTNS.forEach(b => {
             const el = document.getElementById(b);
             if (el) el.style.outline = 'none';
         });
@@ -2932,7 +3026,7 @@
 
         document.getElementById('filterSection').style.display = 'none';
         document.getElementById('resultsContainer').style.display = 'block';
-        ['btnGeneral', 'btnDoctor', 'btnLatest'].forEach(b => { document.getElementById(b).style.outline = 'none'; });
+        ALL_MODE_BTNS.forEach(b => { const el = document.getElementById(b); if (el) el.style.outline = 'none'; });
 
         const title = type === 'clinic'
             ? `🏢 المجمعات المطلوب فيها «${sp}»`
@@ -3061,8 +3155,7 @@
         document.getElementById('filterSection').style.display = 'none';
         document.getElementById('resultsContainer').style.display = 'block';
 
-        document.getElementById('btnGeneral').style.outline = "none";
-        document.getElementById('btnDoctor').style.outline = "none";
+        ALL_MODE_BTNS.forEach(b => { const el = document.getElementById(b); if (el) el.style.outline = 'none'; });
         document.getElementById('btnLatest').style.outline = "3px solid #0f172a";
 
         let combined = [];
@@ -3109,11 +3202,15 @@
     }
 
     function getFilteredItems() {
-        const dataSet = selectedState.mode === 'general' ? GENERAL_CLINICS_DATA : DOCTORS_DATA;
+        const dataSet = isDoctorMode(selectedState.mode) ? GENERAL_CLINICS_DATA : DOCTORS_DATA;
 
         let filtered = dataSet.filter(item => {
-            if (selectedState.mode === 'manager' && item.headerLabel !== 'فرصة عمل مميزة') return false;
-            if (selectedState.mode === 'manager' && item.statusLabel && item.statusLabel.includes('غير متوفر')) return false;
+            const complexMode = selectedState.mode === 'manager' || selectedState.mode === 'hospital';
+            if (complexMode && item.headerLabel !== 'فرصة عمل مميزة') return false;
+            if (complexMode && item.statusLabel && item.statusLabel.includes('غير متوفر')) return false;
+            // المستشفيات الأهلية فقط / الأطباء الذين طلبوا مستشفى أهلي فقط
+            if (selectedState.mode === 'hospital' && item.venueType !== 'hospital') return false;
+            if (selectedState.mode === 'hospdoc' && item.workplace !== 'hospital') return false;
             if (selectedState.specialty && !specsOf(item).includes(selectedState.specialty)) return false;
             if (selectedState.gov && item.gov !== selectedState.gov) return false;
 
@@ -3168,7 +3265,7 @@
             return;
         }
 
-        const cardType = selectedState.mode === 'general' ? 'doctor' : 'clinic';
+        const cardType = isDoctorMode(selectedState.mode) ? 'doctor' : 'clinic';
         filtered.forEach(item => {
             const card = document.createElement('div');
             card.className = 'card active-match';
@@ -3209,7 +3306,16 @@
         content.innerHTML = html;
     }
 
+    // زر "الصفحة الرئيسية" العائم لا فائدة منه وأنت في الرئيسية أصلاً، فيظهر فقط عند فتح قسم
+    function updateHomeFab() {
+        const fab = document.getElementById('homeFab');
+        const rc = document.getElementById('resultsContainer');
+        if (fab && rc) fab.classList.toggle('hidden-fab', rc.style.display !== 'block');
+    }
+
     window.onload = () => {
+        new MutationObserver(updateHomeFab).observe(document.getElementById('resultsContainer'), { attributes: true, attributeFilter: ['style'] });
+        updateHomeFab();
         initTicker();
         document.querySelectorAll('.js-wa-display').forEach(el => el.textContent = WHATSAPP_DISPLAY);
         document.querySelectorAll('.js-wa-link').forEach(el => {
