@@ -1509,8 +1509,21 @@
         return null;
     }
 
+    // أماكن معروفة تُذكر في العنوان تحت "مناطق أخرى"
+    const LANDMARK_COORDS = [
+        ['ناحية الرشيد', [33.200, 44.380]], ['الإسكان', [33.323, 44.345]], ['الاسكان', [33.323, 44.345]],
+        ['الصليخ', [33.387, 44.380]], ['جسر ديالى', [33.260, 44.520]]
+    ];
     function itemCoords(item) {
-        return coordsFor(item.gov, item.areas && item.areas[0]);
+        const first = item.areas && item.areas[0];
+        if (first === 'مناطق أخرى') {
+            const txt = (item.details || '') + ' ' + (item.title || '');
+            const lm = LANDMARK_COORDS.find(([k]) => txt.includes(k));
+            if (lm) return lm[1];
+            const side = [...sidesOf(item)][0];
+            if (side && AREA_COORDS[side]) return AREA_COORDS[side];
+        }
+        return coordsFor(item.gov, first);
     }
 
     // مسافة تقريبية بالكيلومترات (Haversine) بين أول منطقة لكل طرف
@@ -1777,6 +1790,7 @@
         { isNew: true, added: "2026-09-25", isClass: true, prio: 5, hours: "مساءً", specialties: ["جلدية وتجميل", "أطفال", "جراحة عامة", "باطنية", "طب أسرة", "تغذية وعلاج سكري", "أمراض نفسية وعصبية"], gov: "بغداد", areas: ["الدورة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء بعدة اختصاصات - مجمع طبي (بغداد - الكرخ - الدورة - شارع الطعمة) - تسلسل 103", details: "<strong>الموقع:</strong> بغداد - الكرخ - الدورة - شارع الطعمة - الفلكة الأولى، قرب جامع خالد بن الوليد.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس)، والمجمع شغال.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> جلدية وتجميل، أطفال، جراحة عامة، باطنية، طب أسرة، تغذية وعلاج سكري، أمراض نفسية وعصبية.<br><strong>ملاحظة:</strong> لا مانع من طبيب أطفال بورد حديث، وباقي التفاصيل تُناقش خلال الاجتماع.<br><strong>الأطباء المتواجدون حالياً:</strong> طبيب مفاصل وروماتيزم، وطبيب أنف وأذن وحنجرة، وصيدلية (صيدلاني)." },
         { isNew: true, added: "2026-09-25", prio: 1, hours: "مساءً", specialties: ["باطنية", "نسائية وتوليد", "أطفال"], gov: "بغداد", areas: ["مناطق أخرى"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (باطنية، نسائية وتوليد، أطفال) - مجمع طبي (بغداد - الكرخ - ناحية الرشيد) - تسلسل 104", details: "<strong>الموقع:</strong> بغداد - الكرخ - مناطق أخرى - ناحية الرشيد، مقابل مدرسة حماة للبنات.<br><strong>الحالة الحالية:</strong> المجمع أو العيادة جديدة.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> باطنية، نسائية وتوليد، أطفال.<br><strong>عدد المراجعين:</strong> عالٍ.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد أطباء اختصاص حالياً، ويوجد صيدلاني (وهو صاحب المجمع)." },
         { isNew: true, added: "2026-09-25", isClass: true, prio: 1, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال", "جلدية وتجميل"], gov: "بغداد", areas: ["مدينة الصدر"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، أطفال، جلدية وتجميل) - مجمع طبي (بغداد - الرصافة - مدينة الصدر - شارع السفارة) - تسلسل 105", details: "<strong>الموقع:</strong> بغداد - الرصافة - مدينة الصدر - شارع السفارة، قطاع 76.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس)، والمجمع شغال.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> كشفية فقط.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، أطفال، جلدية وتجميل.<br><strong>الأطباء المتواجدون حالياً:</strong> عيادة أسنان، وصيدلاني." },
+        { isNew: true, added: "2026-09-26", isClass: true, prio: 1, hours: "مساءً", specialties: ["نسائية وتوليد", "باطنية", "مختبرات وتحليلات مرضية", "جراحة العظام والكسور"], gov: "بغداد", areas: ["الزعفرانية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، باطنية، مختبرات وتحليلات مرضية، جراحة العظام والكسور) - مجمع طبي (بغداد - الرصافة - الزعفرانية - الأربع شوارع) - تسلسل 106", details: "<strong>الموقع:</strong> بغداد - الرصافة - الزعفرانية - بداية الأربع شوارع، قرب الاستدارة الأولى.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس)، والمجمع شغال.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> كشفية فقط.<br><strong>العرض المقدَّم للطبيب:</strong> عيادة مؤثثة ومدفوعة التكاليف.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، باطنية، مختبرات وتحليلات مرضية، جراحة العظام والكسور.<br><strong>عدد المراجعين:</strong> عالٍ.<br><strong>الأطباء المتواجدون حالياً:</strong> عيادة أسنان، وصيدلية (صاحب المجمع صيدلاني)." },
     ];
 
     const ALL_MODE_BTNS = ['btnGeneral', 'btnDoctor', 'btnHospital', 'btnHospDoc', 'btnLatest', 'btnMatches'];
@@ -2507,6 +2521,27 @@
         return null;
     }
 
+    // جانب المدينة لكل سجل؛ "مناطق أخرى" موجودة في الكرخ والرصافة معاً، فنستنتج الجانب من العنوان المكتوب
+    function sidesOf(item) {
+        const out = new Set();
+        (item.areas || []).forEach(a => {
+            if (a === 'مناطق أخرى') {
+                const txt = (item.details || '') + ' ' + (item.title || '');
+                if (/الكرخ/.test(txt)) out.add('الكرخ');
+                if (/الرصافة/.test(txt)) out.add('الرصافة');
+            } else {
+                const g = groupOf(item.gov, a);
+                if (g) out.add(g);
+            }
+        });
+        return out;
+    }
+    function sidesCompare(a, b) {
+        const sa = sidesOf(a), sb = sidesOf(b);
+        if (!sa.size || !sb.size) return { same: false, known: false };
+        return { same: [...sb].some(x => sa.has(x)), known: true };
+    }
+
     function sharesGroup(gov, areasA, areasB) {
         const groupsA = new Set(areasA.map(a => groupOf(gov, a)).filter(Boolean));
         if (!groupsA.size) return false;
@@ -2623,10 +2658,12 @@
                 const sameGov = c.gov === item.gov;
                 if (!sameGov) return; // لا نقترح مجمعاً في محافظة أخرى
                 const areaOverlap = sameGov && item.areas.some(a => c.areas.includes(a));
-                const sameGroup = sameGov && !areaOverlap && sharesGroup(item.gov, item.areas, c.areas);
+                const sc = sidesCompare(item, c);
+                const sameGroup = sameGov && !areaOverlap && sc.same;
+                const sideDiff = sameGov && !areaOverlap && !sameGroup && sc.known;
                 const km = distanceKm(item, c);
                 const eqPts = pointsEqual(item, c);
-                results.push({ other: c, otherType: 'clinic', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown, km, eqPts, tier });
+                results.push({ other: c, otherType: 'clinic', shared, sameGov, areaOverlap, sameGroup, sideDiff, timeUnknown: tc.unknown, km, eqPts, tier });
             });
         } else {
             GENERAL_CLINICS_DATA.forEach(d => {
@@ -2642,10 +2679,12 @@
                 const sameGov = d.gov === item.gov;
                 if (!sameGov) return; // لا نقترح طبيباً من محافظة أخرى
                 const areaOverlap = sameGov && item.areas.some(a => d.areas.includes(a));
-                const sameGroup = sameGov && !areaOverlap && sharesGroup(item.gov, item.areas, d.areas);
+                const sc = sidesCompare(item, d);
+                const sameGroup = sameGov && !areaOverlap && sc.same;
+                const sideDiff = sameGov && !areaOverlap && !sameGroup && sc.known;
                 const km = distanceKm(item, d);
                 const eqPts = pointsEqual(item, d);
-                results.push({ other: d, otherType: 'doctor', shared, sameGov, areaOverlap, sameGroup, timeUnknown: tc.unknown, km, eqPts, tier });
+                results.push({ other: d, otherType: 'doctor', shared, sameGov, areaOverlap, sameGroup, sideDiff, timeUnknown: tc.unknown, km, eqPts, tier });
             });
         }
         // ترتيب المجمعات المقترحة لطبيب: أجور التنسيق الأعلى، ثم المجمع الشغال الكلاس، ثم الأقرب.
@@ -2680,7 +2719,8 @@
         if (distLabel) badges.push(`<span class="list-tag match-dist">📍 ${distLabel}</span>`);
         if (m.areaOverlap) badges.push('<span class="list-tag match-good">نفس المنطقة</span>');
         else if (m.sameGroup) badges.push('<span class="list-tag match-good">نفس جانب المدينة</span>');
-        else if (m.sameGov) badges.push('<span class="list-tag match-caution">محافظة واحدة، جانب مختلف</span>');
+        else if (m.sideDiff) badges.push('<span class="list-tag match-caution">الجانب الآخر من المدينة</span>');
+        else if (m.sameGov) badges.push('<span class="list-tag">نفس المحافظة</span>');
         if (m.timeUnknown) badges.push('<span class="list-tag match-warn">⚠️ وقت العمل غير مؤكد</span>');
         return `
                     <div class="list-row">
@@ -3127,7 +3167,7 @@
                 const key = d._id + '|' + m.other._id;
                 if (seen.has(key)) return;
                 seen.add(key);
-                pairs.push({ doctor: d, complex: m.other, sameGov: m.sameGov, areaOverlap: m.areaOverlap, sameGroup: m.sameGroup, timeUnknown: m.timeUnknown, km: m.km, eqPts: m.eqPts, tier: m.tier });
+                pairs.push({ doctor: d, complex: m.other, sameGov: m.sameGov, areaOverlap: m.areaOverlap, sameGroup: m.sameGroup, sideDiff: m.sideDiff, timeUnknown: m.timeUnknown, km: m.km, eqPts: m.eqPts, tier: m.tier });
             });
         });
         // أجور التنسيق الأعلى أولاً، ثم المجمع الشغال الكلاس، ثم الأقرب مسافة
@@ -3146,7 +3186,8 @@
         if (distLabel) badges.push(distLabel);
         if (p.areaOverlap) badges.push('نفس المنطقة');
         else if (p.sameGroup) badges.push('نفس جانب المدينة');
-        else if (p.sameGov) badges.push('محافظة واحدة، جانب مختلف');
+        else if (p.sideDiff) badges.push('الجانب الآخر من المدينة');
+        else if (p.sameGov) badges.push('نفس المحافظة');
         if (p.timeUnknown) badges.push('⚠️ وقت العمل غير مؤكد');
         const tag = badges.length ? ' (' + badges.join('، ') + ')' : '';
         return `▪️ طبيب [${seqOf(p.doctor)}] ${adLocation(p.doctor, 'doctor')}  ⇄  مجمع [${seqOf(p.complex)}] ${adLocation(p.complex, 'clinic')}${tag}`;
@@ -3212,7 +3253,8 @@
             if (distLabel) badges.push(`<span class="list-tag match-dist">📍 ${distLabel}</span>`);
             if (p.areaOverlap) badges.push('<span class="list-tag match-good">نفس المنطقة</span>');
             else if (p.sameGroup) badges.push('<span class="list-tag match-good">نفس جانب المدينة</span>');
-            else if (p.sameGov) badges.push('<span class="list-tag match-caution">محافظة واحدة، جانب مختلف</span>');
+            else if (p.sideDiff) badges.push('<span class="list-tag match-caution">الجانب الآخر من المدينة</span>');
+            else if (p.sameGov) badges.push('<span class="list-tag">نفس المحافظة</span>');
             if (p.timeUnknown) badges.push('<span class="list-tag match-warn">⚠️ وقت العمل غير مؤكد</span>');
             return badges.join('');
         }
