@@ -899,6 +899,28 @@
     .empty-form-btn { margin: 6px 0 10px; width: 100%; justify-content: center; }
     .admin-reserved { border-color: #fca5a5; background: #fff7f7; }
     .admin-reserved summary { color: #991b1b !important; }
+    .neg-status { margin-top: 6px; display: flex; flex-direction: column; gap: 6px; width: 100%; }
+    .neg-acts { display: flex; flex-wrap: wrap; gap: 6px; }
+    .neg-act {
+        background: #ffffff; border: 1px solid #cbd5e1; color: #334155; border-radius: 8px;
+        padding: 5px 10px; font-size: 12px; font-weight: 700; cursor: pointer;
+    }
+    .neg-act.ok { border-color: #10b981; color: #047857; }
+    .fab-badge {
+        background: #ef4444; color: #ffffff; border-radius: 12px; padding: 1px 7px;
+        font-size: 12px; margin-inline-start: 4px;
+    }
+    .neg-alert-bar {
+        position: sticky; top: 0; z-index: 70; display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+        background: #7c2d12; color: #ffffff; padding: 10px 16px; font-size: 14px; font-weight: 700;
+        border-bottom: 3px solid var(--gold);
+    }
+    .neg-alert-bar span { flex: 1; min-width: 200px; }
+    .neg-alert-bar button {
+        background: var(--gold); color: var(--navy); border: none; border-radius: 8px;
+        padding: 7px 12px; font-weight: 800; cursor: pointer;
+    }
+    .neg-alert-bar .neg-alert-x { background: transparent; color: #ffffff; padding: 4px 8px; }
     .backup-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .backup-hint { font-size: 12px; color: #64748b; margin: 6px 0 14px; }
 
@@ -2117,7 +2139,100 @@
     }
     function setNegotiatingIds(arr) {
         try { localStorage.setItem('mtp_negotiating', JSON.stringify(arr)); } catch (e) {}
+        syncNegMeta(arr);
     }
+
+    // ================= متابعة التفاوض (تنبيه الأدمن) =================
+    // تاريخ بدء التفاوض + تأجيل التذكير + "تم الاتفاق" — مفاتيح جديدة لا تمس البيانات القديمة
+    const NEG_REMIND_DAYS = 3;
+    function getObj(key) { try { return JSON.parse(localStorage.getItem(key) || '{}'); } catch (e) { return {}; } }
+    function setObj(key, obj) { try { localStorage.setItem(key, JSON.stringify(obj)); } catch (e) {} }
+    function syncNegMeta(arr) {
+        arr = arr || getNegotiatingIds();
+        const since = getObj('mtp_negotiating_since'), snooze = getObj('mtp_negotiating_snooze'), agreed = getObj('mtp_negotiating_agreed');
+        const now = new Date().toISOString();
+        arr.forEach(id => { if (!since[id]) since[id] = now; });
+        [since, snooze, agreed].forEach(o => Object.keys(o).forEach(id => { if (!arr.includes(id)) delete o[id]; }));
+        setObj('mtp_negotiating_since', since); setObj('mtp_negotiating_snooze', snooze); setObj('mtp_negotiating_agreed', agreed);
+    }
+    function daysAgo(iso) { return iso ? Math.floor((new Date() - new Date(iso)) / 86400000) : 0; }
+    function negDays(id) { return daysAgo(getObj('mtp_negotiating_since')[id]); }
+    function isAgreed(id) { return !!getObj('mtp_negotiating_agreed')[id]; }
+    function isSnoozed(id) { const u = getObj('mtp_negotiating_snooze')[id]; return !!(u && new Date(u) > new Date()); }
+    function negNeedsAction(id) {
+        if (!isNegotiating(id)) return false;
+        if (isAgreed(id)) return true; // تم الاتفاق: يلزم تحويله إلى "محجوز" في الموقع
+        return negDays(id) >= NEG_REMIND_DAYS && !isSnoozed(id);
+    }
+    // عدّ التنبيهات: التطابق (طبيب+مجمع) يُحسب مرة واحدة
+    function negAlerts() {
+        const ids = getNegotiatingIds().filter(id => adIndex[id]);
+        const pairs = getNegotiatingPairs().filter(p => adIndex[p.d] && adIndex[p.c]);
+        const inPair = new Set(); pairs.forEach(p => { inPair.add(p.d); inPair.add(p.c); });
+        let overdue = 0, agreedN = 0;
+        pairs.forEach(p => {
+            if (isAgreed(p.d) || isAgreed(p.c)) agreedN++;
+            else if (negNeedsAction(p.d) || negNeedsAction(p.c)) overdue++;
+        });
+        ids.filter(id => !inPair.has(id)).forEach(id => {
+            if (isAgreed(id)) agreedN++; else if (negNeedsAction(id)) overdue++;
+        });
+        return { overdue, agreed: agreedN, total: overdue + agreedN };
+    }
+    function negSnooze(ids) {
+        const o = getObj('mtp_negotiating_snooze');
+        const until = new Date(Date.now() + NEG_REMIND_DAYS * 86400000).toISOString();
+        ids.forEach(id => { o[id] = until; });
+        setObj('mtp_negotiating_snooze', o);
+        showToast('سيتم تذكيرك بعد ' + NEG_REMIND_DAYS + ' أيام');
+        updateNegAlertUi(); refreshCurrentView();
+    }
+    function negSetAgreed(ids, on) {
+        const o = getObj('mtp_negotiating_agreed');
+        ids.forEach(id => { if (on) o[id] = new Date().toISOString(); else delete o[id]; });
+        setObj('mtp_negotiating_agreed', o);
+        showToast(on ? 'تم تسجيل الاتفاق — اطلب تحديث الموقع لتحويله إلى محجوز' : 'تم إلغاء علامة الاتفاق');
+        updateNegAlertUi(); refreshCurrentView();
+    }
+    // سطر الحالة + أزرار الإجراءات في صفحة قيد التفاوض
+    function negStatusHtml(ids) {
+        const days = Math.max(...ids.map(negDays));
+        const agreed = ids.some(isAgreed);
+        const overdue = !agreed && ids.some(negNeedsAction);
+        const idsJs = JSON.stringify(ids).replace(/"/g, "'");
+        const dayTxt = days === 0 ? 'بدأ اليوم' : (days === 1 ? 'منذ يوم' : (days === 2 ? 'منذ يومين' : 'منذ ' + days + ' أيام'));
+        let state;
+        if (agreed) state = `<span class="list-tag match-good">✅ تم الاتفاق — اطلب تحويله إلى «محجوز» في الموقع</span>`;
+        else if (overdue) state = `<span class="list-tag match-caution">⏰ ${dayTxt} — أكمل إجراءات التفاوض</span>`;
+        else state = `<span class="list-tag">🕒 ${dayTxt}${ids.some(isSnoozed) ? ' — التذكير مؤجَّل' : ''}</span>`;
+        const btns = agreed
+            ? `<button type="button" class="neg-act" onclick="negSetAgreed(${idsJs}, false)">↩️ إلغاء «تم الاتفاق»</button>`
+            : `<button type="button" class="neg-act ok" onclick="negSetAgreed(${idsJs}, true)">✅ تم الاتفاق</button>
+               <button type="button" class="neg-act" onclick="negSnooze(${idsJs})">⏰ ذكّرني بعد ${NEG_REMIND_DAYS} أيام</button>`;
+        return `<div class="neg-status">${state}<div class="neg-acts">${btns}</div></div>`;
+    }
+    function updateNegAlertUi() {
+        if (!ADMIN) return;
+        const a = negAlerts();
+        const fab = document.getElementById('negFab');
+        if (fab) fab.innerHTML = '🔒 قيد التفاوض' + (a.total ? ` <span class="fab-badge">${a.total}</span>` : '');
+        let bar = document.getElementById('negAlertBar');
+        if (!a.total || sessionStorageGet('negAlertHidden')) { if (bar) bar.remove(); return; }
+        if (!bar) {
+            bar = document.createElement('div');
+            bar.id = 'negAlertBar';
+            bar.className = 'neg-alert-bar';
+            document.body.insertBefore(bar, document.body.firstChild);
+        }
+        const parts = [];
+        if (a.overdue) parts.push(`${a.overdue} تفاوض مضى عليه ${NEG_REMIND_DAYS} أيام أو أكثر بدون إكمال`);
+        if (a.agreed) parts.push(`${a.agreed} تم الاتفاق عليه وينتظر تحويله إلى «محجوز»`);
+        bar.innerHTML = `<span>⏰ تنبيه: ${parts.join('، و')}</span>
+            <button type="button" onclick="location.hash='#negotiations'">إكمال الإجراءات</button>
+            <button type="button" class="neg-alert-x" onclick="sessionStorageSet('negAlertHidden','1'); updateNegAlertUi();" aria-label="إخفاء">✕</button>`;
+    }
+    function sessionStorageGet(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+    function sessionStorageSet(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
     function isNegotiating(id) {
         return getNegotiatingIds().includes(id);
     }
@@ -2224,6 +2339,7 @@
 
     // أعِد رسم أي عرض مفتوح حالياً حتى يظهر التغيير فوراً
     function refreshCurrentView() {
+        updateNegAlertUi();
         const h = location.hash || '';
         if (h === '#negotiations') showNegotiations();
         else if (/^#(ad|seq|sug)=/.test(h)) handleHash();
@@ -3404,6 +3520,7 @@
                             <a class="list-open" href="#ad=${complex.item._id}">تفاصيل المجمع</a>
                         </div>
                         ${(getNegNote(doctor.item._id) || getNegNote(complex.item._id)) ? `<div class="list-tags match-badges">${[doctor, complex].filter(x => getNegNote(x.item._id)).map(x => `<span class="list-tag match-warn">🌐 ${x.type === 'doctor' ? 'الطبيب' : 'المجمع'} — تفاوض خارجي: ${escHtml(getNegNote(x.item._id))}</span>`).join('')}</div>` : ''}
+                        ${negStatusHtml([doctor.item._id, complex.item._id])}
                         ${bothDetailsHtml(doctor.item._id, complex.item._id)}
                         <button type="button" class="list-remove" onclick="removeConfirmedPair('${doctor.item._id}','${complex.item._id}')">إزالة هذا التطابق</button>
                     </div>`;
@@ -3418,6 +3535,7 @@
                         <div class="list-main">
                             <div class="list-loc">${label}</div>
                             <div class="list-tags">${getNegNote(item._id) ? `<span class="list-tag match-warn">🌐 تفاوض خارجي: ${escHtml(getNegNote(item._id))}</span>` : '<span class="list-tag">الطرف الآخر غير محدد</span>'}</div>
+                            ${negStatusHtml([item._id])}
                         </div>
                         <a class="list-open" href="#ad=${item._id}">التفاصيل</a>
                         <button type="button" class="list-remove" onclick="toggleNegotiating('${item._id}')">إزالة</button>
@@ -3473,10 +3591,10 @@
     }
 
     // ================= نسخ احتياطي لبيانات التفاوض =================
-    const NEG_KEYS = ['mtp_negotiating', 'mtp_negotiating_pairs', 'mtp_negotiating_notes'];
+    const NEG_KEYS = ['mtp_negotiating', 'mtp_negotiating_pairs', 'mtp_negotiating_notes', 'mtp_negotiating_since', 'mtp_negotiating_snooze', 'mtp_negotiating_agreed'];
     function exportNegotiations() {
         const data = { app: 'mtp', exportedAt: new Date().toISOString() };
-        NEG_KEYS.forEach(k => { try { data[k] = JSON.parse(localStorage.getItem(k) || (k.endsWith('notes') ? '{}' : '[]')); } catch (e) { data[k] = k.endsWith('notes') ? {} : []; } });
+        NEG_KEYS.forEach(k => { const isArr = k === 'mtp_negotiating' || k === 'mtp_negotiating_pairs'; try { data[k] = JSON.parse(localStorage.getItem(k) || (isArr ? '[]' : '{}')); } catch (e) { data[k] = isArr ? [] : {}; } });
         const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
@@ -3495,13 +3613,19 @@
                 if (!data || data.app !== 'mtp') throw new Error('bad');
                 // دمج: لا نحذف أي شيء موجود
                 const ids = new Set([...getNegotiatingIds(), ...(data.mtp_negotiating || [])]);
-                setNegotiatingIds([...ids]);
+                try { localStorage.setItem('mtp_negotiating', JSON.stringify([...ids])); } catch (e) {}
                 const pairs = getNegotiatingPairs();
                 (data.mtp_negotiating_pairs || []).forEach(p => { if (p && p.d && p.c && !pairs.some(x => x.d === p.d && x.c === p.c)) pairs.push(p); });
                 setNegotiatingPairs(pairs);
                 const notes = getNegNotes();
                 Object.entries(data.mtp_negotiating_notes || {}).forEach(([k, v]) => { if (!notes[k] && v) notes[k] = v; });
                 try { localStorage.setItem('mtp_negotiating_notes', JSON.stringify(notes)); } catch (e) {}
+                ['mtp_negotiating_since', 'mtp_negotiating_snooze', 'mtp_negotiating_agreed'].forEach(k => {
+                    const cur = getObj(k);
+                    Object.entries(data[k] || {}).forEach(([id, v]) => { if (!cur[id] && v) cur[id] = v; });
+                    setObj(k, cur);
+                });
+                syncNegMeta([...ids]);
                 showToast('تم استيراد النسخة ودمجها');
                 refreshCurrentView();
             } catch (e) {
@@ -3910,6 +4034,8 @@
             fab.textContent = '🔒 قيد التفاوض';
             fab.onclick = () => { location.hash = '#negotiations'; };
             document.body.appendChild(fab);
+            syncNegMeta();          // يسجّل تاريخ بدء للتفاوضات القديمة التي ليس لها تاريخ (يبدأ العد من اليوم)
+            updateNegAlertUi();
         }
         handleHash();
         window.addEventListener('hashchange', handleHash);
