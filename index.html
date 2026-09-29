@@ -1977,8 +1977,13 @@
         const li = document.getElementById('licSearchInput');
         if (li && li.value !== (selectedState.licSearch || '')) li.value = selectedState.licSearch || '';
         const side = selectedState.licSide || 'want';
-        const nWant = DOCTORS_DATA.filter(i => i.license === 'want' && isAvailable(i)).length;
-        const nOffer = GENERAL_CLINICS_DATA.filter(i => i.license === 'offer' && isAvailable(i)).length;
+        const licMatch = i => isAvailable(i) && (!selectedState.specialty || specsOf(i).includes(selectedState.specialty)) && (!selectedState.gov || i.gov === selectedState.gov);
+        const nWant = DOCTORS_DATA.filter(i => i.license === 'want' && licMatch(i)).length;
+        const nOffer = GENERAL_CLINICS_DATA.filter(i => i.license === 'offer' && licMatch(i)).length;
+        const spLabel = selectedState.specialty ? ' «' + selectedState.specialty + '»' : '';
+        const sideCount = side === 'offer' ? nOffer : nWant;
+        const listLabel = side === 'offer' ? ('📋 قائمة الأطباء الذين يعرضون إجازة' + spLabel) : ('📋 قائمة المجمعات التي تطلب إجازة' + spLabel);
+        const pairsN = getLicensePairs().length;
         box.style.display = 'block';
         box.innerHTML = `
             <div class="lic-tabs">
@@ -1986,7 +1991,84 @@
                 <button type="button" class="lic-tab${side === 'offer' ? ' active' : ''}" onclick="setLicSide('offer')">👨‍⚕️ أطباء يعرضون إجازة (${nOffer})</button>
             </div>
             <div class="lic-note">📜 المقصود: إجازة ممارسة المهنة/فتح العيادة لاختصاصات الجلدية والجراحة التجميلية وطب الأسرة والسونار.
-                لطلب إجازة أو عرض إجازتك راسلنا على واتساب المنصة، ونحن ننسّق بين الطرفين.</div>`;
+                لطلب إجازة أو عرض إجازتك راسلنا على واتساب المنصة، ونحن ننسّق بين الطرفين.</div>
+            <div class="lic-actions" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;">
+                <button type="button" class="btn btn-list" style="flex:1; min-width:220px;" onclick="showLicenseList()">${listLabel} (${sideCount})</button>
+                ${pairsN ? `<button type="button" class="btn btn-primary" onclick="showLicenseMatches()">🔗 عرض التطابقات (${pairsN})</button>` : ''}
+            </div>`;
+    }
+
+    // ================= قوائم وتطابقات الإجازة =================
+    function licenseSideRecords() {
+        const side = selectedState.licSide || 'want';
+        const pool = side === 'offer' ? GENERAL_CLINICS_DATA : DOCTORS_DATA;
+        const sp = selectedState.specialty, gov = selectedState.gov;
+        return pool.filter(i => i.license === side && isAvailable(i) && (!sp || specsOf(i).includes(sp)) && (!gov || i.gov === gov));
+    }
+    function getLicensePairs() {
+        const sp = selectedState.specialty, gov = selectedState.gov;
+        const offers = GENERAL_CLINICS_DATA.filter(d => d.license === 'offer' && isAvailable(d) && (!sp || specsOf(d).includes(sp)) && (!gov || d.gov === gov));
+        const pairs = [], seen = new Set();
+        offers.forEach(d => {
+            findMatches(d, 'doctor').forEach(m => {
+                if (!m.other || m.other.license !== 'want') return;
+                const lic = m.shared.filter(s => LICENSE_SPECS.includes(s));
+                if (!lic.length || (sp && !lic.includes(sp))) return;
+                const k = d._id + '|' + m.other._id;
+                if (seen.has(k)) return; seen.add(k);
+                pairs.push({ doctor: d, complex: m.other, shared: lic });
+            });
+        });
+        return pairs;
+    }
+    function backToLicense() {
+        try { if (location.hash) history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+        document.getElementById('filterSection').style.display = 'block';
+        document.getElementById('resultsContainer').style.display = 'block';
+        renderResults();
+        setTimeout(() => document.getElementById('filterSection').scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+    }
+    function licBackBar() {
+        return `<div class="back-to-browse-wrap" style="grid-column:1/-1;"><button type="button" class="back-to-browse-btn" onclick="backToLicense()">⬅ رجوع لقسم الإجازة</button></div>`;
+    }
+    function showLicenseList() {
+        const side = selectedState.licSide || 'want';
+        const items = licenseSideRecords();
+        const sp = selectedState.specialty ? ' «' + selectedState.specialty + '»' : '';
+        const where = selectedState.gov ? ' في ' + selectedState.gov : '';
+        const title = side === 'offer' ? ('👨‍⚕️ أطباء يعرضون إجازة' + sp + where) : ('🏢 مجمعات تطلب إجازة' + sp + where);
+        const t = side === 'offer' ? 'doctor' : 'clinic';
+        const rows = items.map(i => {
+            const loc = t === 'doctor' ? ('👨‍⚕️ ' + rowTitle(i, 'doctor') + ' — ' + adLocation(i, 'doctor')) : ('🏢 ' + adLocation(i, 'clinic'));
+            const tags = listTags(i, t).map(x => `<span class="list-tag">${x}</span>`).join('');
+            return `<div class="list-row"><span class="list-num">${seqOf(i)}</span><div class="list-main"><div class="list-loc">${loc}</div><div class="list-tags">${tags}</div></div><a class="list-open" href="#ad=${i._id}">التفاصيل</a></div>`;
+        }).join('');
+        document.getElementById('filterSection').style.display = 'none';
+        document.getElementById('resultsContainer').style.display = 'block';
+        document.getElementById('resultsGrid').innerHTML = licBackBar() + `
+            <div class="list-view" style="grid-column:1/-1;">
+                <div class="list-head"><h2>${title}</h2><div class="list-meta">العدد: <strong>${items.length}</strong></div></div>
+                <div class="list-rows">${items.length ? rows : '<div class="no-results" style="display:block;"><p>لا يوجد.</p></div>'}</div>
+            </div>`;
+        setTimeout(() => document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+    }
+    function showLicenseMatches() {
+        const pairs = getLicensePairs();
+        const sp = selectedState.specialty ? ' «' + selectedState.specialty + '»' : '';
+        const body = pairs.map(({ doctor, complex }) => `
+                <div class="match-pair">
+                    <div class="match-side"><div class="list-num">${seqOf(doctor)}</div><div class="match-loc">👨‍⚕️ ${adLocation(doctor, 'doctor')}</div><a class="list-open" href="#ad=${doctor._id}">تفاصيل الطبيب</a></div>
+                    <div class="match-arrow">⇄</div>
+                    <div class="match-side"><div class="list-num">${seqOf(complex)}</div><div class="match-loc">🏢 ${adLocation(complex, 'clinic')}</div><a class="list-open" href="#ad=${complex._id}">تفاصيل المجمع</a></div>
+                </div>`).join('');
+        document.getElementById('filterSection').style.display = 'none';
+        document.getElementById('resultsContainer').style.display = 'block';
+        document.getElementById('resultsGrid').innerHTML = licBackBar() + `
+            <div class="list-view" style="grid-column:1/-1;">
+                <div class="list-head"><h2>🔗 تطابقات الإجازة${sp}</h2><div class="list-meta">عدد التطابقات: <strong>${pairs.length}</strong></div></div>
+                ${pairs.length ? body : '<div class="no-results" style="display:block;"><p>لا توجد تطابقات حالياً — يلزم وجود أطباء يعرضون إجازة ومجمعات تطلبها بنفس الاختصاص.</p></div>'}
+            </div>`;
+        setTimeout(() => document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
     }
 
     let selectedState = {
@@ -4346,6 +4428,7 @@
 
     function renderResults() {
         if (selectedState.mode === 'match') { renderMatchesView(); return; }
+        if (selectedState.mode === 'license') renderLicTabs();
         const grid = document.getElementById('resultsGrid');
         grid.innerHTML = '';
 
