@@ -3042,8 +3042,8 @@
                 if (isExcludedMatch(_mySeq, seqNum(c))) return;
                 const reserved = c.statusLabel && c.statusLabel.includes('غير متوفر');
                 if (reserved && !opts.includeReserved) return;
-                // طبيب "مستشفى حصراً" لا يُقترح له إلا مستشفى
-                if (item.workplace === 'hospital' && c.venueType !== 'hospital') return;
+                // طبيب "مستشفى حصراً": المستشفيات أولاً، والعيادات/المجمعات تُقترح له في النهاية كخيار
+                if (item.workplace === 'hospital' && c.venueType !== 'hospital') tier = 1;
                 if (item.workplace !== 'hospital' && c.venueType === 'hospital') tier = 1;
                 if (reserved) tier = 2;
                 const shared = specsOf(c).filter(s => specs.includes(s));
@@ -3067,8 +3067,8 @@
                 let tier = 0;
                 if (isExcludedMatch(seqNum(d), _cxSeq)) return;
                 if (d.statusLabel && d.statusLabel.includes('غير متوفر')) return;
-                // طبيب "مستشفى حصراً" لا يُقترح لمجمع عادي؛ والمستشفى يُقترح له أطباء العيادات في الأخير
-                if (d.workplace === 'hospital' && item.venueType !== 'hospital') return;
+                // طبيب "مستشفى حصراً" يُقترح للمجمع/العيادة في النهاية كخيار؛ والمستشفى يُقترح له أطباء العيادات في الأخير
+                if (d.workplace === 'hospital' && item.venueType !== 'hospital') tier = 1;
                 if (d.workplace !== 'hospital' && item.venueType === 'hospital') tier = 1;
                 const shared = specsOf(d).filter(s => specs.includes(s));
                 if (!shared.length) return;
@@ -3114,6 +3114,7 @@
         if (m.lic) badges.push('<span class="list-tag match-lic">📜 طلب ⇄ عرض إجازة</span>');
         else if (it.license) badges.push(`<span class="list-tag match-lic">${licenseLabel(it)}</span>`);
         if (m.otherType === 'clinic' && it.venueType === 'hospital') badges.push('<span class="list-tag">🏥 مستشفى أهلي</span>');
+        if (m.otherType === 'doctor' && it.workplace === 'hospital') badges.push('<span class="list-tag match-caution">🏥 يفضّل مستشفى أهلي (قد يقبل عيادة)</span>');
         if (m.otherType === 'clinic' && ADMIN && isNotYetOpen(it)) badges.push(`<span class="list-tag match-wait">🚧 قيد الإنشاء - يفتح خلال ${daysUntilOpen(it)} يوم</span>`);
         if (m.otherType === 'clinic' && ADMIN && coordFeeOf(it) > 0) badges.push(`<span class="list-tag match-fee">💰 أجور تنسيق أعلى</span>`);
         if (m.otherType === 'clinic' && ADMIN && isWorkingClass(it)) badges.push(`<span class="list-tag match-good">🏆 مجمع شغال كلاس</span>`);
