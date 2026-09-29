@@ -4321,10 +4321,12 @@
         if (selectedState.mode === 'license') {
             const want = (selectedState.licSide || 'want') === 'want';
             const sp = selectedState.specialty ? ' (' + selectedState.specialty + ')' : '';
+            // طبيب يعرض إجازته ← استمارة الأطباء (7RrE0Z)، صاحب مجمع يطلب إجازة ← استمارة المجمعات (gD6z6l)
+            const licFormUrl = want ? 'https://tally.so/r/7RrE0Z' : 'https://tally.so/r/gD6z6l';
             return `
                 <div class="no-results" style="display: block;">
                     <p>${want ? 'لا توجد طلبات إجازة' : 'لا توجد إجازات معروضة'}${sp} حالياً${hasBase ? ' بهذه الفلاتر' : ''}.</p>
-                    <a href="${buildWaLink(want ? 'مرحباً، أنا طبيب/ة وأرغب بعرض إجازتي' + sp + ' على المنصة' : 'مرحباً، أنا صاحب مجمع طبي وأطلب إجازة' + sp)}" target="_blank" class="btn btn-primary empty-form-btn">${want ? '📜 أنا طبيب وأعرض إجازتي' : '📜 أنا صاحب مجمع وأطلب إجازة'}</a>
+                    <a href="${licFormUrl}" target="_blank" class="btn btn-primary empty-form-btn">${want ? '📜 أنا طبيب وأعرض إجازتي' : '📜 أنا صاحب مجمع وأطلب إجازة'}</a>
                     <a href="${buildWaLink('مرحباً، أستفسر عن طلب أو عرض إجازة' + sp)}" target="_blank" class="whatsapp-btn">تواصل معنا عبر الواتساب 💬</a>
                 </div>`;
         }
