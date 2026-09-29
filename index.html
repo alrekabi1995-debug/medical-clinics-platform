@@ -3023,14 +3023,23 @@
 
     // tier: 0 = مطابقة أساسية، 1 = مستشفى لطبيب طلب عيادة/مجمع (أو العكس) — تُعرض في الأخير،
     // 2 = مجمع/مستشفى محجوز — للأدمن فقط وفي آخر القائمة (opts.includeReserved)
+    // استثناءات يدوية للمطابقة (باتجاهين): تسلسل الطبيب -> تسلسلات المجمعات المستثناة
+    const MATCH_EXCLUDE = { 60: [13, 29, 31, 78, 85, 89, 97, 102] };
+    function isExcludedMatch(docSeq, cxSeq) {
+        const l = MATCH_EXCLUDE[docSeq];
+        return !!(l && l.indexOf(cxSeq) !== -1);
+    }
+
     function findMatches(item, type, opts) {
         opts = opts || {};
         const specs = specsOf(item);
         const results = [];
         if (type === 'doctor') {
             const docTime = timeOfDoctor(item);
+            const _mySeq = seqNum(item);
             DOCTORS_DATA.forEach(c => {
                 let tier = 0;
+                if (isExcludedMatch(_mySeq, seqNum(c))) return;
                 const reserved = c.statusLabel && c.statusLabel.includes('غير متوفر');
                 if (reserved && !opts.includeReserved) return;
                 // طبيب "مستشفى حصراً" لا يُقترح له إلا مستشفى
@@ -3053,8 +3062,10 @@
                 results.push({ other: c, otherType: 'clinic', shared, sameGov, areaOverlap, sameGroup, sideDiff, timeUnknown: tc.unknown, km, eqPts, tier, lic });
             });
         } else {
+            const _cxSeq = seqNum(item);
             GENERAL_CLINICS_DATA.forEach(d => {
                 let tier = 0;
+                if (isExcludedMatch(seqNum(d), _cxSeq)) return;
                 if (d.statusLabel && d.statusLabel.includes('غير متوفر')) return;
                 // طبيب "مستشفى حصراً" لا يُقترح لمجمع عادي؛ والمستشفى يُقترح له أطباء العيادات في الأخير
                 if (d.workplace === 'hospital' && item.venueType !== 'hospital') return;
