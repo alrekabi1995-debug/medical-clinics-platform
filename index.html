@@ -1563,7 +1563,7 @@
     const AREA_COORDS = {
         // بغداد - الرصافة
         "الرصافة": [33.335, 44.415], "الرصافة - المركز": [33.335, 44.415], "الكرادة": [33.305, 44.430], "الاعظمية": [33.375, 44.365],
-        "الوزيرية": [33.345, 44.400], "بغداد الجديدة": [33.345, 44.465], "البلديات": [33.330, 44.455],
+        "الوزيرية": [33.345, 44.400], "الطالبية": [33.360, 44.390], "بغداد الجديدة": [33.345, 44.465], "البلديات": [33.330, 44.455],
         "المشتل": [33.310, 44.470], "العبيدي": [33.360, 44.480], "الكمالية": [33.350, 44.475],
         "ناحية الوحدة": [33.240, 44.530], "مدينة الصدر": [33.370, 44.455], "الشعب": [33.385, 44.410],
         "الراشدية": [33.480, 44.420], "زيونة": [33.320, 44.440], "الطارمية": [33.650, 44.380],
@@ -3193,7 +3193,7 @@
         const archPub = (!ADMIN && typeof archivePubHtml === 'function') ? archivePubHtml(item, type) : '';
         if (!matches.length && !reservedM.length && !archPub) return '';
         const heading = type === 'doctor' ? '🔎 مجمعات قد تناسبك' : '🔎 أطباء قد يناسبونكم';
-        const isClose = m => m.areaOverlap || (m.km !== null && m.km <= 6);
+        const isClose = m => !m.sideDiff && (m.areaOverlap || (m.km !== null && m.km <= 5));
         const base = matches.filter(m => !m.tier);
         const tier1 = matches.filter(m => m.tier === 1);
         const strict = base.filter(isClose);
@@ -3275,7 +3275,7 @@
 
     function suggestionsText(item, type) {
         const matches = findMatches(item, type);
-        const isClose = m => m.areaOverlap || (m.km !== null && m.km <= 6);
+        const isClose = m => !m.sideDiff && (m.areaOverlap || (m.km !== null && m.km <= 5));
         const strict = matches.filter(m => !m.tier && isClose(m));
         const other = matches.filter(m => !m.tier && !isClose(m));
         const tier1 = matches.filter(m => m.tier === 1);
