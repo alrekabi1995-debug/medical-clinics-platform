@@ -1391,6 +1391,9 @@
             </div>
             <div id="step1Box">
                 <div id="licTabsBox" style="display: none;"></div>
+                <div id="licSearchBox" style="display: none; margin: 0 0 18px;">
+                    <input type="text" id="licSearchInput" oninput="onLicSearch(this.value)" autocomplete="off" placeholder="🔎 ابحث بالاسم أو المنطقة أو الاختصاص…" style="width:100%; box-sizing:border-box; padding:12px 16px; font-size:16px; border:2px solid #e2e8f0; border-radius:12px; outline:none; direction:rtl; font-family:inherit;">
+                </div>
                 <div class="step-title" id="step1Title">🩺 الخطوة 1: اختر الاختصاص المطلوب</div>
                 <div class="options-grid" id="specialtiesGrid"></div>
                 <div id="listActionBox" style="display: none; margin-top: 18px;">
@@ -1958,6 +1961,8 @@
         if (item.license === 'offer') return /^طبيبة/.test(item.title || '') ? '📜 تعرض إجازتها' : '📜 يعرض إجازته';
         return '';
     }
+    function licNorm(s) { return String(s || '').replace(/<[^>]+>/g, ' ').replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').replace(/\s+/g, ' ').trim(); }
+    function onLicSearch(v) { selectedState.licSearch = v; renderResults(); }
     function setLicSide(side) {
         selectedState.licSide = side;
         renderLicTabs();
@@ -1965,8 +1970,12 @@
     }
     function renderLicTabs() {
         const box = document.getElementById('licTabsBox');
+        const sbox = document.getElementById('licSearchBox');
         if (!box) return;
-        if (selectedState.mode !== 'license') { box.style.display = 'none'; box.innerHTML = ''; return; }
+        if (selectedState.mode !== 'license') { box.style.display = 'none'; box.innerHTML = ''; if (sbox) sbox.style.display = 'none'; return; }
+        if (sbox) sbox.style.display = 'block';
+        const li = document.getElementById('licSearchInput');
+        if (li && li.value !== (selectedState.licSearch || '')) li.value = selectedState.licSearch || '';
         const side = selectedState.licSide || 'want';
         const nWant = DOCTORS_DATA.filter(i => i.license === 'want' && isAvailable(i)).length;
         const nOffer = GENERAL_CLINICS_DATA.filter(i => i.license === 'offer' && isAvailable(i)).length;
@@ -1986,7 +1995,8 @@
         specialty: null,
         gov: null,
         group: null,
-        area: null
+        area: null,
+        licSearch: ''
     };
 
     // كل سجل قد يحتوي اختصاصاً واحداً (specialty) أو عدة اختصاصات (specialties)
@@ -2080,7 +2090,7 @@
             const el = document.getElementById(b);
             if (el) el.style.outline = 'none';
         });
-        selectedState = { mode: 'general', licSide: 'want', specialty: null, gov: null, group: null, area: null };
+        selectedState = { mode: 'general', licSide: 'want', specialty: null, gov: null, group: null, area: null, licSearch: '' };
         renderLicTabs();
         lastListHash = '';
         lastMatchHash = '';
@@ -2098,6 +2108,7 @@
         selectedState.gov = null;
         selectedState.group = null;
         selectedState.area = null;
+        selectedState.licSearch = '';
 
         document.getElementById('filterSection').style.display = 'block';
         document.getElementById('resultsContainer').style.display = 'block';
@@ -3852,6 +3863,21 @@
                     <h2>🔒 قيد التفاوض — خاص بك فقط</h2>
                     <div class="list-meta">مرئي فقط على هذا المتصفح، ولا يظهر لأي زائر آخر. الإجمالي: <strong>${total}</strong></div>
                 </div>
+                <div class="manual-link-box" style="grid-column:1/-1; background:#f1f5f9; border:1px solid #cbd5e1; border-radius:14px; padding:16px; margin-bottom:14px;">
+                    <div style="font-weight:800; margin-bottom:10px;">🔗 ربط يدوي بالتسلسل</div>
+                    <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:12px;">
+                        <input id="mlDoc" type="number" inputmode="numeric" placeholder="تسلسل الطبيب" style="width:130px; padding:9px 11px; border:2px solid #e2e8f0; border-radius:10px; font-size:15px; text-align:center;">
+                        <span style="font-size:18px;">⇄</span>
+                        <input id="mlCx" type="number" inputmode="numeric" placeholder="تسلسل المجمع" style="width:130px; padding:9px 11px; border:2px solid #e2e8f0; border-radius:10px; font-size:15px; text-align:center;">
+                        <button type="button" class="share-opt" onclick="manualLink()">🤝 ربط كتطابق</button>
+                    </div>
+                    <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+                        <select id="mlKind" style="padding:9px 11px; border:2px solid #e2e8f0; border-radius:10px; font-size:15px;"><option value="doctor">طبيب</option><option value="clinic">مجمع</option></select>
+                        <input id="mlSeq" type="number" inputmode="numeric" placeholder="تسلسل مفرد" style="width:130px; padding:9px 11px; border:2px solid #e2e8f0; border-radius:10px; font-size:15px; text-align:center;">
+                        <button type="button" class="share-opt" onclick="manualAddNeg()">🔖 إضافة مفردة للتفاوض</button>
+                    </div>
+                    <div id="mlMsg" style="margin-top:10px; font-size:13px; font-weight:700;"></div>
+                </div>
                 ${total ? `<button type="button" class="share-opt share-wide" style="margin-bottom:10px;" onclick="copyText(${JSON.stringify(text)}, 'تم نسخ القائمة')">📋 نسخ القائمة لحفظها عندك</button>` : ''}
                 <div class="backup-row">
                     <button type="button" class="share-opt" onclick="exportNegotiations()">💾 تصدير نسخة احتياطية</button>
@@ -3864,6 +3890,43 @@
                 ${singleSection}
             </div>
         `;
+    }
+
+    // ================= ربط يدوي بالتسلسل (أدمن) =================
+    function findBySeqKind(seq, kind) {
+        seq = parseInt(seq, 10);
+        if (!seq) return null;
+        for (const k in adIndex) {
+            const e = adIndex[k];
+            if (e && e.type === kind && seqNum(e.item) === seq) return e.item;
+        }
+        return null;
+    }
+    function manualLink() {
+        const dSeq = (document.getElementById('mlDoc').value || '').trim();
+        const cSeq = (document.getElementById('mlCx').value || '').trim();
+        const msg = document.getElementById('mlMsg');
+        if (!dSeq || !cSeq) { msg.innerHTML = '<span style="color:#dc2626;">أدخل تسلسل الطبيب وتسلسل المجمع.</span>'; return; }
+        const doc = findBySeqKind(dSeq, 'doctor');
+        const cx = findBySeqKind(cSeq, 'clinic');
+        if (!doc || !cx) {
+            msg.innerHTML = '<span style="color:#dc2626;">' + (!doc ? ('لا يوجد طبيب بالتسلسل ' + escHtml(dSeq)) : '') + (!doc && !cx ? ' — ' : '') + (!cx ? ('لا يوجد مجمع بالتسلسل ' + escHtml(cSeq)) : '') + '</span>';
+            return;
+        }
+        confirmMatch(doc._id, cx._id);
+        if (typeof showToast === 'function') showToast('🔗 تم ربط طبيب ' + dSeq + ' مع مجمع ' + cSeq);
+        showNegotiations();
+    }
+    function manualAddNeg() {
+        const kind = document.getElementById('mlKind').value;
+        const seq = (document.getElementById('mlSeq').value || '').trim();
+        const msg = document.getElementById('mlMsg');
+        if (!seq) { msg.innerHTML = '<span style="color:#dc2626;">أدخل التسلسل.</span>'; return; }
+        const it = findBySeqKind(seq, kind);
+        if (!it) { msg.innerHTML = '<span style="color:#dc2626;">لا يوجد ' + (kind === 'doctor' ? 'طبيب' : 'مجمع') + ' بالتسلسل ' + escHtml(seq) + '</span>'; return; }
+        markNegotiating(it._id);
+        if (typeof showToast === 'function') showToast('🔖 أُضيف التسلسل ' + seq + ' للتفاوض');
+        showNegotiations();
     }
 
     // ================= نسخ احتياطي لبيانات التفاوض =================
@@ -4174,6 +4237,11 @@
                 if (item.license !== (selectedState.licSide || 'want')) return false;
                 if (!licenseSpecsOf(item).length) return false;
                 if (item.statusLabel && item.statusLabel.includes('غير متوفر')) return false;
+                const q = licNorm(selectedState.licSearch);
+                if (q) {
+                    const hay = licNorm([item.title, item.gov, (item.areas || []).join(' '), specsOf(item).join(' '), (Array.isArray(item.details) ? item.details.join(' ') : item.details)].join(' '));
+                    if (!q.split(' ').every(w => hay.includes(w.replace(/^ال/, '')))) return false;
+                }
             }
             if (selectedState.specialty && !specsOf(item).includes(selectedState.specialty)) return false;
             if (selectedState.gov && item.gov !== selectedState.gov) return false;
@@ -4296,7 +4364,9 @@
         filtered.forEach(item => {
             const card = document.createElement('div');
             card.className = 'card active-match';
-            card.innerHTML = cardInner(item, cardType, { highlight: true });
+            let html = cardInner(item, cardType, { highlight: true });
+            if (selectedState.mode === 'license') html += matchesHtml(item, cardType);
+            card.innerHTML = html;
             grid.appendChild(card);
         });
     }
