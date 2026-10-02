@@ -1226,6 +1226,7 @@
     .near-clear { background: none; border: none; color: #ef4444; font-weight: 700; font-size: 12px; cursor: pointer; }
     .list-tag.near-km { background: var(--doc); color: #fff; }
     .list-tag.list-date { background: #0f172a; color: #fff; font-weight: 700; }
+    .list-tag.list-seq { background: #e0e7ff; color: #3730a3; font-weight: 800; border: 1px solid #c7d2fe; }
     @media (max-width: 600px) { .near-form input { font-size: 16px; } }
 
     /* ===== طلب وعرض الإجازات ===== */
@@ -4425,6 +4426,7 @@
             const sub = type === 'doctor' ? `<div class="list-sub">${rowTitle(i, 'doctor')}</div>` : '';
             const dt = fmtAddedDate(i);
             const dateTag = dt ? `<span class="list-tag list-date">🗓️ أُضيف: ${dt}</span>` : '';
+            const seqTag = `<span class="list-tag list-seq">🔢 تسلسل ${seqOf(i)}</span>`;
             const tags = listTags(i, type).map(t => `<span class="list-tag">${t}</span>`).join('');
             return `
                     <div class="list-row">
@@ -4432,7 +4434,7 @@
                         <div class="list-main">
                             ${sub}
                             <div class="list-loc">${adLocation(i, type)}</div>
-                            <div class="list-tags">${dateTag}${tags}</div>
+                            <div class="list-tags">${seqTag}${dateTag}${tags}</div>
                         </div>
                         <a class="list-open" href="#ad=${i._id}">التفاصيل</a>
                     </div>`;
