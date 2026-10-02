@@ -4420,14 +4420,15 @@
             ? '🏢 جميع المجمعات الباحثة عن أطباء (الأحدث أولاً)'
             : '👨‍⚕️ جميع الأطباء الباحثين عن عيادات (الأحدث أولاً)';
 
-        const rows = data.map(i => {
+        const rows = data.map((i, idx) => {
+            const dispNum = data.length - idx; // ترقيم للعدّ: الأقدم = 1، الأحدث = الأكبر
             const sub = type === 'doctor' ? `<div class="list-sub">${rowTitle(i, 'doctor')}</div>` : '';
             const dt = fmtAddedDate(i);
             const dateTag = dt ? `<span class="list-tag list-date">🗓️ أُضيف: ${dt}</span>` : '';
             const tags = listTags(i, type).map(t => `<span class="list-tag">${t}</span>`).join('');
             return `
                     <div class="list-row">
-                        <span class="list-num">${seqOf(i)}</span>
+                        <span class="list-num">${dispNum}</span>
                         <div class="list-main">
                             ${sub}
                             <div class="list-loc">${adLocation(i, type)}</div>
