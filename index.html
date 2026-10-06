@@ -1439,6 +1439,7 @@
             <button type="button" class="btn btn-trigger" id="btnGeneral" onclick="startSearch('general')">👨‍⚕️ أطباء بحاجة لعيادات طبية</button>
             <button type="button" class="btn btn-hospdoc" id="btnHospDoc" onclick="startSearch('hospdoc')">👨‍⚕️ أطباء يطلبون العمل في مستشفى أهلي</button>
             <button type="button" class="btn btn-latest" id="btnAllDoctors" onclick="showAllByDate('doctor')">👨‍⚕️ كل الأطباء الباحثين عن عيادات</button>
+            <button type="button" class="btn btn-latest" id="btnDoctorCatalog" onclick="showCatalog('doctor')">📑 كتالوج الأطباء</button>
         </div>
     </div>
 
@@ -2081,7 +2082,7 @@
         { isNew: true, isClass: true, hours: "أي وقت", specialties: ["نسائية وتوليد", "باطنية", "مفاصل وروماتيزم", "طب أسرة", "طبيب ممارس عام", "تغذية وعلاج سكري", "الغدد الصماء والسكري", "جراحة الكلى والمسالك البولية", "أشعة وسونار ومفراس", "قلبية واوعية دموية", "أطفال"], gov: "نينوى", areas: ["قضاء تلعفر"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء بعدة اختصاصات - مجمع طبي (نينوى - قضاء تلعفر) - تسلسل 124", details: "<strong>الموقع:</strong> نينوى - قضاء تلعفر - مدخل القضاء من الجهة الشمالية، قرب مديرية شرطة تلعفر.<br><strong>الحالة الحالية:</strong> فتح جديد — تصنيف كلاس A+ (أكثر من 30 مراجعاً يومياً، مستوى استشاريين Top) — طلب عاجل.<br><strong>أوقات العمل المطلوبة:</strong> أي وقت (طب الأسرة والسونار جميع أيام الأسبوع).<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، باطنية، مفاصل وروماتيزم، طب أسرة، طبيب ممارس عام، تغذية وعلاج سكري، الغدد الصماء والسكري، جراحة الكلى والمسالك البولية، أشعة وسونار ومفراس، قلبية وأوعية دموية، أطفال.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد، ويوجد صيدلاني." }
     ];
 
-    const ALL_MODE_BTNS = ['btnGeneral', 'btnDoctor', 'btnHospital', 'btnHospDoc', 'btnLatest', 'btnMatches', 'btnLicense', 'btnAllDoctors', 'btnAllClinics', 'btnCatalog', 'btnLicenseCatalog'];
+    const ALL_MODE_BTNS = ['btnGeneral', 'btnDoctor', 'btnHospital', 'btnHospDoc', 'btnLatest', 'btnMatches', 'btnLicense', 'btnAllDoctors', 'btnAllClinics', 'btnCatalog', 'btnLicenseCatalog', 'btnDoctorCatalog'];
     // الأوضاع التي تعرض الأطباء (والباقي يعرض المجمعات/المستشفيات)
     function isDoctorMode(mode) {
         return mode === 'general' || mode === 'hospdoc' || (mode === 'license' && selectedState.licSide === 'offer');
