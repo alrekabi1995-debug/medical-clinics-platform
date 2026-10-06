@@ -17,15 +17,19 @@
 
     /* ألوان الهوية: كحلي + ذهبي، وأزرق للأطباء، ونيلي للمجمعات والمستشفيات */
     :root {
-        --navy: #0f172a;
-        --gold: #f59e0b;
-        --doc: #0369a1;
-        --doc-soft: #e0f2fe;
-        --cx: #4338ca;
-        --cx-soft: #eef2ff;
+        --navy: #16307e;          /* سطوح داكنة + نص غامق (أزرق عميق) */
+        --gold: #22c99a;          /* اللون المميّز (نعناعي) بدل الذهبي */
+        --brand: #2456e6;         /* الأزرق الملكي الأساسي */
+        --brand-deep: #1b3fb0;    /* أزرق أعمق للتدرّج */
+        --mint-ink: #053226;      /* نص غامق فوق النعناعي */
+        --cyan: #18b6d8;          /* لمسة سماوية (الجديد) */
+        --doc: #2456e6;
+        --doc-soft: #e4ecff;
+        --cx: #3b4fd8;
+        --cx-soft: #ecefff;
     }
     body {
-        background-color: #f8fafc;
+        background-color: #eef3ff;
         color: #0f172a;
         font-family: 'Tajawal', 'Segoe UI', Tahoma, Arial, sans-serif;
         margin: 0;
@@ -40,8 +44,8 @@
     }
 
     .news-ticker {
-        background-color: #0f172a;
-        border: 1px solid #334155;
+        background-color: #16307e;
+        border: 1px solid #2d4bb0;
         border-radius: 12px;
         box-shadow: 0 10px 25px -8px rgba(15, 23, 42, 0.5);
         display: flex;
@@ -52,8 +56,8 @@
 
     .ticker-label {
         flex-shrink: 0;
-        background-color: #f59e0b;
-        color: #0f172a;
+        background-color: #22c99a;
+        color: #053226;
         font-weight: 800;
         font-size: 13px;
         padding: 10px 16px;
@@ -96,7 +100,7 @@
 
     .ticker-item::after {
         content: "•";
-        color: #f59e0b;
+        color: #22c99a;
         position: absolute;
         left: -2px;
     }
@@ -108,16 +112,16 @@
     }
 
     .hero {
-        background-color: #0f172a;
+        background: linear-gradient(160deg, #1b3fb0 0%, #2456e6 55%, #1c48c9 100%);
         color: #ffffff;
-        padding: 50px 20px 60px;
+        padding: 34px 20px 36px;
         text-align: center;
-        border-bottom: 4px solid #f59e0b;
+        border-bottom: 4px solid #22c99a;
     }
 
     .badge {
-        background-color: rgba(245, 158, 11, 0.2);
-        color: #f59e0b;
+        background-color: rgba(34, 201, 154, 0.22);
+        color: #86efcf;
         padding: 6px 16px;
         border-radius: 20px;
         font-size: 14px;
@@ -129,9 +133,9 @@
         display: inline-flex;
         align-items: center;
         gap: 7px;
-        background: linear-gradient(90deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
-        border: 1px solid rgba(245, 158, 11, 0.4);
-        color: #fbbf24;
+        background: linear-gradient(90deg, rgba(34, 201, 154, 0.18), rgba(34, 201, 154, 0.05));
+        border: 1px solid rgba(34, 201, 154, 0.45);
+        color: #a9f0da;
         font-size: 0.85rem;
         font-weight: 700;
         padding: 8px 18px;
@@ -140,16 +144,17 @@
     }
 
     .hero h1 {
-        font-size: 2.2rem;
+        font-size: 1.9rem;
         font-weight: 800;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
 
     .hero p {
-        color: #94a3b8;
+        color: #cdd9f7;
         max-width: 600px;
-        margin: 0 auto 25px;
-        line-height: 1.6;
+        margin: 0 auto 18px;
+        line-height: 1.55;
+        font-size: 0.95rem;
     }
 
     .cta-container {
@@ -171,9 +176,9 @@
         border: none;
     }
 
-    .btn-primary { background-color: #f59e0b; color: #0f172a; }
+    .btn-primary { background-color: #22c99a; color: #053226; }
     .cta-label {
-        color: #fbbf24;
+        color: #16307e;
         font-size: 0.95rem;
         font-weight: 700;
         margin-bottom: 12px;
@@ -198,13 +203,14 @@
     .btn-secondary { background-color: #ffffff; color: var(--navy); border: none; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); }
 
     /* اختيار الصفة (مسار الطبيب / مسار المجمع) */
-    .aud-ask { color:#fbbf24; font-size:1.05rem; font-weight:800; margin-bottom:14px; text-align:center; }
-    .aud-cards { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
-    .aud-card { flex:1 1 300px; max-width:360px; background:rgba(255,255,255,.08); border:2px solid rgba(255,255,255,.25); border-radius:16px; padding:22px 18px; cursor:pointer; color:#fff; display:flex; flex-direction:column; align-items:center; gap:6px; transition:transform .15s, border-color .15s, background .15s; }
-    .aud-card:hover { transform:translateY(-3px); border-color:var(--gold); background:rgba(255,255,255,.14); }
-    .aud-card .ic { font-size:2.6rem; line-height:1; }
-    .aud-card b { font-size:1.35rem; font-weight:900; }
-    .aud-card small { font-size:.9rem; opacity:.85; font-weight:500; }
+    .aud-ask { color:#a9f0da; font-size:.98rem; font-weight:800; margin-bottom:12px; text-align:center; }
+    .aud-cards { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .aud-card { flex:1 1 240px; max-width:320px; background:rgba(255,255,255,.08); border:2px solid rgba(255,255,255,.25); border-radius:14px; padding:14px 14px; cursor:pointer; color:#fff; display:flex; flex-direction:row; align-items:center; justify-content:center; gap:12px; text-align:right; transition:transform .15s, border-color .15s, background .15s; }
+    .aud-card:hover { transform:translateY(-2px); border-color:var(--gold); background:rgba(255,255,255,.14); }
+    .aud-card .txt { display:flex; flex-direction:column; gap:2px; }
+    .aud-card .ic { font-size:1.9rem; line-height:1; flex:0 0 auto; }
+    .aud-card b { font-size:1.08rem; font-weight:900; }
+    .aud-card small { font-size:.8rem; opacity:.85; font-weight:500; }
     .aud-card.doc { border-color:rgba(245,158,11,.5); }
     .aud-card.cx { border-color:rgba(56,189,248,.5); }
     .aud-panel { max-width:960px; margin:0 auto; padding:0 16px; }
@@ -284,7 +290,7 @@
     }
 
     .global-wa-box {
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        background: linear-gradient(135deg, #16307e 0%, #1b3fb0 100%);
         border: 2px solid #25d366;
         padding: 18px 25px;
         border-radius: 14px;
@@ -380,7 +386,7 @@
 
     .selection-summary {
         background-color: #f8fafc;
-        border-right: 4px solid #f59e0b;
+        border-right: 4px solid #2456e6;
         padding: 12px 16px;
         border-radius: 8px;
         font-size: 14px;
@@ -410,7 +416,7 @@
     }
 
     .section-header h2 {
-        border-right: 4px solid #f59e0b;
+        border-right: 4px solid #2456e6;
         padding-right: 10px;
         font-size: 1.5rem;
     }
@@ -514,18 +520,18 @@
     .type-tag.hospital-venue-tag { background-color: var(--cx-soft); color: var(--cx); border: 1px solid #c7d2fe; }
 
     .btn-latest {
-        background-color: #f59e0b;
-        color: #0f172a;
+        background-color: #22c99a;
+        color: #053226;
         font-size: 1rem;
         padding: 14px 30px;
-        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+        box-shadow: 0 4px 12px rgba(34, 201, 154, 0.35);
     }
 
-    .card.new-item { border: 2px solid #f59e0b; position: relative; }
+    .card.new-item { border: 2px solid #18b6d8; position: relative; }
 
     .new-ribbon {
-        background-color: #f59e0b;
-        color: #0f172a;
+        background-color: #18b6d8;
+        color: #04323c;
         font-size: 12px;
         font-weight: 800;
         text-align: center;
@@ -799,9 +805,9 @@
         bottom: 20px;
         left: 20px;
         z-index: 60;
-        background-color: #0f172a;
+        background-color: #16307e;
         color: #ffffff;
-        border: 2px solid #f59e0b;
+        border: 2px solid #22c99a;
         border-radius: 30px;
         padding: 12px 18px;
         font-size: 14px;
@@ -830,9 +836,9 @@
         cursor: pointer;
     }
     .latest-tab.active {
-        background-color: #f59e0b;
-        border-color: #f59e0b;
-        color: #0f172a;
+        background-color: #2456e6;
+        border-color: #2456e6;
+        color: #ffffff;
     }
 
     .summary-btns {
@@ -1017,8 +1023,8 @@
     .match-confirm-btn {
         grid-column: 1 / -1;
         margin-top: 6px;
-        background-color: #f59e0b;
-        color: #0f172a;
+        background-color: #22c99a;
+        color: #053226;
         border: none;
         border-radius: 8px;
         padding: 8px 14px;
@@ -1094,7 +1100,7 @@
     .kw-head b { color: var(--navy); }
     .kw-hint { font-size: 12px; color: #64748b; }
     .seq-search-btn {
-        background-color: #0f172a;
+        background-color: #2456e6;
         color: #ffffff;
         border: none;
         border-radius: 8px;
@@ -1124,8 +1130,8 @@
         cursor: pointer;
     }
     .seq-mode-pill.active {
-        background-color: #0f172a;
-        border-color: #0f172a;
+        background-color: #2456e6;
+        border-color: #2456e6;
         color: #ffffff;
     }
     .seq-result-group {
@@ -1201,7 +1207,7 @@
     }
     .admin-matches-slot { margin-top: 8px; }
 
-    .list-tag.match-fee { background: #f59e0b; color: #0f172a; }
+    .list-tag.match-fee { background: #22c99a; color: #053226; }
     .list-tag.match-wait { background: #94a3b8; color: #0f172a; }
 
     .admin-seq-info {
@@ -1294,7 +1300,7 @@
     .license-wrap { max-width: 900px; margin: 12px auto 0; padding: 0 20px; }
     .btn-license {
         width: 100%; justify-content: center; text-align: center; border-radius: 12px;
-        background: #fffbeb; color: #92400e; border: 2px dashed var(--gold); font-size: 1rem; padding: 12px 16px;
+        background: #e9fbf4; color: #0b5f49; border: 2px dashed var(--gold); font-size: 1rem; padding: 12px 16px;
     }
     .btn-license small { display: block; font-weight: 600; font-size: 0.8rem; color: #b45309; }
     .lic-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
@@ -1375,10 +1381,10 @@
             <div class="aud-ask">للبدء، اختر صفتك:</div>
             <div class="aud-cards">
                 <button type="button" class="aud-card doc" onclick="setAudience('doctor')">
-                    <span class="ic">👨‍⚕️</span><b>أنا طبيب</b><small>أبحث عن عيادة أو مستشفى أهلي</small>
+                    <span class="ic">👨‍⚕️</span><span class="txt"><b>أنا طبيب</b><small>أبحث عن عيادة أو مستشفى أهلي</small></span>
                 </button>
                 <button type="button" class="aud-card cx" onclick="setAudience('complex')">
-                    <span class="ic">🏢</span><b>صاحب مجمع أو مستشفى</b><small>أبحث عن أطباء</small>
+                    <span class="ic">🏢</span><span class="txt"><b>صاحب مجمع أو مستشفى</b><small>أبحث عن أطباء</small></span>
                 </button>
             </div>
         </div>
