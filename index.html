@@ -119,6 +119,16 @@
         border-bottom: 4px solid #22c99a;
     }
 
+    .brand-row { display: flex; align-items: center; justify-content: center; gap: 16px; margin: 8px 0 10px; }
+    .brand-row h1 { margin: 0; }
+    .brand-logo {
+        width: 64px; height: 64px; border-radius: 16px; flex: 0 0 auto;
+        display: flex; align-items: center; justify-content: center;
+        background: linear-gradient(140deg, #14b8a6, #1aa39a 55%, #2456e6);
+        box-shadow: 0 10px 26px rgba(10, 60, 90, 0.45);
+    }
+    .brand-logo svg { width: 42px; height: 42px; }
+    @media (max-width: 600px) { .brand-row { gap: 10px; } .brand-logo { width: 50px; height: 50px; border-radius: 13px; } .brand-logo svg { width: 33px; height: 33px; } }
     .badge {
         background-color: rgba(34, 201, 154, 0.22);
         color: #86efcf;
@@ -1390,7 +1400,12 @@
 <main>
     <section class="hero">
         <span class="badge">وساطة وتنسيق موقعي متخصص</span>
-        <h1>منصة عيادات طبية</h1>
+        <div class="brand-row">
+            <div class="brand-logo" aria-label="شعار منصة عيادات طبية">
+                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 104c-78 0-141 60-141 138 0 96 120 166 141 166s141-70 141-166c0-78-63-138-141-138z" fill="#ffffff"/><path d="M170 238h34l16-34 28 72 20-46 14 26h50" fill="none" stroke="#14b8a6" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h1>منصة عيادات طبية</h1>
+        </div>
         <div class="hero-trust-line">أول منصة للوساطة الطبية وتوفير العيادات في العراق منذ 4 سنوات</div>
         <p>ننسّق بين الأطباء وأفضل العيادات الشاغرة، ونوفر لأصحاب المجمعات الطبية الكفاءات المطلوبة.</p>
         <div class="hero-stats" id="heroStats" style="display: none;"></div>
