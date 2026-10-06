@@ -623,6 +623,12 @@
         font-weight: 700;
         cursor: pointer;
     }
+    .ad-export-btn {
+        display: block; width: 100%; margin-top: 10px; padding: 11px 14px;
+        background-color: #0d9488; color: #ffffff; border: none; border-radius: 8px;
+        font-size: 14px; font-weight: 800; cursor: pointer;
+    }
+    .ad-export-btn:hover { background-color: #0b7d73; }
 
     .share-menu {
         display: none;
@@ -2953,7 +2959,9 @@
         const id = item._id;
         const native = (typeof navigator !== 'undefined' && navigator.share)
             ? `<button type="button" class="share-opt share-native" onclick="nativeShare('${id}')">📲 مشاركة عبر التطبيقات</button>` : '';
+        const adWho = (GENERAL_CLINICS_DATA.indexOf(item) !== -1) ? 'الطبيب' : (item.venueType === 'hospital' ? 'المستشفى' : 'المجمع');
         return `
+                        <button type="button" class="ad-export-btn" onclick="exportSingleAd('${id}')">📸 إعلان خاص لهذا ${adWho} (صورة للنشر)</button>
                         <button type="button" class="share-btn" onclick="toggleShare('${id}')">🔗 مشاركة هذا الإعلان</button>
                         <div class="share-menu" id="share-menu-${id}">
                             ${native}
@@ -4719,12 +4727,21 @@
             : '';
         catDoExport(data, all, note, false, 'catalog-manasa');
     }
-    // إعلان خاص لمجمع واحد
-    function exportSingleAd(seq) {
-        const item = catFiltered().find(i => seqNum(i) === seq)
-            || DOCTORS_DATA.concat(GENERAL_CLINICS_DATA).find(i => seqNum(i) === seq && catItemType(i));
+    // إعلان خاص لمجمع/طبيب واحد (يعمل من الكتالوج ومن نتائج البحث) — يعتمد على مُعرّف العنصر
+    function exportSingleAd(id) {
+        const item = (adIndex[id] && adIndex[id].item) || DOCTORS_DATA.concat(GENERAL_CLINICS_DATA).find(x => x._id === id);
         if (!item) { showToast('العنصر غير موجود'); return; }
-        catDoExport([item], [item], '', true, 'ad-' + seq);
+        // اضبط نوع الكتالوج حسب العنصر لتُبنى الصورة والكابشن بشكل صحيح
+        catType = item.license ? 'license' : (GENERAL_CLINICS_DATA.indexOf(item) !== -1 ? 'doctor' : 'clinic');
+        const box = document.getElementById('catExport');
+        if (!box) {
+            // خارج الكتالوج: أنشئ صندوق تصدير مؤقت أعلى النتائج
+            const host = document.getElementById('resultsGrid') || document.getElementById('resultsContainer') || document.body;
+            const d = document.createElement('div'); d.className = 'cat-export-box'; d.id = 'catExport';
+            d.style.gridColumn = '1/-1';
+            host.insertBefore(d, host.firstChild);
+        }
+        catDoExport([item], [item], '', true, 'ad-' + seqOf(item));
     }
     function renderCatalog() {
         document.getElementById('filterSection').style.display = 'none';
@@ -4764,7 +4781,7 @@
                     <div class="cr"><span>🩺</span><span class="cv">${it === 'doctor' ? (sub || show) : show}</span></div>
                     <div class="cr"><span>🕒</span><span class="cv">${h}</span> ${licTag}${clsTag}</div>
                     <a class="cbar" href="#ad=${i._id}">${barLabel} · تسلسل ${seqOf(i)}</a>
-                    <button type="button" class="cat-ad-btn no-print" onclick="exportSingleAd(${sq})">📸 إعلان خاص لهذا ${catItemType(i) === 'doctor' ? 'الطبيب' : 'المجمع'}</button>
+                    <button type="button" class="cat-ad-btn no-print" onclick="exportSingleAd('${i._id}')">📸 إعلان خاص لهذا ${catItemType(i) === 'doctor' ? 'الطبيب' : 'المجمع'}</button>
                 </div>`;
         }).join('');
 
