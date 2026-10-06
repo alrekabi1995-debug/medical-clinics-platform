@@ -3016,7 +3016,7 @@
                 </div>
                 <div class="card-body">
                     ${typeTag}${hospitalTag}${addedLabel(item) ? `<div class="added-tag">🕒 ${addedLabel(item)}</div>` : ''}${ADMIN && !isRed && daysSinceAdded(item) !== null && daysSinceAdded(item) > STALE_DAYS ? `<div class="stale-tag">⚠️ مرّ أكثر من ${STALE_DAYS} يوماً — تأكد أنه ما زال متاحاً</div>` : ''}
-                    <h3>${item.title}</h3>
+                    <h3>${type === 'clinic' ? ((isHospVenue ? 'مستشفى أهلي' : 'مجمع طبي') + (item.license === 'want' ? ' (يطلب إجازة)' : '') + ' — تسلسل ' + seqOf(item)) : item.title}</h3>
                     <ul class="card-info">
                         ${specInfoHtml(item, !!opts.highlight)}
                         <li><strong>المحافظة:</strong> ${item.gov} - ${item.areas.join('، ')}</li>
