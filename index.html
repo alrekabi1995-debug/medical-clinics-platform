@@ -4710,13 +4710,17 @@
         const padTop = n <= 6 ? 52 : 44;
         const seqF = n <= 6 ? 22 : 20;
         const specMax = n <= 6 ? 6 : 5;
+        // لوحة ألوان مميّزة لكل نوع: الأطباء أزرق، المجمعات/الإجازات تركوازي — ليتمييز الستايل عند التصفح
+        const P = catType === 'doctor'
+            ? { bg: '#eef3ff', title: '#1b3fb0', sub: '#2456e6', a: '#1d4ed8', b: '#15307e', foot: '#2456e6', footSub: '#d6e3ff', spec: '#ffd36b', hosp: '#cfe0ff' }
+            : { bg: '#f1faf8', title: '#0d9488', sub: '#0f766e', a: '#0e6f66', b: '#0b5f73', foot: '#0d9488', footSub: '#d6fff6', spec: '#ffd36b', hosp: '#b9f0e6' };
         const cards = data.map((i, idx) => {
-            const bg = idx % 2 ? '#0b5f73' : '#0e6f66';
+            const bg = idx % 2 ? P.b : P.a;
             const seqBadge = `<div style="position:absolute;top:13px;left:13px;background:#ffd36b;color:#073b36;font-weight:900;font-size:${seqF}px;padding:2px 13px;border-radius:999px">${seqOf(i)}</div>`;
             if (catType === 'license') {
                 const lspecs = licenseSpecsOf(i); const lshow = lspecs.join('، ');
                 const verb = i.license === 'offer' ? 'طبيب/ة يعرض إجازة' : 'مطلوب إجازة';
-                const noteLine = i.licNote ? `<div style="margin-top:8px;font-weight:800;font-size:${specF - 1}px;line-height:1.4;color:#ffd36b">🏥 ${esc(i.licNote)}</div>` : '';
+                const noteLine = i.licNote ? `<div style="margin-top:8px;font-weight:800;font-size:${specF - 1}px;line-height:1.4;color:${P.spec}">🏥 ${esc(i.licNote)}</div>` : '';
                 return `<div style="background:${bg};border-radius:16px;padding:${padTop}px 20px 22px;color:#ffffff;text-align:center;position:relative;min-height:${minH}px;box-sizing:border-box">
                     ${seqBadge}
                     <div style="font-weight:900;font-size:${areaF - 4}px;line-height:1.12;color:#ffffff">${esc(adLocation(i, catItemType(i)))}</div>
@@ -4730,21 +4734,21 @@
             // بطاقات الأطباء مختصرة (موقع + اختصاص) فنجعلها مدمجة لتصغير الصورة للنشر
             const doc = it2 === 'doctor';
             const mh = doc ? 104 : minH; const pt = doc ? (n <= 6 ? 42 : 36) : padTop; const af = doc ? areaF - 4 : areaF;
-            const hospLine = (it2 === 'doctor' && i.workplace === 'hospital') ? `<div style="margin-top:6px;font-weight:800;font-size:${specF - 2}px;color:#b9f0e6">🏥 يبحث عن مستشفى أهلي</div>`
-                : (it2 === 'clinic' && i.venueType === 'hospital') ? `<div style="margin-top:6px;font-weight:800;font-size:${specF - 2}px;color:#b9f0e6">🏥 مستشفى أهلي</div>` : '';
+            const hospLine = (it2 === 'doctor' && i.workplace === 'hospital') ? `<div style="margin-top:6px;font-weight:800;font-size:${specF - 2}px;color:${P.hosp}">🏥 يبحث عن مستشفى أهلي</div>`
+                : (it2 === 'clinic' && i.venueType === 'hospital') ? `<div style="margin-top:6px;font-weight:800;font-size:${specF - 2}px;color:${P.hosp}">🏥 مستشفى أهلي</div>` : '';
             return `<div style="background:${bg};border-radius:16px;padding:${pt}px 18px ${doc ? 16 : 20}px;color:#ffffff;text-align:center;position:relative;min-height:${mh}px;box-sizing:border-box">
                 ${seqBadge}
                 <div style="font-weight:900;font-size:${af}px;line-height:1.12;color:#ffffff">${esc(adLocation(i, it2))}</div>${hospLine}
-                <div style="margin-top:8px;font-weight:800;font-size:${sf}px;line-height:1.4;color:#ffd36b">${esc(show)}</div>
+                <div style="margin-top:8px;font-weight:800;font-size:${sf}px;line-height:1.4;color:${P.spec}">${esc(show)}</div>
             </div>`;
         }).join('');
         const posterTitle = catType === 'license' ? 'مطلوب إجازات طبية' : catType === 'doctor' ? 'أطباء يبحثون عن عيادات طبية' : 'مطلوب أطباء';
-        const html = `<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;background:#f1faf8;font-family:Tahoma,Arial,sans-serif;padding:36px 40px;box-sizing:border-box;direction:rtl">
-            <div style="text-align:center;font-weight:900;font-size:86px;color:#0d9488;line-height:1;letter-spacing:-2px">${posterTitle}</div>
-            <div style="text-align:center;font-weight:800;font-size:29px;color:#0f766e;margin-top:10px">منصة عيادات طبية — اطلب الفرصة برقم التسلسل</div>
+        const html = `<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;background:${P.bg};font-family:Tahoma,Arial,sans-serif;padding:36px 40px;box-sizing:border-box;direction:rtl">
+            <div style="text-align:center;font-weight:900;font-size:86px;color:${P.title};line-height:1;letter-spacing:-2px">${posterTitle}</div>
+            <div style="text-align:center;font-weight:800;font-size:29px;color:${P.sub};margin-top:10px">منصة عيادات طبية — اطلب الفرصة برقم التسلسل</div>
             <div style="display:grid;grid-template-columns:${data.length === 1 ? '1fr' : '1fr 1fr'};gap:14px;margin-top:20px">${cards}</div>
-            <div style="margin-top:16px;background:#0d9488;border-radius:16px;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;color:#ffffff">
-                <div style="text-align:right"><div style="font-weight:900;font-size:30px">${catType === 'license' ? 'لطلب أو عرض الإجازة' : catType === 'doctor' ? 'تبحث عن طبيب لعيادتك؟' : 'لدينا عرض مميّز للأطباء'}</div><div style="font-size:21px;color:#d6fff6;font-weight:700">أرسل رقم التسلسل على واتساب المنصة</div></div>
+            <div style="margin-top:16px;background:${P.foot};border-radius:16px;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;color:#ffffff">
+                <div style="text-align:right"><div style="font-weight:900;font-size:30px">${catType === 'license' ? 'لطلب أو عرض الإجازة' : catType === 'doctor' ? 'تبحث عن طبيب لعيادتك؟' : 'لدينا عرض مميّز للأطباء'}</div><div style="font-size:21px;color:${P.footSub};font-weight:700">أرسل رقم التسلسل على واتساب المنصة</div></div>
                 <div style="background:#ffffff;color:#128C3E;font-weight:900;font-size:38px;padding:12px 22px;border-radius:14px;direction:ltr;letter-spacing:2px">${WHATSAPP_DISPLAY}</div>
             </div>
         </div>`;
