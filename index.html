@@ -4715,11 +4715,12 @@
                     ${noteLine}
                 </div>`;
             }
-            const specs = specsOf(i); const show = specs.slice(0, specMax).join('، ') + (specs.length > specMax ? '…' : '');
+            const specs = specsOf(i); const show = specs.join('، ');
+            const sf = specs.length > 8 ? specF - 4 : specs.length > 5 ? specF - 2 : specF;
             return `<div style="background:${bg};border-radius:16px;padding:${padTop}px 18px 20px;color:#ffffff;text-align:center;position:relative;min-height:${minH}px;box-sizing:border-box">
                 ${seqBadge}
                 <div style="font-weight:900;font-size:${areaF}px;line-height:1.12;color:#ffffff">${esc(adLocation(i, catItemType(i)))}</div>
-                <div style="margin-top:10px;font-weight:800;font-size:${specF}px;line-height:1.4;color:#ffd36b">${esc(show)}</div>
+                <div style="margin-top:10px;font-weight:800;font-size:${sf}px;line-height:1.4;color:#ffd36b">${esc(show)}</div>
             </div>`;
         }).join('');
         const posterTitle = catType === 'license' ? 'مطلوب إجازات طبية' : 'مطلوب أطباء';
