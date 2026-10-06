@@ -205,14 +205,16 @@
     /* اختيار الصفة (مسار الطبيب / مسار المجمع) */
     .aud-ask { color:#a9f0da; font-size:.98rem; font-weight:800; margin-bottom:12px; text-align:center; }
     .aud-cards { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-    .aud-card { flex:1 1 240px; max-width:320px; background:rgba(255,255,255,.08); border:2px solid rgba(255,255,255,.25); border-radius:14px; padding:14px 14px; cursor:pointer; color:#fff; display:flex; flex-direction:row; align-items:center; justify-content:center; gap:12px; text-align:right; transition:transform .15s, border-color .15s, background .15s; }
-    .aud-card:hover { transform:translateY(-2px); border-color:var(--gold); background:rgba(255,255,255,.14); }
+    .aud-card { flex:1 1 240px; max-width:320px; background:rgba(255,255,255,.10); border:3px solid #ffffff; border-radius:14px; padding:14px 14px; cursor:pointer; color:#fff; display:flex; flex-direction:row; align-items:center; justify-content:center; gap:12px; text-align:right; box-shadow:0 6px 16px rgba(0,0,0,.18); transition:transform .15s, border-color .15s, background .15s, box-shadow .15s; }
+    .aud-card:hover { transform:translateY(-2px); background:rgba(255,255,255,.18); box-shadow:0 10px 22px rgba(0,0,0,.28); }
     .aud-card .txt { display:flex; flex-direction:column; gap:2px; }
     .aud-card .ic { font-size:1.9rem; line-height:1; flex:0 0 auto; }
     .aud-card b { font-size:1.08rem; font-weight:900; }
-    .aud-card small { font-size:.8rem; opacity:.85; font-weight:500; }
-    .aud-card.doc { border-color:rgba(245,158,11,.5); }
-    .aud-card.cx { border-color:rgba(56,189,248,.5); }
+    .aud-card small { font-size:.8rem; opacity:.9; font-weight:500; }
+    .aud-card.doc { border-color:#ffd36b; }
+    .aud-card.doc:hover { border-color:#ffdf8f; }
+    .aud-card.cx { border-color:#7cc4ff; }
+    .aud-card.cx:hover { border-color:#a8d8ff; }
     .aud-panel { max-width:960px; margin:0 auto; padding:0 16px; }
     .aud-switch { display:flex; align-items:center; justify-content:center; gap:12px; margin:4px 0 16px; }
     .aud-switch button { background:#fff; color:var(--navy); border:none; border-radius:999px; padding:8px 18px; font-weight:800; font-family:inherit; cursor:pointer; font-size:.9rem; }
@@ -1986,7 +1988,7 @@
         { isNew: true, isClass: true, hours: "أي وقت", specialties: ["باطنية"], gov: "بغداد", areas: ["حي الجهاد"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة باطنية - مجمع طبي (بغداد - الكرخ - حي الجهاد) - تسلسل 53", details: "<strong>الموقع:</strong> بغداد - الكرخ - حي الجهاد - شارع الشارقة.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس).<br><strong>أوقات العمل المطلوبة:</strong> أي وقت<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> باطنية.<br><strong>الأطباء المتواجدون حالياً:</strong> نساىية كلاس." },
         { isNew: true, hours: "مساءً", specialties: ["أطفال", "باطنية", "جلدية"], gov: "بغداد", areas: ["الاعظمية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (أطفال، باطنية، جلدية) - مجمع طبي (بغداد - الرصافة - الاعظمية - راس الحواش) - تسلسل 54", details: "<strong>الموقع:</strong> بغداد - الرصافة - الاعظمية - راس الحواش، قرب مثلجات الحديد.<br><strong>الحالة الحالية:</strong> المجمع أو العيادة جديدة.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> كشفية فقط.<br><strong>الاختصاصات المطلوبة:</strong> أطفال، باطنية، جلدية.<br><strong>الأطباء المتواجدون حالياً:</strong> طبيبة نسائية وطبيب اسنان." },
         { isNew: true, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال", "جلدية"], gov: "بغداد", areas: ["مدينة جكوك"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، أطفال، جلدية) - مجمع طبي (بغداد - الكرخ - مدينة جكوك) - تسلسل 55", details: "<strong>الموقع:</strong> بغداد - الكرخ - مدينة جكوك، حسينية قمر بني هاشم.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> كشفية فقط.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، أطفال، جلدية.<br><strong>الأطباء المتواجدون حالياً:</strong> ، طبيب باطنية اختصاص." },
-        { isNew: true, license: "want", hours: "مساءً", specialties: ["جلدية", "جراحة تجميلية"], gov: "بغداد", areas: ["السيدية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب إجازة جلدية أو جراحة تجميلية - مجمع طبي (بغداد - الكرخ - السيدية) - تسلسل 56", details: "<strong>الموقع:</strong> بغداد - الكرخ - السيدية - شارع العلوة، قرب أفران الساعة.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> إجازة جراحة تجميلية (بلاستك) أو إجازة جلدية.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد أطباء اختصاص آخرون في المجمع (دون تفاصيل إضافية)." },
+        { isNew: true, license: "want", hours: "مساءً", specialties: ["جلدية", "جراحة تجميلية"], gov: "بغداد", areas: ["السيدية"], statusLabel: "🔴 غير متوفر (محجوز)", headerLabel: "فرصة عمل مميزة", title: "مطلوب إجازة جلدية أو جراحة تجميلية - مجمع طبي (بغداد - الكرخ - السيدية) - تسلسل 56", details: "<strong>الموقع:</strong> بغداد - الكرخ - السيدية - شارع العلوة، قرب أفران الساعة.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> إجازة جراحة تجميلية (بلاستك) أو إجازة جلدية.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد أطباء اختصاص آخرون في المجمع (دون تفاصيل إضافية)." },
         { isNew: true, isClass: true, hours: "أي وقت", specialties: ["جلدية", "أطفال", "جراحة عامة", "مفاصل وروماتيزم", "جراحة العظام والكسور", "باطنية", "طب أسرة", "جراحة الكلى والمسالك البولية", "قلبية واوعية دموية", "تغذية وعلاج سكري", "الغدد الصماء والسكري", "جراحة تجميلية", "جراحة الكبرى والعصبية", "أورام"], gov: "بغداد", areas: ["الكرادة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء بعدة اختصاصات - مجمع الفاخر والوسام الطبي (بغداد - الكرادة - ساحة الواثق) - تسلسل 117", details: "<strong>الموقع:</strong> بغداد - الكرادة - ساحة الواثق - شارع سلمان فائق، قرب مستشفى عشتار ومستشفى الواثق ومطعم قدوري.<br><strong>ملاحظة:</strong> مجمعان في موقع واحد ولنفس المالك (مجمع الفاخر الطبي + مجمع الوسام الطبي).<br><strong>الحالة الحالية:</strong> المجمع شغّال — تصنيف كلاس A (من 20 إلى 30 مراجعاً يومياً، سمعة ممتازة) — طلب عاجل.<br><strong>أوقات العمل المطلوبة:</strong> أي وقت.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق، ويوجد عروض لاستقطاب الأطباء.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد 5 اختصاصات، وصيدلية (صيدلاني)." },
         { specialties: [], gov: "بغداد", areas: ["الكرادة"], statusLabel: "🔴 غير متوفر (محجوز)", headerLabel: "محجوز", title: "مجمع محجوز / مغلق - تسلسل 57", details: "<strong>الموقع:</strong> —.<br>هذا التسلسل (57) محجوز / مغلق حالياً." },
         { isNew: true, hours: "مساءً", specialties: ["أطفال", "باطنية"], gov: "بغداد", areas: ["مناطق أخرى"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (أطفال، باطنية) - مجمع طبي (بغداد - الرصافة - مناطق أخرى - الصليخ 600) - تسلسل 58", details: "<strong>الموقع:</strong> بغداد - الرصافة - مناطق أخرى - الصليخ 600، قرب مطعم ريزو، مجاور كوزمتك عماد.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> أطفال، باطنية.<br><strong>الأطباء المتواجدون حالياً:</strong> نسائية اسنان سونار تجميل." },
@@ -2057,7 +2059,8 @@
         { isNew: true, isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد", "جراحة عامة", "مفاصل وروماتيزم", "جراحة العظام والكسور", "طبيب ممارس عام", "جلدية", "أطفال", "باطنية"], gov: "بغداد", areas: ["حي أور"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، جراحة عامة، عظام ومفاصل، جلدية، أطفال، باطنية، ممارس عام) - مجمع طبي (بغداد - حي أور) - تسلسل 118", details: "<strong>الموقع:</strong> بغداد - حي أور - شارع المطعم الفلسطيني، مجاور سنتر حي أور.<br><strong>الحالة الحالية:</strong> مجمع موجود ومستقر — تصنيف كلاس B (من 10 إلى 20 مراجعاً يومياً، عمل مستقر).<br><strong>أوقات العمل المطلوبة:</strong> مسائي.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق، ويوجد عروض حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، جراحة عامة، مفاصل وروماتيزم، جراحة العظام والكسور، طبيب ممارس عام، جلدية، أطفال، باطنية.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد أطباء، وصيدلاني/طبيب." },
         { isNew: true, isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد"], gov: "النجف", areas: ["شارع الإسكان"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة نسائية وتوليد - مجمع اليسر الطبي (النجف - شارع الإسكان) - تسلسل 119", details: "<strong>الموقع:</strong> النجف - شارع الإسكان، مجاور صيدلية أريدو.<br><strong>الحالة الحالية:</strong> فتح جديد — تصنيف كلاس Z (أقل من 5 مراجعين يومياً، جديد كلياً أو أيام دوام محدودة).<br><strong>أوقات العمل المطلوبة:</strong> مسائي.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق، ويوجد دعم للطبيب.<br><strong>الاختصاص المطلوب:</strong> نسائية وتوليد.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد أطباء بعد، ويوجد صيدلاني." },
         { isNew: true, isClass: true, hours: "صباحاً", specialties: ["جلدية", "باطنية", "طب أسرة"], gov: "بغداد", areas: ["سوق التاجي"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (جلدية، باطنية، طب أسرة) - مجمع نجمة التاجي (بغداد - الكرخ - سوق التاجي) - تسلسل 120", details: "<strong>الموقع:</strong> بغداد - الكرخ - سوق التاجي، قرب المركز الصحي الثاني.<br><strong>الحالة الحالية:</strong> فتح جديد — تصنيف كلاس A+ (أكثر من 30 مراجعاً يومياً، مستوى استشاريين Top).<br><strong>أوقات العمل المطلوبة:</strong> صباحي.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق، ويوجد دعم للطبيب.<br><strong>الاختصاصات المطلوبة:</strong> جلدية، باطنية، طب أسرة.<br><strong>الأطباء المتواجدون حالياً:</strong> طبيبة نسائية (كلاس A+)، وصيدلاني." },
-        { isNew: true, isClass: true, venueType: "hospital", hours: "أي وقت", specialties: ["جراحة تجميلية", "جراحة عامة", "عيون", "أنف وأذن وحنجرة"], gov: "بغداد", areas: ["الوزيرية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (جراحة تجميلية، جراحة عامة، عيون، أنف وأذن وحنجرة) - مستشفى النهرين الأهلي (بغداد - الرصافة - الوزيرية) - تسلسل 121", details: "<strong>الموقع:</strong> بغداد - الرصافة - الوزيرية - خدمي محمد القاسم، قرب رعاية شؤون المرأة.<br><strong>الحالة الحالية:</strong> المستشفى شغّال — تصنيف كلاس A (من 20 إلى 30 مراجعاً يومياً، سمعة ممتازة).<br><strong>أوقات العمل المطلوبة:</strong> أي وقت.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> جراحة تجميلية، جراحة عامة، عيون، أنف وأذن وحنجرة.<br><strong>التجهيزات:</strong> متوفرة مسبقاً في المستشفى، ويوجد صيدلية.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد أطباء اختصاص آخرون." }
+        { isNew: true, isClass: true, venueType: "hospital", hours: "أي وقت", specialties: ["جراحة تجميلية", "جراحة عامة", "عيون", "أنف وأذن وحنجرة"], gov: "بغداد", areas: ["الوزيرية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (جراحة تجميلية، جراحة عامة، عيون، أنف وأذن وحنجرة) - مستشفى النهرين الأهلي (بغداد - الرصافة - الوزيرية) - تسلسل 121", details: "<strong>الموقع:</strong> بغداد - الرصافة - الوزيرية - خدمي محمد القاسم، قرب رعاية شؤون المرأة.<br><strong>الحالة الحالية:</strong> المستشفى شغّال — تصنيف كلاس A (من 20 إلى 30 مراجعاً يومياً، سمعة ممتازة).<br><strong>أوقات العمل المطلوبة:</strong> أي وقت.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> جراحة تجميلية، جراحة عامة، عيون، أنف وأذن وحنجرة.<br><strong>التجهيزات:</strong> متوفرة مسبقاً في المستشفى، ويوجد صيدلية.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد أطباء اختصاص آخرون." },
+        { isNew: true, isClass: true, license: "want", hours: "مساءً", specialties: ["جراحة تجميلية"], gov: "بغداد", areas: ["البنوك"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب-ة جراحة تجميلية ذو كفاءة (أو إجازة) - مجمع أهواك للتجميل والليزر (بغداد - الرصافة - البنوك) - تسلسل 122", details: "<strong>الموقع:</strong> بغداد - الرصافة - البنوك - شارع الميثاق.<br><strong>الحالة الحالية:</strong> المجمع شغّال — تصنيف كلاس A (من 20 إلى 30 مراجعاً يومياً، سمعة ممتازة) — طلب عاجل.<br><strong>أوقات العمل المطلوبة:</strong> مسائي (دوام جزئي).<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>المطلوب:</strong> يُفضّل طبيب/ة جراحة تجميلية ذو كفاءة للعمل والتواجد الفعلي في المجمع (وليس مجرد إجازة)، ويقبلون الإجازة إن تعذّر الحضور — وشغل الطبيب جيد (إقبال مرضى ممتاز).<br><strong>العرض المقدَّم:</strong> يوجد كادر تصوير وترويج للطبيب.<br><strong>التجهيزات:</strong> متوفرة مسبقاً في المجمع." }
     ];
 
     const ALL_MODE_BTNS = ['btnGeneral', 'btnDoctor', 'btnHospital', 'btnHospDoc', 'btnLatest', 'btnMatches', 'btnLicense', 'btnAllDoctors', 'btnAllClinics', 'btnCatalog'];
@@ -4563,10 +4566,12 @@
     }
 
     // ===== عرض الكتالوج (شبكة بطاقات + تحديد + فلترة + تصدير صورة + كابشن) =====
-    let catType = 'clinic', catGov = '', catSpec = '', catSide = '', catClass = '', catSel = new Set(), catShowSel = false;
-    function showCatalog(type) { if (type) { catType = type; catGov = ''; catSpec = ''; catSide = ''; catClass = ''; catSel = new Set(); catShowSel = false; } renderCatalog(); }
+    let catType = 'clinic', catGov = '', catSpec = '', catSide = '', catClass = '', catSel = new Set(), catShowSel = false, catLicSide = 'all';
+    function showCatalog(type) { if (type) { catType = type; catGov = ''; catSpec = ''; catSide = ''; catClass = ''; catSel = new Set(); catShowSel = false; catLicSide = 'all'; } renderCatalog(); }
     function catToggleShowSel() { catShowSel = !catShowSel; renderCatalog(); }
-    function catSet(which, val) { if (which === 'gov') catGov = val; else if (which === 'spec') catSpec = val; else if (which === 'side') catSide = val; else if (which === 'class') catClass = val; renderCatalog(); }
+    function catSet(which, val) { if (which === 'gov') catGov = val; else if (which === 'spec') catSpec = val; else if (which === 'side') catSide = val; else if (which === 'class') catClass = val; else if (which === 'licside') { catLicSide = val; catSel = new Set(); catShowSel = false; } renderCatalog(); }
+    // نوع العنصر داخل الكتالوج (في تبويب الإجازات يُحسب لكل عنصر حسب جهته)
+    function catItemType(i) { return catType === 'license' ? (i.license === 'offer' ? 'doctor' : 'clinic') : catType; }
     function printCatalog() { window.print(); }
     function catPick(seq, on) { if (on) catSel.add(seq); else catSel.delete(seq); const n = document.getElementById('catSelCount'); if (n) n.textContent = catSel.size; }
     function catSelectAll() { catFiltered().forEach(i => catSel.add(seqNum(i))); renderCatalog(); }
@@ -4574,7 +4579,14 @@
     function catClearSel() { catSel = new Set(); renderCatalog(); }
     function catChosen() { const f = catFiltered(); const sel = f.filter(i => catSel.has(seqNum(i))); return sel.length ? sel : f; }
     function catFiltered() {
-        const src = catType === 'doctor' ? GENERAL_CLINICS_DATA : DOCTORS_DATA;
+        let src;
+        if (catType === 'license') {
+            const want = DOCTORS_DATA.filter(i => i.license === 'want' && licenseSpecsOf(i).length);
+            const offer = GENERAL_CLINICS_DATA.filter(i => i.license === 'offer' && licenseSpecsOf(i).length);
+            src = catLicSide === 'want' ? want : catLicSide === 'offer' ? offer : want.concat(offer);
+        } else {
+            src = catType === 'doctor' ? GENERAL_CLINICS_DATA : DOCTORS_DATA;
+        }
         return src.filter(i => seqNum(i) !== null
             && !(i.statusLabel && i.statusLabel.includes('غير متوفر'))
             && !/محجوز مؤقت/.test(i.title || '')
@@ -4585,13 +4597,15 @@
             .slice().sort((a, b) => seqNum(b) - seqNum(a));
     }
     function catCaption(data) {
-        const lines = [catType === 'doctor'
-            ? '👨‍⚕️ أطباء يبحثون عن عيادات — منصة عيادات طبية'
-            : '🏢 مطلوب أطباء — مجمعات تبحث عن كوادر طبية'];
+        const head = catType === 'license' ? '📜 كتالوج الإجازات — منصة عيادات طبية'
+            : catType === 'doctor' ? '👨‍⚕️ أطباء يبحثون عن عيادات — منصة عيادات طبية'
+            : '🏢 مطلوب أطباء — مجمعات تبحث عن كوادر طبية';
+        const lines = [head];
         lines.push('');
         data.forEach(i => {
-            const specs = specsOf(i); const show = specs.slice(0, 4).join('، ') + (specs.length > 4 ? '…' : '');
-            lines.push(`▪️ [تسلسل ${seqOf(i)}] ${adLocation(i, catType)}${show ? ' — ' + show : ''}`);
+            const specs = (catType === 'license' ? licenseSpecsOf(i) : specsOf(i)); const show = specs.slice(0, 4).join('، ') + (specs.length > 4 ? '…' : '');
+            const tag = catType === 'license' ? (i.license === 'offer' ? '👨‍⚕️ يعرض إجازة' : '🏢 يطلب إجازة') + ' · ' : '';
+            lines.push(`▪️ ${tag}[تسلسل ${seqOf(i)}] ${adLocation(i, catItemType(i))}${show ? ' — ' + show : ''}`);
         });
         lines.push('', '✅ للتفاصيل والتقديم أرسل رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
         lines.push('🌐 https://medical-clinics-platform.vercel.app/');
@@ -4603,12 +4617,14 @@
 
     // رسالة الطبيب: اختار مجمعات ويريد إرسالها للمنصة
     function catDoctorMsg(data) {
-        const kind = catType === 'doctor' ? 'الأطباء' : 'المجمعات';
-        const lines = ['السلام عليكم، أنا ' + (catType === 'doctor' ? 'صاحب مجمع/مستشفى' : 'طبيب') + ' مهتم عبر «منصة عيادات طبية» بـ' + kind + ' التالية:'];
+        const kind = catType === 'license' ? 'الإجازات' : catType === 'doctor' ? 'الأطباء' : 'المجمعات';
+        const who = catType === 'license' ? 'مهتم بالإجازات' : (catType === 'doctor' ? 'صاحب مجمع/مستشفى' : 'طبيب');
+        const lines = ['السلام عليكم، أنا ' + who + ' عبر «منصة عيادات طبية» بخصوص ' + kind + ' التالية:'];
         lines.push('');
         data.forEach(i => {
-            const specs = specsOf(i); const show = specs.slice(0, 4).join('، ') + (specs.length > 4 ? '…' : '');
-            lines.push(`▪️ تسلسل ${seqOf(i)} — ${adLocation(i, catType)}${show ? ' (' + show + ')' : ''}`);
+            const specs = (catType === 'license' ? licenseSpecsOf(i) : specsOf(i)); const show = specs.slice(0, 4).join('، ') + (specs.length > 4 ? '…' : '');
+            const tag = catType === 'license' ? (i.license === 'offer' ? 'طبيب يعرض إجازة · ' : 'مجمع يطلب إجازة · ') : '';
+            lines.push(`▪️ ${tag}تسلسل ${seqOf(i)} — ${adLocation(i, catItemType(i))}${show ? ' (' + show + ')' : ''}`);
         });
         lines.push('');
         lines.push('— اختصاصي: ');
@@ -4638,16 +4654,18 @@
         const seqF = n <= 6 ? 22 : 20;
         const specMax = n <= 6 ? 6 : 5;
         const cards = data.map((i, idx) => {
-            const specs = specsOf(i); const show = specs.slice(0, specMax).join('، ') + (specs.length > specMax ? '…' : '');
+            const specs = (catType === 'license' ? licenseSpecsOf(i) : specsOf(i)); const show = specs.slice(0, specMax).join('، ') + (specs.length > specMax ? '…' : '');
             const bg = idx % 2 ? '#0b5f73' : '#0e6f66';
+            const ltag = catType === 'license' ? `<div style="font-size:${specF - 2}px;color:#b9f0e6;font-weight:800;margin-top:4px">${i.license === 'offer' ? '👨‍⚕️ يعرض إجازة' : '🏢 يطلب إجازة'}</div>` : '';
             return `<div style="background:${bg};border-radius:16px;padding:${padTop}px 18px 20px;color:#ffffff;text-align:center;position:relative;min-height:${minH}px;box-sizing:border-box">
                 <div style="position:absolute;top:13px;left:13px;background:#ffd36b;color:#073b36;font-weight:900;font-size:${seqF}px;padding:2px 13px;border-radius:999px">${seqOf(i)}</div>
-                <div style="font-weight:900;font-size:${areaF}px;line-height:1.12;color:#ffffff">${esc(adLocation(i, catType))}</div>
+                <div style="font-weight:900;font-size:${areaF}px;line-height:1.12;color:#ffffff">${esc(adLocation(i, catItemType(i)))}</div>${ltag}
                 <div style="margin-top:10px;font-weight:800;font-size:${specF}px;line-height:1.4;color:#ffd36b">${esc(show)}</div>
             </div>`;
         }).join('');
+        const posterTitle = catType === 'license' ? 'الإجازات المتاحة' : 'مطلوب أطباء';
         const html = `<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;background:#f1faf8;font-family:Tahoma,Arial,sans-serif;padding:36px 40px;box-sizing:border-box;direction:rtl">
-            <div style="text-align:center;font-weight:900;font-size:86px;color:#0d9488;line-height:1;letter-spacing:-2px">مطلوب أطباء</div>
+            <div style="text-align:center;font-weight:900;font-size:86px;color:#0d9488;line-height:1;letter-spacing:-2px">${posterTitle}</div>
             <div style="text-align:center;font-weight:800;font-size:29px;color:#0f766e;margin-top:10px">منصة عيادات طبية — اطلب الفرصة برقم التسلسل</div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px">${cards}</div>
             <div style="margin-top:16px;background:#0d9488;border-radius:16px;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;color:#ffffff">
@@ -4699,35 +4717,47 @@
         ALL_MODE_BTNS.forEach(b => { const el = document.getElementById(b); if (el) el.style.outline = 'none'; });
         const cb = document.getElementById('btnCatalog'); if (cb) cb.style.outline = '3px solid #0f172a';
 
-        const src = catType === 'doctor' ? GENERAL_CLINICS_DATA : DOCTORS_DATA;
-        const base = src.filter(i => seqNum(i) !== null
+        const baseSrc = catType === 'license'
+            ? DOCTORS_DATA.filter(i => i.license === 'want').concat(GENERAL_CLINICS_DATA.filter(i => i.license === 'offer'))
+            : (catType === 'doctor' ? GENERAL_CLINICS_DATA : DOCTORS_DATA);
+        const base = baseSrc.filter(i => seqNum(i) !== null
             && !(i.statusLabel && i.statusLabel.includes('غير متوفر'))
             && !/محجوز مؤقت/.test(i.title || ''));
         const govList = [...new Set(base.map(i => i.gov).filter(Boolean))].sort((a, b) => a === 'بغداد' ? -1 : b === 'بغداد' ? 1 : 0);
-        const specList = [...new Set(base.flatMap(i => specsOf(i)))].filter(Boolean).sort();
+        const specList = catType === 'license' ? LICENSE_SPECS.slice() : [...new Set(base.flatMap(i => specsOf(i)))].filter(Boolean).sort();
         const data = catFiltered();
         const shown = catShowSel ? data.filter(i => catSel.has(seqNum(i))) : data;
 
-        const title = catType === 'doctor' ? '👨‍⚕️ كتالوج الأطباء الباحثين عن عيادات' : '🏢 كتالوج المجمعات الباحثة عن أطباء';
+        const title = catType === 'license' ? '📜 كتالوج الإجازات (طلب وعرض)'
+            : catType === 'doctor' ? '👨‍⚕️ كتالوج الأطباء الباحثين عن عيادات'
+            : '🏢 كتالوج المجمعات الباحثة عن أطباء';
         const cards = shown.map(i => {
-            const specs = specsOf(i); const show = specs.slice(0, 3).join('، ') + (specs.length > 3 ? ' +' + (specs.length - 3) : '');
-            const sub = catType === 'doctor' ? rowTitle(i, 'doctor') : '';
-            const h = catType === 'clinic' ? (i.hours || 'حسب الاتفاق') : (timeOfDoctor(i) || 'مرن');
+            const it = catItemType(i);
+            const specsArr = catType === 'license' ? licenseSpecsOf(i) : specsOf(i);
+            const show = specsArr.slice(0, 3).join('، ') + (specsArr.length > 3 ? ' +' + (specsArr.length - 3) : '');
+            const sub = it === 'doctor' ? rowTitle(i, 'doctor') : '';
+            const h = it === 'clinic' ? (i.hours || 'حسب الاتفاق') : (timeOfDoctor(i) || 'مرن');
             const clsTag = i.isClass ? '<span class="clstag">كلاس</span>' : '';
+            const licTag = catType === 'license' ? `<span class="clstag" style="background:#0d9488;color:#fff">${i.license === 'offer' ? '👨‍⚕️ يعرض إجازة' : '🏢 يطلب إجازة'}</span>` : '';
             const sq = seqNum(i);
             const checked = catSel.has(sq) ? ' checked' : '';
+            const barLabel = catType === 'license' ? (i.license === 'offer' ? 'طبيب يعرض إجازة' : 'مجمع يطلب إجازة') : (it === 'doctor' ? 'عرض الطبيب' : 'مطلوب أطباء');
             return `
                 <div class="cat-card">
                     <label class="cat-pick no-print"><input type="checkbox" onchange="catPick(${sq},this.checked)"${checked}> تحديد</label>
-                    <div class="ct"><span class="cn">${seqOf(i)}</span><span class="ca">${adLocation(i, catType)}</span></div>
-                    <div class="cr"><span>🩺</span><span class="cv">${catType === 'doctor' ? (sub || show) : show}</span></div>
-                    <div class="cr"><span>🕒</span><span class="cv">${h}</span> ${clsTag}</div>
-                    <a class="cbar" href="#ad=${i._id}">${catType === 'doctor' ? 'عرض الطبيب' : 'مطلوب أطباء'} · تسلسل ${seqOf(i)}</a>
+                    <div class="ct"><span class="cn">${seqOf(i)}</span><span class="ca">${adLocation(i, it)}</span></div>
+                    <div class="cr"><span>🩺</span><span class="cv">${it === 'doctor' ? (sub || show) : show}</span></div>
+                    <div class="cr"><span>🕒</span><span class="cv">${h}</span> ${licTag}${clsTag}</div>
+                    <a class="cbar" href="#ad=${i._id}">${barLabel} · تسلسل ${seqOf(i)}</a>
                 </div>`;
         }).join('');
 
         const tab = (val, label) => `<button type="button" class="cat-tab${catType === val ? ' active' : ''}" onclick="showCatalog('${val}')">${label}</button>`;
         const opt = (v, cur) => `<option value="${escHtml(v)}"${v === cur ? ' selected' : ''}>${escHtml(v)}</option>`;
+        const licPill = (val, label) => `<button type="button" class="cat-print${catLicSide === val ? ' exp' : ''}" onclick="catSet('licside','${val}')">${label}</button>`;
+        const licSideRow = catType === 'license'
+            ? `<div class="cat-filters no-print">${licPill('all', 'الكل')}${licPill('want', '🏢 مجمعات تطلب')}${licPill('offer', '👨‍⚕️ أطباء يعرضون')}</div>`
+            : '';
         const govSel = `<select class="cat-sel" onchange="catSet('gov',this.value)"><option value="">كل المحافظات</option>${govList.map(g => opt(g, catGov)).join('')}</select>`;
         const specSel = `<select class="cat-sel" onchange="catSet('spec',this.value)"><option value="">كل الاختصاصات</option>${specList.map(s => opt(s, catSpec)).join('')}</select>`;
         const sideSel = `<select class="cat-sel" onchange="catSet('side',this.value)"><option value="">كل الجوانب</option>${['الكرخ', 'الرصافة'].map(s => opt(s, catSide)).join('')}</select>`;
@@ -4736,8 +4766,9 @@
         document.getElementById('resultsGrid').innerHTML = back + `
             <div class="cat-wrap">
                 <div class="cat-head"><h2>${title}</h2><p>✅ أشّر على ما يهمّك بعلامة الصح ثم أرسل اختيارك لنا — أو فلتر حسب المحافظة والاختصاص. ${catShowSel ? 'المعروض (المحدّد)' : 'العدد'}: ${shown.length}</p></div>
-                <div class="cat-tabs no-print">${tab('clinic', '🏢 المجمعات')}${tab('doctor', '👨‍⚕️ الأطباء')}</div>
-                <div class="cat-filters no-print">${govSel}${sideSel}${specSel}${classSel}</div>
+                <div class="cat-tabs no-print">${tab('clinic', '🏢 المجمعات')}${tab('doctor', '👨‍⚕️ الأطباء')}${tab('license', '📜 الإجازات')}</div>
+                ${licSideRow}
+                <div class="cat-filters no-print">${govSel}${sideSel}${specSel}${catType === 'license' ? '' : classSel}</div>
                 <div class="cat-filters no-print" style="align-items:center">
                     <span style="font-weight:800;color:#0f766e">تحديد سريع لأول:</span>
                     <button type="button" class="cat-print" onclick="catSelectFirst(6)">6</button>
