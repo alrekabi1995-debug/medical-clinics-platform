@@ -4640,7 +4640,8 @@
         data.forEach(i => {
             const specs = (catType === 'license' ? licenseSpecsOf(i) : specsOf(i)); const show = specs.slice(0, 4).join('، ') + (specs.length > 4 ? '…' : '');
             const tag = catType === 'license' ? (i.license === 'offer' ? '👨‍⚕️ يعرض إجازة' : '🏢 يطلب إجازة') + (i.licNote ? ' (' + i.licNote + ')' : '') + ' · ' : '';
-            lines.push(`▪️ ${tag}[تسلسل ${seqOf(i)}] ${adLocation(i, catItemType(i))}${show ? ' — ' + show : ''}`);
+            const hosp = (catItemType(i) === 'doctor' && i.workplace === 'hospital') ? ' 🏥(يبحث عن مستشفى أهلي)' : (catItemType(i) === 'clinic' && i.venueType === 'hospital') ? ' 🏥(مستشفى أهلي)' : '';
+            lines.push(`▪️ ${tag}[تسلسل ${seqOf(i)}] ${adLocation(i, catItemType(i))}${hosp}${show ? ' — ' + show : ''}`);
         });
         lines.push('', '✅ للتفاصيل والتقديم أرسل رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
         lines.push('🌐 https://medical-clinics-platform.vercel.app/');
@@ -4678,7 +4679,8 @@
         data.forEach(i => {
             const specs = (catType === 'license' ? licenseSpecsOf(i) : specsOf(i)); const show = specs.slice(0, 4).join('، ') + (specs.length > 4 ? '…' : '');
             const tag = catType === 'license' ? (i.license === 'offer' ? 'طبيب يعرض إجازة' : 'مجمع يطلب إجازة') + (i.licNote ? ' (' + i.licNote + ')' : '') + ' · ' : '';
-            lines.push(`▪️ ${tag}تسلسل ${seqOf(i)} — ${adLocation(i, catItemType(i))}${show ? ' (' + show + ')' : ''}`);
+            const hosp = (catItemType(i) === 'doctor' && i.workplace === 'hospital') ? ' 🏥(يبحث عن مستشفى أهلي)' : (catItemType(i) === 'clinic' && i.venueType === 'hospital') ? ' 🏥(مستشفى أهلي)' : '';
+            lines.push(`▪️ ${tag}تسلسل ${seqOf(i)} — ${adLocation(i, catItemType(i))}${hosp}${show ? ' (' + show + ')' : ''}`);
         });
         lines.push('');
         lines.push('— اختصاصي: ');
@@ -4724,9 +4726,12 @@
             }
             const specs = specsOf(i); const show = specs.join('، ');
             const sf = specs.length > 8 ? specF - 4 : specs.length > 5 ? specF - 2 : specF;
+            const it2 = catItemType(i);
+            const hospLine = (it2 === 'doctor' && i.workplace === 'hospital') ? `<div style="margin-top:6px;font-weight:800;font-size:${specF - 2}px;color:#b9f0e6">🏥 يبحث عن مستشفى أهلي</div>`
+                : (it2 === 'clinic' && i.venueType === 'hospital') ? `<div style="margin-top:6px;font-weight:800;font-size:${specF - 2}px;color:#b9f0e6">🏥 مستشفى أهلي</div>` : '';
             return `<div style="background:${bg};border-radius:16px;padding:${padTop}px 18px 20px;color:#ffffff;text-align:center;position:relative;min-height:${minH}px;box-sizing:border-box">
                 ${seqBadge}
-                <div style="font-weight:900;font-size:${areaF}px;line-height:1.12;color:#ffffff">${esc(adLocation(i, catItemType(i)))}</div>
+                <div style="font-weight:900;font-size:${areaF}px;line-height:1.12;color:#ffffff">${esc(adLocation(i, it2))}</div>${hospLine}
                 <div style="margin-top:10px;font-weight:800;font-size:${sf}px;line-height:1.4;color:#ffd36b">${esc(show)}</div>
             </div>`;
         }).join('');
@@ -4827,6 +4832,8 @@
             const sub = it === 'doctor' ? rowTitle(i, 'doctor') : '';
             const h = it === 'clinic' ? (i.hours || 'حسب الاتفاق') : (timeOfDoctor(i) || 'مرن');
             const clsTag = i.isClass ? '<span class="clstag">كلاس</span>' : '';
+            const hospTag = (it === 'doctor' && i.workplace === 'hospital') ? '<span class="clstag" style="background:#1d4ed8;color:#fff">🏥 يبحث عن مستشفى أهلي</span>'
+                : (it === 'clinic' && i.venueType === 'hospital') ? '<span class="clstag" style="background:#1d4ed8;color:#fff">🏥 مستشفى أهلي</span>' : '';
             const licTag = catType === 'license' ? `<span class="clstag" style="background:#0d9488;color:#fff">${i.license === 'offer' ? '👨‍⚕️ يعرض إجازة' : '🏢 يطلب إجازة'}${i.licNote ? ' · ' + i.licNote : ''}</span>` : '';
             const sq = seqNum(i);
             const checked = catSel.has(sq) ? ' checked' : '';
@@ -4836,7 +4843,7 @@
                     <label class="cat-pick no-print"><input type="checkbox" onchange="catPick(${sq},this.checked)"${checked}> تحديد</label>
                     <div class="ct"><span class="cn">${seqOf(i)}</span><span class="ca">${adLocation(i, it)}</span></div>
                     <div class="cr"><span>🩺</span><span class="cv">${it === 'doctor' ? (sub || show) : show}</span></div>
-                    <div class="cr"><span>🕒</span><span class="cv">${h}</span> ${licTag}${clsTag}</div>
+                    <div class="cr"><span>🕒</span><span class="cv">${h}</span> ${hospTag}${licTag}${clsTag}</div>
                     <a class="cbar" href="#ad=${i._id}">${barLabel} · تسلسل ${seqOf(i)}</a>
                     <button type="button" class="cat-ad-btn no-print" onclick="exportSingleAd('${i._id}')">📸 إعلان خاص لهذا ${catItemType(i) === 'doctor' ? 'الطبيب' : 'المجمع'}</button>
                 </div>`;
