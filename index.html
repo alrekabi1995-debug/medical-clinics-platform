@@ -4605,6 +4605,9 @@
     function catPick(seq, on) { if (on) catSel.add(seq); else catSel.delete(seq); const n = document.getElementById('catSelCount'); if (n) n.textContent = catSel.size; }
     function catSelectAll() { catFiltered().forEach(i => catSel.add(seqNum(i))); renderCatalog(); }
     function catSelectFirst(n) { catSel = new Set(); catFiltered().slice(0, n).forEach(i => catSel.add(seqNum(i))); renderCatalog(); }
+    // تحديد دفعة/نطاق (تراكمي): العناصر من start بعدد count
+    function catSelectRange(start, count) { catFiltered().slice(start, start + count).forEach(i => catSel.add(seqNum(i))); renderCatalog(); }
+    function catSelectLast(n) { const f = catFiltered(); f.slice(Math.max(0, f.length - n)).forEach(i => catSel.add(seqNum(i))); renderCatalog(); }
     function catClearSel() { catSel = new Set(); renderCatalog(); }
     function catChosen() { const f = catFiltered(); const sel = f.filter(i => catSel.has(seqNum(i))); return sel.length ? sel : f; }
     function catFiltered() {
@@ -4861,6 +4864,12 @@
                     <button type="button" class="cat-print${catShowSel ? ' exp' : ''}" onclick="catToggleShowSel()">${catShowSel ? '↩️ عرض الكل' : '👁️ عرض المحدّد'}</button>
                     <span style="align-self:center;font-weight:800;color:#0f766e">المحدّد: <span id="catSelCount">${catSel.size}</span></span>
                 </div>
+                ${data.length > 10 ? `<div class="cat-filters no-print" style="align-items:center">
+                    <span style="font-weight:800;color:#0f766e">دفعات 10 (تُضاف للتحديد):</span>
+                    ${Array.from({ length: Math.min(Math.ceil(data.length / 10), 12) }, (_, k) => { const s = k * 10 + 1, e = Math.min((k + 1) * 10, data.length); return `<button type="button" class="cat-print" onclick="catSelectRange(${k * 10},10)">${s}–${e}</button>`; }).join('')}
+                    <button type="button" class="cat-print exp" onclick="catSelectLast(6)">آخر 6</button>
+                    <button type="button" class="cat-print exp" onclick="catSelectLast(10)">آخر 10</button>
+                </div>` : ''}
                 <div class="cat-send-bar no-print">
                     <div class="lbl">📲 أرسل اختيارك إلى المنصة:</div>
                     <div class="row">
