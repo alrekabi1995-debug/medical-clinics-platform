@@ -4604,6 +4604,18 @@
     function catSet(which, val) { if (which === 'gov') catGov = val; else if (which === 'spec') catSpec = val; else if (which === 'side') catSide = val; else if (which === 'class') catClass = val; else if (which === 'licside') { catLicSide = val; catSel = new Set(); catShowSel = false; } renderCatalog(); }
     // نوع العنصر داخل الكتالوج (في تبويب الإجازات يُحسب لكل عنصر حسب جهته)
     function catItemType(i) { return catType === 'license' ? (i.license === 'offer' ? 'doctor' : 'clinic') : catType; }
+    // استخراج درجة الطبيب (بورد/أخصائي/ماجستير/مقيم/ممارس…) من العنوان والتفاصيل
+    function doctorGrade(item) {
+        const t = ((item.title || '') + ' ' + (item.headerLabel || '') + ' ' + (Array.isArray(item.details) ? item.details.join(' ') : (item.details || '')));
+        if (/بورد/.test(t)) return 'بورد';
+        if (/ماجستير/.test(t)) return 'ماجستير';
+        if (/دبلوم/.test(t)) return 'دبلوم';
+        if (/أخصائي|اخصائي|اختصاص/.test(t)) return 'أخصائي';
+        if (/قدم[ىي]|أقدم/.test(t)) return 'مقيم أقدم';
+        if (/مقيم/.test(t)) return 'مقيم';
+        if (/ممارس/.test(t)) return 'ممارس عام';
+        return '';
+    }
     function printCatalog() { window.print(); }
     function catPick(seq, on) { if (on) catSel.add(seq); else catSel.delete(seq); const n = document.getElementById('catSelCount'); if (n) n.textContent = catSel.size; }
     function catSelectAll() { catFiltered().forEach(i => catSel.add(seqNum(i))); renderCatalog(); }
@@ -4641,7 +4653,8 @@
             const specs = (catType === 'license' ? licenseSpecsOf(i) : specsOf(i)); const show = specs.slice(0, 4).join('، ') + (specs.length > 4 ? '…' : '');
             const tag = catType === 'license' ? (i.license === 'offer' ? '👨‍⚕️ يعرض إجازة' : '🏢 يطلب إجازة') + (i.licNote ? ' (' + i.licNote + ')' : '') + ' · ' : '';
             const hosp = (catItemType(i) === 'doctor' && i.workplace === 'hospital') ? ' 🏥(يبحث عن مستشفى أهلي)' : (catItemType(i) === 'clinic' && i.venueType === 'hospital') ? ' 🏥(مستشفى أهلي)' : '';
-            lines.push(`▪️ ${tag}[تسلسل ${seqOf(i)}] ${adLocation(i, catItemType(i))}${hosp}${show ? ' — ' + show : ''}`);
+            const gr = catItemType(i) === 'doctor' && doctorGrade(i) ? ' (' + doctorGrade(i) + ')' : '';
+            lines.push(`▪️ ${tag}[تسلسل ${seqOf(i)}] ${adLocation(i, catItemType(i))}${hosp}${show ? ' — ' + show + gr : ''}`);
         });
         lines.push('', '✅ للتفاصيل والتقديم أرسل رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
         lines.push('🌐 https://medical-clinics-platform.vercel.app/');
@@ -4680,7 +4693,8 @@
             const specs = (catType === 'license' ? licenseSpecsOf(i) : specsOf(i)); const show = specs.slice(0, 4).join('، ') + (specs.length > 4 ? '…' : '');
             const tag = catType === 'license' ? (i.license === 'offer' ? 'طبيب يعرض إجازة' : 'مجمع يطلب إجازة') + (i.licNote ? ' (' + i.licNote + ')' : '') + ' · ' : '';
             const hosp = (catItemType(i) === 'doctor' && i.workplace === 'hospital') ? ' 🏥(يبحث عن مستشفى أهلي)' : (catItemType(i) === 'clinic' && i.venueType === 'hospital') ? ' 🏥(مستشفى أهلي)' : '';
-            lines.push(`▪️ ${tag}تسلسل ${seqOf(i)} — ${adLocation(i, catItemType(i))}${hosp}${show ? ' (' + show + ')' : ''}`);
+            const gr = catItemType(i) === 'doctor' && doctorGrade(i) ? ' - ' + doctorGrade(i) : '';
+            lines.push(`▪️ ${tag}تسلسل ${seqOf(i)} — ${adLocation(i, catItemType(i))}${hosp}${show ? ' (' + show + gr + ')' : ''}`);
         });
         lines.push('');
         lines.push('— اختصاصي: ');
@@ -4739,7 +4753,7 @@
             return `<div style="background:${bg};border-radius:16px;padding:${pt}px 18px ${doc ? 16 : 20}px;color:#ffffff;text-align:center;position:relative;min-height:${mh}px;box-sizing:border-box">
                 ${seqBadge}
                 <div style="font-weight:900;font-size:${af}px;line-height:1.12;color:#ffffff">${esc(adLocation(i, it2))}</div>${hospLine}
-                <div style="margin-top:8px;font-weight:800;font-size:${sf}px;line-height:1.4;color:${P.spec}">${esc(show)}</div>
+                <div style="margin-top:8px;font-weight:800;font-size:${sf}px;line-height:1.4;color:${P.spec}">${esc(show)}${doc && doctorGrade(i) ? ' (' + esc(doctorGrade(i)) + ')' : ''}</div>
             </div>`;
         }).join('');
         const posterTitle = catType === 'license' ? 'مطلوب إجازات طبية' : catType === 'doctor' ? 'أطباء يبحثون عن عيادات طبية' : 'مطلوب أطباء';
@@ -4849,7 +4863,7 @@
                 <div class="cat-card">
                     <label class="cat-pick no-print"><input type="checkbox" onchange="catPick(${sq},this.checked)"${checked}> تحديد</label>
                     <div class="ct"><span class="cn">${seqOf(i)}</span><span class="ca">${adLocation(i, it)}</span></div>
-                    <div class="cr"><span>🩺</span><span class="cv">${it === 'doctor' ? (sub || show) : show}</span></div>
+                    <div class="cr"><span>🩺</span><span class="cv">${it === 'doctor' ? ((sub || show) + (doctorGrade(i) ? ' (' + doctorGrade(i) + ')' : '')) : show}</span></div>
                     <div class="cr"><span>🕒</span><span class="cv">${h}</span> ${hospTag}${licTag}${clsTag}</div>
                     <a class="cbar" href="#ad=${i._id}">${barLabel} · تسلسل ${seqOf(i)}</a>
                     <button type="button" class="cat-ad-btn no-print" onclick="exportSingleAd('${i._id}')">📸 إعلان خاص لهذا ${catItemType(i) === 'doctor' ? 'الطبيب' : 'المجمع'}</button>
