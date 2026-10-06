@@ -196,7 +196,29 @@
         .form-btn-sub { font-size: 0.78rem; }
     }
     .btn-secondary { background-color: #ffffff; color: var(--navy); border: none; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); }
-    
+
+    /* اختيار الصفة (مسار الطبيب / مسار المجمع) */
+    .aud-ask { color:#fbbf24; font-size:1.05rem; font-weight:800; margin-bottom:14px; text-align:center; }
+    .aud-cards { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+    .aud-card { flex:1 1 300px; max-width:360px; background:rgba(255,255,255,.08); border:2px solid rgba(255,255,255,.25); border-radius:16px; padding:22px 18px; cursor:pointer; color:#fff; display:flex; flex-direction:column; align-items:center; gap:6px; transition:transform .15s, border-color .15s, background .15s; }
+    .aud-card:hover { transform:translateY(-3px); border-color:var(--gold); background:rgba(255,255,255,.14); }
+    .aud-card .ic { font-size:2.6rem; line-height:1; }
+    .aud-card b { font-size:1.35rem; font-weight:900; }
+    .aud-card small { font-size:.9rem; opacity:.85; font-weight:500; }
+    .aud-card.doc { border-color:rgba(245,158,11,.5); }
+    .aud-card.cx { border-color:rgba(56,189,248,.5); }
+    .aud-panel { max-width:960px; margin:0 auto; padding:0 16px; }
+    .aud-switch { display:flex; align-items:center; justify-content:center; gap:12px; margin:4px 0 16px; }
+    .aud-switch button { background:#fff; color:var(--navy); border:none; border-radius:999px; padding:8px 18px; font-weight:800; font-family:inherit; cursor:pointer; font-size:.9rem; }
+    .aud-switch .lane-tag { font-weight:900; color:var(--navy); background:var(--gold); padding:6px 18px; border-radius:999px; font-size:.95rem; }
+    .shared-tools { max-width:960px; margin:18px auto 0; padding:0 16px; }
+    .more-tools { margin-top:12px; background:#ffffff; border:1px solid #e2e8f0; border-radius:12px; overflow:hidden; }
+    .more-tools > summary { cursor:pointer; list-style:none; padding:14px 18px; font-weight:800; color:var(--navy); background:#f8fafc; }
+    .more-tools > summary::-webkit-details-marker { display:none; }
+    .more-tools[open] > summary { border-bottom:1px solid #e2e8f0; }
+    .more-tools .secondary-actions { padding:14px; margin:0; }
+    @media (max-width:600px){ .aud-card .ic{font-size:2.2rem;} .aud-card b{font-size:1.15rem;} }
+
     .btn-trigger {
         background-color: var(--doc);
         color: white;
@@ -1235,17 +1257,29 @@
     .cat-tab { background:#eef4f3; border:1.5px solid #cbd5d3; border-radius:999px; padding:10px 24px; font-weight:800; font-size:16px; color:#0a2236; cursor:pointer; }
     .cat-tab.active { background:#0e3350; color:#fff; border-color:#0e3350; }
     .cat-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
-    .cat-card { background:#fff; color:#0a2236; border:2px solid #d8c178; border-radius:14px; padding:12px 12px 0; overflow:hidden; box-shadow:0 4px 12px rgba(10,34,54,.1); }
-    .cat-card .ct { display:flex; align-items:center; gap:10px; border-bottom:1.5px dashed #cdd7df; padding-bottom:8px; }
-    .cat-card .cn { width:42px;height:42px;flex:0 0 auto;background:#0e3350;color:#fff;font-weight:900;font-size:22px;border-radius:9px;display:flex;align-items:center;justify-content:center; }
-    .cat-card .ca { font-weight:900; font-size:21px; line-height:1.15; }
-    .cat-card .cr { display:flex; gap:7px; margin-top:8px; font-size:16px; color:#223; }
-    .cat-card .cr .cv { font-weight:600; line-height:1.35; }
-    .cat-card .clstag { background:#c9a24a; color:#0a2236; font-weight:800; font-size:13px; padding:2px 10px; border-radius:999px; margin-right:auto; }
-    .cat-card .cbar { margin:11px -12px 0; background:#0e3350; color:#e9d7a8; font-weight:900; font-size:16px; text-align:center; padding:10px; text-decoration:none; display:block; }
+    .cat-card { position:relative; background:#0e6f66; color:#fff; border-radius:14px; padding:14px 14px 0; overflow:hidden; box-shadow:0 6px 14px rgba(14,111,102,.22); }
+    .cat-card:nth-child(even) { background:#0b5f73; }
+    .cat-card .ct { display:flex; align-items:center; gap:10px; border-bottom:1.5px solid rgba(255,255,255,.2); padding-bottom:8px; padding-left:70px; }
+    .cat-card .cn { width:42px;height:42px;flex:0 0 auto;background:#ffd36b;color:#073b36;font-weight:900;font-size:22px;border-radius:9px;display:flex;align-items:center;justify-content:center; }
+    .cat-card .ca { font-weight:900; font-size:22px; line-height:1.15; color:#fff; }
+    .cat-card .cr { display:flex; gap:7px; margin-top:8px; font-size:16px; color:#eafff9; }
+    .cat-card .cr .cv { font-weight:700; line-height:1.4; }
+    .cat-card .clstag { background:#ffd36b; color:#073b36; font-weight:800; font-size:13px; padding:2px 10px; border-radius:999px; margin-right:auto; }
+    .cat-card .cbar { margin:11px -14px 0; background:rgba(0,0,0,.22); color:#fff; font-weight:900; font-size:16px; text-align:center; padding:10px; text-decoration:none; display:block; }
     .cat-filters { display:flex; gap:10px; justify-content:center; margin:0 0 16px; flex-wrap:wrap; }
     .cat-sel { font-family:inherit; font-size:16px; font-weight:700; padding:10px 16px; border-radius:12px; border:2px solid #cbd5d3; background:#fff; color:#0a2236; min-width:180px; }
     .cat-print { font-family:inherit; font-size:16px; font-weight:800; padding:10px 22px; border-radius:12px; border:none; background:#0e3350; color:#fff; cursor:pointer; }
+    .cat-print.exp { background:#0d9488; }
+    .cat-print.wa { background:#25D366; color:#053a1b; }
+    .cat-send-bar { background:#effaf7; border:2px dashed #25D366; border-radius:14px; padding:14px 16px; margin:4px 0 2px; }
+    .cat-send-bar .lbl { font-weight:900; color:#0f766e; margin-bottom:10px; font-size:17px; }
+    .cat-send-bar .row { display:flex; flex-wrap:wrap; gap:10px; }
+    .cat-pick { position:absolute; top:10px; right:10px; display:flex; align-items:center; gap:6px; background:rgba(255,255,255,.92); border-radius:999px; padding:4px 10px; font-size:13px; font-weight:800; color:#0f766e; cursor:pointer; }
+    .cat-pick input { width:18px; height:18px; accent-color:#0d9488; }
+    .cat-export-box { grid-column:1/-1; margin-top:18px; background:#eef4f3; border:2px solid #0d9488; border-radius:16px; padding:18px; text-align:center; }
+    .cat-export-box img { max-width:100%; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.2); }
+    .cat-export-box .dl { display:inline-block; margin:14px 6px 0; background:#0d9488; color:#fff; font-weight:800; font-size:17px; padding:12px 26px; border-radius:12px; text-decoration:none; }
+    .cat-cap { width:100%; box-sizing:border-box; margin-top:14px; min-height:150px; font-family:inherit; font-size:15px; direction:rtl; padding:14px; border-radius:12px; border:2px solid #cbd5d3; }
     @media print {
       body * { visibility:hidden !important; }
       #resultsContainer, #resultsContainer * { visibility:visible !important; }
@@ -1337,47 +1371,73 @@
         <div class="hero-trust-line">أول منصة للوساطة الطبية وتوفير العيادات في العراق منذ 4 سنوات</div>
         <p>ننسّق بين الأطباء وأفضل العيادات الشاغرة، ونوفر لأصحاب المجمعات الطبية الكفاءات المطلوبة.</p>
         <div class="hero-stats" id="heroStats" style="display: none;"></div>
-        <div class="cta-label">سجّل طلبك عبر الاستمارة المناسبة لك</div>
+        <div class="audience-chooser" id="audienceChooser">
+            <div class="aud-ask">للبدء، اختر صفتك:</div>
+            <div class="aud-cards">
+                <button type="button" class="aud-card doc" onclick="setAudience('doctor')">
+                    <span class="ic">👨‍⚕️</span><b>أنا طبيب</b><small>أبحث عن عيادة أو مستشفى أهلي</small>
+                </button>
+                <button type="button" class="aud-card cx" onclick="setAudience('complex')">
+                    <span class="ic">🏢</span><b>صاحب مجمع أو مستشفى</b><small>أبحث عن أطباء</small>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- مسار الطبيب -->
+    <div class="aud-panel" id="panelDoctor" style="display:none">
+        <div class="aud-switch"><span class="lane-tag">👨‍⚕️ مسار الطبيب</span><button type="button" onclick="switchAudience()">🏠 الصفحة الرئيسية</button></div>
+        <div class="cta-label">سجّل طلبك أولاً:</div>
         <div class="cta-container">
             <a href="https://tally.so/r/7RrE0Z" target="_blank" class="btn btn-primary form-btn">
                 <span class="form-btn-title">📝 استمارة الأطباء</span>
                 <span class="form-btn-sub">أنا طبيب أبحث عن عيادة أو مستشفى أهلي</span>
             </a>
+        </div>
+        <div class="main-trigger-section">
+            <button type="button" class="btn btn-doctor-search" id="btnDoctor" onclick="startSearch('manager')">🏢 مجمعات طبية بحاجة للأطباء</button>
+            <button type="button" class="btn btn-hospital" id="btnHospital" onclick="startSearch('hospital')">🏥 مستشفيات أهلية بحاجة للأطباء</button>
+            <button type="button" class="btn btn-latest" id="btnAllClinics" onclick="showAllByDate('clinic')">🏢 كل المجمعات الباحثة عن أطباء</button>
+            <button type="button" class="btn btn-latest" id="btnCatalog" onclick="showCatalog('clinic')">📑 عرض الكتالوج</button>
+        </div>
+    </div>
+
+    <!-- مسار صاحب المجمع/المستشفى -->
+    <div class="aud-panel" id="panelComplex" style="display:none">
+        <div class="aud-switch"><span class="lane-tag">🏢 مسار المجمع/المستشفى</span><button type="button" onclick="switchAudience()">🏠 الصفحة الرئيسية</button></div>
+        <div class="cta-label">سجّل طلبك أولاً:</div>
+        <div class="cta-container">
             <a href="https://tally.so/r/gD6z6l" target="_blank" class="btn btn-secondary form-btn">
                 <span class="form-btn-title">📝 استمارة المجمعات والمستشفيات</span>
                 <span class="form-btn-sub">أنا صاحب مجمع طبي أو مستشفى أهلي وأبحث عن أطباء</span>
             </a>
         </div>
-    </section>
-
-    <div class="main-trigger-section">
-        <button type="button" class="btn btn-trigger" id="btnGeneral" onclick="startSearch('general')">
-            أطباء بحاجة لعيادات طبية
-        </button>
-        <button type="button" class="btn btn-hospdoc" id="btnHospDoc" onclick="startSearch('hospdoc')">
-            أطباء يطلبون العمل في مستشفى أهلي
-        </button>
-        <button type="button" class="btn btn-doctor-search" id="btnDoctor" onclick="startSearch('manager')">
-            مجمعات طبية بحاجة للأطباء
-        </button>
-        <button type="button" class="btn btn-hospital" id="btnHospital" onclick="startSearch('hospital')">
-            مستشفيات أهلية بحاجة للأطباء
-        </button>
-    </div>
-    <div class="license-wrap">
-        <button type="button" class="btn btn-license" id="btnLicense" onclick="startSearch('license')">
-            <span>📜 طلب وعرض الإجازات<small>جلدية • جراحة تجميلية • طب أسرة • سونار — مجمعات تطلب إجازة، وأطباء يعرضون إجازاتهم</small></span>
-        </button>
+        <div class="main-trigger-section">
+            <button type="button" class="btn btn-trigger" id="btnGeneral" onclick="startSearch('general')">👨‍⚕️ أطباء بحاجة لعيادات طبية</button>
+            <button type="button" class="btn btn-hospdoc" id="btnHospDoc" onclick="startSearch('hospdoc')">👨‍⚕️ أطباء يطلبون العمل في مستشفى أهلي</button>
+            <button type="button" class="btn btn-latest" id="btnAllDoctors" onclick="showAllByDate('doctor')">👨‍⚕️ كل الأطباء الباحثين عن عيادات</button>
+        </div>
     </div>
 
-    <div class="seq-search-wrap">
-        <input type="search" class="seq-search-input" id="seqSearchInput" placeholder="ابحث بالتسلسل أو المنطقة أو الاختصاص (مثال: 57 أو الأعظمية نسائية)" onkeydown="if(event.key==='Enter') searchBySeq()">
-        <button type="button" class="seq-search-btn" onclick="searchBySeq()">بحث</button>
-    </div>
-    <div class="seq-mode-wrap" id="seqModeWrap">
-        <button type="button" class="seq-mode-pill active" data-mode="all" onclick="setSeqMode('all')">الكل</button>
-        <button type="button" class="seq-mode-pill" data-mode="doctor" onclick="setSeqMode('doctor')">👨‍⚕️ أطباء فقط</button>
-        <button type="button" class="seq-mode-pill" data-mode="clinic" onclick="setSeqMode('clinic')">🏢 مجمعات فقط</button>
+    <!-- أدوات مشتركة -->
+    <div class="shared-tools" id="sharedTools" style="display:none">
+        <div class="seq-search-wrap">
+            <input type="search" class="seq-search-input" id="seqSearchInput" placeholder="ابحث بالتسلسل أو المنطقة أو الاختصاص (مثال: 57 أو الأعظمية نسائية)" onkeydown="if(event.key==='Enter') searchBySeq()">
+            <button type="button" class="seq-search-btn" onclick="searchBySeq()">بحث</button>
+        </div>
+        <div class="seq-mode-wrap" id="seqModeWrap">
+            <button type="button" class="seq-mode-pill active" data-mode="all" onclick="setSeqMode('all')">الكل</button>
+            <button type="button" class="seq-mode-pill" data-mode="doctor" onclick="setSeqMode('doctor')">👨‍⚕️ أطباء فقط</button>
+            <button type="button" class="seq-mode-pill" data-mode="clinic" onclick="setSeqMode('clinic')">🏢 مجمعات فقط</button>
+        </div>
+        <details class="more-tools" open>
+            <summary>📋 إجراءات أخرى (الإجازات • التطابقات • آخر الإضافات)</summary>
+            <div class="secondary-actions">
+                <button type="button" class="btn btn-license" id="btnLicense" onclick="startSearch('license')">📜 طلب وعرض الإجازات</button>
+                <button type="button" class="btn btn-matches" id="btnMatches" onclick="startSearch('match')">🔗 التطابقات المحتملة</button>
+                <button type="button" class="btn btn-latest" id="btnLatest" onclick="showLatestAdditions()">🆕 آخر الإضافات</button>
+            </div>
+        </details>
     </div>
 
     <div class="news-ticker-wrap">
@@ -1387,24 +1447,6 @@
                 <div class="ticker-content" id="tickerContent"></div>
             </div>
         </div>
-    </div>
-
-    <div class="secondary-actions">
-        <button type="button" class="btn btn-latest" id="btnLatest" onclick="showLatestAdditions()">
-            آخر الإضافات
-        </button>
-        <button type="button" class="btn btn-matches" id="btnMatches" onclick="startSearch('match')">
-            التطابقات المحتملة
-        </button>
-        <button type="button" class="btn btn-latest" id="btnAllDoctors" onclick="showAllByDate('doctor')">
-            👨‍⚕️ كل الأطباء الباحثين عن عيادات
-        </button>
-        <button type="button" class="btn btn-latest" id="btnAllClinics" onclick="showAllByDate('clinic')">
-            🏢 كل المجمعات الباحثة عن أطباء
-        </button>
-        <button type="button" class="btn btn-latest" id="btnCatalog" onclick="showCatalog('clinic')">
-            📑 عرض الكتالوج
-        </button>
     </div>
 
     <div class="global-whatsapp-banner">
@@ -2225,6 +2267,20 @@
         }
     }
 
+    function setAudience(role) {
+        sessionStorageSet('audience', role);
+        const ch = document.getElementById('audienceChooser'); if (ch) ch.style.display = 'none';
+        const pd = document.getElementById('panelDoctor'); if (pd) pd.style.display = role === 'doctor' ? 'block' : 'none';
+        const pc = document.getElementById('panelComplex'); if (pc) pc.style.display = role === 'complex' ? 'block' : 'none';
+        const st = document.getElementById('sharedTools'); if (st) st.style.display = 'block';
+    }
+    function switchAudience() {
+        sessionStorageSet('audience', '');
+        const ch = document.getElementById('audienceChooser'); if (ch) ch.style.display = 'block';
+        ['panelDoctor', 'panelComplex', 'sharedTools'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+        goHome();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     function goHome() {
         try { if (location.hash) history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
         document.getElementById('filterSection').style.display = 'none';
@@ -4495,11 +4551,17 @@
         }, 100);
     }
 
-    // ===== عرض الكتالوج (شبكة بطاقات + فلترة + طباعة/حفظ كصورة) =====
-    let catType = 'clinic', catGov = '', catSpec = '', catSide = '', catClass = '';
-    function showCatalog(type) { if (type) { catType = type; catGov = ''; catSpec = ''; catSide = ''; catClass = ''; } renderCatalog(); }
+    // ===== عرض الكتالوج (شبكة بطاقات + تحديد + فلترة + تصدير صورة + كابشن) =====
+    let catType = 'clinic', catGov = '', catSpec = '', catSide = '', catClass = '', catSel = new Set(), catShowSel = false;
+    function showCatalog(type) { if (type) { catType = type; catGov = ''; catSpec = ''; catSide = ''; catClass = ''; catSel = new Set(); catShowSel = false; } renderCatalog(); }
+    function catToggleShowSel() { catShowSel = !catShowSel; renderCatalog(); }
     function catSet(which, val) { if (which === 'gov') catGov = val; else if (which === 'spec') catSpec = val; else if (which === 'side') catSide = val; else if (which === 'class') catClass = val; renderCatalog(); }
     function printCatalog() { window.print(); }
+    function catPick(seq, on) { if (on) catSel.add(seq); else catSel.delete(seq); const n = document.getElementById('catSelCount'); if (n) n.textContent = catSel.size; }
+    function catSelectAll() { catFiltered().forEach(i => catSel.add(seqNum(i))); renderCatalog(); }
+    function catSelectFirst(n) { catSel = new Set(); catFiltered().slice(0, n).forEach(i => catSel.add(seqNum(i))); renderCatalog(); }
+    function catClearSel() { catSel = new Set(); renderCatalog(); }
+    function catChosen() { const f = catFiltered(); const sel = f.filter(i => catSel.has(seqNum(i))); return sel.length ? sel : f; }
     function catFiltered() {
         const src = catType === 'doctor' ? GENERAL_CLINICS_DATA : DOCTORS_DATA;
         return src.filter(i => seqNum(i) !== null
@@ -4511,19 +4573,114 @@
             && (!catClass || !!i.isClass))
             .slice().sort((a, b) => seqNum(b) - seqNum(a));
     }
-    function copyCatalogText() {
-        const data = catFiltered();
-        const lines = [catType === 'doctor' ? '👨‍⚕️ أطباء يبحثون عن عيادات — منصة عيادات طبية' : '🏢 مجمعات تبحث عن أطباء — منصة عيادات طبية'];
-        const flt = [catGov, catSide, catSpec, catClass ? 'مصنّفة (كلاس)' : ''].filter(Boolean).join(' · ');
-        if (flt) lines.push('📍 ' + flt);
-        lines.push('العدد: ' + data.length, '');
+    function catCaption(data) {
+        const lines = [catType === 'doctor'
+            ? '👨‍⚕️ أطباء يبحثون عن عيادات — منصة عيادات طبية'
+            : '🏢 مطلوب أطباء — مجمعات تبحث عن كوادر طبية'];
+        lines.push('');
         data.forEach(i => {
             const specs = specsOf(i); const show = specs.slice(0, 4).join('، ') + (specs.length > 4 ? '…' : '');
-            const h = catType === 'clinic' ? (i.hours || '') : (timeOfDoctor(i) || '');
-            lines.push(`▪️ [${seqOf(i)}] ${adLocation(i, catType)}${show ? ' — ' + show : ''}${h ? ' (' + h + ')' : ''}`);
+            lines.push(`▪️ [تسلسل ${seqOf(i)}] ${adLocation(i, catType)}${show ? ' — ' + show : ''}`);
         });
-        lines.push('', '💬 للتفاصيل أرسلوا رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
-        copyText(lines.join('\n'), 'تم نسخ الكتالوج — الصقه في واتساب');
+        lines.push('', '✅ للتفاصيل والتقديم أرسل رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
+        lines.push('🌐 https://medical-clinics-platform.vercel.app/');
+        lines.push('', '#منصة_عيادات_طبية #مطلوب_اطباء #تنسيق_طبي #اطباء_العراق #مجمع_طبي #فرص_عمل_طبية #العراق #بغداد');
+        return lines.join('\n');
+    }
+    function copyCatalogText() { copyText(catCaption(catChosen()), 'تم نسخ الكابشن — الصقه في واتساب'); }
+    function copyCatCaption() { const t = document.getElementById('catCapArea'); if (t) { copyText(t.value, 'تم نسخ الكابشن'); } }
+
+    // رسالة الطبيب: اختار مجمعات ويريد إرسالها للمنصة
+    function catDoctorMsg(data) {
+        const kind = catType === 'doctor' ? 'الأطباء' : 'المجمعات';
+        const lines = ['السلام عليكم، أنا ' + (catType === 'doctor' ? 'صاحب مجمع/مستشفى' : 'طبيب') + ' مهتم عبر «منصة عيادات طبية» بـ' + kind + ' التالية:'];
+        lines.push('');
+        data.forEach(i => {
+            const specs = specsOf(i); const show = specs.slice(0, 4).join('، ') + (specs.length > 4 ? '…' : '');
+            lines.push(`▪️ تسلسل ${seqOf(i)} — ${adLocation(i, catType)}${show ? ' (' + show + ')' : ''}`);
+        });
+        lines.push('');
+        lines.push('— اختصاصي: ');
+        lines.push('— اسمي: ');
+        lines.push('— رقمي للتواصل: ');
+        lines.push('');
+        lines.push('أرجو التنسيق معي بخصوص ما سبق. شكراً لكم.');
+        return lines.join('\n');
+    }
+    function catSendWhatsApp() {
+        const data = catChosen();
+        if (!data.length) { showToast('أشّر على المجمعات التي تهمّك أولاً ✅'); return; }
+        window.open(buildWaLink(catDoctorMsg(data)), '_blank');
+    }
+    function copyDoctorMsg() { copyText(catDoctorMsg(catChosen()), 'تم نسخ اختيارك — الصقه في محادثة الواتساب'); }
+
+    // بناء بوستر HTML (XHTML) لمجموعة مجمعات بأسلوب البلوكات
+    const CAT_IMG_MAX = 10; // أقصى عدد مجمعات في الصورة (مناسب للموبايل)
+    function catPosterHTML(data) {
+        const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const n = data.length;
+        // خطوط وأحجام متكيّفة حسب العدد ليبقى الكل واضحاً على الموبايل
+        const areaF = n <= 4 ? 40 : n <= 6 ? 36 : 31;
+        const specF = n <= 4 ? 26 : n <= 6 ? 23 : 20;
+        const minH = n <= 4 ? 190 : n <= 6 ? 165 : 142;
+        const padTop = n <= 6 ? 52 : 44;
+        const seqF = n <= 6 ? 22 : 20;
+        const specMax = n <= 6 ? 6 : 5;
+        const cards = data.map((i, idx) => {
+            const specs = specsOf(i); const show = specs.slice(0, specMax).join('، ') + (specs.length > specMax ? '…' : '');
+            const bg = idx % 2 ? '#0b5f73' : '#0e6f66';
+            return `<div style="background:${bg};border-radius:16px;padding:${padTop}px 18px 20px;color:#ffffff;text-align:center;position:relative;min-height:${minH}px;box-sizing:border-box">
+                <div style="position:absolute;top:13px;left:13px;background:#ffd36b;color:#073b36;font-weight:900;font-size:${seqF}px;padding:2px 13px;border-radius:999px">${seqOf(i)}</div>
+                <div style="font-weight:900;font-size:${areaF}px;line-height:1.12;color:#ffffff">${esc(adLocation(i, catType))}</div>
+                <div style="margin-top:10px;font-weight:800;font-size:${specF}px;line-height:1.4;color:#ffd36b">${esc(show)}</div>
+            </div>`;
+        }).join('');
+        const html = `<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;background:#f1faf8;font-family:Tahoma,Arial,sans-serif;padding:36px 40px;box-sizing:border-box;direction:rtl">
+            <div style="text-align:center;font-weight:900;font-size:86px;color:#0d9488;line-height:1;letter-spacing:-2px">مطلوب أطباء</div>
+            <div style="text-align:center;font-weight:800;font-size:29px;color:#0f766e;margin-top:10px">منصة عيادات طبية — اطلب الفرصة برقم التسلسل</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px">${cards}</div>
+            <div style="margin-top:16px;background:#0d9488;border-radius:16px;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;color:#ffffff">
+                <div style="text-align:right"><div style="font-weight:900;font-size:30px">لدينا عرض مميّز للأطباء</div><div style="font-size:21px;color:#d6fff6;font-weight:700">أرسل رقم التسلسل على واتساب المنصة</div></div>
+                <div style="background:#ffffff;color:#128C3E;font-weight:900;font-size:38px;padding:12px 22px;border-radius:14px;direction:ltr;letter-spacing:2px">${WHATSAPP_DISPLAY}</div>
+            </div>
+        </div>`;
+        return { html, w: 1080 };
+    }
+    function exportCatalogImage() {
+        const all = catChosen();
+        if (!all.length) { showToast('أشّر على المجمعات التي تهمّك أولاً ✅'); return; }
+        const data = all.slice(0, CAT_IMG_MAX);
+        const extra = all.length - data.length;
+        const { html, w } = catPosterHTML(data);
+        // قياس الارتفاع الفعلي لتفادي القصّ وضبط حجم مناسب للموبايل
+        const meas = document.createElement('div');
+        meas.style.cssText = 'position:absolute;left:-99999px;top:0;width:' + w + 'px;visibility:hidden';
+        meas.innerHTML = html; document.body.appendChild(meas);
+        const h = Math.ceil(meas.firstElementChild.getBoundingClientRect().height) || 1400;
+        document.body.removeChild(meas);
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><foreignObject width="100%" height="100%">${html}</foreignObject></svg>`;
+        const img = new Image();
+        img.onload = function () {
+            const scale = 2, c = document.createElement('canvas');
+            c.width = w * scale; c.height = h * scale;
+            const ctx = c.getContext('2d'); ctx.scale(scale, scale); ctx.drawImage(img, 0, 0);
+            let url; try { url = c.toDataURL('image/png'); } catch (e) { showToast('تعذّر التصدير على هذا المتصفح'); return; }
+            const box = document.getElementById('catExport');
+            if (box) box.style.display = 'block';
+            const note = extra > 0
+                ? `<div style="background:#fff7e6;border:2px solid #f0b429;border-radius:12px;padding:12px 14px;margin-bottom:12px;font-weight:800;color:#8a5a00">⚠️ الصورة تعرض أول ${CAT_IMG_MAX} مجمعات فقط (اخترت ${all.length}). لإرسال القائمة كاملة استخدم زر «💬 إرسال عبر واتساب» أو «📋 نسخ القائمة».</div>`
+                : '';
+            if (box) box.innerHTML = note + `
+                <div style="font-weight:900;font-size:20px;color:#0d9488;margin-bottom:10px">✅ الصورة جاهزة (${data.length} مجمع) — احفظها وانشرها</div>
+                <img src="${url}" alt="كتالوج"/>
+                <div><a class="dl" href="${url}" download="catalog-manasa.png">⬇️ تنزيل الصورة</a></div>
+                <div style="font-weight:800;color:#0f766e;margin-top:16px">📝 الكابشن الجاهز (كل ما اخترت):</div>
+                <textarea id="catCapArea" class="cat-cap" readonly>${catCaption(all).replace(/</g, '&lt;')}</textarea>
+                <div><button type="button" class="cat-print exp" onclick="copyCatCaption()">📋 نسخ الكابشن</button></div>`;
+            box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+        img.onerror = function () { showToast('تعذّر إنشاء الصورة'); };
+        img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
     }
     function renderCatalog() {
         document.getElementById('filterSection').style.display = 'none';
@@ -4538,15 +4695,19 @@
         const govList = [...new Set(base.map(i => i.gov).filter(Boolean))].sort((a, b) => a === 'بغداد' ? -1 : b === 'بغداد' ? 1 : 0);
         const specList = [...new Set(base.flatMap(i => specsOf(i)))].filter(Boolean).sort();
         const data = catFiltered();
+        const shown = catShowSel ? data.filter(i => catSel.has(seqNum(i))) : data;
 
         const title = catType === 'doctor' ? '👨‍⚕️ كتالوج الأطباء الباحثين عن عيادات' : '🏢 كتالوج المجمعات الباحثة عن أطباء';
-        const cards = data.map(i => {
+        const cards = shown.map(i => {
             const specs = specsOf(i); const show = specs.slice(0, 3).join('، ') + (specs.length > 3 ? ' +' + (specs.length - 3) : '');
             const sub = catType === 'doctor' ? rowTitle(i, 'doctor') : '';
             const h = catType === 'clinic' ? (i.hours || 'حسب الاتفاق') : (timeOfDoctor(i) || 'مرن');
             const clsTag = i.isClass ? '<span class="clstag">كلاس</span>' : '';
+            const sq = seqNum(i);
+            const checked = catSel.has(sq) ? ' checked' : '';
             return `
                 <div class="cat-card">
+                    <label class="cat-pick no-print"><input type="checkbox" onchange="catPick(${sq},this.checked)"${checked}> تحديد</label>
                     <div class="ct"><span class="cn">${seqOf(i)}</span><span class="ca">${adLocation(i, catType)}</span></div>
                     <div class="cr"><span>🩺</span><span class="cv">${catType === 'doctor' ? (sub || show) : show}</span></div>
                     <div class="cr"><span>🕒</span><span class="cv">${h}</span> ${clsTag}</div>
@@ -4563,11 +4724,32 @@
         const back = `<div class="back-to-browse-wrap no-print" style="grid-column:1/-1;"><button type="button" class="back-to-browse-btn" onclick="startSearch('general')">⬅ رجوع للتصفح</button></div>`;
         document.getElementById('resultsGrid').innerHTML = back + `
             <div class="cat-wrap">
-                <div class="cat-head"><h2>${title}</h2><p>العدد: ${data.length} — للتفاصيل أرسل رقم التسلسل على واتساب المنصة ${WHATSAPP_DISPLAY}</p></div>
+                <div class="cat-head"><h2>${title}</h2><p>✅ أشّر على ما يهمّك بعلامة الصح ثم أرسل اختيارك لنا — أو فلتر حسب المحافظة والاختصاص. ${catShowSel ? 'المعروض (المحدّد)' : 'العدد'}: ${shown.length}</p></div>
                 <div class="cat-tabs no-print">${tab('clinic', '🏢 المجمعات')}${tab('doctor', '👨‍⚕️ الأطباء')}</div>
-                <div class="cat-filters no-print">${govSel}${sideSel}${specSel}${classSel}<button type="button" class="cat-print" onclick="copyCatalogText()">📋 نسخ كنص للواتساب</button><button type="button" class="cat-print" onclick="printCatalog()">🖨️ طباعة / حفظ كصورة</button></div>
-                <div class="cat-grid">${cards || '<p style="padding:16px">لا يوجد ضمن هذا الفلتر.</p>'}</div>
+                <div class="cat-filters no-print">${govSel}${sideSel}${specSel}${classSel}</div>
+                <div class="cat-filters no-print" style="align-items:center">
+                    <span style="font-weight:800;color:#0f766e">تحديد سريع لأول:</span>
+                    <button type="button" class="cat-print" onclick="catSelectFirst(6)">6</button>
+                    <button type="button" class="cat-print" onclick="catSelectFirst(8)">8</button>
+                    <button type="button" class="cat-print" onclick="catSelectFirst(10)">10</button>
+                    <button type="button" class="cat-print" onclick="catSelectAll()">✅ كل الظاهر</button>
+                    <button type="button" class="cat-print" onclick="catClearSel()">⬜ إلغاء التحديد</button>
+                    <button type="button" class="cat-print${catShowSel ? ' exp' : ''}" onclick="catToggleShowSel()">${catShowSel ? '↩️ عرض الكل' : '👁️ عرض المحدّد'}</button>
+                    <span style="align-self:center;font-weight:800;color:#0f766e">المحدّد: <span id="catSelCount">${catSel.size}</span></span>
+                </div>
+                <div class="cat-send-bar no-print">
+                    <div class="lbl">📲 أرسل اختيارك إلى المنصة:</div>
+                    <div class="row">
+                        <button type="button" class="cat-print wa" onclick="catSendWhatsApp()">💬 إرسال عبر واتساب</button>
+                        <button type="button" class="cat-print" onclick="copyDoctorMsg()">📋 نسخ القائمة</button>
+                        <button type="button" class="cat-print exp" onclick="exportCatalogImage()">📸 حفظ كصورة لرفعها</button>
+                    </div>
+                </div>
+                <div class="cat-grid">${cards || (catShowSel ? '<p style="padding:16px">لم تؤشّر على أي عنصر بعد — ارجع لـ«عرض الكل» وأشّر على ما يهمّك.</p>' : '<p style="padding:16px">لا يوجد ضمن هذا الفلتر.</p>')}</div>
+                <div class="cat-export-box" id="catExport" style="display:none"></div>
             </div>`;
+        const _xb = document.getElementById('catExport'); // يظهر عند التصدير فقط
+        if (_xb) _xb.style.display = 'none';
         setTimeout(() => document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
     }
 
@@ -4804,6 +4986,8 @@
         });
         ADMIN = checkAdmin();
         renderHeroStats();
+        const savedAud = sessionStorageGet('audience');
+        if (savedAud === 'doctor' || savedAud === 'complex') setAudience(savedAud);
         if (ADMIN) {
             const fab = document.createElement('button');
             fab.type = 'button';
