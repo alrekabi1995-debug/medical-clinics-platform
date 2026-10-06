@@ -1278,6 +1278,8 @@
     .cat-sel { font-family:inherit; font-size:16px; font-weight:700; padding:10px 16px; border-radius:12px; border:2px solid #cbd5d3; background:#fff; color:#0a2236; min-width:180px; }
     .cat-print { font-family:inherit; font-size:16px; font-weight:800; padding:10px 22px; border-radius:12px; border:none; background:#0e3350; color:#fff; cursor:pointer; }
     .cat-print.exp { background:#0d9488; }
+    .cat-ad-btn { margin-top:8px; width:100%; font-family:inherit; font-weight:800; font-size:14px; padding:9px 12px; border:none; border-radius:10px; background:#0d9488; color:#fff; cursor:pointer; }
+    .cat-ad-btn:hover { background:#0b7d73; }
     .cat-print.wa { background:#25D366; color:#053a1b; }
     .cat-send-bar { background:#effaf7; border:2px dashed #25D366; border-radius:14px; padding:14px 16px; margin:4px 0 2px; }
     .cat-send-bar .lbl { font-weight:900; color:#0f766e; margin-bottom:10px; font-size:17px; }
@@ -4668,7 +4670,7 @@
         const html = `<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;background:#f1faf8;font-family:Tahoma,Arial,sans-serif;padding:36px 40px;box-sizing:border-box;direction:rtl">
             <div style="text-align:center;font-weight:900;font-size:86px;color:#0d9488;line-height:1;letter-spacing:-2px">${posterTitle}</div>
             <div style="text-align:center;font-weight:800;font-size:29px;color:#0f766e;margin-top:10px">منصة عيادات طبية — اطلب الفرصة برقم التسلسل</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px">${cards}</div>
+            <div style="display:grid;grid-template-columns:${data.length === 1 ? '1fr' : '1fr 1fr'};gap:14px;margin-top:20px">${cards}</div>
             <div style="margin-top:16px;background:#0d9488;border-radius:16px;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;color:#ffffff">
                 <div style="text-align:right"><div style="font-weight:900;font-size:30px">لدينا عرض مميّز للأطباء</div><div style="font-size:21px;color:#d6fff6;font-weight:700">أرسل رقم التسلسل على واتساب المنصة</div></div>
                 <div style="background:#ffffff;color:#128C3E;font-weight:900;font-size:38px;padding:12px 22px;border-radius:14px;direction:ltr;letter-spacing:2px">${WHATSAPP_DISPLAY}</div>
@@ -4676,13 +4678,9 @@
         </div>`;
         return { html, w: 1080 };
     }
-    function exportCatalogImage() {
-        const all = catChosen();
-        if (!all.length) { showToast('أشّر على المجمعات التي تهمّك أولاً ✅'); return; }
-        const data = all.slice(0, CAT_IMG_MAX);
-        const extra = all.length - data.length;
-        const { html, w } = catPosterHTML(data);
-        // قياس الارتفاع الفعلي لتفادي القصّ وضبط حجم مناسب للموبايل
+    // محرّك التصدير المشترك: imgData للصورة، capData للكابشن، single لإعلان مجمع واحد
+    function catDoExport(imgData, capData, note, single, fname) {
+        const { html, w } = catPosterHTML(imgData);
         const meas = document.createElement('div');
         meas.style.cssText = 'position:absolute;left:-99999px;top:0;width:' + w + 'px;visibility:hidden';
         meas.innerHTML = html; document.body.appendChild(meas);
@@ -4696,21 +4694,37 @@
             const ctx = c.getContext('2d'); ctx.scale(scale, scale); ctx.drawImage(img, 0, 0);
             let url; try { url = c.toDataURL('image/png'); } catch (e) { showToast('تعذّر التصدير على هذا المتصفح'); return; }
             const box = document.getElementById('catExport');
-            if (box) box.style.display = 'block';
-            const note = extra > 0
-                ? `<div style="background:#fff7e6;border:2px solid #f0b429;border-radius:12px;padding:12px 14px;margin-bottom:12px;font-weight:800;color:#8a5a00">⚠️ الصورة تعرض أول ${CAT_IMG_MAX} مجمعات فقط (اخترت ${all.length}). لإرسال القائمة كاملة استخدم زر «💬 إرسال عبر واتساب» أو «📋 نسخ القائمة».</div>`
-                : '';
-            if (box) box.innerHTML = note + `
-                <div style="font-weight:900;font-size:20px;color:#0d9488;margin-bottom:10px">✅ الصورة جاهزة (${data.length} مجمع) — احفظها وانشرها</div>
-                <img src="${url}" alt="كتالوج"/>
-                <div><a class="dl" href="${url}" download="catalog-manasa.png">⬇️ تنزيل الصورة</a></div>
-                <div style="font-weight:800;color:#0f766e;margin-top:16px">📝 الكابشن الجاهز (كل ما اخترت):</div>
-                <textarea id="catCapArea" class="cat-cap" readonly>${catCaption(all).replace(/</g, '&lt;')}</textarea>
+            if (box) { box.style.display = 'block';
+                const head = single ? `✅ إعلان المجمع (تسلسل ${seqOf(imgData[0])}) جاهز — احفظه وانشره` : `✅ الصورة جاهزة (${imgData.length} ${catType === 'license' ? 'إعلان' : 'مجمع'}) — احفظها وانشرها`;
+                box.innerHTML = (note || '') + `
+                <div style="font-weight:900;font-size:20px;color:#0d9488;margin-bottom:10px">${head}</div>
+                <img src="${url}" alt="إعلان"/>
+                <div><a class="dl" href="${url}" download="${fname || 'manasa-ad'}.png">⬇️ تنزيل الصورة</a></div>
+                <div style="font-weight:800;color:#0f766e;margin-top:16px">📝 الكابشن الجاهز:</div>
+                <textarea id="catCapArea" class="cat-cap" readonly>${catCaption(capData).replace(/</g, '&lt;')}</textarea>
                 <div><button type="button" class="cat-print exp" onclick="copyCatCaption()">📋 نسخ الكابشن</button></div>`;
-            box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         };
         img.onerror = function () { showToast('تعذّر إنشاء الصورة'); };
         img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    }
+    function exportCatalogImage() {
+        const all = catChosen();
+        if (!all.length) { showToast('أشّر على المجمعات التي تهمّك أولاً ✅'); return; }
+        const data = all.slice(0, CAT_IMG_MAX);
+        const extra = all.length - data.length;
+        const note = extra > 0
+            ? `<div style="background:#fff7e6;border:2px solid #f0b429;border-radius:12px;padding:12px 14px;margin-bottom:12px;font-weight:800;color:#8a5a00">⚠️ الصورة تعرض أول ${CAT_IMG_MAX} فقط (اخترت ${all.length}). لإرسال القائمة كاملة استخدم «💬 إرسال عبر واتساب» أو «📋 نسخ القائمة».</div>`
+            : '';
+        catDoExport(data, all, note, false, 'catalog-manasa');
+    }
+    // إعلان خاص لمجمع واحد
+    function exportSingleAd(seq) {
+        const item = catFiltered().find(i => seqNum(i) === seq)
+            || DOCTORS_DATA.concat(GENERAL_CLINICS_DATA).find(i => seqNum(i) === seq && catItemType(i));
+        if (!item) { showToast('العنصر غير موجود'); return; }
+        catDoExport([item], [item], '', true, 'ad-' + seq);
     }
     function renderCatalog() {
         document.getElementById('filterSection').style.display = 'none';
@@ -4750,6 +4764,7 @@
                     <div class="cr"><span>🩺</span><span class="cv">${it === 'doctor' ? (sub || show) : show}</span></div>
                     <div class="cr"><span>🕒</span><span class="cv">${h}</span> ${licTag}${clsTag}</div>
                     <a class="cbar" href="#ad=${i._id}">${barLabel} · تسلسل ${seqOf(i)}</a>
+                    <button type="button" class="cat-ad-btn no-print" onclick="exportSingleAd(${sq})">📸 إعلان خاص لهذا ${catItemType(i) === 'doctor' ? 'الطبيب' : 'المجمع'}</button>
                 </div>`;
         }).join('');
 
