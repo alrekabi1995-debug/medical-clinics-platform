@@ -629,6 +629,13 @@
         font-size: 14px; font-weight: 800; cursor: pointer;
     }
     .ad-export-btn:hover { background-color: #0b7d73; }
+    .more-opts-btn {
+        display: block; width: 100%; margin-top: 10px; padding: 10px 14px;
+        background-color: #eef3ff; color: #16307e; border: 1px solid #c7d4f5; border-radius: 8px;
+        font-size: 14px; font-weight: 800; cursor: pointer;
+    }
+    .more-opts-btn:hover { background-color: #e0e9ff; }
+    .more-opts { margin-top: 8px; }
 
     .share-menu {
         display: none;
@@ -2973,6 +2980,17 @@
                         </div>`;
     }
 
+    // تجميع الأزرار الثانوية تحت زر واحد «خيارات أخرى» (أغلبها للإدمن)
+    function cardMoreOptions(item, type, isRed) {
+        const inner = (isRed ? '' : shareHtml(item)) + adminToggleBtnHtml(item) + (ADMIN ? adminMatchesButtonHtml(item, type) : '');
+        if (!inner.replace(/\s/g, '')) return '';
+        const id = item._id;
+        return `
+                    <button type="button" class="more-opts-btn" onclick="toggleMoreOpts('${id}')">⚙️ خيارات أخرى</button>
+                    <div class="more-opts" id="more-opts-${id}" style="display:none">${inner}</div>`;
+    }
+    function toggleMoreOpts(id) { const m = document.getElementById('more-opts-' + id); if (m) m.style.display = (m.style.display === 'none' || !m.style.display) ? 'block' : 'none'; }
+
     // محتوى البطاقة (الترويسة + الجسم) — يُستعمل في البحث وآخر الإضافات والإعلان المُشارَك
     function cardInner(item, type, opts) {
         opts = opts || {};
@@ -3010,9 +3028,9 @@
                     <div class="whatsapp-box">
                         <a href="${buildWaLink('مرحباً، أستفسر عن التفاصيل بخصوص: ' + item.title)}" target="_blank" class="whatsapp-btn">
                             💬 ${WHATSAPP_DISPLAY}
-                        </a>${extraPhoneHtml}${isRed ? '' : shareHtml(item)}${adminToggleBtnHtml(item)}
+                        </a>${extraPhoneHtml}
                     </div>
-                    ${ADMIN ? adminMatchesButtonHtml(item, type) : ''}
+                    ${cardMoreOptions(item, type, isRed)}
                 </div>
         `;
     }
