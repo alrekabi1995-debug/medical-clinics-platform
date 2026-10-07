@@ -622,6 +622,12 @@
         font-weight: 800; font-size: 14px; line-height: 1.7;
     }
     .doctor-note b { color: #15803d; }
+    .cat-suggest-btn {
+        display: block; width: 100%; margin: 4px 0 12px; font-family: inherit; font-weight: 900;
+        font-size: 14.5px; padding: 12px 14px; border: none; border-radius: 12px; cursor: pointer;
+        color: #fff; background: linear-gradient(135deg, #0d9488, #0b5f73); box-shadow: 0 6px 16px rgba(13,148,136,.26);
+    }
+    .cat-suggest-btn:hover { filter: brightness(1.05); }
     .res-pick {
         display: flex; align-items: center; gap: 9px; cursor: pointer;
         margin: 0 0 12px; padding: 11px 14px; border-radius: 12px;
@@ -3535,6 +3541,7 @@
         return `
             <div class="matches-box">
                 <div class="matches-title">${heading} (${matches.length})</div>
+                ${matches.length ? `<button type="button" class="cat-suggest-btn" onclick="showSuggestedCatalog('${item._id}')">📑 افتح كتالوج ${type === 'doctor' ? 'المجمعات المقترحة' : 'الأطباء المقترحين'} — حدّد وأرسل كصورة ${type === 'doctor' ? 'للطبيب' : 'للمجمع'}</button>` : ''}
                 ${matches.length ? sugShareHtml(item, type) : ''}
                 ${base.length ? strictHtml : ''}
                 ${otherHtml}
@@ -4745,7 +4752,24 @@
 
     // ===== عرض الكتالوج (شبكة بطاقات + تحديد + فلترة + تصدير صورة + كابشن) =====
     let catType = 'clinic', catGov = '', catSpec = '', catSide = '', catClass = '', catSel = new Set(), catShowSel = false, catLicSide = 'all';
-    function showCatalog(type) { if (type) { catType = type; catGov = ''; catSpec = ''; catSide = ''; catClass = ''; catSel = new Set(); catShowSel = false; catLicSide = 'all'; } renderCatalog(); }
+    // وضع «الكتالوج المقترح»: قائمة ثابتة من المطابقات لطبيب/مجمع معيّن
+    let catCustom = null, catCustomBase = null, catCustomBaseType = null;
+    function showCatalog(type) { catCustom = null; catCustomBase = null; catCustomBaseType = null; if (type) { catType = type; catGov = ''; catSpec = ''; catSide = ''; catClass = ''; catSel = new Set(); catShowSel = false; catLicSide = 'all'; } renderCatalog(); }
+    // يفتح كتالوجاً يحوي المجمعات/الأطباء المقترحين لعنصر معيّن (بنفس أدوات التحديد والإرسال والصورة)
+    function showSuggestedCatalog(baseId) {
+        const a = adIndex[baseId];
+        if (!a) { showToast('العنصر غير موجود'); return; }
+        const baseItem = a.item, baseType = a.type;
+        const wantType = baseType === 'doctor' ? 'clinic' : 'doctor';
+        const matches = findMatches(baseItem, baseType, { includeReserved: ADMIN }).filter(m => m.tier !== 2 && m.otherType === wantType);
+        const seen = new Set(), uniq = [];
+        matches.forEach(m => { const it = m.other; if (it && !seen.has(it._id)) { seen.add(it._id); uniq.push(it); } });
+        if (!uniq.length) { showToast('لا توجد مطابقات لعرضها'); return; }
+        catCustom = uniq; catCustomBase = baseItem; catCustomBaseType = baseType;
+        catType = wantType; catGov = ''; catSpec = ''; catSide = ''; catClass = '';
+        catSel = new Set(); catShowSel = false; catLicSide = 'all';
+        renderCatalog();
+    }
     function catToggleShowSel() { catShowSel = !catShowSel; renderCatalog(); }
     function catSet(which, val) { if (which === 'gov') catGov = val; else if (which === 'spec') catSpec = val; else if (which === 'side') catSide = val; else if (which === 'class') catClass = val; else if (which === 'licside') { catLicSide = val; catSel = new Set(); catShowSel = false; } renderCatalog(); }
     // نوع العنصر داخل الكتالوج (في تبويب الإجازات يُحسب لكل عنصر حسب جهته)
@@ -4772,6 +4796,12 @@
     function catClearSel() { catSel = new Set(); renderCatalog(); }
     function catChosen() { const f = catFiltered(); const sel = f.filter(i => catSel.has(seqNum(i))); return sel.length ? sel : f; }
     function catFiltered() {
+        // وضع الكتالوج المقترح: قائمة ثابتة بترتيب المطابقة، مع استبعاد غير المتوفر
+        if (catCustom) {
+            return catCustom.filter(i => seqNum(i) !== null
+                && !(i.statusLabel && i.statusLabel.includes('غير متوفر'))
+                && !/محجوز مؤقت/.test(i.title || ''));
+        }
         let src;
         if (catType === 'license') {
             const want = DOCTORS_DATA.filter(i => i.license === 'want' && licenseSpecsOf(i).length);
@@ -4790,7 +4820,8 @@
             .slice().sort((a, b) => seqNum(b) - seqNum(a));
     }
     function catCaption(data) {
-        const head = catType === 'license' ? '📜 كتالوج الإجازات — منصة عيادات طبية'
+        const head = catCustom ? ((catCustomBaseType === 'doctor' ? '📑 مجمعات مقترحة لك' : '📑 أطباء مقترحون لك') + ' — منصة عيادات طبية')
+            : catType === 'license' ? '📜 كتالوج الإجازات — منصة عيادات طبية'
             : catType === 'doctor' ? '👨‍⚕️ أطباء يبحثون عن عيادات — منصة عيادات طبية'
             : '🏢 مطلوب أطباء — مجمعات تبحث عن كوادر طبية';
         const lines = [head];
@@ -4877,6 +4908,37 @@
         if (!data.length) { showToast('أشّر على ما تريد مشاركته أولاً ✅'); return; }
         window.open('https://wa.me/?text=' + encodeURIComponent(catShareMsg(data)), '_blank');
     }
+    // رسالة «مجمعات/أطباء مقترحون لك» موجّهة للطبيب أو صاحب المجمع صاحب التسلسل
+    function catSuggestMsg(data) {
+        const toDoctor = catCustomBaseType === 'doctor';
+        const who = toDoctor ? (/^طبيبة/.test(catCustomBase && catCustomBase.title || '') ? 'دكتورة' : 'دكتور') : 'صاحب المجمع';
+        const kind = catType === 'clinic' ? 'المجمعات/المستشفيات' : 'الأطباء';
+        const seqLine = catCustomBase ? ' (تسلسل ' + seqOf(catCustomBase) + ')' : '';
+        const lines = ['السلام عليكم ' + who + seqLine + '، هذه ' + kind + ' المقترحة لك عبر «منصة عيادات طبية»:'];
+        lines.push('');
+        data.forEach(i => {
+            const specs = specsOf(i); const show = specs.slice(0, 4).join('، ') + (specs.length > 4 ? '…' : '');
+            const hosp = (catItemType(i) === 'doctor' && i.workplace === 'hospital') ? ' 🏥(مستشفى أهلي)' : (catItemType(i) === 'clinic' && i.venueType === 'hospital') ? ' 🏥(مستشفى أهلي)' : '';
+            const gr = catItemType(i) === 'doctor' && doctorGrade(i) ? ' (' + doctorGrade(i) + ')' : '';
+            const vf = catItemType(i) === 'clinic' ? venueFlags(i) : [];
+            const df = catItemType(i) === 'doctor' ? doctorFlags(i) : [];
+            const note = vf.length ? ' ⚠️(' + vf.join(' · ') + ')' : df.length ? ' 💰(' + df.join(' · ') + ')' : '';
+            lines.push(`▪️ تسلسل ${seqOf(i)} — ${adLocation(i, catItemType(i))}${hosp}${show ? ' — ' + show + gr : ''}${note}`);
+        });
+        lines.push('', '✅ للتنسيق على أيٍّ منها أرسل رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
+        lines.push('🌐 https://medical-clinics-platform.vercel.app/');
+        return lines.join('\n');
+    }
+    function catSendSuggest() {
+        const data = catChosen();
+        if (!data.length) { showToast('أشّر على ما تريد إرساله أولاً ✅'); return; }
+        window.open('https://wa.me/?text=' + encodeURIComponent(catSuggestMsg(data)), '_blank');
+    }
+    function copySuggestMsg() {
+        const data = catChosen();
+        if (!data.length) { showToast('أشّر على ما تريد نسخه أولاً ✅'); return; }
+        copyText(catSuggestMsg(data), 'تم نسخ الرسالة — الصقها في محادثة الطبيب');
+    }
 
     // بناء بوستر HTML (XHTML) لمجموعة مجمعات بأسلوب البلوكات
     // أقصى عدد في الصورة ودفعة التحديد: الأطباء بطاقات مختصرة فتتسع 16، المجمعات 10
@@ -4928,13 +4990,16 @@
                 <div style="margin-top:8px;font-weight:800;font-size:${sf}px;line-height:1.4;color:${P.spec}">${esc(show)}${doc && doctorGrade(i) ? ' (' + esc(doctorGrade(i)) + ')' : ''}</div>${warnLine}
             </div>`;
         }).join('');
-        const posterTitle = catType === 'license' ? 'مطلوب إجازات طبية' : catType === 'doctor' ? 'أطباء يبحثون عن عيادات طبية' : 'مطلوب أطباء';
+        const posterTitle = catCustom ? (catCustomBaseType === 'doctor' ? 'مجمعات مقترحة لك' : 'أطباء مقترحون لك')
+            : catType === 'license' ? 'مطلوب إجازات طبية' : catType === 'doctor' ? 'أطباء يبحثون عن عيادات طبية' : 'مطلوب أطباء';
+        const footTitle = catCustom ? 'للتنسيق أرسل رقم التسلسل'
+            : catType === 'license' ? 'لطلب أو عرض الإجازة' : catType === 'doctor' ? 'تبحث عن طبيب لعيادتك؟' : 'لدينا عرض مميّز للأطباء';
         const html = `<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;background:${P.bg};font-family:Tahoma,Arial,sans-serif;padding:36px 40px;box-sizing:border-box;direction:rtl">
             <div style="text-align:center;font-weight:900;font-size:86px;color:${P.title};line-height:1;letter-spacing:-2px">${posterTitle}</div>
             <div style="text-align:center;font-weight:800;font-size:29px;color:${P.sub};margin-top:10px">منصة عيادات طبية — اطلب الفرصة برقم التسلسل</div>
             <div style="display:grid;grid-template-columns:${data.length === 1 ? '1fr' : '1fr 1fr'};gap:14px;margin-top:20px">${cards}</div>
             <div style="margin-top:16px;background:${P.foot};border-radius:16px;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;color:#ffffff">
-                <div style="text-align:right"><div style="font-weight:900;font-size:30px">${catType === 'license' ? 'لطلب أو عرض الإجازة' : catType === 'doctor' ? 'تبحث عن طبيب لعيادتك؟' : 'لدينا عرض مميّز للأطباء'}</div><div style="font-size:21px;color:${P.footSub};font-weight:700">أرسل رقم التسلسل على واتساب المنصة</div></div>
+                <div style="text-align:right"><div style="font-weight:900;font-size:30px">${footTitle}</div><div style="font-size:21px;color:${P.footSub};font-weight:700">أرسل رقم التسلسل على واتساب المنصة</div></div>
                 <div style="background:#ffffff;color:#128C3E;font-weight:900;font-size:38px;padding:12px 22px;border-radius:14px;direction:ltr;letter-spacing:2px">${WHATSAPP_DISPLAY}</div>
             </div>
         </div>`;
@@ -4987,6 +5052,7 @@
         const item = (adIndex[id] && adIndex[id].item) || DOCTORS_DATA.concat(GENERAL_CLINICS_DATA).find(x => x._id === id);
         if (!item) { showToast('العنصر غير موجود'); return; }
         // اضبط نوع الكتالوج حسب العنصر لتُبنى الصورة والكابشن بشكل صحيح
+        catCustom = null; catCustomBase = null; catCustomBaseType = null;
         catType = item.license ? 'license' : (GENERAL_CLINICS_DATA.indexOf(item) !== -1 ? 'doctor' : 'clinic');
         const box = document.getElementById('catExport');
         if (!box) {
@@ -5016,7 +5082,9 @@
         const data = catFiltered();
         const shown = catShowSel ? data.filter(i => catSel.has(seqNum(i))) : data;
 
-        const title = catType === 'license' ? '📜 كتالوج الإجازات (طلب وعرض)'
+        const sugFor = catCustom && catCustomBase ? ((catCustomBaseType === 'doctor' ? 'للطبيب' : 'للمجمع') + ' تسلسل ' + seqOf(catCustomBase)) : '';
+        const title = catCustom ? ((catCustomBaseType === 'doctor' ? '📑 كتالوج المجمعات المقترحة' : '📑 كتالوج الأطباء المقترحين') + ' — ' + sugFor)
+            : catType === 'license' ? '📜 كتالوج الإجازات (طلب وعرض)'
             : catType === 'doctor' ? '👨‍⚕️ كتالوج الأطباء الباحثين عن عيادات'
             : '🏢 كتالوج المجمعات الباحثة عن أطباء';
         const cards = shown.map(i => {
@@ -5053,21 +5121,31 @@
         const specSel = `<select class="cat-sel" onchange="catSet('spec',this.value)"><option value="">كل الاختصاصات</option>${specList.map(s => opt(s, catSpec)).join('')}</select>`;
         const sideSel = `<select class="cat-sel" onchange="catSet('side',this.value)"><option value="">كل الجوانب</option>${['الكرخ', 'الرصافة'].map(s => opt(s, catSide)).join('')}</select>`;
         const classSel = `<select class="cat-sel" onchange="catSet('class',this.value)"><option value="">الكل</option><option value="cls"${catClass === 'cls' ? ' selected' : ''}>المصنّفة (كلاس)</option></select>`;
-        const back = `<div class="back-to-browse-wrap no-print" style="grid-column:1/-1;"><button type="button" class="back-to-browse-btn" onclick="startSearch('general')">⬅ رجوع للتصفح</button></div>`;
-        document.getElementById('resultsGrid').innerHTML = back + `
-            <div class="cat-wrap">
-                <div class="cat-head"><h2>${title}</h2>
-                    <p>${catType === 'doctor' ? 'اختر الأطباء المناسبين لمجمعك في 3 خطوات:' : catType === 'license' ? 'اختر الإجازات المناسبة في 3 خطوات:' : 'اختر ما يناسبك في 3 خطوات:'}</p>
+        const back = catCustom
+            ? `<div class="back-to-browse-wrap no-print" style="grid-column:1/-1;"><button type="button" class="back-to-browse-btn" onclick="location.hash='#ad=${catCustomBase ? catCustomBase._id : ''}'">⬅ رجوع للمقترحات</button></div>`
+            : `<div class="back-to-browse-wrap no-print" style="grid-column:1/-1;"><button type="button" class="back-to-browse-btn" onclick="startSearch('general')">⬅ رجوع للتصفح</button></div>`;
+        const headSteps = catCustom
+            ? `<p>هذه ${catType === 'clinic' ? 'المجمعات/المستشفيات' : 'الأطباء'} المقترحة ${sugFor} — أرسلها كاملة أو حدّد ما يناسب وأرسله كصورة أو نص:</p>
+                    <div class="cat-steps">
+                        <span class="st"><b>1</b> أشّر ✅ على المناسب (أو «كل الظاهر»)</span>
+                        <span class="st"><b>2</b> صدّرها 📸 صورة أو انسخها 📋</span>
+                        <span class="st"><b>3</b> أرسلها للطبيب على واتساب 💬</span>
+                    </div>`
+            : `<p>${catType === 'doctor' ? 'اختر الأطباء المناسبين لمجمعك في 3 خطوات:' : catType === 'license' ? 'اختر الإجازات المناسبة في 3 خطوات:' : 'اختر ما يناسبك في 3 خطوات:'}</p>
                     <div class="cat-steps">
                         <span class="st"><b>1</b> فلتر حسب ${catType === 'doctor' ? 'اختصاصك ومحافظتك' : 'محافظتك واختصاصك'}</span>
                         <span class="st"><b>2</b> أشّر ✅ على ما يناسبك (أو «تحديد سريع»)</span>
                         <span class="st"><b>3</b> أرسله للمنصة 💬 أو شاركه 📤 / صدّره 📸</span>
-                    </div>
-                    <p style="margin-top:8px">${catShowSel ? 'المعروض (المحدّد)' : 'المتاح الآن'}: <b>${shown.length}</b></p>
+                    </div>`;
+        document.getElementById('resultsGrid').innerHTML = back + `
+            <div class="cat-wrap">
+                <div class="cat-head"><h2>${title}</h2>
+                    ${headSteps}
+                    <p style="margin-top:8px">${catShowSel ? 'المعروض (المحدّد)' : (catCustom ? 'المقترح' : 'المتاح الآن')}: <b>${shown.length}</b></p>
                 </div>
-                <div class="cat-tabs no-print">${tab('clinic', '🏢 المجمعات')}${tab('doctor', '👨‍⚕️ الأطباء')}${tab('license', '📜 الإجازات')}</div>
-                ${licSideRow}
-                <div class="cat-filters no-print">${govSel}${sideSel}${specSel}${catType === 'license' ? '' : classSel}</div>
+                ${catCustom ? '' : `<div class="cat-tabs no-print">${tab('clinic', '🏢 المجمعات')}${tab('doctor', '👨‍⚕️ الأطباء')}${tab('license', '📜 الإجازات')}</div>`}
+                ${catCustom ? '' : licSideRow}
+                ${catCustom ? '' : `<div class="cat-filters no-print">${govSel}${sideSel}${specSel}${catType === 'license' ? '' : classSel}</div>`}
                 <div class="cat-filters no-print" style="align-items:center">
                     <span style="font-weight:800;color:#0f766e">تحديد سريع لأول:</span>
                     <button type="button" class="cat-print" onclick="catSelectFirst(6)">6</button>
@@ -5084,7 +5162,14 @@
                     <button type="button" class="cat-print exp" onclick="catSelectLast(${Math.round(catBatch() / 2)})">آخر ${Math.round(catBatch() / 2)}</button>
                     <button type="button" class="cat-print exp" onclick="catSelectLast(${catBatch()})">آخر ${catBatch()}</button>
                 </div>` : ''}
-                <div class="cat-send-bar no-print">
+                ${catCustom ? `<div class="cat-send-bar no-print">
+                    <div class="lbl">📲 أرسل ${catType === 'clinic' ? 'المجمعات' : 'الأطباء'} المقترحة ${sugFor}: صدّرها صورة أو انسخها، ثم أرسلها للطبيب على واتساب:</div>
+                    <div class="row">
+                        <button type="button" class="cat-print exp" onclick="exportCatalogImage()">📸 حفظ كصورة للطبيب</button>
+                        <button type="button" class="cat-print wa" onclick="catSendSuggest()">💬 إرسال للطبيب بالواتساب</button>
+                        <button type="button" class="cat-print" onclick="copySuggestMsg()">📋 نسخ الرسالة</button>
+                    </div>
+                </div>` : `<div class="cat-send-bar no-print">
                     <div class="lbl">📲 ${catType === 'doctor' ? 'حدّد الأطباء الذين تريدهم وأرسلهم للمنصة لنرتّب لك التواصل معهم' : catType === 'license' ? 'حدّد الإجازات المطلوبة وأرسلها للمنصة لنرتّب التنسيق' : 'حدّد المجمعات التي تريدها وأرسلها للمنصة لنرتّب لك التواصل معها'} — أو شاركها مع زميل:</div>
                     <div class="row">
                         <button type="button" class="cat-print wa" onclick="catSendWhatsApp()">💬 إرسال إلى المنصة</button>
@@ -5092,7 +5177,7 @@
                         <button type="button" class="cat-print" onclick="copyDoctorMsg()">📋 نسخ القائمة</button>
                         <button type="button" class="cat-print exp" onclick="exportCatalogImage()">📸 حفظ كصورة</button>
                     </div>
-                </div>
+                </div>`}
                 <div class="cat-grid">${cards || (catShowSel ? '<p style="padding:16px">لم تؤشّر على أي عنصر بعد — ارجع لـ«عرض الكل» وأشّر على ما يهمّك.</p>' : '<p style="padding:16px">لا يوجد ضمن هذا الفلتر.</p>')}</div>
                 <div class="cat-export-box" id="catExport" style="display:none"></div>
             </div>`;
@@ -5311,6 +5396,7 @@
     }
     function openCatalogFromSearch() {
         const t = searchCatType();
+        catCustom = null; catCustomBase = null; catCustomBaseType = null;
         catType = t;
         catGov = selectedState.gov || '';
         catSpec = selectedState.specialty || '';
