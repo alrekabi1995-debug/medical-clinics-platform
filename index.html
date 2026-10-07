@@ -4757,19 +4757,17 @@
             : '👨‍⚕️ جميع الأطباء الباحثين عن عيادات (الأحدث أولاً)';
 
         const rows = data.map((i, idx) => {
-            const dispNum = data.length - idx; // ترقيم للعدّ: الأقدم = 1، الأحدث = الأكبر
             const sub = type === 'doctor' ? `<div class="list-sub">${rowTitle(i, 'doctor')}</div>` : '';
             const dt = fmtAddedDate(i);
             const dateTag = dt ? `<span class="list-tag list-date">🗓️ أُضيف: ${dt}</span>` : '';
-            const seqTag = `<span class="list-tag list-seq">🔢 تسلسل ${seqOf(i)}</span>`;
             const tags = listTags(i, type).map(t => `<span class="list-tag">${t}</span>`).join('');
             return `
                     <div class="list-row">
-                        <span class="list-num">${dispNum}</span>
+                        <span class="list-num">${seqOf(i)}</span>
                         <div class="list-main">
                             ${sub}
                             <div class="list-loc">${adLocation(i, type)}</div>
-                            <div class="list-tags">${seqTag}${dateTag}${tags}</div>
+                            <div class="list-tags">${dateTag}${tags}</div>
                         </div>
                         <a class="list-open" href="#ad=${i._id}">التفاصيل</a>
                     </div>`;
