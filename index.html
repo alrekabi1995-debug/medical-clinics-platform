@@ -644,6 +644,14 @@
     .chat-input-row input { flex: 1 1 auto; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 10px 12px; font-family: inherit; font-size: 14px; min-width: 0; }
     .chat-send { background: #15307e; color: #fff; border: none; border-radius: 10px; padding: 10px 16px; font-family: inherit; font-weight: 800; cursor: pointer; }
     @media (max-width: 480px) { .chat-panel { width: calc(100vw - 24px); inset-inline-start: 12px; bottom: 12px; height: 74vh; } }
+    .sug-reasons { display: flex; flex-wrap: wrap; gap: 5px; margin: 7px 0 2px; }
+    .sug-r { font-size: 11.5px; font-weight: 800; border-radius: 999px; padding: 2px 9px; background: #eef2ff; color: #3730a3; }
+    .sug-r.good { background: #dcfce7; color: #14532d; }
+    .sug-r.warn { background: #fef3c7; color: #92400e; }
+    .sug-r.bad { background: #fee2e2; color: #991b1b; }
+    .sug-r.fee { background: #fff7ed; color: #9a3412; }
+    .sug-r.best { background: linear-gradient(135deg,#f59e0b,#d97706); color: #fff; }
+    .cat-card.sug-top { outline: 3px solid #f59e0b; outline-offset: 1px; box-shadow: 0 10px 26px rgba(245,158,11,.28); }
     .venue-warn {
         margin: 2px 0 12px; padding: 11px 14px; border-radius: 12px;
         background: #fef2f2; border: 1.5px solid #f3b4b4; color: #9b1c1c;
@@ -4797,16 +4805,55 @@
     let catCustom = null, catCustomBase = null, catCustomBaseType = null;
     function showCatalog(type) { catCustom = null; catCustomBase = null; catCustomBaseType = null; if (type) { catType = type; catGov = ''; catSpec = ''; catSide = ''; catClass = ''; catSel = new Set(); catShowSel = false; catLicSide = 'all'; } renderCatalog(); }
     // يفتح كتالوجاً يحوي المجمعات/الأطباء المقترحين لعنصر معيّن (بنفس أدوات التحديد والإرسال والصورة)
+    // درجة ترتيب الاقتراح: الأقرب + أكثر تطابقاً بالاختصاص + كلاس + الأعلى دفعاً (أجور التنسيق) − التعارض
+    function suggestScore(base, baseType, m) {
+        const other = m.other; let s = 0;
+        if (m.areaOverlap) s += 40; else if (m.sameGroup) s += 22; else if (m.sameGov) s += 10;
+        if (m.km != null && m.km <= 7) s += 12;
+        if (m.sideDiff) s -= 25;
+        s += (m.shared ? m.shared.length : 0) * 6;
+        if (other.isClass) s += 8;
+        const fee = (typeof coordFeeOf === 'function') ? coordFeeOf(other) : 0;
+        s += fee * 5; // الأعلى دفعاً أولاً
+        let doctor = null, venue = null;
+        if (m.otherType === 'clinic') { venue = other; doctor = (baseType === 'doctor') ? base : null; }
+        else { doctor = other; venue = (baseType === 'clinic') ? base : null; }
+        if (typeof matchConflicts === 'function' && matchConflicts(doctor, venue).length) s -= 30;
+        if (typeof doctorPaysRent === 'function' && doctor && venue && doctorPaysRent(doctor) && venue.rentPaid === false) s += 12;
+        return s;
+    }
+    function suggestReasons(base, baseType, m, rank) {
+        const other = m.other; const out = [];
+        if (rank === 0) out.push('<span class="sug-r best">⭐ الأقرب والأفضل</span>');
+        if (m.areaOverlap) out.push('<span class="sug-r good">نفس المنطقة</span>');
+        else if (m.sameGroup) out.push('<span class="sug-r good">نفس الجانب</span>');
+        else if (m.sideDiff) out.push('<span class="sug-r warn">الجانب الآخر</span>');
+        else if (m.sameGov) out.push('<span class="sug-r">نفس المحافظة</span>');
+        if (m.km != null && m.km <= 7) out.push('<span class="sug-r good">قريب</span>');
+        if (other.isClass) out.push('<span class="sug-r">كلاس</span>');
+        if (typeof ADMIN !== 'undefined' && ADMIN && (typeof coordFeeOf === 'function') && coordFeeOf(other) > 0) out.push('<span class="sug-r fee">💰 أعلى دفعاً</span>');
+        let doctor = null, venue = null;
+        if (m.otherType === 'clinic') { venue = other; doctor = (baseType === 'doctor') ? base : null; }
+        else { doctor = other; venue = (baseType === 'clinic') ? base : null; }
+        if (typeof matchConflicts === 'function' && matchConflicts(doctor, venue).length) out.push('<span class="sug-r bad">⚠️ تعارض</span>');
+        else if (typeof doctorPaysRent === 'function' && doctor && venue && doctorPaysRent(doctor) && venue.rentPaid === false) out.push('<span class="sug-r good">✅ يتكفّل بالإيجار</span>');
+        return out.join('');
+    }
+    let catCustomMeta = {};
     function showSuggestedCatalog(baseId) {
         const a = adIndex[baseId];
         if (!a) { showToast('العنصر غير موجود'); return; }
         const baseItem = a.item, baseType = a.type;
         const wantType = baseType === 'doctor' ? 'clinic' : 'doctor';
         const matches = findMatches(baseItem, baseType, { includeReserved: ADMIN }).filter(m => m.tier !== 2 && m.otherType === wantType);
-        const seen = new Set(), uniq = [];
-        matches.forEach(m => { const it = m.other; if (it && !seen.has(it._id)) { seen.add(it._id); uniq.push(it); } });
-        if (!uniq.length) { showToast('لا توجد مطابقات لعرضها'); return; }
-        catCustom = uniq; catCustomBase = baseItem; catCustomBaseType = baseType;
+        const seen = new Set(), scored = [];
+        matches.forEach(m => { const it = m.other; if (it && !seen.has(it._id)) { seen.add(it._id); scored.push({ it, m, score: suggestScore(baseItem, baseType, m) }); } });
+        if (!scored.length) { showToast('لا توجد مطابقات لعرضها'); return; }
+        scored.sort((a, b) => b.score - a.score);
+        catCustom = scored.map(x => x.it);
+        catCustomMeta = {};
+        scored.forEach((x, idx) => { catCustomMeta[x.it._id] = suggestReasons(baseItem, baseType, x.m, idx); });
+        catCustomBase = baseItem; catCustomBaseType = baseType;
         catType = wantType; catGov = ''; catSpec = ''; catSide = ''; catClass = '';
         catSel = new Set(); catShowSel = false; catLicSide = 'all';
         renderCatalog();
@@ -5141,12 +5188,14 @@
             const sq = seqNum(i);
             const checked = catSel.has(sq) ? ' checked' : '';
             const barLabel = catType === 'license' ? (i.license === 'offer' ? 'طبيب يعرض إجازة' : 'مجمع يطلب إجازة') : (it === 'doctor' ? 'عرض الطبيب' : 'مطلوب أطباء');
+            const isTop = catCustom && catCustom[0] && catCustom[0]._id === i._id;
             return `
-                <div class="cat-card">
+                <div class="cat-card${isTop ? ' sug-top' : ''}">
                     <label class="cat-pick no-print"><input type="checkbox" onchange="catPick(${sq},this.checked)"${checked}> تحديد</label>
                     <div class="ct"><span class="cn">${seqOf(i)}</span><span class="ca">${adLocation(i, it)}</span></div>
                     <div class="cr"><span>🩺</span><span class="cv">${it === 'doctor' ? ((sub || show) + (doctorGrade(i) ? ' (' + doctorGrade(i) + ')' : '')) : show}</span></div>
                     <div class="cr"><span>🕒</span><span class="cv">${h}</span> ${hospTag}${licTag}${clsTag}${it === 'clinic' && venueFlags(i).length ? '<span class="clstag" style="background:#dc2626;color:#fff">⚠️ ' + venueFlags(i).join(' · ') + '</span>' : ''}${it === 'doctor' && doctorFlags(i).length ? '<span class="clstag" style="background:#15803d;color:#fff">💰 ' + doctorFlags(i).join(' · ') + '</span>' : ''}</div>
+                    ${catCustom && catCustomMeta[i._id] ? '<div class="sug-reasons">' + catCustomMeta[i._id] + '</div>' : ''}
                     <a class="cbar" href="#ad=${i._id}">${barLabel} · تسلسل ${seqOf(i)}</a>
                     <button type="button" class="cat-ad-btn no-print" onclick="exportSingleAd('${i._id}')">📸 إعلان خاص لهذا ${catItemType(i) === 'doctor' ? 'الطبيب' : 'المجمع'}</button>
                 </div>`;
