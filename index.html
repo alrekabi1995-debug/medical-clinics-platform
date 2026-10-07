@@ -4948,7 +4948,7 @@
                     <button type="button" class="cat-print exp" onclick="catSelectLast(${catBatch()})">آخر ${catBatch()}</button>
                 </div>` : ''}
                 <div class="cat-send-bar no-print">
-                    <div class="lbl">📲 أرسل اختيارك للمنصة أو شاركه مع غيرك:</div>
+                    <div class="lbl">📲 ${catType === 'doctor' ? 'حدّد الأطباء الذين تريدهم وأرسلهم للمنصة لنرتّب لك التواصل معهم' : catType === 'license' ? 'حدّد الإجازات المطلوبة وأرسلها للمنصة لنرتّب التنسيق' : 'حدّد المجمعات التي تريدها وأرسلها للمنصة لنرتّب لك التواصل معها'} — أو شاركها مع زميل:</div>
                     <div class="row">
                         <button type="button" class="cat-print wa" onclick="catSendWhatsApp()">💬 إرسال إلى المنصة</button>
                         <button type="button" class="cat-print wa" onclick="catShareWhatsApp()">📤 مشاركة مع زميل</button>
