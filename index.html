@@ -644,6 +644,8 @@
     .chat-input-row input { flex: 1 1 auto; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 10px 12px; font-family: inherit; font-size: 14px; min-width: 0; }
     .chat-send { background: #15307e; color: #fff; border: none; border-radius: 10px; padding: 10px 16px; font-family: inherit; font-weight: 800; cursor: pointer; }
     @media (max-width: 480px) { .chat-panel { width: calc(100vw - 24px); inset-inline-start: 12px; bottom: 12px; height: 74vh; } }
+    .cat-focus-btn { background: #f59e0b !important; color: #1e1b4b !important; border-color: #f59e0b !important; }
+    .cat-focus-hint { margin-top: 8px; font-size: 12.5px; color: #92400e; background: #fff7ed; border: 1px solid #fed7aa; border-radius: 9px; padding: 8px 11px; font-weight: 700; }
     .sug-reasons { display: flex; flex-wrap: wrap; gap: 5px; margin: 7px 0 2px; }
     .sug-r { font-size: 11.5px; font-weight: 800; border-radius: 999px; padding: 2px 9px; background: #eef2ff; color: #3730a3; }
     .sug-r.good { background: #dcfce7; color: #14532d; }
@@ -4840,6 +4842,7 @@
         return out.join('');
     }
     let catCustomMeta = {};
+    let catExportFocus = false; // عند التصدير: صورة مركّزة على الاختصاص المختار
     function showSuggestedCatalog(baseId) {
         const a = adIndex[baseId];
         if (!a) { showToast('العنصر غير موجود'); return; }
@@ -4908,7 +4911,9 @@
             .slice().sort((a, b) => seqNum(b) - seqNum(a));
     }
     function catCaption(data) {
-        const head = catCustom ? ((catCustomBaseType === 'doctor' ? '📑 مجمعات مقترحة لك' : '📑 أطباء مقترحون لك') + ' — منصة عيادات طبية')
+        const focus = catExportFocus && catSpec;
+        const head = focus ? ('🩺 مطلوب أطباء وطبيبات اختصاص ' + catSpec + ' — منصة عيادات طبية')
+            : catCustom ? ((catCustomBaseType === 'doctor' ? '📑 مجمعات مقترحة لك' : '📑 أطباء مقترحون لك') + ' — منصة عيادات طبية')
             : catType === 'license' ? '📜 كتالوج الإجازات — منصة عيادات طبية'
             : catType === 'doctor' ? '👨‍⚕️ أطباء يبحثون عن عيادات — منصة عيادات طبية'
             : '🏢 مطلوب أطباء — مجمعات تبحث عن كوادر طبية';
@@ -4922,6 +4927,8 @@
             const vf = catItemType(i) === 'clinic' ? venueFlags(i) : [];
             const df = catItemType(i) === 'doctor' ? doctorFlags(i) : [];
             const warn = vf.length ? ' ⚠️(' + vf.join(' · ') + ')' : df.length ? ' 💰(' + df.join(' · ') + ')' : '';
+            // في الصورة المركّزة: العنوان والتسلسل فقط (بلا بقية الاختصاصات)
+            if (focus) { lines.push(`▪️ [تسلسل ${seqOf(i)}] ${adLocation(i, catItemType(i))}${hosp}${warn}`); return; }
             lines.push(`▪️ ${tag}[تسلسل ${seqOf(i)}] ${adLocation(i, catItemType(i))}${hosp}${show ? ' — ' + show + gr : ''}${warn}`);
         });
         lines.push('', '✅ للتفاصيل والتقديم أرسل رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
@@ -5072,13 +5079,16 @@
             const df = (it2 === 'doctor') ? doctorFlags(i) : [];
             const warnLine = vf.length ? `<div style="margin-top:9px;display:inline-block;background:#ffe3e3;color:#9b1c1c;font-weight:900;font-size:${specF - 3}px;line-height:1.4;padding:5px 12px;border-radius:999px">⚠️ ${esc(vf.join(' · '))}</div>`
                 : df.length ? `<div style="margin-top:8px;display:inline-block;background:#dcfce7;color:#14532d;font-weight:900;font-size:${specF - 3}px;line-height:1.4;padding:5px 12px;border-radius:999px">💰 ${esc(df.join(' · '))}</div>` : '';
-            return `<div style="background:${bg};border-radius:16px;padding:${pt}px 18px ${doc ? 16 : 20}px;color:#ffffff;text-align:center;position:relative;min-height:${mh}px;box-sizing:border-box">
+            // الصورة المركّزة على الاختصاص: نعرض العنوان فقط (بلا قائمة الاختصاصات الأخرى)
+            const specLine = catExportFocus ? '' : `<div style="margin-top:8px;font-weight:800;font-size:${sf}px;line-height:1.4;color:${P.spec}">${esc(show)}${doc && doctorGrade(i) ? ' (' + esc(doctorGrade(i)) + ')' : ''}</div>`;
+            return `<div style="background:${bg};border-radius:16px;padding:${pt}px 18px ${doc ? 16 : 20}px;color:#ffffff;text-align:center;position:relative;min-height:${catExportFocus ? 96 : mh}px;box-sizing:border-box">
                 ${seqBadge}
                 <div style="font-weight:900;font-size:${af}px;line-height:1.12;color:#ffffff">${esc(adLocation(i, it2))}</div>${hospLine}
-                <div style="margin-top:8px;font-weight:800;font-size:${sf}px;line-height:1.4;color:${P.spec}">${esc(show)}${doc && doctorGrade(i) ? ' (' + esc(doctorGrade(i)) + ')' : ''}</div>${warnLine}
+                ${specLine}${warnLine}
             </div>`;
         }).join('');
-        const posterTitle = catCustom ? (catCustomBaseType === 'doctor' ? 'مجمعات مقترحة لك' : 'أطباء مقترحون لك')
+        const posterTitle = (catExportFocus && catSpec) ? ('مطلوب أطباء وطبيبات اختصاص ' + catSpec)
+            : catCustom ? (catCustomBaseType === 'doctor' ? 'مجمعات مقترحة لك' : 'أطباء مقترحون لك')
             : catType === 'license' ? 'مطلوب إجازات طبية' : catType === 'doctor' ? 'أطباء يبحثون عن عيادات طبية' : 'مطلوب أطباء';
         const footTitle = catCustom ? 'للتنسيق أرسل رقم التسلسل'
             : catType === 'license' ? 'لطلب أو عرض الإجازة' : catType === 'doctor' ? 'تبحث عن طبيب لعيادتك؟' : 'لدينا عرض مميّز للأطباء';
@@ -5125,9 +5135,10 @@
         img.onerror = function () { showToast('تعذّر إنشاء الصورة'); };
         img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
     }
-    function exportCatalogImage() {
+    function exportCatalogImage(focus) {
+        catExportFocus = !!focus; // صورة مركّزة على الاختصاص المختار (عنوان + تسلسل فقط)
         const all = catChosen();
-        if (!all.length) { showToast('أشّر على المجمعات التي تهمّك أولاً ✅'); return; }
+        if (!all.length) { showToast('أشّر على المجمعات التي تهمّك أولاً ✅'); catExportFocus = false; return; }
         const data = all.slice(0, catBatch());
         const extra = all.length - data.length;
         const note = extra > 0
@@ -5137,6 +5148,7 @@
     }
     // إعلان خاص لمجمع/طبيب واحد (يعمل من الكتالوج ومن نتائج البحث) — يعتمد على مُعرّف العنصر
     function exportSingleAd(id) {
+        catExportFocus = false;
         const item = (adIndex[id] && adIndex[id].item) || DOCTORS_DATA.concat(GENERAL_CLINICS_DATA).find(x => x._id === id);
         if (!item) { showToast('العنصر غير موجود'); return; }
         // اضبط نوع الكتالوج حسب العنصر لتُبنى الصورة والكابشن بشكل صحيح
@@ -5265,8 +5277,10 @@
                         <button type="button" class="cat-print wa" onclick="catSendWhatsApp()">💬 إرسال إلى المنصة</button>
                         <button type="button" class="cat-print wa" onclick="catShareWhatsApp()">📤 مشاركة مع زميل</button>
                         <button type="button" class="cat-print" onclick="copyDoctorMsg()">📋 نسخ القائمة</button>
-                        <button type="button" class="cat-print exp" onclick="exportCatalogImage()">📸 حفظ كصورة</button>
+                        <button type="button" class="cat-print exp" onclick="exportCatalogImage()">📸 حفظ كصورة (بكل الاختصاصات)</button>
+                        ${catSpec ? `<button type="button" class="cat-print exp cat-focus-btn" onclick="exportCatalogImage(true)">🎯 صورة خاصة باختصاص «${escHtml(catSpec)}» فقط</button>` : ''}
                     </div>
+                    ${catSpec ? `<div class="cat-focus-hint">🎯 «صورة الاختصاص» تُظهر عنوانها «مطلوب أطباء وطبيبات اختصاص ${escHtml(catSpec)}» وتعرض العنوان ورقم التسلسل فقط لكل مجمع (بلا بقية الاختصاصات).</div>` : ''}
                 </div>`}
                 <div class="cat-grid">${cards || (catShowSel ? '<p style="padding:16px">لم تؤشّر على أي عنصر بعد — ارجع لـ«عرض الكل» وأشّر على ما يهمّك.</p>' : '<p style="padding:16px">لا يوجد ضمن هذا الفلتر.</p>')}</div>
                 <div class="cat-export-box" id="catExport" style="display:none"></div>
