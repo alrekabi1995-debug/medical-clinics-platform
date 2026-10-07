@@ -602,6 +602,48 @@
     }
     .search-cat-cta .scc-btn:hover { filter: brightness(1.05); }
     @media (max-width: 560px) { .search-cat-cta .scc-btn { width: 100%; } }
+    .chat-fab {
+        position: fixed; bottom: 18px; inset-inline-start: 18px; z-index: 65;
+        background: linear-gradient(135deg, #2456e6, #15307e); color: #fff; border: none;
+        border-radius: 30px; padding: 12px 18px; font-family: inherit; font-weight: 800; font-size: 15px;
+        cursor: pointer; box-shadow: 0 10px 26px rgba(21,48,126,.4);
+    }
+    .chat-fab:hover { filter: brightness(1.08); }
+    .chat-panel {
+        position: fixed; bottom: 18px; inset-inline-start: 18px; z-index: 66;
+        width: min(94vw, 390px); height: min(72vh, 560px); background: #fff;
+        border-radius: 18px; box-shadow: 0 24px 60px rgba(15,23,42,.35); display: flex; flex-direction: column;
+        overflow: hidden; border: 1.5px solid #c7d2fe;
+    }
+    .chat-head { background: #15307e; color: #fff; padding: 13px 16px; font-weight: 900; font-size: 16px; display: flex; align-items: center; justify-content: space-between; }
+    .chat-x { background: rgba(255,255,255,.2); color: #fff; border: none; border-radius: 8px; width: 32px; height: 32px; font-size: 15px; cursor: pointer; }
+    .chat-msgs { flex: 1 1 auto; overflow-y: auto; padding: 12px; background: #f8fafc; display: flex; flex-direction: column; gap: 10px; }
+    .chat-msg { display: flex; }
+    .chat-msg.user { justify-content: flex-start; }
+    .chat-msg.bot { justify-content: flex-end; }
+    .chat-bubble { max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 14px; line-height: 1.6; }
+    .chat-msg.user .chat-bubble { background: #2456e6; color: #fff; border-bottom-right-radius: 4px; }
+    .chat-msg.bot .chat-bubble { background: #eef2ff; color: #1e293b; border-bottom-left-radius: 4px; }
+    .chat-item { background: #fff; border: 1px solid #dbe3ff; border-radius: 11px; padding: 9px 11px; margin-top: 8px; }
+    .chat-item-t { font-weight: 800; color: #15307e; font-size: 13.5px; }
+    .chat-item-s { color: #475569; font-size: 12.8px; margin-top: 3px; line-height: 1.6; }
+    .chat-ph { margin-top: 5px; font-size: 12.5px; }
+    .chat-wa { display: block; margin-top: 7px; background: #25D366; color: #fff; text-align: center; font-weight: 800; border-radius: 9px; padding: 8px; text-decoration: none; font-size: 13px; }
+    .chat-open { display: inline-block; margin-top: 6px; color: #2456e6; font-weight: 800; text-decoration: none; font-size: 13px; }
+    .chat-flag { display: inline-block; border-radius: 999px; padding: 1px 8px; font-size: 11.5px; font-weight: 800; }
+    .chat-flag.bad { background: #fee2e2; color: #991b1b; }
+    .chat-flag.good { background: #dcfce7; color: #14532d; }
+    .chat-grp { font-weight: 900; color: #0f766e; font-size: 13.5px; margin: 10px 0 2px; }
+    .chat-more { color: #64748b; font-size: 12.5px; margin-top: 6px; }
+    .chat-cta { display: block; margin-top: 8px; background: #25D366; color: #fff; text-align: center; font-weight: 800; border-radius: 10px; padding: 9px; text-decoration: none; font-size: 13.5px; }
+    .chat-cta[href*="tally"] { background: #2456e6; }
+    .chat-sugs { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+    .chat-sug { background: #fff; border: 1.5px solid #c7d2fe; color: #2456e6; border-radius: 10px; padding: 8px 10px; font-family: inherit; font-weight: 700; font-size: 13px; cursor: pointer; text-align: start; }
+    .chat-sug:hover { background: #eef2ff; }
+    .chat-input-row { display: flex; gap: 6px; padding: 10px; border-top: 1px solid #e2e8f0; background: #fff; }
+    .chat-input-row input { flex: 1 1 auto; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 10px 12px; font-family: inherit; font-size: 14px; min-width: 0; }
+    .chat-send { background: #15307e; color: #fff; border: none; border-radius: 10px; padding: 10px 16px; font-family: inherit; font-weight: 800; cursor: pointer; }
+    @media (max-width: 480px) { .chat-panel { width: calc(100vw - 24px); inset-inline-start: 12px; bottom: 12px; height: 74vh; } }
     .venue-warn {
         margin: 2px 0 12px; padding: 11px 14px; border-radius: 12px;
         background: #fef2f2; border: 1.5px solid #f3b4b4; color: #9b1c1c;
@@ -2983,7 +3025,7 @@
         const det = detailsParts(item.details).map(s => '• ' + s.replace(/<[^>]+>/g, '')).join('\n');
         if (det) { lines.push(''); lines.push(det); }
         lines.push('');
-        if (item.extraPhone) lines.push('📞 ' + item.extraPhone);
+        if (ADMIN && item.extraPhone) lines.push('📞 (خاص للمدير) ' + item.extraPhone);
         lines.push('💬 واتساب المنصة: ' + WHATSAPP_DISPLAY);
         if (withUrl !== false) lines.push('🔗 ' + adUrl(item._id));
         return lines.join('\n');
@@ -3094,9 +3136,10 @@
         const hospitalTag = ((type === 'doctor' && item.workplace === 'hospital') ? '<div class="type-tag hospital-tag">🏥 يطلب مستشفى أهلي حصراً</div>' : '')
             + (item.license ? `<div class="type-tag license-tag">${licenseLabel(item)}</div>` : '');
 
-        const extraPhoneHtml = item.extraPhone ? `
+        // رقم الطبيب/المجمع الخاص لا يظهر للزائر إطلاقاً — يظهر للمدير فقط. الزائر يتواصل عبر رقم المنصة ورقم التسلسل.
+        const extraPhoneHtml = (ADMIN && item.extraPhone) ? `
                     <a href="${buildWaLink('مرحباً، أستفسر عن التفاصيل بخصوص: ' + item.title)}" target="_blank" class="whatsapp-btn extra-phone">
-                        💬 ${item.extraPhone}
+                        💬 ${item.extraPhone} <span style="font-size:11px;opacity:.8">(خاص — للمدير)</span>
                     </a>` : '';
 
         return `
@@ -5541,6 +5584,164 @@
         box.innerHTML = stat(docs, 'طبيب متاح') + stat(cx, 'مجمع يطلب أطباء') + (hosp ? stat(hosp, 'مستشفى أهلي') : '') + stat(govs, 'محافظة');
     }
 
+    // ====================== 💬 مساعد المنصة (محادثة محلية للزائر والمدير) ======================
+    // يفهم السؤال بالعربي ويبحث في بيانات الموقع نفسها — بلا إنترنت ولا خدمة خارجية ولا تكلفة.
+    function chatNorm(s) {
+        return String(s || '').toLowerCase()
+            .replace(/[إأآا]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي')
+            .replace(/[ًٌٍَُِّْـ]/g, '').replace(/\s+/g, ' ').trim();
+    }
+    const CHAT_SPEC_SYN = {
+        'نسائيه': 'نسائية وتوليد', 'نسائي': 'نسائية وتوليد', 'توليد': 'نسائية وتوليد', 'حوامل': 'نسائية وتوليد', 'نسا': 'نسائية وتوليد',
+        'اطفال': 'أطفال', 'طفل': 'أطفال', 'جلديه': 'جلدية', 'جلد': 'جلدية', 'تجميل': 'جراحة تجميلية', 'تجميلي': 'جراحة تجميلية',
+        'باطنيه': 'باطنية', 'باطني': 'باطنية', 'قلب': 'قلبية واوعية دموية', 'قلبيه': 'قلبية واوعية دموية',
+        'عظام': 'جراحة العظام والكسور', 'كسور': 'جراحة العظام والكسور', 'مفاصل': 'مفاصل وروماتيزم', 'روماتيزم': 'مفاصل وروماتيزم',
+        'انف': 'أنف وأذن وحنجرة', 'اذن': 'أنف وأذن وحنجرة', 'حنجره': 'أنف وأذن وحنجرة', 'عيون': 'عيون', 'عين': 'عيون',
+        'اسره': 'طب أسرة', 'كلى': 'جراحة الكلى والمسالك البولية', 'مسالك': 'جراحة الكلى والمسالك البولية', 'بوليه': 'جراحة الكلى والمسالك البولية',
+        'عصبيه': 'أمراض نفسية وعصبية', 'نفسيه': 'أمراض نفسية وعصبية', 'اعصاب': 'أمراض نفسية وعصبية', 'مخ': 'جراحة الكبرى والعصبية',
+        'اشعه': 'أشعة وسونار ومفراس', 'سونار': 'أشعة وسونار ومفراس', 'مفراس': 'أشعة وسونار ومفراس', 'سيتي': 'أشعة وسونار ومفراس',
+        'مختبر': 'مختبرات وتحليلات مرضية', 'تحليلات': 'مختبرات وتحليلات مرضية', 'تخدير': 'تخدير وعناية مركزة', 'عنايه': 'تخدير وعناية مركزة',
+        'طوارئ': 'طوارئ وإصابات', 'اصابات': 'طوارئ وإصابات', 'ممارس': 'طبيب ممارس عام', 'غدد': 'الغدد الصماء والسكري', 'سكري': 'الغدد الصماء والسكري',
+        'تغذيه': 'تغذية', 'اورام': 'أورام', 'صدريه': 'صدرية', 'صدر': 'صدرية', 'دوالي': 'جراحة أوعية دموية ودوالي', 'جراحه عامه': 'جراحة عامة', 'جراحه': 'جراحة عامة'
+    };
+    function chatDetectSpec(nq) {
+        for (const sp of SPECIALTIES) { if (nq.includes(chatNorm(sp))) return sp; }
+        for (const k in CHAT_SPEC_SYN) { if (nq.includes(k)) return CHAT_SPEC_SYN[k]; }
+        return null;
+    }
+    function chatGovs() { return [...new Set([...GENERAL_CLINICS_DATA, ...DOCTORS_DATA].map(i => i.gov).filter(Boolean))]; }
+    function chatDetectGov(nq) { for (const g of chatGovs()) { if (nq.includes(chatNorm(g))) return g; } return null; }
+    function chatDetectSide(nq) { if (/كرخ/.test(nq)) return 'الكرخ'; if (/رصافه/.test(nq)) return 'الرصافة'; return null; }
+    function chatAvail(arr) { return arr.filter(i => seqNum(i) !== null && isAvailable(i) && !/محجوز مؤقت/.test(i.title || '')); }
+    function chatFilter(arr, spec, gov, side) {
+        return chatAvail(arr).filter(i => (!spec || specsOf(i).includes(spec)) && (!gov || i.gov === gov) && (!side || sidesOf(i).has(side)));
+    }
+    function chatContact(i, type) {
+        if (typeof ADMIN !== 'undefined' && ADMIN && typeof pvPhoneLinks === 'function' && typeof PV !== 'undefined' && PV[i._id]) {
+            return '<div class="chat-ph">' + pvPhoneLinks(i._id, true) + '</div>';
+        }
+        return '';
+    }
+    function chatItem(i, type) {
+        const who = type === 'doctor' ? ('👨‍⚕️ ' + (rowTitle(i, 'doctor') || 'طبيب')) : ('🏢 ' + (i.venueType === 'hospital' ? 'مستشفى أهلي' : 'مجمع طبي'));
+        const specs = specsOf(i).slice(0, 4).join('، ') + (specsOf(i).length > 4 ? '…' : '');
+        const vf = type === 'clinic' && typeof venueFlags === 'function' ? venueFlags(i) : [];
+        const df = type === 'doctor' && typeof doctorFlags === 'function' ? doctorFlags(i) : [];
+        const tag = vf.length ? ' <span class="chat-flag bad">⚠️ ' + vf.join(' · ') + '</span>' : df.length ? ' <span class="chat-flag good">💰 ' + df.join(' · ') + '</span>' : '';
+        // للزائر: يظهر رقم واتساب المنصة مع رقم التسلسل (لا يظهر رقم الطبيب/المجمع إطلاقاً)
+        const seq = seqOf(i);
+        const waSeq = buildWaLink('مرحباً، أستفسر عبر منصة عيادات طبية عن تسلسل ' + seq);
+        return '<div class="chat-item"><div class="chat-item-t"><b>تسلسل ' + seq + '</b> — ' + who + '</div>'
+            + '<div class="chat-item-s">📍 ' + escHtml(adLocation(i, type)) + (specs ? ' · 🩺 ' + escHtml(specs) : '') + tag + '</div>'
+            + chatContact(i, type)
+            + '<a class="chat-wa" href="' + waSeq + '" target="_blank">💬 راسل المنصة بخصوص تسلسل ' + seq + ' (' + WHATSAPP_DISPLAY + ')</a>'
+            + '<a class="chat-open" href="#ad=' + i._id + '" onclick="chatGo()">عرض التفاصيل ←</a></div>';
+    }
+    function chatList(items, type, max) {
+        const m = max || 6;
+        let html = items.slice(0, m).map(i => chatItem(i, type)).join('');
+        if (items.length > m) html += '<div class="chat-more">والمزيد (' + (items.length - m) + ') — افتح الكتالوج لرؤية الكل.</div>';
+        return html;
+    }
+    function chatBotAnswer(q) {
+        const nq = chatNorm(q);
+        const spec = chatDetectSpec(nq), gov = chatDetectGov(nq), side = chatDetectSide(nq);
+        const waAll = buildWaLink('مرحباً، أستفسر عن خدمات المنصة');
+        // تواصل
+        if (/رقم|واتساب|تواصل|اتصال|هاتف|تلفون/.test(nq))
+            return { text: 'رقم المنصة على واتساب: <b>' + WHATSAPP_DISPLAY + '</b>', html: '<a class="chat-cta" href="' + waAll + '" target="_blank">💬 افتح محادثة واتساب</a>' };
+        // تسجيل
+        if (/تسجيل|اسجل|سجل|استماره|انضم|اشترك|كيف ابدا/.test(nq))
+            return { text: 'يمكنك التسجيل حسب حالتك:', html: '<a class="chat-cta" href="https://tally.so/r/7RrE0Z" target="_blank">👨‍⚕️ أنا طبيب أبحث عن عيادة</a><a class="chat-cta" href="https://tally.so/r/gD6z6l" target="_blank">🏢 أنا صاحب مجمع أبحث عن أطباء</a>' };
+        // أسنان غير منشورة
+        if (/اسنان/.test(nq))
+            return { text: 'عذراً، اختصاص طب وجراحة الأسنان غير معروض حالياً في القوائم العامة. راسل المنصة مباشرة للاستفسار:', html: '<a class="chat-cta" href="' + waAll + '" target="_blank">💬 راسل المنصة</a>' };
+        // إجازات
+        if (/اجازه|رخصه|افتتاح عياده/.test(nq)) {
+            const want = chatAvail(DOCTORS_DATA).filter(i => i.license === 'want' && (!spec || licenseSpecsOf(i).includes(spec)) && (!gov || i.gov === gov));
+            const offer = chatAvail(GENERAL_CLINICS_DATA).filter(i => i.license === 'offer' && (!spec || licenseSpecsOf(i).includes(spec)));
+            if (!want.length && !offer.length) return { text: 'لا توجد إجازات مطابقة الآن. راسل المنصة وسنبلغك عند توفّرها.', html: '<a class="chat-cta" href="' + waAll + '" target="_blank">💬 راسل المنصة</a>' };
+            let html = '';
+            if (want.length) html += '<div class="chat-grp">🏢 مجمعات تطلب إجازة (' + want.length + ')</div>' + chatList(want, 'clinic');
+            if (offer.length) html += '<div class="chat-grp">👨‍⚕️ أطباء يعرضون إجازة (' + offer.length + ')</div>' + chatList(offer, 'doctor');
+            return { text: 'بخصوص الإجازات الطبية' + (spec ? ' («' + spec + '»)' : '') + ':', html };
+        }
+        // إحصاء
+        if (/كم عدد|عدد ال|كم طبيب|كم مجمع|احصائ/.test(nq)) {
+            const nd = chatAvail(GENERAL_CLINICS_DATA).length, nc = chatAvail(DOCTORS_DATA).length;
+            return { text: 'حالياً: <b>' + nd + '</b> طبيب يبحث عن عيادة، و<b>' + nc + '</b> مجمع/مستشفى يطلب أطباء' + (gov ? ' (يشمل ' + gov + ')' : '') + '.', html: '' };
+        }
+        const isComplexSide = /مطلوب اطباء|اريد طبيب|نبحث عن طبيب|عندي مجمع|صاحب مجمع|انا مجمع|اطباء لمجمع|اريد دكتور/.test(nq);
+        const isDoctorSide = /ابحث عن عياده|اريد عياده|اريد مجمع|طبيب يبحث|دكتور يبحث|انا طبيب|انا دكتور|اريد عمل|فرصه عمل|وظيفه|اشتغل|تعيين/.test(nq);
+        const cx = chatFilter(DOCTORS_DATA, spec, gov, side);
+        const dr = chatFilter(GENERAL_CLINICS_DATA, spec, gov, side);
+        const where = (spec ? '«' + spec + '»' : '') + (gov ? ' في ' + gov : '') + (side ? ' - ' + side : '');
+        if (isComplexSide) {
+            if (!dr.length) return { text: 'لا يوجد أطباء مطابقون ' + (where || 'لطلبك') + ' الآن. سجّل مجمعك لنصلك بالمناسب:', html: '<a class="chat-cta" href="https://tally.so/r/gD6z6l" target="_blank">🏢 سجّل مجمعك</a>' };
+            return { text: 'أطباء متاحون ' + (where || '') + ' (' + dr.length + '):', html: chatList(dr, 'doctor') };
+        }
+        if (isDoctorSide) {
+            if (!cx.length) return { text: 'لا توجد مجمعات مطابقة ' + (where || 'لطلبك') + ' الآن. سجّل نفسك لنصلك بالفرص:', html: '<a class="chat-cta" href="https://tally.so/r/7RrE0Z" target="_blank">👨‍⚕️ سجّل كطبيب</a>' };
+            return { text: 'مجمعات/مستشفيات متاحة ' + (where || '') + ' (' + cx.length + '):', html: chatList(cx, 'clinic') };
+        }
+        // عام: عرض الطرفين إن وُجد اختصاص/محافظة
+        if (spec || gov || side) {
+            let html = '';
+            if (cx.length) html += '<div class="chat-grp">🏢 مجمعات تطلب أطباء (' + cx.length + ')</div>' + chatList(cx, 'clinic', 4);
+            if (dr.length) html += '<div class="chat-grp">👨‍⚕️ أطباء يبحثون عن عيادات (' + dr.length + ')</div>' + chatList(dr, 'doctor', 4);
+            if (!html) return { text: 'لا توجد نتائج مطابقة ' + where + ' الآن. جرّب اختصاصاً أو محافظة أخرى، أو راسل المنصة.', html: '<a class="chat-cta" href="' + waAll + '" target="_blank">💬 راسل المنصة</a>' };
+            return { text: 'نتائج ' + where + ':', html };
+        }
+        // مساعدة
+        return {
+            text: 'أهلاً بك في مساعد «منصة عيادات طبية» 🌿 اسألني مثل:',
+            html: '<div class="chat-sugs">'
+                + '<button type="button" class="chat-sug" onclick="chatAsk(this.textContent)">مجمعات تطلب نسائية في بغداد</button>'
+                + '<button type="button" class="chat-sug" onclick="chatAsk(this.textContent)">أنا طبيب جلدية أبحث عن عيادة بالكرخ</button>'
+                + '<button type="button" class="chat-sug" onclick="chatAsk(this.textContent)">أطباء أطفال في البصرة</button>'
+                + '<button type="button" class="chat-sug" onclick="chatAsk(this.textContent)">مطلوب إجازة جلدية</button>'
+                + '<button type="button" class="chat-sug" onclick="chatAsk(this.textContent)">كيف أسجل؟</button>'
+                + '<button type="button" class="chat-sug" onclick="chatAsk(this.textContent)">رقم المنصة</button>'
+                + '</div>'
+        };
+    }
+    function chatPush(role, text, html) {
+        const box = document.getElementById('chatMsgs'); if (!box) return;
+        const div = document.createElement('div');
+        div.className = 'chat-msg ' + role;
+        div.innerHTML = (text ? '<div class="chat-bubble">' + text + (html || '') + '</div>' : '<div class="chat-bubble">' + (html || '') + '</div>');
+        box.appendChild(div);
+        box.scrollTop = box.scrollHeight;
+    }
+    function chatAsk(q) {
+        if (!q || !q.trim()) return;
+        chatPush('user', escHtml(q), '');
+        const a = chatBotAnswer(q);
+        setTimeout(() => chatPush('bot', a.text, a.html), 120);
+        const inp = document.getElementById('chatInput'); if (inp) inp.value = '';
+    }
+    function chatSend() { const inp = document.getElementById('chatInput'); if (inp) chatAsk(inp.value); }
+    function chatGo() { chatToggle(false); }
+    function chatToggle(open) {
+        const p = document.getElementById('chatPanel'); if (!p) return;
+        const show = open === undefined ? (p.style.display === 'none' || !p.style.display) : open;
+        p.style.display = show ? 'flex' : 'none';
+        if (show && !p.getAttribute('data-greeted')) { const a = chatBotAnswer(''); chatPush('bot', a.text, a.html); p.setAttribute('data-greeted', '1'); setTimeout(() => { const i = document.getElementById('chatInput'); if (i) i.focus(); }, 60); }
+    }
+    function chatInit() {
+        if (document.getElementById('chatFab')) return;
+        const fab = document.createElement('button');
+        fab.type = 'button'; fab.id = 'chatFab'; fab.className = 'chat-fab'; fab.innerHTML = '💬 اسأل المنصة';
+        fab.onclick = () => chatToggle();
+        document.body.appendChild(fab);
+        const panel = document.createElement('div');
+        panel.id = 'chatPanel'; panel.className = 'chat-panel'; panel.style.display = 'none';
+        panel.innerHTML = '<div class="chat-head"><span>🤖 مساعد المنصة</span><button type="button" class="chat-x" onclick="chatToggle(false)">✖</button></div>'
+            + '<div class="chat-msgs" id="chatMsgs"></div>'
+            + '<div class="chat-input-row"><input id="chatInput" type="text" placeholder="اكتب سؤالك… مثلاً: مجمعات جلدية بالكرخ" onkeydown="if(event.key===\'Enter\')chatSend()"><button type="button" class="chat-send" onclick="chatSend()">إرسال</button></div>';
+        document.body.appendChild(panel);
+    }
+
     window.onload = () => {
         new MutationObserver(updateHomeFab).observe(document.getElementById('resultsContainer'), { attributes: true, attributeFilter: ['style'] });
         updateHomeFab();
@@ -5566,6 +5767,7 @@
         }
         handleHash();
         window.addEventListener('hashchange', handleHash);
+        chatInit();
     };
 </script>
 </body>
