@@ -586,6 +586,22 @@
         margin-bottom: 20px;
     }
 
+    .search-cat-cta {
+        display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+        margin: 6px 0 14px; padding: 14px 18px; border-radius: 16px;
+        background: linear-gradient(135deg, #eff4ff, #e0eaff);
+        border: 1.5px solid #bcd0ff;
+    }
+    .search-cat-cta .scc-txt { display: flex; flex-direction: column; gap: 3px; flex: 1 1 260px; }
+    .search-cat-cta .scc-txt b { color: #15307e; font-size: 15px; }
+    .search-cat-cta .scc-txt span { color: #2b3a67; font-size: 13.5px; line-height: 1.6; }
+    .search-cat-cta .scc-btn {
+        flex: 0 0 auto; font-family: inherit; font-weight: 900; font-size: 15px;
+        padding: 12px 20px; border: none; border-radius: 12px; cursor: pointer; color: #fff;
+        background: linear-gradient(135deg, #2456e6, #1b3fb0); box-shadow: 0 6px 16px rgba(27,63,176,.28);
+    }
+    .search-cat-cta .scc-btn:hover { filter: brightness(1.05); }
+    @media (max-width: 560px) { .search-cat-cta .scc-btn { width: 100%; } }
     .back-to-browse-btn {
         background: none;
         border: 1px solid #cbd5e1;
@@ -5085,6 +5101,43 @@
                 </div>`;
     }
 
+    // جسر من نتائج البحث العادية إلى وضع التحديد (الكتالوج) مع نقل نفس الفلاتر
+    function searchCatType() {
+        if (selectedState.mode === 'license') return 'license';
+        return isDoctorMode(selectedState.mode) ? 'doctor' : 'clinic';
+    }
+    function openCatalogFromSearch() {
+        const t = searchCatType();
+        catType = t;
+        catGov = selectedState.gov || '';
+        catSpec = selectedState.specialty || '';
+        catSide = (selectedState.group === 'الكرخ' || selectedState.group === 'الرصافة') ? selectedState.group : '';
+        catClass = '';
+        catSel = new Set();
+        catShowSel = false;
+        catLicSide = t === 'license' ? (selectedState.licSide === 'offer' ? 'offer' : 'want') : 'all';
+        renderCatalog();
+        const rc = document.getElementById('resultsContainer');
+        if (rc) rc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    // شريط يوضّح للطبيب/صاحب المجمع كيف يحدّد خياراته من النتائج ويرسلها لنا
+    function searchToCatalogBannerHtml(n) {
+        const t = searchCatType();
+        const who = t === 'doctor'
+            ? 'الأطباء الذين يناسبون مجمعك'
+            : t === 'license'
+                ? 'الإجازات التي تناسبك'
+                : 'المجمعات/المستشفيات التي تناسبك';
+        return `
+            <div class="search-cat-cta" style="grid-column:1/-1">
+                <div class="scc-txt">
+                    <b>✅ تريد اختيار أكثر من خيار وإرسالها لنا دفعة واحدة؟</b>
+                    <span>افتح «وضع التحديد» (بنفس الفلاتر الحالية)، أشّر على ${who}، ثم أرسلها للمنصة عبر واتساب أو صدّرها كصورة — ونحن نرتّب لك التواصل.</span>
+                </div>
+                <button type="button" class="scc-btn" onclick="openCatalogFromSearch()">📑 حدّد هذه النتائج وأرسلها لنا</button>
+            </div>`;
+    }
+
     function renderResults() {
         if (selectedState.mode === 'match') { renderMatchesView(); return; }
         if (selectedState.mode === 'license') renderLicTabs();
@@ -5103,6 +5156,8 @@
             grid.insertAdjacentHTML('beforeend', emptyResultsHtml(true));
             return;
         }
+
+        grid.insertAdjacentHTML('beforeend', searchToCatalogBannerHtml(filtered.length));
 
         const cardType = isDoctorMode(selectedState.mode) ? 'doctor' : 'clinic';
         filtered.forEach(item => {
