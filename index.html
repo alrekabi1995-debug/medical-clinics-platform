@@ -602,6 +602,31 @@
     }
     .search-cat-cta .scc-btn:hover { filter: brightness(1.05); }
     @media (max-width: 560px) { .search-cat-cta .scc-btn { width: 100%; } }
+    .res-pick {
+        display: flex; align-items: center; gap: 9px; cursor: pointer;
+        margin: 0 0 12px; padding: 11px 14px; border-radius: 12px;
+        background: #eff4ff; border: 1.5px dashed #9cb8ff; color: #15307e; font-weight: 800; font-size: 14.5px;
+    }
+    .res-pick input { width: 20px; height: 20px; accent-color: #2456e6; cursor: pointer; flex: 0 0 auto; }
+    .card.sel-card { outline: 3px solid #2456e6; outline-offset: 1px; box-shadow: 0 10px 26px rgba(36,86,230,.22); }
+    .card.sel-card .res-pick { background: #dbe6ff; border-style: solid; border-color: #2456e6; }
+    .res-send-bar {
+        position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
+        background: rgba(255,255,255,.97); backdrop-filter: blur(6px);
+        border-top: 2px solid #bcd0ff; box-shadow: 0 -8px 24px rgba(21,48,126,.16);
+        padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); display: none;
+        flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px;
+    }
+    .res-send-bar.show { display: flex; }
+    .res-send-bar .rsb-count { font-weight: 900; color: #15307e; font-size: 15px; }
+    .res-send-bar .rsb-btns { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .res-send-bar .rsb-btn {
+        font-family: inherit; font-weight: 800; font-size: 14px; padding: 10px 14px;
+        border: 1.5px solid #bcd0ff; border-radius: 11px; background: #fff; color: #1b3fb0; cursor: pointer;
+    }
+    .res-send-bar .rsb-btn.primary { background: linear-gradient(135deg,#25D366,#1ebe5a); border: none; color: #fff; }
+    .res-send-bar .rsb-btn.ghost { border-color: #e2b4b4; color: #b23b3b; background: #fff5f5; }
+    @media (max-width: 560px) { .res-send-bar .rsb-btn { flex: 1 1 auto; min-width: 42%; } }
     .back-to-browse-btn {
         background: none;
         border: 1px solid #cbd5e1;
@@ -2073,7 +2098,7 @@
         { isNew: true, hours: "مساءً", specialties: ["أطفال", "أنف وأذن وحنجرة", "الغدد الصماء والسكري", "باطنية", "تغذية وعلاج سكري", "جراحة عامة", "قلبية واوعية دموية", "نسائية وتوليد"], gov: "ذي قار", areas: ["الرفاعي"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء بعدة اختصاصات - مجمع طبي (ذي قار - الرفاعي) - تسلسل 86", details: "<strong>الموقع:</strong> ذي قار - الرفاعي.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> كشفية فقط.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد أطباء اختصاص آخرون حالياً." },
         { isNew: true, isClass: true, hours: "أي وقت", specialties: ["أطفال", "باطنية", "قلبية واوعية دموية", "نسائية وتوليد"], gov: "بغداد", areas: ["الاعظمية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (أطفال، باطنية، قلبية واوعية دموية، نسائية وتوليد) - مجمع طبي (بغداد - الرصافة - الاعظمية - شارع عمر) - تسلسل 87", details: "<strong>الموقع:</strong> بغداد - الرصافة - الاعظمية - شارع عمر.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس).<br><strong>أوقات العمل المطلوبة:</strong> أي وقت<br><strong>آلية الراتب والعمل:</strong> كشفية فقط.<br><strong>الاختصاصات المطلوبة:</strong> أطفال، باطنية، قلبية واوعية دموية، نسائية وتوليد.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد أطباء اختصاص آخرون في المجمع (دون تفاصيل إضافية)." },
         { isNew: true, isClass: true, specialties: ["جلدية", "نسائية وتوليد"], gov: "بغداد", areas: ["أبو غريب"], statusLabel: "🔴 غير متوفر حالياً / محجوز", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (جلدية، نسائية وتوليد) - مجمع طبي (بغداد - الكرخ - أبو غريب - خان ضاري) - تسلسل 88", details: "<strong>الموقع:</strong> بغداد - الكرخ - أبو غريب - خان ضاري.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس).<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق." },
-        { isNew: true, isClass: true, specialties: ["أطفال", "الغدد الصماء والسكري", "باطنية", "تغذية وعلاج سكري", "جراحة الكلى والمسالك البولية", "جراحة عامة", "جلدية", "طب أسرة", "نسائية وتوليد"], gov: "بغداد", areas: ["حي الجامعة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء بعدة اختصاصات - مجمع طبي (بغداد - الكرخ - حي الجامعة) - تسلسل 89", details: "<strong>الموقع:</strong> بغداد - الكرخ - حي الجامعة.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس).<br><strong>آلية الراتب والعمل:</strong> كشفية فقط." },
+        { isNew: true, isClass: true, specialties: ["أطفال", "الغدد الصماء والسكري", "باطنية", "تغذية وعلاج سكري", "جراحة الكلى والمسالك البولية", "جراحة عامة", "جلدية", "طب أسرة", "نسائية وتوليد"], gov: "بغداد", areas: ["حي الجامعة"], statusLabel: "🔴 غير متوفر حالياً / محجوز", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء بعدة اختصاصات - مجمع طبي (بغداد - الكرخ - حي الجامعة) - تسلسل 89", details: "<strong>الموقع:</strong> بغداد - الكرخ - حي الجامعة.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس).<br><strong>آلية الراتب والعمل:</strong> كشفية فقط." },
         { isNew: true, hours: "أي وقت", specialties: ["نسائية وتوليد", "باطنية", "تغذية وعلاج سكري", "الغدد الصماء والسكري"], gov: "بغداد", areas: ["المنصور"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، باطنية، تغذية وعلاج سكري، الغدد الصماء والسكري) - مجمع طبي (بغداد - الكرخ - المنصور - الداوودي) - تسلسل 90", details: "<strong>الموقع:</strong> بغداد - الكرخ - المنصور - الداوودي، قرب فرع مطعم الساعة.<br><strong>أوقات العمل المطلوبة:</strong> أي وقت<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد أطباء اختصاص آخرون في المجمع (دون تفاصيل إضافية)." },
         { isNew: true, hours: "أي وقت", specialties: ["باطنية", "جراحة العظام والكسور", "أنف وأذن وحنجرة"], gov: "بغداد", areas: ["مناطق أخرى"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (باطنية، جراحة العظام والكسور، أنف وأذن وحنجرة) - مجمع طبي (بغداد - الكرخ - ناحية الرشيد) - تسلسل 91", details: "<strong>الموقع:</strong> بغداد - الكرخ - مناطق أخرى - ناحية الرشيد - شارع أسواق قطب، شارع النهر، قرب المجلس البلدي.<br><strong>أوقات العمل المطلوبة:</strong> أي وقت<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد أطباء اختصاص آخرون حالياً." },
         { isNew: true, hours: "مساءً", specialties: ["جلدية", "نسائية وتوليد", "باطنية", "الغدد الصماء والسكري", "أمراض نفسية وعصبية", "قلبية واوعية دموية"], gov: "بغداد", areas: ["الكاظمية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء بعدة اختصاصات - مجمع طبي (بغداد - الكرخ - الكاظمية) - تسلسل 92", details: "<strong>الموقع:</strong> بغداد - الكرخ - الكاظمية، قرب ساحة عبد المحسن الكاظمي.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد أطباء اختصاص آخرون في المجمع (دون تفاصيل إضافية)." },
@@ -3052,7 +3077,7 @@
                     <span>${item.statusLabel}${item.isClass ? ' <span class="class-badge"><span class="dot"></span>مجمع كلاس</span>' : ''}</span>
                 </div>
                 <div class="card-body">
-                    ${typeTag}${hospitalTag}${addedLabel(item) ? `<div class="added-tag">🕒 ${addedLabel(item)}</div>` : ''}${ADMIN && !isRed && daysSinceAdded(item) !== null && daysSinceAdded(item) > STALE_DAYS ? `<div class="stale-tag">⚠️ مرّ أكثر من ${STALE_DAYS} يوماً — تأكد أنه ما زال متاحاً</div>` : ''}
+                    ${opts.selectable && !isRed ? resPickHtml(item) : ''}${typeTag}${hospitalTag}${addedLabel(item) ? `<div class="added-tag">🕒 ${addedLabel(item)}</div>` : ''}${ADMIN && !isRed && daysSinceAdded(item) !== null && daysSinceAdded(item) > STALE_DAYS ? `<div class="stale-tag">⚠️ مرّ أكثر من ${STALE_DAYS} يوماً — تأكد أنه ما زال متاحاً</div>` : ''}
                     <h3>${type === 'clinic' ? ((isHospVenue ? 'مستشفى أهلي' : 'مجمع طبي') + (item.license === 'want' ? ' (يطلب إجازة)' : '') + ' — تسلسل ' + seqOf(item)) : item.title}</h3>
                     <ul class="card-info">
                         ${specInfoHtml(item, !!opts.highlight)}
@@ -4835,7 +4860,7 @@
             c.width = w * scale; c.height = h * scale;
             const ctx = c.getContext('2d'); ctx.scale(scale, scale); ctx.drawImage(img, 0, 0);
             let url; try { url = c.toDataURL('image/png'); } catch (e) { showToast('تعذّر التصدير على هذا المتصفح'); return; }
-            const box = document.getElementById('catExport');
+            const box = document.getElementById('catExport') || document.getElementById('resExport');
             if (box) { box.style.display = 'block';
                 const unit = catType === 'license' ? 'إعلان' : catType === 'doctor' ? 'طبيب' : 'مجمع';
                 const head = single ? `✅ إعلان (تسلسل ${seqOf(imgData[0])}) جاهز — احفظه وانشره` : `✅ الصورة جاهزة (${imgData.length} ${unit}) — احفظها وانشرها`;
@@ -4881,6 +4906,7 @@
     function renderCatalog() {
         document.getElementById('filterSection').style.display = 'none';
         document.getElementById('resultsContainer').style.display = 'block';
+        const _rb = document.getElementById('resSendBar'); if (_rb) _rb.classList.remove('show');
         ALL_MODE_BTNS.forEach(b => { const el = document.getElementById(b); if (el) el.style.outline = 'none'; });
         const cb = document.getElementById('btnCatalog'); if (cb) cb.style.outline = '3px solid #0f172a';
 
@@ -5101,6 +5127,88 @@
                 </div>`;
     }
 
+    // ========== التحديد الإلكتروني داخل بطاقات نتائج البحث نفسها ==========
+    let lastSearchSig = '';
+    // مربّع التأشير أعلى البطاقة
+    function resPickHtml(item) {
+        const sq = seqNum(item);
+        if (sq === null) return '';
+        const checked = catSel.has(sq) ? ' checked' : '';
+        return `<label class="res-pick no-print"><input type="checkbox" onchange="resPick(${sq},this.checked,this)"${checked}> <span>أضِفه إلى اختيارك ✅</span></label>`;
+    }
+    function resPick(sq, on, el) {
+        if (on) catSel.add(sq); else catSel.delete(sq);
+        const card = el && el.closest('.card');
+        if (card) card.classList.toggle('sel-card', on);
+        renderResSendBar();
+    }
+    // العناصر المحدّدة من ضمن المعروض حالياً فقط
+    function searchSelData() {
+        const base = applyQuickFilters(getFilteredItems());
+        return base.filter(i => seqNum(i) !== null && catSel.has(seqNum(i)));
+    }
+    // مزامنة نوع الكتالوج مع البحث الحالي حتى تنسّق دوال الرسائل/الصور الصياغة الصحيحة
+    function syncCatFromSearch() {
+        catType = searchCatType();
+        catLicSide = catType === 'license' ? (selectedState.licSide === 'offer' ? 'offer' : 'want') : 'all';
+    }
+    function resClearSel() { catSel = new Set(); renderResults(); }
+    function resSendWhatsApp() {
+        syncCatFromSearch();
+        const data = searchSelData();
+        if (!data.length) { showToast('أشّر على ما يهمّك أولاً ✅'); return; }
+        window.open(buildWaLink(catDoctorMsg(data)), '_blank');
+    }
+    function resShareWhatsApp() {
+        syncCatFromSearch();
+        const data = searchSelData();
+        if (!data.length) { showToast('أشّر على ما تريد مشاركته أولاً ✅'); return; }
+        window.open('https://wa.me/?text=' + encodeURIComponent(catShareMsg(data)), '_blank');
+    }
+    function resCopyMsg() {
+        syncCatFromSearch();
+        const data = searchSelData();
+        if (!data.length) { showToast('أشّر على ما يهمّك أولاً ✅'); return; }
+        copyText(catDoctorMsg(data), 'تم نسخ اختيارك — الصقه في محادثة الواتساب');
+    }
+    function resExportImage() {
+        syncCatFromSearch();
+        const all = searchSelData();
+        if (!all.length) { showToast('أشّر على ما يهمّك أولاً ✅'); return; }
+        const data = all.slice(0, catBatch());
+        const extra = all.length - data.length;
+        const note = extra > 0
+            ? `<div style="background:#fff7e6;border:2px solid #f0b429;border-radius:12px;padding:12px 14px;margin-bottom:12px;font-weight:800;color:#8a5a00">⚠️ الصورة تعرض أول ${catBatch()} فقط (اخترت ${all.length}). لإرسال القائمة كاملة استخدم «💬 إرسال إلى المنصة» أو «📋 نسخ القائمة».</div>`
+            : '';
+        catDoExport(data, all, note, false, 'results-manasa');
+    }
+    // الشريط السفلي الثابت الذي يظهر عند وجود تحديد
+    function renderResSendBar() {
+        let bar = document.getElementById('resSendBar');
+        const inResults = document.getElementById('resultsContainer') && document.getElementById('resultsContainer').style.display === 'block';
+        const isStep = selectedState.mode && selectedState.mode !== 'match' && document.querySelector('.search-cat-cta');
+        const n = searchSelData().length;
+        if (!bar) {
+            bar = document.createElement('div');
+            bar.id = 'resSendBar';
+            bar.className = 'res-send-bar';
+            document.body.appendChild(bar);
+        }
+        if (!inResults || !isStep || n === 0) { bar.classList.remove('show'); return; }
+        const t = searchCatType();
+        const lbl = t === 'doctor' ? 'أطباء' : t === 'license' ? 'إجازات' : 'مجمعات';
+        bar.innerHTML = `
+            <div class="rsb-count">✅ اخترت <b>${n}</b> ${lbl}</div>
+            <div class="rsb-btns">
+                <button type="button" class="rsb-btn primary" onclick="resSendWhatsApp()">💬 إرسال إلى المنصة</button>
+                <button type="button" class="rsb-btn" onclick="resShareWhatsApp()">📤 مشاركة مع زميل</button>
+                <button type="button" class="rsb-btn" onclick="resExportImage()">📸 صورة</button>
+                <button type="button" class="rsb-btn" onclick="resCopyMsg()">📋 نسخ</button>
+                <button type="button" class="rsb-btn ghost" onclick="resClearSel()">✖ إلغاء</button>
+            </div>`;
+        bar.classList.add('show');
+    }
+
     // جسر من نتائج البحث العادية إلى وضع التحديد (الكتالوج) مع نقل نفس الفلاتر
     function searchCatType() {
         if (selectedState.mode === 'license') return 'license';
@@ -5120,7 +5228,7 @@
         const rc = document.getElementById('resultsContainer');
         if (rc) rc.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-    // شريط يوضّح للطبيب/صاحب المجمع كيف يحدّد خياراته من النتائج ويرسلها لنا
+    // تلميح يوضّح للطبيب/صاحب المجمع أن التحديد صار إلكترونياً داخل البطاقات
     function searchToCatalogBannerHtml(n) {
         const t = searchCatType();
         const who = t === 'doctor'
@@ -5131,15 +5239,15 @@
         return `
             <div class="search-cat-cta" style="grid-column:1/-1">
                 <div class="scc-txt">
-                    <b>✅ تريد اختيار أكثر من خيار وإرسالها لنا دفعة واحدة؟</b>
-                    <span>افتح «وضع التحديد» (بنفس الفلاتر الحالية)، أشّر على ${who}، ثم أرسلها للمنصة عبر واتساب أو صدّرها كصورة — ونحن نرتّب لك التواصل.</span>
+                    <b>✅ أشّر إلكترونياً على ${who}</b>
+                    <span>اضغط «أضِفه إلى اختيارك ✅» في أي بطاقة، ثم من الشريط السفلي أرسل اختيارك للمنصة عبر واتساب أو صدّره كصورة — ونحن نرتّب لك التواصل.</span>
                 </div>
-                <button type="button" class="scc-btn" onclick="openCatalogFromSearch()">📑 حدّد هذه النتائج وأرسلها لنا</button>
+                <button type="button" class="scc-btn" onclick="openCatalogFromSearch()">📑 فتح وضع التحديد الكامل</button>
             </div>`;
     }
 
     function renderResults() {
-        if (selectedState.mode === 'match') { renderMatchesView(); return; }
+        if (selectedState.mode === 'match') { renderMatchesView(); renderResSendBar(); return; }
         if (selectedState.mode === 'license') renderLicTabs();
         const grid = document.getElementById('resultsGrid');
         grid.innerHTML = '';
@@ -5149,25 +5257,34 @@
 
         if (base.length === 0) {
             grid.innerHTML = emptyResultsHtml(false);
+            renderResSendBar();
             return;
         }
         grid.innerHTML = quickFiltersHtml(base.length, filtered.length);
         if (filtered.length === 0) {
             grid.insertAdjacentHTML('beforeend', emptyResultsHtml(true));
+            renderResSendBar();
             return;
         }
 
         grid.insertAdjacentHTML('beforeend', searchToCatalogBannerHtml(filtered.length));
 
+        // عند تغيّر البحث (اختصاص/محافظة/جانب/وضع) نفرّغ التحديد السابق حتى لا تبقى اختيارات من قائمة أخرى
+        const sig = [selectedState.mode, selectedState.specialty, selectedState.gov, selectedState.group, selectedState.licSide].join('|');
+        if (sig !== lastSearchSig) { catSel = new Set(); lastSearchSig = sig; }
+
         const cardType = isDoctorMode(selectedState.mode) ? 'doctor' : 'clinic';
         filtered.forEach(item => {
             const card = document.createElement('div');
             card.className = 'card active-match';
-            let html = cardInner(item, cardType, { highlight: true });
+            if (seqNum(item) !== null && catSel.has(seqNum(item))) card.className += ' sel-card';
+            let html = cardInner(item, cardType, { highlight: true, selectable: true });
             if (selectedState.mode === 'license') html += matchesHtml(item, cardType);
             card.innerHTML = html;
             grid.appendChild(card);
         });
+        grid.insertAdjacentHTML('beforeend', '<div id="resExport" class="cat-export" style="display:none;grid-column:1/-1"></div>');
+        renderResSendBar();
     }
 
     // سطر الخبر يوضح صراحةً ماذا يريد الطبيب أو المجمع، مع رقم التسلسل للسؤال عنه
@@ -5225,6 +5342,7 @@
         const fab = document.getElementById('homeFab');
         const rc = document.getElementById('resultsContainer');
         if (fab && rc) fab.classList.toggle('hidden-fab', rc.style.display !== 'block');
+        if (rc && rc.style.display !== 'block') { const b = document.getElementById('resSendBar'); if (b) b.classList.remove('show'); }
     }
 
     function isAvailable(item) { return !(item.statusLabel && item.statusLabel.includes('غير متوفر')); }
