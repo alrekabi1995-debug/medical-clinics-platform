@@ -644,6 +644,21 @@
     .chat-input-row input { flex: 1 1 auto; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 10px 12px; font-family: inherit; font-size: 14px; min-width: 0; }
     .chat-send { background: #15307e; color: #fff; border: none; border-radius: 10px; padding: 10px 16px; font-family: inherit; font-weight: 800; cursor: pointer; }
     @media (max-width: 480px) { .chat-panel { width: calc(100vw - 24px); inset-inline-start: 12px; bottom: 12px; height: 74vh; } }
+    .pc-panel { position: fixed; inset: 0; z-index: 2147483001; background: rgba(15,23,42,.55); display: none; flex-direction: column; align-items: center; justify-content: flex-start; padding: 18px 10px; box-sizing: border-box; direction: rtl; overflow-y: auto; }
+    .pc-card { width: min(96vw, 680px); background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 24px 60px rgba(15,23,42,.4); }
+    .pc-head { background: #15307e; color: #fff; padding: 14px 18px; font-weight: 900; font-size: 16px; display: flex; align-items: center; justify-content: space-between; }
+    .pc-x { background: rgba(255,255,255,.2); color: #fff; border: none; border-radius: 8px; width: 34px; height: 34px; font-size: 16px; cursor: pointer; }
+    .pc-body { padding: 16px; max-height: calc(100vh - 120px); overflow-y: auto; }
+    .pc-note { background: #eef2ff; border: 1px solid #c7d2fe; color: #3730a3; border-radius: 10px; padding: 10px 12px; font-weight: 700; font-size: 13px; margin-bottom: 12px; line-height: 1.6; }
+    .pc-fmt-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 6px; }
+    .pc-fmt-lbl { font-weight: 800; color: #15307e; font-size: 13.5px; }
+    .pc-fmt { font-family: inherit; font-weight: 800; font-size: 13px; padding: 8px 14px; border: 1.5px solid #cbd5e1; border-radius: 10px; background: #fff; color: #334155; cursor: pointer; }
+    .pc-fmt.on { background: #15307e; color: #fff; border-color: #15307e; }
+    .pc-grp { font-weight: 900; color: #0f766e; font-size: 14.5px; margin: 14px 0 6px; }
+    .pc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 520px) { .pc-row { grid-template-columns: 1fr; } }
+    .pc-btn { font-family: inherit; font-weight: 800; font-size: 14px; padding: 14px 12px; border: 1.5px solid #c7d2fe; border-radius: 12px; cursor: pointer; background: #f8fafc; color: #15307e; text-align: start; line-height: 1.4; }
+    .pc-btn:hover { background: #eef2ff; border-color: #2456e6; }
     .promo-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; margin: 4px 0 10px; padding: 10px; background: #f8fafc; border: 1.5px dashed #c7d2fe; border-radius: 12px; }
     .promo-lbl { font-weight: 800; color: #15307e; font-size: 13.5px; }
     .promo-btn { font-family: inherit; font-weight: 800; font-size: 13.5px; padding: 10px 14px; border: none; border-radius: 11px; cursor: pointer; color: #fff; }
@@ -1604,6 +1619,7 @@
                 <button type="button" class="btn btn-latest" id="btnLicenseCatalog" onclick="showCatalog('license')">📑 كتالوج الإجازات</button>
                 <button type="button" class="btn btn-matches" id="btnMatches" onclick="startSearch('match')">🔗 التطابقات المحتملة</button>
                 <button type="button" class="btn btn-latest" id="btnLatest" onclick="showLatestAdditions()">🆕 آخر الإضافات</button>
+                <button type="button" class="btn btn-latest" id="btnPosters" onclick="postersOpen()">🎨 مركز المنشورات</button>
             </div>
         </details>
     </div>
@@ -4849,6 +4865,7 @@
     }
     let catCustomMeta = {};
     let catExportFocus = false; // عند التصدير: صورة مركّزة على الاختصاص المختار
+    let promoStory = false; // صيغة المنشور: false = مربّع للمنشور، true = ستوري عمودي 1080×1920
     function showSuggestedCatalog(baseId) {
         const a = adIndex[baseId];
         if (!a) { showToast('العنصر غير موجود'); return; }
@@ -5118,52 +5135,118 @@
         const cx = DOCTORS_DATA.filter(i => av(i) && i.venueType !== 'hospital').length;
         const hosp = DOCTORS_DATA.filter(i => av(i) && i.venueType === 'hospital').length;
         const govs = new Set([...GENERAL_CLINICS_DATA, ...DOCTORS_DATA].filter(av).map(i => i.gov)).size;
-        const forDoc = kind === 'doctor';
-        const P = forDoc
-            ? { bg: '#15307e', bg2: '#2456e6', chip: '#1d4ed8', sub: '#d6e3ff', accent: '#ffd36b' }
-            : { bg: '#0b5f56', bg2: '#0d9488', chip: '#0d9488', sub: '#d6fff6', accent: '#ffd36b' };
-        const title = forDoc ? 'طبيب يبحث عن عيادة؟' : 'مجمع أو مستشفى يبحث عن أطباء؟';
-        const sub = forDoc ? 'منصة عيادات طبية تنسّق لك أقرب فرصة مناسبة في كل العراق'
-            : 'نوفّر لك الكفاءات الطبية بأسرع وقت وأدقّ اختيار';
-        const points = forDoc
-            ? ['عيادات ومجمعات ومستشفيات أهلية في كل المحافظات', 'تنسيق مجاني للطبيب — الأجور على جهة العمل', 'اختر منطقتك واختصاصك ونرتّب لك التواصل', 'خصوصية تامة — رقمك لا يظهر للعامة']
-            : ['قاعدة أطباء بكل الاختصاصات: بورد وأخصائيون وممارسون', 'نرشّح لك الأنسب حسب منطقتك واختصاصك', 'تنسيق سريع ومباشر وموثوق', 'إعلان مجمعك يصل لأكبر عدد من الأطباء'];
-        const stat = forDoc ? ((cx + hosp) + '+ فرصة عمل متاحة في ' + govs + ' محافظة')
-            : (docs + '+ طبيب متاح الآن بمختلف الاختصاصات');
+        // إحصاء الإجازات
+        const licWant = DOCTORS_DATA.filter(i => av(i) && i.license === 'want' && licenseSpecsOf(i).length).length;
+        const licOffer = GENERAL_CLINICS_DATA.filter(i => av(i) && i.license === 'offer' && licenseSpecsOf(i).length).length;
+        const licList = (typeof LICENSE_SPECS !== 'undefined' ? LICENSE_SPECS : ['جلدية', 'جراحة تجميلية', 'طب أسرة', 'أشعة وسونار ومفراس']).join('، ');
+        const blue = { bg: '#15307e', bg2: '#2456e6', chip: '#1d4ed8', sub: '#d6e3ff', accent: '#ffd36b' };
+        const teal = { bg: '#0b5f56', bg2: '#0d9488', chip: '#0d9488', sub: '#d6fff6', accent: '#ffd36b' };
+        let P, title, sub, points, stat;
+        if (kind === 'doctors-available') {
+            P = teal;
+            title = 'أطباء جاهزون بانتظار مجمعكم';
+            sub = 'لدينا أطباء يبحثون عن مجمعات وعيادات ومستشفيات أهلية — في كل المحافظات';
+            points = ['أطباء بكل الاختصاصات: بورد وأخصائيون وممارسون', 'جاهزون للعمل صباحاً أو مساءً', 'نرشّح لكم الأنسب لمنطقتكم واختصاصكم', 'تنسيق سريع ومباشر وموثوق'];
+            stat = docs + '+ طبيب متاح الآن يبحث عن فرصة';
+        } else if (kind === 'venues-available') {
+            P = blue;
+            title = 'فرص عمل متاحة للأطباء الآن';
+            sub = 'مجمعات وعيادات ومستشفيات أهلية تبحث عن أطباء في كل العراق';
+            points = ['فرص في ' + govs + ' محافظة بمختلف الاختصاصات', 'مجمعات ومستشفيات أهلية وعيادات', 'تنسيق مجاني للطبيب — الأجور على جهة العمل', 'اختر منطقتك واختصاصك ونرتّب لك التواصل'];
+            stat = (cx + hosp) + '+ فرصة عمل متاحة في ' + govs + ' محافظة';
+        } else if (kind === 'lic-want') {
+            P = teal;
+            title = 'مجمع يحتاج إجازة لفتح عيادة؟';
+            sub = 'منصة عيادات طبية توفّر لك إجازات أطباء بالاختصاص المطلوب';
+            points = ['إجازات بالاختصاصات المسموحة: ' + licList, 'نوصلك بطبيب يعرض إجازته بسرعة', 'تنسيق مباشر وموثوق', 'خصوصية تامة لكل الأطراف'];
+            stat = licOffer + '+ طبيب يعرض إجازته الآن';
+        } else if (kind === 'lic-offer') {
+            P = blue;
+            title = 'طبيب يملك إجازة ويريد عرضها؟';
+            sub = 'نوصلك بمجمعات تبحث عن إجازتك بالاختصاص المطلوب';
+            points = ['اختصاصات مطلوبة: ' + licList, 'مجمعات جاهزة تبحث عن إجازة', 'تنسيق سريع وبعائد مناسب لك', 'خصوصية تامة — رقمك لا يظهر للعامة'];
+            stat = licWant + '+ مجمع يطلب إجازة الآن';
+        } else {
+            const forDoc = kind === 'doctor';
+            P = forDoc ? blue : teal;
+            title = forDoc ? 'طبيب يبحث عن عيادة؟' : 'مجمع أو مستشفى يبحث عن أطباء؟';
+            sub = forDoc ? 'منصة عيادات طبية تنسّق لك أقرب فرصة مناسبة في كل العراق'
+                : 'نوفّر لك الكفاءات الطبية بأسرع وقت وأدقّ اختيار';
+            points = forDoc
+                ? ['عيادات ومجمعات ومستشفيات أهلية في كل المحافظات', 'تنسيق مجاني للطبيب — الأجور على جهة العمل', 'اختر منطقتك واختصاصك ونرتّب لك التواصل', 'خصوصية تامة — رقمك لا يظهر للعامة']
+                : ['قاعدة أطباء بكل الاختصاصات: بورد وأخصائيون وممارسون', 'نرشّح لك الأنسب حسب منطقتك واختصاصك', 'تنسيق سريع ومباشر وموثوق', 'إعلان مجمعك يصل لأكبر عدد من الأطباء'];
+            stat = forDoc ? ((cx + hosp) + '+ فرصة عمل متاحة في ' + govs + ' محافظة')
+                : (docs + '+ طبيب متاح الآن بمختلف الاختصاصات');
+        }
+        const ctaTitle = (kind === 'doctor' || kind === 'venues-available') ? 'سجّل الآن وابدأ العمل'
+            : kind === 'lic-want' ? 'سجّل طلب الإجازة الآن'
+            : kind === 'lic-offer' ? 'اعرض إجازتك الآن'
+            : kind === 'doctors-available' ? 'اطلب طبيبك الآن'
+            : 'سجّل مجمعك الآن';
         const logo = '<svg viewBox="0 0 512 512" width="58" height="58" xmlns="http://www.w3.org/2000/svg"><path d="M256 104c-78 0-141 60-141 138 0 96 120 166 141 166s141-70 141-166c0-78-63-138-141-138z" fill="#ffffff"/><path d="M170 238h34l16-34 28 72 20-46 14 26h50" fill="none" stroke="' + P.chip + '" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-        const chips = points.map(t => '<div style="background:rgba(255,255,255,.12);border-radius:16px;padding:20px 24px;font-size:31px;font-weight:800;color:#fff;display:flex;gap:14px;align-items:center;line-height:1.3"><span style="color:' + P.accent + ';font-size:36px;flex:0 0 auto">✓</span><span>' + esc(t) + '</span></div>').join('');
-        const html = '<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;background:linear-gradient(160deg,' + P.bg + ',' + P.bg2 + ');font-family:Tahoma,Arial,sans-serif;padding:56px 54px;box-sizing:border-box;direction:rtl;color:#fff">'
-            + '<div style="display:flex;align-items:center;gap:18px;justify-content:center">'
-            + '<div style="width:92px;height:92px;background:#ffffff;border-radius:22px;display:flex;align-items:center;justify-content:center">' + logo + '</div>'
-            + '<div style="font-weight:900;font-size:42px">منصة عيادات طبية</div></div>'
-            + '<div style="text-align:center;font-weight:900;font-size:78px;margin-top:30px;line-height:1.05">' + esc(title) + '</div>'
-            + '<div style="text-align:center;font-size:33px;color:' + P.sub + ';margin-top:14px;font-weight:700">' + esc(sub) + '</div>'
-            + '<div style="background:' + P.accent + ';color:#1b1b1b;font-weight:900;font-size:31px;text-align:center;border-radius:16px;padding:14px 26px;margin:28px auto 0;width:fit-content">📊 ' + esc(stat) + '</div>'
-            + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px">' + chips + '</div>'
-            + '<div style="margin-top:34px;background:#ffffff;border-radius:20px;padding:26px 30px;display:flex;align-items:center;justify-content:space-between;gap:18px">'
-            + '<div style="text-align:right"><div style="font-weight:900;font-size:34px;color:' + P.chip + '">' + (forDoc ? 'سجّل الآن وابدأ العمل' : 'سجّل مجمعك الآن') + '</div><div style="font-size:24px;color:#555;font-weight:700">راسلنا على واتساب أو زر الموقع</div></div>'
-            + '<div style="background:' + P.chip + ';color:#fff;font-weight:900;font-size:40px;padding:14px 24px;border-radius:14px;direction:ltr;white-space:nowrap">' + WHATSAPP_DISPLAY + '</div></div>'
-            + '<div style="text-align:center;font-size:26px;color:' + P.sub + ';margin-top:20px;font-weight:700">🌐 medical-clinics-platform.vercel.app</div>'
-            + '</div>';
+        const story = !!promoStory;
+        const tF = story ? 92 : 78, sF = story ? 38 : 33, cF = story ? 36 : 31, iF = story ? 40 : 36, gap = story ? 20 : 16;
+        const chips = points.map(t => '<div style="background:rgba(255,255,255,.12);border-radius:16px;padding:' + (story ? '26px 28px' : '20px 24px') + ';font-size:' + cF + 'px;font-weight:800;color:#fff;display:flex;gap:14px;align-items:center;line-height:1.35"><span style="color:' + P.accent + ';font-size:' + iF + 'px;flex:0 0 auto">✓</span><span>' + esc(t) + '</span></div>').join('');
+        const header = '<div style="display:flex;align-items:center;gap:18px;justify-content:center">'
+            + '<div style="width:' + (story ? 104 : 92) + 'px;height:' + (story ? 104 : 92) + 'px;background:#ffffff;border-radius:24px;display:flex;align-items:center;justify-content:center">' + logo + '</div>'
+            + '<div style="font-weight:900;font-size:' + (story ? 48 : 42) + 'px">منصة عيادات طبية</div></div>';
+        const middle = '<div style="text-align:center;font-weight:900;font-size:' + tF + 'px;margin-top:' + (story ? 40 : 30) + 'px;line-height:1.08">' + esc(title) + '</div>'
+            + '<div style="text-align:center;font-size:' + sF + 'px;color:' + P.sub + ';margin-top:16px;font-weight:700;line-height:1.4">' + esc(sub) + '</div>'
+            + '<div style="background:' + P.accent + ';color:#1b1b1b;font-weight:900;font-size:' + cF + 'px;text-align:center;border-radius:16px;padding:16px 28px;margin:' + (story ? 36 : 28) + 'px auto 0;width:fit-content">📊 ' + esc(stat) + '</div>'
+            + '<div style="display:grid;grid-template-columns:' + (story ? '1fr' : '1fr 1fr') + ';gap:' + gap + 'px;margin-top:' + (story ? 36 : 30) + 'px">' + chips + '</div>';
+        const footer = '<div style="margin-top:' + (story ? 44 : 34) + 'px;background:#ffffff;border-radius:20px;padding:' + (story ? '32px 34px' : '26px 30px') + ';display:flex;align-items:center;justify-content:space-between;gap:18px">'
+            + '<div style="text-align:right"><div style="font-weight:900;font-size:' + (story ? 40 : 34) + 'px;color:' + P.chip + '">' + ctaTitle + '</div><div style="font-size:' + (story ? 28 : 24) + 'px;color:#555;font-weight:700">راسلنا على واتساب أو زر الموقع</div></div>'
+            + '<div style="background:' + P.chip + ';color:#fff;font-weight:900;font-size:' + (story ? 44 : 40) + 'px;padding:16px 26px;border-radius:14px;direction:ltr;white-space:nowrap">' + WHATSAPP_DISPLAY + '</div></div>'
+            + '<div style="text-align:center;font-size:' + (story ? 30 : 26) + 'px;color:' + P.sub + ';margin-top:' + (story ? 26 : 20) + 'px;font-weight:700">🌐 medical-clinics-platform.vercel.app</div>';
+        let html;
+        if (story) {
+            html = '<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;height:1920px;background:linear-gradient(160deg,' + P.bg + ',' + P.bg2 + ');font-family:Tahoma,Arial,sans-serif;padding:96px 72px;box-sizing:border-box;direction:rtl;color:#fff;display:flex;flex-direction:column;justify-content:space-between">'
+                + '<div>' + header + '</div>'
+                + '<div>' + middle + '</div>'
+                + '<div>' + footer + '</div>'
+                + '</div>';
+            return { html, w: 1080, h: 1920 };
+        }
+        html = '<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;background:linear-gradient(160deg,' + P.bg + ',' + P.bg2 + ');font-family:Tahoma,Arial,sans-serif;padding:56px 54px;box-sizing:border-box;direction:rtl;color:#fff">'
+            + header + middle + footer + '</div>';
         return { html, w: 1080 };
     }
     function promoCaption(kind) {
-        const forDoc = kind === 'doctor';
-        const lines = forDoc
-            ? ['👨‍⚕️ طبيب تبحث عن عيادة للعمل؟', '', 'منصة «عيادات طبية» تنسّق لك أقرب وأفضل فرصة في كل العراق — تنسيق مجاني للطبيب، وخصوصية تامة.', '✅ عيادات ومجمعات ومستشفيات أهلية بكل الاختصاصات.', '✅ اختر منطقتك واختصاصك ونرتّب لك التواصل.']
-            : ['🏢 مجمع أو مستشفى أهلي تبحث عن أطباء؟', '', 'منصة «عيادات طبية» توفّر لك كفاءات طبية بأسرع وقت وأدقّ اختيار.', '✅ أطباء بورد وأخصائيون وممارسون بكل الاختصاصات.', '✅ نرشّح لك الأنسب لمنطقتك واختصاصك.'];
-        lines.push('', '📲 راسلنا على واتساب: ' + WHATSAPP_DISPLAY, '🌐 https://medical-clinics-platform.vercel.app/');
-        lines.push('', forDoc ? '#طبيب_يبحث_عن_عيادة #اطباء_العراق #فرص_عمل_طبية #منصة_عيادات_طبية #العراق'
-            : '#مطلوب_اطباء #مجمع_طبي #مستشفى_اهلي #وظائف_طبية #منصة_عيادات_طبية #العراق');
+        let lines, tags;
+        if (kind === 'doctors-available') {
+            lines = ['🏢 لأصحاب المجمعات والعيادات والمستشفيات الأهلية:', '', 'لدينا أطباء جاهزون يبحثون عن فرصة عمل — بكل الاختصاصات وفي كل المحافظات.', '✅ بورد وأخصائيون وممارسون.', '✅ نرشّح لكم الأنسب لمنطقتكم واختصاصكم بتنسيق سريع.'];
+            tags = '#اطباء_متاحون #مطلوب_اطباء #مجمع_طبي #مستشفى_اهلي #منصة_عيادات_طبية #العراق';
+        } else if (kind === 'venues-available') {
+            lines = ['👨‍⚕️ فرص عمل متاحة للأطباء الآن:', '', 'مجمعات وعيادات ومستشفيات أهلية تبحث عن أطباء في كل العراق.', '✅ اختصاصات متنوعة وفي عدة محافظات.', '✅ تنسيق مجاني للطبيب — اختر منطقتك واختصاصك ونرتّب لك.'];
+            tags = '#فرص_عمل_طبية #طبيب_يبحث_عن_عيادة #اطباء_العراق #منصة_عيادات_طبية #العراق';
+        } else if (kind === 'lic-want') {
+            lines = ['🏢 مجمع يحتاج إجازة طبية لفتح عيادة؟', '', 'منصة «عيادات طبية» توفّر لك إجازات أطباء بالاختصاص المطلوب (جلدية، تجميلية، طب أسرة، أشعة…).', '✅ نوصلك بطبيب يعرض إجازته بسرعة.', '✅ تنسيق مباشر وخصوصية تامة.'];
+            tags = '#اجازات_طبية #اجازة_فتح_عيادة #مطلوب_اجازة #منصة_عيادات_طبية #العراق';
+        } else if (kind === 'lic-offer') {
+            lines = ['📜 طبيب يملك إجازة ويريد عرضها؟', '', 'منصة «عيادات طبية» توصلك بمجمعات تبحث عن إجازتك بالاختصاص المطلوب.', '✅ مجمعات جاهزة وتنسيق سريع بعائد مناسب.', '✅ خصوصية تامة — رقمك لا يظهر للعامة.'];
+            tags = '#عرض_اجازة #اجازة_طبية #اطباء_العراق #منصة_عيادات_طبية #العراق';
+        } else {
+            const forDoc = kind === 'doctor';
+            lines = forDoc
+                ? ['👨‍⚕️ طبيب تبحث عن عيادة للعمل؟', '', 'منصة «عيادات طبية» تنسّق لك أقرب وأفضل فرصة في كل العراق — تنسيق مجاني للطبيب، وخصوصية تامة.', '✅ عيادات ومجمعات ومستشفيات أهلية بكل الاختصاصات.', '✅ اختر منطقتك واختصاصك ونرتّب لك التواصل.']
+                : ['🏢 مجمع أو مستشفى أهلي تبحث عن أطباء؟', '', 'منصة «عيادات طبية» توفّر لك كفاءات طبية بأسرع وقت وأدقّ اختيار.', '✅ أطباء بورد وأخصائيون وممارسون بكل الاختصاصات.', '✅ نرشّح لك الأنسب لمنطقتك واختصاصك.'];
+            tags = forDoc ? '#طبيب_يبحث_عن_عيادة #اطباء_العراق #فرص_عمل_طبية #منصة_عيادات_طبية #العراق'
+                : '#مطلوب_اطباء #مجمع_طبي #مستشفى_اهلي #وظائف_طبية #منصة_عيادات_طبية #العراق';
+        }
+        lines.push('', '📲 راسلنا على واتساب: ' + WHATSAPP_DISPLAY, '🌐 https://medical-clinics-platform.vercel.app/', '', tags);
         return lines.join('\n');
     }
     function promoExport(kind) {
-        const { html, w } = promoPosterHTML(kind);
-        const meas = document.createElement('div');
-        meas.style.cssText = 'position:absolute;left:-99999px;top:0;width:' + w + 'px;visibility:hidden';
-        meas.innerHTML = html; document.body.appendChild(meas);
-        const h = Math.ceil(meas.firstElementChild.getBoundingClientRect().height) || 1350;
-        document.body.removeChild(meas);
+        const r = promoPosterHTML(kind); const html = r.html, w = r.w;
+        let h;
+        if (r.h) { h = r.h; } // الستوري بارتفاع ثابت 1920
+        else {
+            const meas = document.createElement('div');
+            meas.style.cssText = 'position:absolute;left:-99999px;top:0;width:' + w + 'px;visibility:hidden';
+            meas.innerHTML = html; document.body.appendChild(meas);
+            h = Math.ceil(meas.firstElementChild.getBoundingClientRect().height) || 1350;
+            document.body.removeChild(meas);
+        }
         const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '"><foreignObject width="100%" height="100%">' + html + '</foreignObject></svg>';
         const img = new Image();
         img.onload = function () {
@@ -5171,7 +5254,7 @@
             c.width = w * scale; c.height = h * scale;
             const ctx = c.getContext('2d'); ctx.scale(scale, scale); ctx.drawImage(img, 0, 0);
             let url; try { url = c.toDataURL('image/png'); } catch (e) { showToast('تعذّر التصدير على هذا المتصفح'); return; }
-            const box = document.getElementById('catExport') || document.getElementById('resExport');
+            const box = document.getElementById('promoExport') || document.getElementById('catExport') || document.getElementById('resExport');
             if (box) {
                 box.style.display = 'block';
                 box.innerHTML = '<div style="font-weight:900;font-size:20px;color:#0d9488;margin-bottom:10px">✅ المنشور جاهز — احفظه وانشره</div>'
@@ -5329,9 +5412,8 @@
                     <p style="margin-top:8px">${catShowSel ? 'المعروض (المحدّد)' : (catCustom ? 'المقترح' : 'المتاح الآن')}: <b>${shown.length}</b></p>
                 </div>
                 ${catCustom ? '' : `<div class="promo-row no-print">
-                    <span class="promo-lbl">📣 منشور ترويجي عام (صورة جاهزة للنشر):</span>
-                    <button type="button" class="promo-btn doc" onclick="promoExport('doctor')">👨‍⚕️ منشور لجذب الأطباء</button>
-                    <button type="button" class="promo-btn cx" onclick="promoExport('clinic')">🏢 منشور لجذب المجمعات</button>
+                    <span class="promo-lbl">📣 تريد منشوراً جاهزاً للنشر؟</span>
+                    <button type="button" class="promo-btn doc" onclick="postersOpen()">🎨 افتح مركز المنشورات (حسب الطلب)</button>
                 </div>`}
                 ${catCustom ? '' : `<div class="cat-tabs no-print">${tab('clinic', '🏢 المجمعات')}${tab('doctor', '👨‍⚕️ الأطباء')}${tab('license', '📜 الإجازات')}</div>`}
                 ${catCustom ? '' : licSideRow}
@@ -5877,6 +5959,40 @@
         p.style.display = show ? 'flex' : 'none';
         if (show && !p.getAttribute('data-greeted')) { const a = chatBotAnswer(''); chatPush('bot', a.text, a.html); p.setAttribute('data-greeted', '1'); setTimeout(() => { const i = document.getElementById('chatInput'); if (i) i.focus(); }, 60); }
     }
+    // ====================== 🎨 مركز المنشورات (حسب الطلب) ======================
+    function postersOpen() { const p = document.getElementById('postersPanel'); if (p) { p.style.display = 'flex'; postersFormat(false); } }
+    function postersClose() { const p = document.getElementById('postersPanel'); if (p) p.style.display = 'none'; }
+    function postersFormat(story) {
+        promoStory = !!story;
+        document.querySelectorAll('#postersPanel .pc-fmt').forEach(b => b.classList.toggle('on', (b.dataset.fmt === 'story') === promoStory));
+    }
+    function postersMake(kind) {
+        const box = document.getElementById('promoExport');
+        if (box) { box.style.display = 'block'; box.innerHTML = '<div style="color:#64748b;font-weight:700;padding:8px">⏳ جارٍ إنشاء ' + (promoStory ? 'الستوري' : 'المنشور') + '…</div>'; }
+        setTimeout(() => promoExport(kind), 30);
+    }
+    function postersInit() {
+        if (document.getElementById('postersPanel')) return;
+        const btn = (k, label) => `<button type="button" class="pc-btn" onclick="postersMake('${k}')">${label}</button>`;
+        const panel = document.createElement('div');
+        panel.id = 'postersPanel'; panel.className = 'pc-panel'; panel.style.display = 'none';
+        panel.innerHTML = '<div class="pc-card">'
+            + '<div class="pc-head"><span>🎨 مركز المنشورات — صور جاهزة للنشر</span><button type="button" class="pc-x" onclick="postersClose()">✖</button></div>'
+            + '<div class="pc-body">'
+            + '<div class="pc-note">اختر الصيغة ثم نوع المنشور، وتُنشأ صورة فوراً مع كابشن جاهز وهاشتاكات. كل الأرقام تُحسب تلقائياً من بيانات المنصة، وبلا أي أسماء أو أرقام خاصة.</div>'
+            + '<div class="pc-fmt-row"><span class="pc-fmt-lbl">📐 الصيغة:</span>'
+            + '<button type="button" class="pc-fmt on" data-fmt="post" onclick="postersFormat(false)">🖼️ منشور (مربّع)</button>'
+            + '<button type="button" class="pc-fmt" data-fmt="story" onclick="postersFormat(true)">📱 ستوري (عمودي)</button></div>'
+            + '<div class="pc-grp">👨‍⚕️ للأطباء</div>'
+            + '<div class="pc-row">' + btn('doctor', '🩺 جذب الأطباء (طبيب يبحث عن عيادة؟)') + btn('venues-available', '📣 فرص عمل متاحة للأطباء الآن') + '</div>'
+            + '<div class="pc-grp">🏢 للمجمعات والمستشفيات</div>'
+            + '<div class="pc-row">' + btn('clinic', '🏥 جذب المجمعات (يبحث عن أطباء؟)') + btn('doctors-available', '📣 أطباء جاهزون بانتظار مجمعكم') + '</div>'
+            + '<div class="pc-grp">📜 الإجازات</div>'
+            + '<div class="pc-row">' + btn('lic-want', '🏢 مجمعات تطلب إجازات') + btn('lic-offer', '📜 أطباء يعرضون إجازات') + '</div>'
+            + '<div class="cat-export-box" id="promoExport" style="display:none;margin-top:14px"></div>'
+            + '</div></div>';
+        document.body.appendChild(panel);
+    }
     function chatInit() {
         if (document.getElementById('chatFab')) return;
         const fab = document.createElement('button');
@@ -5917,6 +6033,7 @@
         handleHash();
         window.addEventListener('hashchange', handleHash);
         chatInit();
+        postersInit();
     };
 </script>
 </body>
