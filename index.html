@@ -4725,6 +4725,24 @@
         window.open(buildWaLink(catDoctorMsg(data)), '_blank');
     }
     function copyDoctorMsg() { copyText(catDoctorMsg(catChosen()), 'تم نسخ اختيارك — الصقه في محادثة الواتساب'); }
+    // رسالة ترشيح لمشاركتها مع زميل (تبقي الرابط ورقم المنصة ليعود عبرنا)
+    function catShareMsg(data) {
+        const kind = catType === 'license' ? 'فرص إجازات' : catType === 'doctor' ? 'أطباء' : 'فرص عمل في مجمعات';
+        const lines = ['👋 شفت هذه ' + kind + ' على «منصة عيادات طبية» وحبيت أرشّحها لك:'];
+        lines.push('');
+        data.forEach(i => {
+            const specs = (catType === 'license' ? licenseSpecsOf(i) : specsOf(i)); const show = specs.slice(0, 4).join('، ') + (specs.length > 4 ? '…' : '');
+            lines.push(`▪️ تسلسل ${seqOf(i)} — ${adLocation(i, catItemType(i))}${show ? ' (' + show + ')' : ''}`);
+        });
+        lines.push('', '✅ للتفاصيل أرسل رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
+        lines.push('🌐 https://medical-clinics-platform.vercel.app/');
+        return lines.join('\n');
+    }
+    function catShareWhatsApp() {
+        const data = catChosen();
+        if (!data.length) { showToast('أشّر على ما تريد مشاركته أولاً ✅'); return; }
+        window.open('https://wa.me/?text=' + encodeURIComponent(catShareMsg(data)), '_blank');
+    }
 
     // بناء بوستر HTML (XHTML) لمجموعة مجمعات بأسلوب البلوكات
     // أقصى عدد في الصورة ودفعة التحديد: الأطباء بطاقات مختصرة فتتسع 16، المجمعات 10
@@ -4919,11 +4937,12 @@
                     <button type="button" class="cat-print exp" onclick="catSelectLast(${catBatch()})">آخر ${catBatch()}</button>
                 </div>` : ''}
                 <div class="cat-send-bar no-print">
-                    <div class="lbl">📲 أرسل اختيارك إلى المنصة:</div>
+                    <div class="lbl">📲 أرسل اختيارك للمنصة أو شاركه مع غيرك:</div>
                     <div class="row">
-                        <button type="button" class="cat-print wa" onclick="catSendWhatsApp()">💬 إرسال عبر واتساب</button>
+                        <button type="button" class="cat-print wa" onclick="catSendWhatsApp()">💬 إرسال إلى المنصة</button>
+                        <button type="button" class="cat-print wa" onclick="catShareWhatsApp()">📤 مشاركة مع زميل</button>
                         <button type="button" class="cat-print" onclick="copyDoctorMsg()">📋 نسخ القائمة</button>
-                        <button type="button" class="cat-print exp" onclick="exportCatalogImage()">📸 حفظ كصورة لرفعها</button>
+                        <button type="button" class="cat-print exp" onclick="exportCatalogImage()">📸 حفظ كصورة</button>
                     </div>
                 </div>
                 <div class="cat-grid">${cards || (catShowSel ? '<p style="padding:16px">لم تؤشّر على أي عنصر بعد — ارجع لـ«عرض الكل» وأشّر على ما يهمّك.</p>' : '<p style="padding:16px">لا يوجد ضمن هذا الفلتر.</p>')}</div>
