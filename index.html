@@ -1284,6 +1284,9 @@
     .cat-head { background: linear-gradient(120deg,#0a2236,#0e3350); border:2px solid #c9a24a; border-radius:18px; padding:20px 24px; text-align:center; color:#fff; margin-bottom:16px; }
     .cat-head h2 { font-size:30px; font-weight:900; color:#fff; margin:0; }
     .cat-head p { font-size:16px; color:#cfe0ec; margin:8px 0 0; }
+    .cat-steps { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:12px; }
+    .cat-steps .st { background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); border-radius:999px; padding:7px 14px; font-size:14px; font-weight:700; color:#fff; display:inline-flex; align-items:center; gap:7px; }
+    .cat-steps .st b { background:var(--gold); color:#0a2236; width:22px; height:22px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:13px; }
     .cat-tabs { display:flex; gap:10px; justify-content:center; margin:14px 0; flex-wrap:wrap; }
     .cat-tab { background:#eef4f3; border:1.5px solid #cbd5d3; border-radius:999px; padding:10px 24px; font-weight:800; font-size:16px; color:#0a2236; cursor:pointer; }
     .cat-tab.active { background:#0e3350; color:#fff; border-color:#0e3350; }
@@ -4916,7 +4919,15 @@
         const back = `<div class="back-to-browse-wrap no-print" style="grid-column:1/-1;"><button type="button" class="back-to-browse-btn" onclick="startSearch('general')">⬅ رجوع للتصفح</button></div>`;
         document.getElementById('resultsGrid').innerHTML = back + `
             <div class="cat-wrap">
-                <div class="cat-head"><h2>${title}</h2><p>✅ أشّر على ما يهمّك بعلامة الصح ثم أرسل اختيارك لنا — أو فلتر حسب المحافظة والاختصاص. ${catShowSel ? 'المعروض (المحدّد)' : 'العدد'}: ${shown.length}</p></div>
+                <div class="cat-head"><h2>${title}</h2>
+                    <p>${catType === 'doctor' ? 'اختر الأطباء المناسبين لمجمعك في 3 خطوات:' : catType === 'license' ? 'اختر الإجازات المناسبة في 3 خطوات:' : 'اختر ما يناسبك في 3 خطوات:'}</p>
+                    <div class="cat-steps">
+                        <span class="st"><b>1</b> فلتر حسب ${catType === 'doctor' ? 'اختصاصك ومحافظتك' : 'محافظتك واختصاصك'}</span>
+                        <span class="st"><b>2</b> أشّر ✅ على ما يناسبك (أو «تحديد سريع»)</span>
+                        <span class="st"><b>3</b> أرسله للمنصة 💬 أو شاركه 📤 / صدّره 📸</span>
+                    </div>
+                    <p style="margin-top:8px">${catShowSel ? 'المعروض (المحدّد)' : 'المتاح الآن'}: <b>${shown.length}</b></p>
+                </div>
                 <div class="cat-tabs no-print">${tab('clinic', '🏢 المجمعات')}${tab('doctor', '👨‍⚕️ الأطباء')}${tab('license', '📜 الإجازات')}</div>
                 ${licSideRow}
                 <div class="cat-filters no-print">${govSel}${sideSel}${specSel}${catType === 'license' ? '' : classSel}</div>
