@@ -1619,7 +1619,7 @@
                 <button type="button" class="btn btn-latest" id="btnLicenseCatalog" onclick="showCatalog('license')">📑 كتالوج الإجازات</button>
                 <button type="button" class="btn btn-matches" id="btnMatches" onclick="startSearch('match')">🔗 التطابقات المحتملة</button>
                 <button type="button" class="btn btn-latest" id="btnLatest" onclick="showLatestAdditions()">🆕 آخر الإضافات</button>
-                <button type="button" class="btn btn-latest" id="btnPosters" onclick="postersOpen()">🎨 مركز المنشورات</button>
+                <button type="button" class="btn btn-latest" id="btnPosters" onclick="postersOpen()">🎨 منشورات ترويجية جاهزة</button>
             </div>
         </details>
     </div>
@@ -5411,8 +5411,8 @@
                     ${headSteps}
                     <p style="margin-top:8px">${catShowSel ? 'المعروض (المحدّد)' : (catCustom ? 'المقترح' : 'المتاح الآن')}: <b>${shown.length}</b></p>
                 </div>
-                ${catCustom ? '' : `<div class="promo-row no-print">
-                    <span class="promo-lbl">📣 تريد منشوراً جاهزاً للنشر؟</span>
+                ${(catCustom || !ADMIN) ? '' : `<div class="promo-row no-print">
+                    <span class="promo-lbl">📣 تريد منشوراً جاهزاً للنشر؟ (للمدير)</span>
                     <button type="button" class="promo-btn doc" onclick="postersOpen()">🎨 افتح مركز المنشورات (حسب الطلب)</button>
                 </div>`}
                 ${catCustom ? '' : `<div class="cat-tabs no-print">${tab('clinic', '🏢 المجمعات')}${tab('doctor', '👨‍⚕️ الأطباء')}${tab('license', '📜 الإجازات')}</div>`}
