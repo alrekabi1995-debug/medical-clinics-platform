@@ -823,7 +823,22 @@
     .strong-pair { font-weight:900; font-size:15px; color:#111; }
     .strong-loc { font-size:13px; color:#475569; font-weight:700; margin-top:3px; line-height:1.4; }
     .strong-reasons { margin-top:6px; }
-    .strong-wa.whatsapp-btn { flex:0 0 auto; width:auto !important; display:inline-flex !important; align-items:center; align-self:center; padding:10px 14px !important; font-size:14px; white-space:nowrap; margin:0 !important; }
+    .strong-wa.whatsapp-btn { flex:0 0 auto; width:auto !important; display:inline-flex !important; align-items:center; align-self:center; padding:10px 14px !important; font-size:14px; white-space:nowrap; margin:0 !important; cursor:pointer; border:none; }
+    .strong-det { margin:-4px 0 10px; background:#ffffff; border:1.5px solid #fcd34d; border-top:none; border-radius:0 0 12px 12px; padding:12px; }
+    .sd-pair { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    @media (max-width:560px){ .sd-pair{ grid-template-columns:1fr; } }
+    .sd-side { background:#eef2ff; border:1px solid #c7d2fe; border-radius:10px; padding:10px; }
+    .sd-side.cx { background:#ecfdf5; border-color:#a7f3d0; }
+    .sd-ttl { font-weight:900; font-size:14px; color:#15307e; margin-bottom:6px; }
+    .sd-side.cx .sd-ttl { color:#0b5f56; }
+    .sd-line { font-size:13px; color:#334155; font-weight:700; line-height:1.45; margin-top:3px; }
+    .sd-phone { margin-top:8px; font-weight:900; font-size:16px; color:#0b5f56; direction:ltr; text-align:right; }
+    .sd-phone.sd-no { color:#94a3b8; font-weight:700; font-size:13px; direction:rtl; }
+    .sd-priv { font-size:10px; color:#b45309; font-weight:700; }
+    .sd-wa.whatsapp-btn { display:block; width:100%; margin-top:8px; padding:9px !important; font-size:13px; text-align:center; }
+    .sd-plat.whatsapp-btn { display:block; width:100%; margin-top:10px; text-align:center; }
+    .sd-back { display:block; width:100%; margin-top:10px; padding:12px; background:#eef2ff; color:#15307e; border:1.5px solid #c7d2fe; border-radius:10px; font-weight:900; font-size:14px; cursor:pointer; }
+    .sd-back:hover { background:#e0e9ff; }
     .strong-loc { overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
 
     .share-menu {
@@ -5159,14 +5174,58 @@
         p.addEventListener('click', e => { if (e.target === p) strongOppsClose(); });
     }
     function strongOppsClose() { const p = document.getElementById('strongPanel'); if (p) p.style.display = 'none'; }
+    // رابط واتساب مباشر لرقم معيّن (للمدير فقط)
+    function waTo(phone, text) {
+        const n = String(phone || '').replace(/[^0-9]/g, '').replace(/^0/, '964');
+        return 'https://wa.me/' + n + '?text=' + encodeURIComponent(text || '');
+    }
+    let _strongTop = [];
+    // تفاصيل الطبيب والمجمع مع رقم الهاتف (للمدير) عند الضغط على «نسّق»
+    function strongDetailHtml(pr, idx) {
+        const d = pr.doc, v = pr.venue;
+        const gr = doctorGrade(d);
+        const backBtn = '<button type="button" class="sd-back" onclick="strongBack(' + (idx || 0) + ')">⬅ رجوع — أكملتُ التنسيق</button>';
+        // في وضع المدير: نستخدم بطاقة الأوفرلاي الخاصة (اسم + هاتف + إجابات) وأزرار الرسائل الجاهزة للطرفين
+        if (typeof pvCardBlock === 'function' && typeof pvPairButtons === 'function') {
+            const docBlk = '<div class="sd-side"><div class="sd-ttl">👨‍⚕️ الطبيب — تسلسل ' + seqOf(d) + (gr ? ' · ' + gr : '') + '</div>'
+                + '<div class="sd-line"><b>الاختصاص:</b> ' + specsOf(d).join('، ') + '</div>'
+                + '<div class="sd-line"><b>الموقع:</b> ' + adLocation(d, 'doctor') + '</div>' + pvCardBlock(d._id) + '</div>';
+            const cxBlk = '<div class="sd-side cx"><div class="sd-ttl">🏢 المجمع — تسلسل ' + seqOf(v) + (v.isClass ? ' <span class="insta-cls">كلاس</span>' : '') + '</div>'
+                + '<div class="sd-line"><b>الاختصاصات المطلوبة:</b> ' + specsOf(v).join('، ') + '</div>'
+                + '<div class="sd-line"><b>الموقع:</b> ' + adLocation(v, 'clinic') + '</div>' + pvCardBlock(v._id) + '</div>';
+            return '<div class="sd-pair">' + docBlk + cxBlk + '</div>'
+                + pvPairButtons(d._id, v._id)
+                + '<a class="whatsapp-btn sd-plat" target="_blank" href="' + buildWaLink(instantMsg(pr)) + '">📩 تنسيق عام عبر واتساب المنصة</a>'
+                + backBtn;
+        }
+        // غير المدير (لا يُفترض الوصول هنا لأن اللوحة للمدير فقط)
+        return '<div class="sd-pair"><div class="sd-side"><div class="sd-ttl">👨‍⚕️ الطبيب — تسلسل ' + seqOf(d) + '</div><div class="sd-line">' + specsOf(d).join('، ') + (gr ? ' · ' + gr : '') + '</div><div class="sd-line">' + adLocation(d, 'doctor') + '</div></div>'
+            + '<div class="sd-side cx"><div class="sd-ttl">🏢 المجمع — تسلسل ' + seqOf(v) + '</div><div class="sd-line">' + specsOf(v).join('، ') + '</div><div class="sd-line">' + adLocation(v, 'clinic') + '</div></div></div>'
+            + '<a class="whatsapp-btn sd-plat" target="_blank" href="' + buildWaLink(instantMsg(pr)) + '">📩 تنسيق عبر واتساب المنصة</a>'
+            + backBtn;
+    }
+    function strongToggle(i) {
+        const det = document.getElementById('strong-det-' + i);
+        if (!det) return;
+        if (!det.dataset.filled) { det.innerHTML = strongDetailHtml(_strongTop[i], i); det.dataset.filled = '1'; }
+        det.style.display = (det.style.display === 'block') ? 'none' : 'block';
+    }
+    // زر الرجوع بعد إتمام التنسيق: يغلق التفاصيل ويعيدك إلى صف الفرصة في القائمة
+    function strongBack(i) {
+        const det = document.getElementById('strong-det-' + i);
+        if (det) det.style.display = 'none';
+        const item = det && det.closest('.strong-item');
+        if (item) item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
     function strongRow(pr, idx) {
         const d = pr.doc, v = pr.venue;
         const reasons = suggestReasons(d, 'doctor', pr.m, 0);
-        return '<div class="strong-row"><div class="strong-rank">' + (idx + 1) + '</div><div class="strong-main">'
+        return '<div class="strong-item"><div class="strong-row"><div class="strong-rank">' + (idx + 1) + '</div><div class="strong-main">'
             + '<div class="strong-pair"><b>👨‍⚕️ طبيب ' + seqOf(d) + '</b> ↔ <b>🏢 مجمع ' + seqOf(v) + (v.isClass ? ' <span class="insta-cls">كلاس</span>' : '') + '</b></div>'
             + '<div class="strong-loc">' + specsOf(d).slice(0, 2).join('، ') + ' · ' + adLocation(v, 'clinic') + '</div>'
             + (reasons ? '<div class="strong-reasons">' + reasons + '</div>' : '')
-            + '</div><a class="strong-wa whatsapp-btn" target="_blank" href="' + buildWaLink(instantMsg(pr)) + '">💬 نسّق</a></div>';
+            + '</div><button type="button" class="strong-wa whatsapp-btn" onclick="strongToggle(' + idx + ')">💬 نسّق</button></div>'
+            + '<div class="strong-det" id="strong-det-' + idx + '" style="display:none"></div></div>';
     }
     function strongOppsOpen() {
         strongOppsInit();
@@ -5178,6 +5237,7 @@
             if (seenD.has(pr.doc._id) || seenC.has(pr.venue._id)) continue;
             seenD.add(pr.doc._id); seenC.add(pr.venue._id); top.push(pr);
         }
+        _strongTop = top;
         const body = document.getElementById('strongBody');
         body.innerHTML = top.length
             ? '<div style="font-size:13px;color:#64748b;font-weight:700;margin-bottom:10px">أقوى ' + top.length + ' فرص تطابق مرتّبة حسب القوة (أفضلية للمجمعات كلاس) — تابعها قبل أن تضيع.</div>' + top.map((pr, i) => strongRow(pr, i)).join('')
