@@ -797,6 +797,34 @@
         border: 1px dashed #fcd34d; border-radius: 8px; color: #78350f; font-size: 14px; font-weight: 700;
     }
     .amount-box .amount-note { margin-top: 6px; font-size: 12px; font-weight: 500; color: #a16207; }
+    .btn-insta { width:100%; margin:4px 0 12px; background:linear-gradient(135deg,#7c3aed,#2456e6); color:#fff; border:none; font-weight:900; font-size:16px; padding:14px; border-radius:12px; cursor:pointer; box-shadow:0 6px 18px rgba(124,58,237,.3); }
+    .btn-insta:hover { filter:brightness(1.07); }
+    .insta-head-line { text-align:center; font-weight:900; font-size:17px; color:#7c3aed; margin-bottom:12px; }
+    .insta-pair { display:flex; align-items:stretch; gap:8px; }
+    .insta-side { flex:1; background:#eef2ff; border:1.5px solid #c7d2fe; border-radius:14px; padding:12px; }
+    .insta-side.cx { background:#ecfdf5; border-color:#a7f3d0; }
+    .insta-badge { font-weight:900; font-size:14px; color:#15307e; margin-bottom:6px; }
+    .insta-side.cx .insta-badge { color:#0b5f56; }
+    .insta-cls { background:#ffd36b; color:#1b1b1b; border-radius:8px; padding:1px 8px; font-size:12px; }
+    .insta-loc { font-weight:800; font-size:14px; color:#111; line-height:1.35; }
+    .insta-spec { font-size:13px; color:#475569; font-weight:700; margin-top:5px; line-height:1.4; }
+    .insta-sal { margin-top:6px; font-size:12px; font-weight:800; color:#6d28d9; }
+    .insta-link { align-self:center; font-size:22px; }
+    .insta-reasons { margin-top:12px; text-align:center; }
+    .insta-notes { margin-top:8px; background:#dcfce7; color:#14532d; border-radius:10px; padding:8px 12px; font-weight:800; font-size:13px; }
+    .insta-actions { margin-top:14px; display:flex; flex-direction:column; gap:10px; }
+    .insta-reroll { text-align:center; background:#f5f3ff; border-color:#ddd6fe; color:#6d28d9; }
+    .btn-bestfor { width:100%; margin:2px 0 10px; background:linear-gradient(135deg,#0d9488,#2456e6); color:#fff; border:none; font-weight:900; font-size:15px; padding:13px; border-radius:12px; cursor:pointer; box-shadow:0 5px 16px rgba(13,148,136,.28); }
+    .btn-bestfor:hover { filter:brightness(1.07); }
+    #strongFab { bottom:328px !important; background:linear-gradient(135deg,#b45309,#d97706); }
+    .strong-row { display:flex; gap:10px; align-items:stretch; background:#fffbeb; border:1.5px solid #fcd34d; border-radius:12px; padding:10px; margin-bottom:10px; }
+    .strong-rank { flex:0 0 auto; width:30px; height:30px; background:#b45309; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; }
+    .strong-main { flex:1; min-width:0; }
+    .strong-pair { font-weight:900; font-size:15px; color:#111; }
+    .strong-loc { font-size:13px; color:#475569; font-weight:700; margin-top:3px; line-height:1.4; }
+    .strong-reasons { margin-top:6px; }
+    .strong-wa.whatsapp-btn { flex:0 0 auto; width:auto !important; display:inline-flex !important; align-items:center; align-self:center; padding:10px 14px !important; font-size:14px; white-space:nowrap; margin:0 !important; }
+    .strong-loc { overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
 
     .share-menu {
         display: none;
@@ -1629,6 +1657,7 @@
             <button type="button" class="seq-mode-pill" data-mode="doctor" onclick="setSeqMode('doctor')">👨‍⚕️ أطباء فقط</button>
             <button type="button" class="seq-mode-pill" data-mode="clinic" onclick="setSeqMode('clinic')">🏢 مجمعات فقط</button>
         </div>
+        <button type="button" class="btn btn-insta" id="btnInsta" onclick="instantSuggest()">⚡ اقتراح فوري — فرصة مثالية الآن</button>
         <details class="more-tools" open>
             <summary>📋 إجراءات أخرى (الإجازات • كتالوج الإجازات • التطابقات • آخر الإضافات)</summary>
             <div class="secondary-actions">
@@ -1865,8 +1894,13 @@
         "قضاء جلولاء": [34.320, 44.930], "الموصل الجديدة": [36.310, 43.150], "ذي قار قضاء الغراف": [31.380, 46.130],
         "الرفاعي": [31.590, 46.130], "قضاء الفلوجة": [33.349, 43.784], "قضاء القائم": [34.379, 41.132],
         "قضاء شط العرب": [30.480, 47.850], "العمارة - مركز المحافظة": [31.835, 47.147],
+        "التراث": [33.290, 44.335], "حي أور": [33.375, 44.490], "المقدادية": [33.970, 44.930],
+        "القبلة": [30.520, 47.800], "تلعفر": [36.373, 42.449], "قضاء تلعفر": [36.373, 42.449], "حي ميسان": [31.990, 44.310],
         // مناطق مذكورة باسم المحافظة/المدينة نفسها بلا تفصيل حي - توضع في مركز المدينة صراحةً
-        "أربيل": [36.190, 44.009], "البصرة": [30.509, 47.783], "الكوت": [32.512, 45.818], "كربلاء": [32.616, 44.024]
+        "أربيل": [36.190, 44.009], "البصرة": [30.509, 47.783], "الكوت": [32.512, 45.818], "كربلاء": [32.616, 44.024],
+        // الأنبار - مدن وأحياء
+        "الرمادي": [33.420, 43.300], "الفلوجة": [33.349, 43.784], "القائم": [34.379, 41.132],
+        "الخالدية": [33.380, 43.480], "الجزيرة": [33.470, 43.300], "هيت": [33.642, 42.825], "حديثة": [34.070, 42.378]
         // "مناطق أخرى" تُترك بلا إحداثية ثابتة هنا عمداً؛ فهي تُستعمل في كل محافظة، فتسقط تلقائياً
         // إلى مركز محافظتها الصحيح عبر GOV_COORDS بدل نقطة واحدة خاطئة لكل المحافظات
     };
@@ -1921,6 +1955,7 @@
     function placeNorm(s) {
         return String(s || '').toLowerCase().replace(/<[^>]+>/g, ' ').replace(/[\u064B-\u0652\u0640]/g, '')
             .replace(/[أإآٱ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي')
+            .replace(/[\u060C\u061B\u061F\u066B\u066C\u06D4\u00AB\u00BB]/g, ' ')
             .replace(/[^\w\u0600-\u06FF]+/g, ' ').trim().split(/\s+/)
             .map(w => w.replace(/^ال(?=..)/, '')).filter(w => w && !['حي', 'منطقه', 'قرب', 'مستشفي', 'مجمع', 'شارع', 'في', 'بغداد', 'مدينه'].includes(w)).join(' ');
     }
@@ -1973,16 +2008,32 @@
         return !!(a && b && a[0] === b[0] && a[1] === b[1]);
     }
 
-    function distanceKm(itemA, itemB) {
+    // نقاط حقيقية للعنصر: من مناطقه المدرَجة + الأحياء المذكورة في التفاصيل/العنوان،
+    // دون السقوط على مركز المحافظة (الذي يُنتج مسافات وهمية قريبة من الصفر لمناطق غير مدرَجة)
+    function realPointsOf(item, type) {
+        const txt = ' ' + placeNorm(type === 'clinic' ? adLocation(item, 'clinic') : ((item.areas || []).join(' ، ') + ' ' + (item.details || ''))) + ' ';
+        const pts = (item.areas || []).map(a => AREA_COORDS[a]).filter(Boolean);
+        PLACE_INDEX.forEach(p => { if (p.gov === item.gov && !GENERIC_PLACE.has(p.key) && txt.includes(' ' + p.key + ' ')) pts.push(p.c); });
+        if ((item.areas && item.areas[0]) === 'مناطق أخرى') {
+            const t2 = (item.details || '') + ' ' + (item.title || '');
+            const lm = LANDMARK_COORDS.find(([k]) => t2.includes(k));
+            if (lm) pts.push(lm[1]);
+        }
+        return pts;
+    }
+    function distanceKm(itemA, itemB, typeA, typeB) {
+        // المسار الموثوق: مسافة حقيقية بين أقرب نقطتين فعليتين (حي ↔ حي)، وإلا "غير معروفة" (null)
+        if (typeA && typeB) {
+            const pa = realPointsOf(itemA, typeA), pb = realPointsOf(itemB, typeB);
+            if (!pa.length || !pb.length) return null; // لا نخمّن مركز المحافظة كي لا تتصدّر مناطق مجهولة
+            let best = Infinity;
+            pa.forEach(x => pb.forEach(y => { const d = kmBetween(x, y); if (d < best) best = d; }));
+            return best === Infinity ? null : best;
+        }
         const a = itemCoords(itemA), b = itemCoords(itemB);
         if (!a || !b) return null;
         if (a[0] === b[0] && a[1] === b[1]) return 5;
-        const R = 6371;
-        const dLat = (b[0] - a[0]) * Math.PI / 180;
-        const dLng = (b[1] - a[1]) * Math.PI / 180;
-        const lat1 = a[0] * Math.PI / 180, lat2 = b[0] * Math.PI / 180;
-        const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
-        return R * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+        return kmBetween(a, b);
     }
 
     function distanceLabel(km, equal) {
@@ -2008,7 +2059,7 @@
         { added: "2026-08-28", specialty: "جراحة العظام والكسور", gov: "بغداد", areas: ["المنصور"], statusLabel: "🟢 متوفر مساءً", headerLabel: "طبيب تسلسل 5", title: "طبيب أخصائي (جراحة العظام والكسور - بورد) يبحث عن عيادة للعمل - تسلسل 5", details: "يطلب العمل في منطقة المنصور (وتشمل: الإسكان، الطوبجي، الحارثية، علي الصالح)، يبحث عن عيادة مؤثثة وجاهزة للعمل، يمتلك عيادة سابقة في الحارثية، ويمتلك وسيلة نقل ومتاح للاتفاق، أوقات العمل مسائية." },
         { added: "2026-08-29", specialty: "نسائية وتوليد", gov: "بغداد", areas: ["بغداد الجديدة"], statusLabel: "🟢 متوفرة صباحاً", headerLabel: "طبيبة تسلسل 6", title: "طبيبة أخصائية نسائية وتوليد (جراحة نسائية وتوليد - بورد) - تبحث عن عيادة للعمل - تسلسل 6", details: "متوفرة للعمل صباحاً في بغداد الجديدة والمناطق المجاورة، ولديها عمل حكومي في مستشفى قريب. تبحث عن عيادة شغالة، مؤثثة، ومجهزة للعمل (وتشمل: الغدير، زيونة، المشتل، العبيدي، والكمالية). تمتلك خبرة ممتازة وأدواتها الخاصة، ومتاحة للاتفاق على التفاصيل الأخرى." },
         { added: "2026-08-29", specialty: "نسائية وتوليد", gov: "بغداد", areas: ["البلديات"], statusLabel: "🟢 متوفرة صباحاً", headerLabel: "طبيبة تسلسل 7", title: "طبيبة أخصائية نسائية وتوليد (جراحة نسائية وتوليد بورد) - تبحث عن عيادة للعمل - تسلسل 7", details: "طبيبة نسائية وتوليد متفرغة تماماً للعمل، تبحث عن عيادة في منطقة البلديات. لديها خبرة ممتازة وأدواتها الخاصة، وتبحث عن عيادة مؤثثة وجاهزة للعمل في الفترة الصباحية حصراً. متاحة للاتفاق الفوري على كافة التفاصيل." },
-        { added: "2026-08-29", specialty: "أطفال", gov: "بغداد", areas: ["الكرخ"], statusLabel: "🟢 متوفر مساءً", headerLabel: "طبيب تسلسل 8", title: "دكتور أخصائي أطفال - يبحث عن عيادة للعمل - تسلسل 8", details: "متوفر للعمل مساءً، يطلب العمل في حي الجهاد، البياع، الإعلام، التراث، حي العامل، واليرموك (Polyclinic). يبحث عن عيادة مؤثثة ومدفوعة الإيجار. يمتلك وسيلة نقل، ولديه خبرة عمل عيادة لمدة سنة." },
+        { added: "2026-08-29", specialty: "أطفال", gov: "بغداد", areas: ["الكرخ"], statusLabel: "🔴 غير متوفر (محجوز)", headerLabel: "طبيب تسلسل 8", title: "دكتور أخصائي أطفال - يبحث عن عيادة للعمل - تسلسل 8", details: "متوفر للعمل مساءً، يطلب العمل في حي الجهاد، البياع، الإعلام، التراث، حي العامل، واليرموك (Polyclinic). يبحث عن عيادة مؤثثة ومدفوعة الإيجار. يمتلك وسيلة نقل، ولديه خبرة عمل عيادة لمدة سنة." },
         { added: "2026-08-29", specialty: "نسائية وتوليد", gov: "بغداد", areas: ["الخضراء", "العامرية"], statusLabel: "🟢 متوفرة مساءً", headerLabel: "طبيبة تسلسل 9", title: "طبيبة أخصائية نسائية وتوليد (بورد) - تبحث عن عيادة للعمل - تسلسل 9", details: "تبحث عن عمل في الخضراء أو العامرية، تطلب عيادة مؤثثة ومدفوعة الإيجار، ضمن نظام الكشفية." },
         { added: "2026-08-29", specialty: "جراحة أوعية دموية ودوالي", gov: "بغداد", areas: ["الوزيرية"], statusLabel: "🔴 غير متوفر حالياً / محجوز", headerLabel: "طبيبة تسلسل 10", title: "طبيبة أخصائية جراحة أوعية دموية ودوالي (بورد) - تبحث عن عيادة للعمل - تسلسل 10", details: "تطلب العمل في منطقة الوزيرية قرب شارع المغرب، تبحث عن عيادة مؤثثة ومدفوعة الإيجار، ضمن نظام الكشفية." },
         { added: "2026-08-29", specialty: "جلدية", gov: "بغداد", areas: ["الكرخ"], statusLabel: "🟢 متوفرة مساءً", headerLabel: "طبيبة تسلسل 11", title: "طبيبة أخصائية جلدية (بورد) - تبحث عن عيادة للعمل - تسلسل 11", details: "تطلب العمل ضمن منطقة الكرخ، تبحث عن عيادة مؤثثة ومدفوعة الإيجار، ضمن نظام الكشفية." },
@@ -2294,6 +2345,8 @@
         { isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال", "جراحة العظام والكسور"], gov: "بغداد", areas: ["الطارمية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عاجلة", title: "مطلوب أطباء وطبيبات (نسائية وتوليد، أطفال، جراحة العظام والكسور) - مجمع طبي (بغداد - الكرخ - الطارمية) - تسلسل 132", details: "<strong>الموقع:</strong> بغداد - الكرخ، الطارمية، طريق الشط.<br><strong>الحالة الحالية:</strong> مجمع كلاس (B) (من 10 إلى 20 مراجعاً يومياً، عمل مستقر)، العيادة مؤثثة ومدفوعة الإيجار من قِبَل المجمع، وتوجد صيدلية بإشراف صيدلانية.<br><strong>أوقات العمل المطلوبة:</strong> مساءً.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، أطفال، جراحة العظام والكسور (الطلب عاجل)." }
     ,
         { isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال", "باطنية", "جراحة الكلى والمسالك البولية", "جراحة العظام والكسور", "جراحة عامة"], gov: "بغداد", areas: ["جسر ديالى"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء وطبيبات (نسائية وتوليد، أطفال، باطنية، جراحة الكلى والمسالك البولية، جراحة العظام والكسور، جراحة عامة) - مجمع طبي (بغداد - الرصافة - جسر ديالى) - تسلسل 133", details: "<strong>الموقع:</strong> بغداد - الرصافة - جسر ديالى، شارع المصرف، سنتر الأطباء.<br><strong>الحالة الحالية:</strong> مجمع كلاس (Z) جديد كلياً (أقل من 5 مراجعين يومياً)، فتح جديد، توجد عيادات مؤثثة ومدفوعة الإيجار مع سكرتير خاص وصيدلية بإشراف صيدلاني.<br><strong>أوقات العمل المطلوبة:</strong> مساءً — كل أيام الأسبوع عدا الجمعة.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، أطفال، باطنية، جراحة الكلى والمسالك البولية، جراحة العظام والكسور، جراحة عامة (يُشترط وجود الاختصاص)." }
+    ,
+        { isClass: true, license: "want", licNote: "إيجار الإجازة فقط (لترخيص المركز)", hours: "أي وقت", specialties: ["طب أسرة"], gov: "بغداد", areas: ["الطارمية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب إجازة طب أسرة - مجمع طبي (بغداد - الكرخ - الطارمية) - تسلسل 134", details: "<strong>الموقع:</strong> بغداد - الكرخ - الطارمية.<br><strong>الحالة الحالية:</strong> مركز شغّال تصنيف كلاس (C) (من 5 إلى 10 مراجعين يومياً) — طلب عاجل.<br><strong>نوع الطلب:</strong> إيجار إجازة طب أسرة فقط لترخيص المركز (لا يُشترط التواجد؛ درجة الطبيب لا تهم لأن المركز شغّال).<br><strong>أوقات العمل:</strong> أي وقت.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>المطلوب:</strong> إجازة مزاولة طب أسرة." }
     ];
 
     const ALL_MODE_BTNS = ['btnGeneral', 'btnDoctor', 'btnHospital', 'btnHospDoc', 'btnLatest', 'btnMatches', 'btnLicense', 'btnAllDoctors', 'btnAllClinics', 'btnCatalog', 'btnLicenseCatalog', 'btnDoctorCatalog'];
@@ -2583,7 +2636,7 @@
         lastListHash = '';
         lastMatchHash = '';
         latestFilter = 'all';
-        quickFilter = { time: 'all', cls: false, fresh: false };
+        quickFilter = { time: 'all', cls: false, fresh: false, salary: 'all' };
         updateListButton();
         updateAdminSeqInfo(mode);
         renderLicTabs();
@@ -3439,7 +3492,7 @@
                 const sc = sidesCompare(item, c);
                 const sameGroup = sameGov && !areaOverlap && sc.same;
                 const sideDiff = sameGov && !areaOverlap && !sameGroup && sc.known;
-                const km = distanceKm(item, c);
+                const km = distanceKm(item, c, 'doctor', 'clinic');
                 const eqPts = pointsEqual(item, c);
                 const lic = !!(item.license === 'offer' && c.license === 'want' && shared.some(s => LICENSE_SPECS.includes(s)));
                 results.push({ other: c, otherType: 'clinic', shared, sameGov, areaOverlap, sameGroup, sideDiff, timeUnknown: tc.unknown, km, eqPts, tier, lic });
@@ -3464,7 +3517,7 @@
                 const sc = sidesCompare(item, d);
                 const sameGroup = sameGov && !areaOverlap && sc.same;
                 const sideDiff = sameGov && !areaOverlap && !sameGroup && sc.known;
-                const km = distanceKm(item, d);
+                const km = distanceKm(item, d, 'clinic', 'doctor');
                 const eqPts = pointsEqual(item, d);
                 const lic = !!(item.license === 'want' && d.license === 'offer' && shared.some(s => LICENSE_SPECS.includes(s)));
                 results.push({ other: d, otherType: 'doctor', shared, sameGov, areaOverlap, sameGroup, sideDiff, timeUnknown: tc.unknown, km, eqPts, tier, lic });
@@ -3494,9 +3547,12 @@
                 if (rb.fee !== ra.fee) return rb.fee - ra.fee;
                 if (rb.working !== ra.working) return rb.working - ra.working;
             } else {
-                if (a.km !== null && b.km !== null) return a.km - b.km;
-                if (a.km !== null) return -1;
-                if (b.km !== null) return 1;
+                if (a.km !== null && b.km !== null && a.km !== b.km) return a.km - b.km;
+                if (a.km !== null && b.km === null) return -1;
+                if (a.km === null && b.km !== null) return 1;
+                // عند تساوي/غياب المسافة: فضّل الطبيب الأعلى درجة (استشاري/بورد) للمجمع
+                const ga = gradeRank(a.other), gb = gradeRank(b.other);
+                if (ga !== gb) return gb - ga;
             }
             return (b.areaOverlap - a.areaOverlap) || (b.sameGroup - a.sameGroup) || (b.sameGov - a.sameGov) || (a.timeUnknown - b.timeUnknown);
         });
@@ -4008,11 +4064,11 @@
             // فصل سلس: عنوان قسم مميز فوق كل نوع عند وجود الاثنين معاً
             if (doc) {
                 if (doc && clinic) body += `<div class="seq-result-group doctor-group">👨‍⚕️ نتيجة الأطباء</div>`;
-                body += `<div class="card active-match">${cardInner(doc, 'doctor', { typeTag: true })}</div>`;
+                body += `<div class="card active-match">${cardInner(doc, 'doctor', { typeTag: true })}</div>` + bestForBtn(doc, 'doctor');
             }
             if (clinic) {
                 if (doc && clinic) body += `<div class="seq-result-group clinic-group">🏢 نتيجة المجمعات</div>`;
-                body += `<div class="card active-match">${cardInner(clinic, 'clinic', { typeTag: true })}</div>`;
+                body += `<div class="card active-match">${cardInner(clinic, 'clinic', { typeTag: true })}</div>` + bestForBtn(clinic, 'clinic');
             }
         }
 
@@ -4991,6 +5047,144 @@
         catSel = new Set(); catShowSel = false; catLicSide = 'all';
         renderCatalog();
     }
+    // ================= اقتراحات فورية (فرصة مثالية عشوائية بشروط) =================
+    function _classQuality(item) {
+        const t = (item.details || '') + ' ' + (item.title || '');
+        if (/كلاس\s*\(?\s*A/i.test(t)) return 10;
+        if (/كلاس\s*\(?\s*B/i.test(t)) return 6;
+        if (/كلاس\s*\(?\s*C/i.test(t)) return 2;
+        if (/كلاس\s*\(?\s*Z/i.test(t)) return 1;
+        return 0;
+    }
+    function instantSuggestPairs() {
+        const pairs = [];
+        GENERAL_CLINICS_DATA.forEach(doc => {
+            if (seqNum(doc) === null || !isAvailable(doc)) return;
+            const ms = findMatches(doc, 'doctor', {}).filter(m => m.tier === 0 && m.otherType === 'clinic');
+            ms.forEach(m => {
+                const venue = m.other;
+                if (seqNum(venue) === null || !isAvailable(venue)) return;
+                let score = suggestScore(doc, 'doctor', m);
+                if (venue.isClass) score += 15;            // أفضلية قوية للمجمع كلاس
+                score += _classQuality(venue);              // A أعلى من B أعلى من C…
+                const gr = doctorGrade(doc);
+                if (gr && /استشاري|بورد/.test(gr)) score += 6;
+                if (matchConflicts(doc, venue).length) return; // الفرصة المثالية بلا تعارض
+                pairs.push({ doc, venue, m, score });
+            });
+        });
+        pairs.sort((a, b) => b.score - a.score);
+        return pairs;
+    }
+    let _instaPool = [], _instaLast = null;
+    function instantSuggest() {
+        instaInit();
+        _instaPool = instantSuggestPairs();
+        document.getElementById('instaPanel').style.display = 'flex';
+        instantReroll();
+    }
+    function instantReroll() {
+        if (!_instaPool || !_instaPool.length) _instaPool = instantSuggestPairs();
+        if (!_instaPool.length) { const b = document.getElementById('instaBody'); if (b) b.innerHTML = '<div style="padding:20px;text-align:center;font-weight:800;color:#64748b">لا توجد فرص مطابقة مثالية حالياً.</div>'; return; }
+        const K = Math.min(25, _instaPool.length);
+        let idx = Math.floor(Math.random() * K);
+        if (_instaLast && K > 1 && _instaPool[idx] && _instaPool[idx].doc._id === _instaLast.d && _instaPool[idx].venue._id === _instaLast.v) idx = (idx + 1) % K;
+        const pick = _instaPool[idx];
+        _instaLast = { d: pick.doc._id, v: pick.venue._id };
+        renderInstant(pick);
+    }
+    function instantMsg(pick) {
+        const d = pick.doc, v = pick.venue;
+        const dSpec = specsOf(d).slice(0, 3).join('، ');
+        const gr = doctorGrade(d) ? ' - ' + doctorGrade(d) : '';
+        return ['مرحباً، لديّ فرصة تطابق مميّزة عبر «منصة عيادات طبية»:',
+            '',
+            '👨‍⚕️ الطبيب: تسلسل ' + seqOf(d) + ' — ' + adLocation(d, 'doctor') + (dSpec ? ' (' + dSpec + gr + ')' : ''),
+            '🏢 المجمع: تسلسل ' + seqOf(v) + ' — ' + adLocation(v, 'clinic') + (v.isClass ? ' (مجمع كلاس)' : ''),
+            '',
+            'أرجو التنسيق بينهما. شكراً لكم.'].join('\n');
+    }
+    function renderInstant(pick) {
+        const d = pick.doc, v = pick.venue;
+        const reasons = suggestReasons(d, 'doctor', pick.m, 0);
+        const notes = (typeof matchGoodNotes === 'function') ? matchGoodNotes(d, v) : [];
+        const dSpec = specsOf(d).join('، ');
+        const vSpec = specsOf(v).join('، ');
+        const gr = doctorGrade(d);
+        const miniDoc = '<div class="insta-side"><div class="insta-badge">👨‍⚕️ طبيب — تسلسل ' + seqOf(d) + '</div>'
+            + '<div class="insta-loc">' + adLocation(d, 'doctor') + '</div>'
+            + '<div class="insta-spec">' + dSpec + (gr ? ' · ' + gr : '') + '</div>'
+            + (salaryPref(d) ? '<div class="insta-sal">💵 ' + salaryPref(d) + '</div>' : '') + '</div>';
+        const miniCx = '<div class="insta-side cx"><div class="insta-badge">🏢 مجمع — تسلسل ' + seqOf(v) + (v.isClass ? ' <span class="insta-cls">كلاس</span>' : '') + '</div>'
+            + '<div class="insta-loc">' + adLocation(v, 'clinic') + '</div>'
+            + '<div class="insta-spec">' + vSpec + '</div>'
+            + (salaryPref(v) ? '<div class="insta-sal">💵 ' + salaryPref(v) + '</div>' : '') + '</div>';
+        const waMsg = instantMsg(pick);
+        const body = document.getElementById('instaBody');
+        body.innerHTML = '<div class="insta-head-line">⭐ فرصة مثالية باحتمال تطابق عالٍ</div>'
+            + '<div class="insta-pair">' + miniDoc + '<div class="insta-link">🔗</div>' + miniCx + '</div>'
+            + (reasons ? '<div class="insta-reasons">' + reasons + '</div>' : '')
+            + (notes && notes.length ? '<div class="insta-notes">✅ ' + notes.join(' · ') + '</div>' : '')
+            + '<div class="insta-actions">'
+            + '<button type="button" class="pc-btn insta-reroll" onclick="instantReroll()">🔄 اقتراح آخر</button>'
+            + '<a class="whatsapp-btn" target="_blank" href="' + buildWaLink(waMsg) + '">💬 نسّق عبر واتساب المنصة</a>'
+            + '</div>';
+    }
+    function instaInit() {
+        if (document.getElementById('instaPanel')) return;
+        const p = document.createElement('div');
+        p.id = 'instaPanel'; p.className = 'pc-panel';
+        p.innerHTML = '<div class="pc-card"><div class="pc-head"><span>⚡ اقتراحات فورية</span><button type="button" class="pc-x" onclick="instaClose()">✖</button></div>'
+            + '<div class="pc-body" id="instaBody"></div></div>';
+        document.body.appendChild(p);
+        p.addEventListener('click', e => { if (e.target === p) instaClose(); });
+    }
+    function instaClose() { const p = document.getElementById('instaPanel'); if (p) p.style.display = 'none'; }
+
+    // زر «أفضل المجمعات لهذا الطبيب / أفضل الأطباء لهذا المجمع» عند البحث بالتسلسل
+    function bestForBtn(item, type) {
+        if (seqNum(item) === null) return '';
+        if (item.statusLabel && item.statusLabel.includes('غير متوفر')) return '';
+        const label = type === 'doctor' ? '⚡ أفضل المجمعات المناسبة لهذا الطبيب' : '⚡ أفضل الأطباء المناسبين لهذا المجمع';
+        return `<div style="grid-column:1/-1"><button type="button" class="btn-bestfor" onclick="showSuggestedCatalog('${item._id}')">${label}</button></div>`;
+    }
+
+    // ===== لوحة «أقوى الفرص» للمدير =====
+    function strongOppsInit() {
+        if (document.getElementById('strongPanel')) return;
+        const p = document.createElement('div');
+        p.id = 'strongPanel'; p.className = 'pc-panel';
+        p.innerHTML = '<div class="pc-card"><div class="pc-head"><span>🏆 أقوى الفرص — تابعها الآن</span><button type="button" class="pc-x" onclick="strongOppsClose()">✖</button></div><div class="pc-body" id="strongBody"></div></div>';
+        document.body.appendChild(p);
+        p.addEventListener('click', e => { if (e.target === p) strongOppsClose(); });
+    }
+    function strongOppsClose() { const p = document.getElementById('strongPanel'); if (p) p.style.display = 'none'; }
+    function strongRow(pr, idx) {
+        const d = pr.doc, v = pr.venue;
+        const reasons = suggestReasons(d, 'doctor', pr.m, 0);
+        return '<div class="strong-row"><div class="strong-rank">' + (idx + 1) + '</div><div class="strong-main">'
+            + '<div class="strong-pair"><b>👨‍⚕️ طبيب ' + seqOf(d) + '</b> ↔ <b>🏢 مجمع ' + seqOf(v) + (v.isClass ? ' <span class="insta-cls">كلاس</span>' : '') + '</b></div>'
+            + '<div class="strong-loc">' + specsOf(d).slice(0, 2).join('، ') + ' · ' + adLocation(v, 'clinic') + '</div>'
+            + (reasons ? '<div class="strong-reasons">' + reasons + '</div>' : '')
+            + '</div><a class="strong-wa whatsapp-btn" target="_blank" href="' + buildWaLink(instantMsg(pr)) + '">💬 نسّق</a></div>';
+    }
+    function strongOppsOpen() {
+        strongOppsInit();
+        const pairs = instantSuggestPairs();
+        // تنويع: لا نكرّر نفس الطبيب أو المجمع أكثر من مرة، وأفضل 12 فرصة
+        const seenD = new Set(), seenC = new Set(), top = [];
+        for (const pr of pairs) {
+            if (top.length >= 12) break;
+            if (seenD.has(pr.doc._id) || seenC.has(pr.venue._id)) continue;
+            seenD.add(pr.doc._id); seenC.add(pr.venue._id); top.push(pr);
+        }
+        const body = document.getElementById('strongBody');
+        body.innerHTML = top.length
+            ? '<div style="font-size:13px;color:#64748b;font-weight:700;margin-bottom:10px">أقوى ' + top.length + ' فرص تطابق مرتّبة حسب القوة (أفضلية للمجمعات كلاس) — تابعها قبل أن تضيع.</div>' + top.map((pr, i) => strongRow(pr, i)).join('')
+            : '<div style="padding:20px;text-align:center;color:#64748b;font-weight:800">لا توجد فرص قوية حالياً.</div>';
+        document.getElementById('strongPanel').style.display = 'flex';
+    }
+
     function catToggleShowSel() { catShowSel = !catShowSel; renderCatalog(); }
     function catSet(which, val) { if (which === 'gov') catGov = val; else if (which === 'spec') catSpec = val; else if (which === 'side') catSide = val; else if (which === 'class') catClass = val; else if (which === 'licside') { catLicSide = val; catSel = new Set(); catShowSel = false; } renderCatalog(); }
     // نوع العنصر داخل الكتالوج (في تبويب الإجازات يُحسب لكل عنصر حسب جهته)
@@ -5012,6 +5206,12 @@
         const title = (item.title || '') + ' ' + (item.headerLabel || '');
         const full = title + ' ' + (Array.isArray(item.details) ? item.details.join(' ') : (item.details || ''));
         return scan(title) || scan(full);
+    }
+    // رتبة عددية للدرجة (الأعلى أفضل) — تُستخدم كمرجّح عند تساوي المسافة في اقتراح الأطباء للمجمع
+    function gradeRank(item) {
+        const g = doctorGrade(item);
+        const order = { 'استشاري': 8, 'بورد': 7, 'ماجستير': 6, 'دبلوم': 5, 'أخصائي': 4, 'مقيم أقدم': 3, 'مقيم': 2, 'ممارس عام': 1 };
+        return order[g] || 0;
     }
     function printCatalog() { window.print(); }
     function catPick(seq, on) { if (on) catSel.add(seq); else catSel.delete(seq); const n = document.getElementById('catSelCount'); if (n) n.textContent = catSel.size; }
@@ -5655,7 +5855,7 @@
     }
 
     // ================= فلاتر سريعة فوق النتائج =================
-    let quickFilter = { time: 'all', cls: false, fresh: false };
+    let quickFilter = { time: 'all', cls: false, fresh: false, salary: 'all' };
 
     function timeMatchesFilter(item) {
         if (quickFilter.time === 'all') return true;
@@ -5669,6 +5869,9 @@
     function applyQuickFilters(list) {
         return list.filter(i => {
             if (!timeMatchesFilter(i)) return false;
+            // فلتر نظام الراتب: «مقطوع» يُظهر المجمعات/الأطباء المتوافقين مع المقطوع (مقطوع أو حسب الاتفاق)
+            if (quickFilter.salary === 'fixed' && !salarySet(i).fixed) return false;
+            if (quickFilter.salary === 'visit' && !salarySet(i).visit) return false;
             if (!isDoctorMode(selectedState.mode)) {
                 if (quickFilter.cls && !i.isClass) return false;
                 if (quickFilter.fresh && !/جديد/.test(i.details || '')) return false;
@@ -5677,7 +5880,7 @@
         });
     }
     function setQuickFilter(key, val) {
-        if (key === 'time') quickFilter.time = val; else quickFilter[key] = !quickFilter[key];
+        if (key === 'time' || key === 'salary') quickFilter[key] = val; else quickFilter[key] = !quickFilter[key];
         renderResults();
     }
     function quickFiltersHtml(total, shown) {
@@ -5690,6 +5893,9 @@
             html += chip(quickFilter.cls, 'كلاس فقط', "setQuickFilter('cls')") +
                     chip(quickFilter.fresh, 'مجمع جديد', "setQuickFilter('fresh')");
         }
+        const sal = quickFilter.salary;
+        html += chip(sal === 'fixed', '💵 راتب مقطوع', "setQuickFilter('salary', quickFilter.salary==='fixed'?'all':'fixed')") +
+                chip(sal === 'visit', '🧾 نظام الكشفية', "setQuickFilter('salary', quickFilter.salary==='visit'?'all':'visit')");
         return `<div class="quick-filters" style="grid-column: 1 / -1;">${html}<span class="qf-count">${shown === total ? total + ' نتيجة' : shown + ' من ' + total}</span></div>`;
     }
 
@@ -6169,6 +6375,12 @@
             document.body.appendChild(fab);
             syncNegMeta();          // يسجّل تاريخ بدء للتفاوضات القديمة التي ليس لها تاريخ (يبدأ العد من اليوم)
             updateNegAlertUi();
+            const sf = document.createElement('button');
+            sf.type = 'button'; sf.className = 'admin-fab strong-fab'; sf.id = 'strongFab';
+            sf.textContent = '🏆 أقوى الفرص';
+            sf.onclick = () => strongOppsOpen();
+            document.body.appendChild(sf);
+            setTimeout(() => { try { strongOppsOpen(); } catch (e) {} }, 900); // فتح تلقائي مرة عند دخول المدير
         }
         handleHash();
         window.addEventListener('hashchange', handleHash);
