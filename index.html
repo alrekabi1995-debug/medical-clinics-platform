@@ -837,6 +837,10 @@
     .sd-priv { font-size:10px; color:#b45309; font-weight:700; }
     .sd-wa.whatsapp-btn { display:block; width:100%; margin-top:8px; padding:9px !important; font-size:13px; text-align:center; }
     .sd-plat.whatsapp-btn { display:block; width:100%; margin-top:10px; text-align:center; }
+    .sd-map { margin-top:10px; background:#f1f5f9; border:1px solid #cbd5e1; border-radius:10px; padding:10px 12px; font-size:13px; font-weight:800; color:#334155; display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+    .sd-map b { color:#0b5f56; }
+    .sd-maplink { background:#2456e6; color:#fff; border-radius:8px; padding:6px 12px; font-weight:800; text-decoration:none; }
+    .sd-maplink:hover { background:#1d4ed8; }
     .sd-back { display:block; width:100%; margin-top:10px; padding:12px; background:#eef2ff; color:#15307e; border:1.5px solid #c7d2fe; border-radius:10px; font-weight:900; font-size:14px; cursor:pointer; }
     .sd-back:hover { background:#e0e9ff; }
     .strong-loc { overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
@@ -5181,6 +5185,22 @@
     }
     let _strongTop = [];
     // تفاصيل الطبيب والمجمع مع رقم الهاتف (للمدير) عند الضغط على «نسّق»
+    // سطر المسافة بين الطبيب والمجمع + رابط خريطة المسار (أقرب نقطتين فعليتين)
+    function pairMapHtml(pr) {
+        const d = pr.doc, v = pr.venue;
+        const km = (pr.m && pr.m.km != null) ? pr.m.km : null;
+        const kmTxt = km == null ? 'غير معروفة (منطقة عامة بلا حي محدد)' : (km < 1 ? 'أقل من كيلومتر' : '≈ ' + Math.round(km) + ' كم');
+        let link = '';
+        const dp = realPointsOf(d, 'doctor'), vp = realPointsOf(v, 'clinic');
+        if (dp.length && vp.length) {
+            let best = Infinity, a = dp[0], bpt = vp[0];
+            dp.forEach(x => vp.forEach(y => { const dd = kmBetween(x, y); if (dd < best) { best = dd; a = x; bpt = y; } }));
+            link = 'https://www.google.com/maps/dir/?api=1&origin=' + a[0] + ',' + a[1] + '&destination=' + bpt[0] + ',' + bpt[1];
+        }
+        return '<div class="sd-map">📏 المسافة بين الطبيب والمجمع: <b>' + kmTxt + '</b>'
+            + (link ? '<a class="sd-maplink" target="_blank" href="' + link + '">🗺️ افتح الخريطة والمسار</a>' : '')
+            + '</div>';
+    }
     function strongDetailHtml(pr, idx) {
         const d = pr.doc, v = pr.venue;
         const gr = doctorGrade(d);
@@ -5194,6 +5214,7 @@
                 + '<div class="sd-line"><b>الاختصاصات المطلوبة:</b> ' + specsOf(v).join('، ') + '</div>'
                 + '<div class="sd-line"><b>الموقع:</b> ' + adLocation(v, 'clinic') + '</div>' + pvCardBlock(v._id) + '</div>';
             return '<div class="sd-pair">' + docBlk + cxBlk + '</div>'
+                + pairMapHtml(pr)
                 + pvPairButtons(d._id, v._id)
                 + '<a class="whatsapp-btn sd-plat" target="_blank" href="' + buildWaLink(instantMsg(pr)) + '">📩 تنسيق عام عبر واتساب المنصة</a>'
                 + backBtn;
@@ -5201,6 +5222,7 @@
         // غير المدير (لا يُفترض الوصول هنا لأن اللوحة للمدير فقط)
         return '<div class="sd-pair"><div class="sd-side"><div class="sd-ttl">👨‍⚕️ الطبيب — تسلسل ' + seqOf(d) + '</div><div class="sd-line">' + specsOf(d).join('، ') + (gr ? ' · ' + gr : '') + '</div><div class="sd-line">' + adLocation(d, 'doctor') + '</div></div>'
             + '<div class="sd-side cx"><div class="sd-ttl">🏢 المجمع — تسلسل ' + seqOf(v) + '</div><div class="sd-line">' + specsOf(v).join('، ') + '</div><div class="sd-line">' + adLocation(v, 'clinic') + '</div></div></div>'
+            + pairMapHtml(pr)
             + '<a class="whatsapp-btn sd-plat" target="_blank" href="' + buildWaLink(instantMsg(pr)) + '">📩 تنسيق عبر واتساب المنصة</a>'
             + backBtn;
     }
