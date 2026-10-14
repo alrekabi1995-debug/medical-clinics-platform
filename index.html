@@ -5222,7 +5222,10 @@
             const warnLine = vf.length ? `<div style="margin-top:9px;display:inline-block;background:#ffe3e3;color:#9b1c1c;font-weight:900;font-size:${specF - 3}px;line-height:1.4;padding:5px 12px;border-radius:999px">⚠️ ${esc(vf.join(' · '))}</div>`
                 : df.length ? `<div style="margin-top:8px;display:inline-block;background:#dcfce7;color:#14532d;font-weight:900;font-size:${specF - 3}px;line-height:1.4;padding:5px 12px;border-radius:999px">💰 ${esc(df.join(' · '))}</div>` : '';
             // الصورة المركّزة على الاختصاص: نعرض العنوان فقط (بلا قائمة الاختصاصات الأخرى)
-            const specLine = catExportFocus ? '' : `<div style="margin-top:8px;font-weight:800;font-size:${sf}px;line-height:1.4;color:${P.spec}">${esc(show)}${doc && doctorGrade(i) ? ' (' + esc(doctorGrade(i)) + ')' : ''}</div>`;
+            const prettySpecs = specs.join('  •  ');
+            const specLine = catExportFocus ? ''
+                : doc ? `<div style="margin-top:8px;font-weight:800;font-size:${sf}px;line-height:1.4;color:${P.spec}">${esc(show)}${doctorGrade(i) ? ' (' + esc(doctorGrade(i)) + ')' : ''}</div>`
+                : `<div style="margin-top:10px;font-weight:800;font-size:${sf - 2}px;line-height:1.5;color:#eafff9">مطلوب أطباء وطبيبات للاختصاصات التالية:</div><div style="margin-top:6px;font-weight:900;font-size:${sf}px;line-height:1.6;color:${P.spec}">${esc(prettySpecs)}</div>`;
             return `<div style="background:${bg};border-radius:16px;padding:${pt}px 18px ${doc ? 16 : 20}px;color:#ffffff;text-align:center;position:relative;min-height:${catExportFocus ? 96 : mh}px;box-sizing:border-box">
                 ${seqBadge}
                 <div style="font-weight:900;font-size:${af}px;line-height:1.12;color:#ffffff">${esc(adLocation(i, it2))}</div>${hospLine}
@@ -5240,7 +5243,7 @@
             : catCustom ? (catCustomBaseType === 'doctor' ? 'مجمعات مقترحة لك' : 'أطباء مقترحون لك')
             : catType === 'license' ? licTitle : catType === 'doctor' ? 'أطباء يبحثون عن عيادات طبية' : 'مطلوب أطباء';
         const footTitle = catCustom ? 'للتنسيق أرسل رقم التسلسل'
-            : catType === 'license' ? 'لطلب أو عرض الإجازة' : catType === 'doctor' ? 'تبحث عن طبيب لعيادتك؟' : 'لدينا عرض مميّز للأطباء';
+            : catType === 'license' ? 'لطلب أو عرض الإجازة' : catType === 'doctor' ? 'تبحث عن طبيب لعيادتك؟' : 'عروض مميّزة للأطباء ذوي السمعة والمشهورين في المنطقة';
         const html = `<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;background:${P.bg};font-family:Tahoma,Arial,sans-serif;padding:36px 40px;box-sizing:border-box;direction:rtl">
             <div style="text-align:center;font-weight:900;font-size:86px;color:${P.title};line-height:1;letter-spacing:-2px">${posterTitle}</div>
             <div style="text-align:center;font-weight:800;font-size:29px;color:${P.sub};margin-top:10px">منصة عيادات طبية — اطلب الفرصة برقم التسلسل</div>
@@ -5292,6 +5295,12 @@
             sub = 'نوصلك بمجمعات تبحث عن إجازتك بالاختصاص المطلوب';
             points = ['اختصاصات مطلوبة: ' + licList, 'مجمعات جاهزة تبحث عن إجازة', 'تنسيق سريع وبعائد مناسب لك', 'خصوصية تامة — رقمك لا يظهر للعامة'];
             stat = 'مجمعات تطلب إجازات الآن';
+        } else if (kind === 'vip-offer') {
+            P = blue;
+            title = 'لدينا عرض مميّز للأطباء';
+            sub = 'طبيب معروف في منطقتك وتبحث عن موقع أفضل لعيادتك؟ ننقلك إلى مجمع أرقى داخل منطقتك نفسها';
+            points = ['موقع أرقى (كلاس A / B) داخل منطقتك — تحتفظ بجمهورك ومراجعيك', 'عيادة جاهزة ومؤثثة وتغطية إيجار خلال فترة التأسيس', 'نظام مالي مرن: راتب مقطوع أو كشفية أو حسب الاتفاق', 'دعم إعلامي للانتقال وخصوصية تامة — رقمك لا يظهر للعامة'];
+            stat = 'عروض مميّزة للأطباء أصحاب السمعة';
         } else {
             const forDoc = kind === 'doctor';
             P = forDoc ? blue : teal;
@@ -5307,7 +5316,9 @@
             : kind === 'lic-want' ? 'سجّل طلب الإجازة الآن'
             : kind === 'lic-offer' ? 'اعرض إجازتك الآن'
             : kind === 'doctors-available' ? 'اطلب طبيبك الآن'
+            : kind === 'vip-offer' ? 'راسلنا لطلب العيادة الآن'
             : 'سجّل مجمعك الآن';
+        const ctaSub = kind === 'vip-offer' ? 'املأ الاستمارة لطلب العيادة الآن' : 'راسلنا على واتساب أو زر الموقع';
         const logo = '<svg viewBox="0 0 512 512" width="58" height="58" xmlns="http://www.w3.org/2000/svg"><path d="M256 104c-78 0-141 60-141 138 0 96 120 166 141 166s141-70 141-166c0-78-63-138-141-138z" fill="#ffffff"/><path d="M170 238h34l16-34 28 72 20-46 14 26h50" fill="none" stroke="' + P.chip + '" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/></svg>';
         const story = !!promoStory;
         const tF = story ? 92 : 78, sF = story ? 38 : 33, cF = story ? 36 : 31, iF = story ? 40 : 36, gap = story ? 20 : 16;
@@ -5320,7 +5331,7 @@
             + '<div style="background:' + P.accent + ';color:#1b1b1b;font-weight:900;font-size:' + cF + 'px;text-align:center;border-radius:16px;padding:16px 28px;margin:' + (story ? 36 : 28) + 'px auto 0;width:fit-content">📊 ' + esc(stat) + '</div>'
             + '<div style="display:grid;grid-template-columns:' + (story ? '1fr' : '1fr 1fr') + ';gap:' + gap + 'px;margin-top:' + (story ? 36 : 30) + 'px">' + chips + '</div>';
         const footer = '<div style="margin-top:' + (story ? 44 : 34) + 'px;background:#ffffff;border-radius:20px;padding:' + (story ? '32px 34px' : '26px 30px') + ';display:flex;align-items:center;justify-content:space-between;gap:18px">'
-            + '<div style="text-align:right"><div style="font-weight:900;font-size:' + (story ? 40 : 34) + 'px;color:' + P.chip + '">' + ctaTitle + '</div><div style="font-size:' + (story ? 28 : 24) + 'px;color:#555;font-weight:700">راسلنا على واتساب أو زر الموقع</div></div>'
+            + '<div style="text-align:right"><div style="font-weight:900;font-size:' + (story ? 40 : 34) + 'px;color:' + P.chip + '">' + ctaTitle + '</div><div style="font-size:' + (story ? 28 : 24) + 'px;color:#555;font-weight:700">' + ctaSub + '</div></div>'
             + '<div style="background:' + P.chip + ';color:#fff;font-weight:900;font-size:' + (story ? 44 : 40) + 'px;padding:16px 26px;border-radius:14px;direction:ltr;white-space:nowrap">' + WHATSAPP_DISPLAY + '</div></div>'
             + '<div style="text-align:center;font-size:' + (story ? 30 : 26) + 'px;color:' + P.sub + ';margin-top:' + (story ? 26 : 20) + 'px;font-weight:700">🌐 medical-clinics-platform.vercel.app</div>';
         let html;
@@ -5350,6 +5361,9 @@
         } else if (kind === 'lic-offer') {
             lines = ['📜 طبيب يملك إجازة ويريد عرضها؟', '', 'منصة «عيادات طبية» توصلك بمجمعات تبحث عن إجازتك بالاختصاص المطلوب.', '✅ مجمعات جاهزة وتنسيق سريع بعائد مناسب.', '✅ خصوصية تامة — رقمك لا يظهر للعامة.'];
             tags = '#عرض_اجازة #اجازة_طبية #اطباء_العراق #منصة_عيادات_طبية #العراق';
+        } else if (kind === 'vip-offer') {
+            lines = ['⭐ عرض مميّز للأطباء أصحاب السمعة في مناطقهم:', '', 'طبيب معروف في منطقتك وتبحث عن موقع أفضل لعيادتك؟ ننقلك إلى مجمع أرقى داخل منطقتك نفسها — مع الحفاظ على جمهورك ومراجعيك.', '✅ عيادة جاهزة ومؤثثة وتغطية إيجار خلال فترة التأسيس.', '✅ نظام مالي مرن ودعم إعلامي للانتقال.', '✅ خصوصية تامة — رقمك لا يظهر للعامة.', '', '📩 راسلنا واملأ الاستمارة لطلب العيادة الآن.'];
+            tags = '#عرض_مميز #اطباء_مميزون #نقل_عيادة #فرص_عمل_طبية #منصة_عيادات_طبية #العراق';
         } else {
             const forDoc = kind === 'doctor';
             lines = forDoc
@@ -6110,6 +6124,7 @@
             + '<button type="button" class="pc-fmt" data-fmt="story" onclick="postersFormat(true)">📱 ستوري (عمودي)</button></div>'
             + '<div class="pc-grp">👨‍⚕️ للأطباء</div>'
             + '<div class="pc-row">' + btn('doctor', '🩺 جذب الأطباء (طبيب يبحث عن عيادة؟)') + btn('venues-available', '📣 فرص عمل متاحة للأطباء الآن') + '</div>'
+            + '<div class="pc-row">' + btn('vip-offer', '⭐ عرض مميّز للأطباء المعروفين (نقل العيادة داخل المنطقة)') + '</div>'
             + '<div class="pc-grp">🏢 للمجمعات والمستشفيات</div>'
             + '<div class="pc-row">' + btn('clinic', '🏥 جذب المجمعات (يبحث عن أطباء؟)') + btn('doctors-available', '📣 أطباء جاهزون بانتظار مجمعكم') + '</div>'
             + '<div class="pc-grp">📜 الإجازات</div>'
