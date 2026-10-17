@@ -841,6 +841,10 @@
     .sd-map b { color:#0b5f56; }
     .sd-maplink { background:#2456e6; color:#fff; border-radius:8px; padding:6px 12px; font-weight:800; text-decoration:none; }
     .sd-maplink:hover { background:#1d4ed8; }
+    .sd-more { margin-top:8px; width:100%; background:#fff7ed; color:#9a3412; border:1px dashed #fdba74; border-radius:9px; padding:8px 10px; font-weight:800; font-size:12.5px; cursor:pointer; }
+    .sd-more:hover { background:#ffedd5; }
+    .sd-full { margin-top:6px; background:#fff; border:1px solid #e2e8f0; border-radius:9px; padding:8px 10px; }
+    .sd-full .details-list { font-size:12.5px; color:#334155; margin:0; padding-inline-start:18px; line-height:1.5; }
     .sd-back { display:block; width:100%; margin-top:10px; padding:12px; background:#eef2ff; color:#15307e; border:1.5px solid #c7d2fe; border-radius:10px; font-weight:900; font-size:14px; cursor:pointer; }
     .sd-back:hover { background:#e0e9ff; }
     .strong-loc { overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
@@ -5207,6 +5211,12 @@
             + (link ? '<a class="sd-maplink" target="_blank" href="' + link + '">🗺️ افتح الخريطة والمسار</a>' : '')
             + '</div>';
     }
+    // زر «التفاصيل الكاملة» لكل طرف داخل عرض الفرصة
+    function sdFullBlock(item, idx, side) {
+        return '<button type="button" class="sd-more" onclick="sdMore(' + (idx || 0) + ',\'' + side + '\')">📋 التفاصيل الكاملة</button>'
+            + '<div class="sd-full" id="sd-full-' + (idx || 0) + '-' + side + '" style="display:none"><ul class="details-list">' + formatDetailsAsList(item.details) + '</ul></div>';
+    }
+    function sdMore(i, side) { const el = document.getElementById('sd-full-' + i + '-' + side); if (el) el.style.display = (el.style.display === 'block') ? 'none' : 'block'; }
     function strongDetailHtml(pr, idx) {
         const d = pr.doc, v = pr.venue;
         const gr = doctorGrade(d);
@@ -5215,10 +5225,10 @@
         if (typeof pvCardBlock === 'function' && typeof pvPairButtons === 'function') {
             const docBlk = '<div class="sd-side"><div class="sd-ttl">👨‍⚕️ الطبيب — تسلسل ' + seqOf(d) + (gr ? ' · ' + gr : '') + '</div>'
                 + '<div class="sd-line"><b>الاختصاص:</b> ' + specsOf(d).join('، ') + '</div>'
-                + '<div class="sd-line"><b>الموقع:</b> ' + adLocation(d, 'doctor') + '</div>' + pvCardBlock(d._id) + '</div>';
+                + '<div class="sd-line"><b>الموقع:</b> ' + adLocation(d, 'doctor') + '</div>' + sdFullBlock(d, idx, 'd') + pvCardBlock(d._id) + '</div>';
             const cxBlk = '<div class="sd-side cx"><div class="sd-ttl">🏢 المجمع — تسلسل ' + seqOf(v) + (v.isClass ? ' <span class="insta-cls">كلاس</span>' : '') + '</div>'
                 + '<div class="sd-line"><b>الاختصاصات المطلوبة:</b> ' + specsOf(v).join('، ') + '</div>'
-                + '<div class="sd-line"><b>الموقع:</b> ' + adLocation(v, 'clinic') + '</div>' + pvCardBlock(v._id) + '</div>';
+                + '<div class="sd-line"><b>الموقع:</b> ' + adLocation(v, 'clinic') + '</div>' + sdFullBlock(v, idx, 'v') + pvCardBlock(v._id) + '</div>';
             return '<div class="sd-pair">' + docBlk + cxBlk + '</div>'
                 + pairMapHtml(pr)
                 + pvPairButtons(d._id, v._id)
@@ -5226,8 +5236,8 @@
                 + backBtn;
         }
         // غير المدير (لا يُفترض الوصول هنا لأن اللوحة للمدير فقط)
-        return '<div class="sd-pair"><div class="sd-side"><div class="sd-ttl">👨‍⚕️ الطبيب — تسلسل ' + seqOf(d) + '</div><div class="sd-line">' + specsOf(d).join('، ') + (gr ? ' · ' + gr : '') + '</div><div class="sd-line">' + adLocation(d, 'doctor') + '</div></div>'
-            + '<div class="sd-side cx"><div class="sd-ttl">🏢 المجمع — تسلسل ' + seqOf(v) + '</div><div class="sd-line">' + specsOf(v).join('، ') + '</div><div class="sd-line">' + adLocation(v, 'clinic') + '</div></div></div>'
+        return '<div class="sd-pair"><div class="sd-side"><div class="sd-ttl">👨‍⚕️ الطبيب — تسلسل ' + seqOf(d) + '</div><div class="sd-line">' + specsOf(d).join('، ') + (gr ? ' · ' + gr : '') + '</div><div class="sd-line">' + adLocation(d, 'doctor') + '</div>' + sdFullBlock(d, idx, 'd') + '</div>'
+            + '<div class="sd-side cx"><div class="sd-ttl">🏢 المجمع — تسلسل ' + seqOf(v) + '</div><div class="sd-line">' + specsOf(v).join('، ') + '</div><div class="sd-line">' + adLocation(v, 'clinic') + '</div>' + sdFullBlock(v, idx, 'v') + '</div></div>'
             + pairMapHtml(pr)
             + '<a class="whatsapp-btn sd-plat" target="_blank" href="' + buildWaLink(instantMsg(pr)) + '">📩 تنسيق عبر واتساب المنصة</a>'
             + backBtn;
