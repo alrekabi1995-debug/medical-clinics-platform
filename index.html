@@ -226,6 +226,29 @@
     .aud-card.cx { border-color:#7cc4ff; }
     .aud-card.cx:hover { border-color:#a8d8ff; }
     .aud-panel { max-width:960px; margin:0 auto; padding:0 16px; }
+    .aud-steps { display:flex; align-items:center; justify-content:center; gap:6px; margin:0 auto 14px; max-width:520px; }
+    .aud-steps .st { flex:1 1 0; display:flex; flex-direction:column; align-items:center; gap:5px; text-align:center; font-size:.8rem; font-weight:800; color:#16307e; line-height:1.3; }
+    .aud-steps .st b { width:30px; height:30px; border-radius:50%; background:#16307e; color:#fff; display:flex; align-items:center; justify-content:center; font-size:.95rem; }
+    .aud-steps i { color:#94a3b8; font-style:normal; font-weight:900; flex:0 0 auto; margin-bottom:22px; }
+    .step1-box { background:linear-gradient(180deg,#fffbeb,#fef3c7); border:3px solid #f59e0b; border-radius:16px; padding:16px 14px 14px; margin:6px 0 4px; text-align:center; position:relative; box-shadow:0 8px 22px rgba(245,158,11,.28); }
+    .step1-badge { display:inline-block; background:#f59e0b; color:#3b2400; font-weight:900; font-size:.9rem; padding:5px 16px; border-radius:999px; margin-bottom:6px; }
+    .step1-why { color:#78350f; font-weight:800; font-size:.88rem; margin-bottom:12px; }
+    .step1-box .cta-container { margin:0; }
+    .step1-box .form-btn { box-shadow:0 6px 16px rgba(0,0,0,.22); animation:step1pulse 2.4s ease-in-out infinite; }
+    .step1-box .btn-secondary { background:#16307e; color:#fff; }
+    @keyframes step1pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.025); } }
+    .aud-steps .st:first-child b { background:#f59e0b; color:#3b2400; box-shadow:0 0 0 4px rgba(245,158,11,.3); }
+    .main-go { width:100%; max-width:560px; font-size:1.1rem !important; padding:16px 20px !important; }
+    .trigger-chips { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; padding:0 16px; margin:-4px auto 6px; max-width:720px; }
+    .trigger-chips .btn { background:#fff !important; color:#334155 !important; border:2px solid #cbd5e1 !important; box-shadow:none !important; border-radius:999px !important; padding:8px 16px !important; font-size:.88rem !important; font-weight:800; width:auto !important; }
+    .trigger-chips .btn:hover { border-color:#16307e !important; color:#16307e !important; }
+    .mt-arrow { float:left; color:#94a3b8; }
+    .more-tools[open] .mt-arrow { transform:rotate(180deg); display:inline-block; }
+    .browse-label { margin-top:20px; text-align:center; color:#475569; }
+    body:not(.is-admin) .admin-only { display:none !important; }
+    .wa-sticky { position:fixed; bottom:0; left:0; right:0; z-index:64; background:#25D366; color:#053a1b; text-align:center; padding:12px 14px; font-weight:900; font-size:15px; text-decoration:none; box-shadow:0 -4px 14px rgba(0,0,0,.18); display:flex; align-items:center; justify-content:center; gap:8px; }
+    body.has-wa-sticky { padding-bottom:52px; }
+    body.has-wa-sticky .chat-fab { bottom:68px; }
     .aud-switch { display:flex; align-items:center; justify-content:center; gap:12px; margin:4px 0 16px; }
     .aud-switch button { background:#fff; color:var(--navy); border:none; border-radius:999px; padding:8px 18px; font-weight:800; font-family:inherit; cursor:pointer; font-size:.9rem; }
     .aud-switch .lane-tag { font-weight:900; color:var(--navy); background:var(--gold); padding:6px 18px; border-radius:999px; font-size:.95rem; }
@@ -806,6 +829,7 @@
     .insta-badge { font-weight:900; font-size:14px; color:#15307e; margin-bottom:6px; }
     .insta-side.cx .insta-badge { color:#0b5f56; }
     .insta-cls { background:#ffd36b; color:#1b1b1b; border-radius:8px; padding:1px 8px; font-size:12px; }
+    .insta-new { background:#16a34a; color:#fff; border-radius:8px; padding:1px 8px; font-size:12px; font-weight:800; }
     .insta-loc { font-weight:800; font-size:14px; color:#111; line-height:1.35; }
     .insta-spec { font-size:13px; color:#475569; font-weight:700; margin-top:5px; line-height:1.4; }
     .insta-sal { margin-top:6px; font-size:12px; font-weight:800; color:#6d28d9; }
@@ -1515,6 +1539,9 @@
     .cat-ad-btn { margin-top:8px; width:100%; font-family:inherit; font-weight:800; font-size:14px; padding:9px 12px; border:none; border-radius:10px; background:#0d9488; color:#fff; cursor:pointer; }
     .cat-ad-btn:hover { background:#0b7d73; }
     .cat-print.wa { background:#25D366; color:#053a1b; }
+    .cap-fmts { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; align-items:center; }
+    .cap-fmt { font-family:inherit; font-size:15px; font-weight:800; padding:9px 18px; border-radius:12px; border:2px solid #cbd5d3; background:#fff; color:#334155; cursor:pointer; }
+    .cap-fmt.on { background:#0e3350; color:#fff; border-color:#0e3350; }
     .cat-send-bar { background:#effaf7; border:2px dashed #25D366; border-radius:14px; padding:14px 16px; margin:4px 0 2px; }
     .cat-send-bar .lbl { font-weight:900; color:#0f766e; margin-bottom:10px; font-size:17px; }
     .cat-send-bar .row { display:flex; flex-wrap:wrap; gap:10px; }
@@ -1636,59 +1663,69 @@
     <!-- مسار الطبيب -->
     <div class="aud-panel" id="panelDoctor" style="display:none">
         <div class="aud-switch"><span class="lane-tag">👨‍⚕️ مسار الطبيب</span><button type="button" onclick="switchAudience()">🏠 الصفحة الرئيسية</button></div>
-        <div class="cta-label">سجّل طلبك أولاً:</div>
+        <div class="aud-steps"><div class="st"><b>1</b><span>سجّل طلبك<br>(دقيقة واحدة)</span></div><i>←</i><div class="st"><b>2</b><span>نرشّح لك<br>الأنسب والأقرب</span></div><i>←</i><div class="st"><b>3</b><span>ننسّق لك<br>التواصل</span></div></div>
+        <div class="step1-box"><div class="step1-badge">⭐ ضروري — ابدأ من هنا</div><div class="step1-why">بدون تسجيل طلبك لا نستطيع ترشيح الأنسب لك ولا التنسيق</div>
+        
         <div class="cta-container">
             <a href="https://tally.so/r/7RrE0Z" target="_blank" class="btn btn-primary form-btn">
                 <span class="form-btn-title">📝 استمارة الأطباء</span>
                 <span class="form-btn-sub">أنا طبيب أبحث عن عيادة أو مستشفى أهلي</span>
             </a>
-        </div>
+        </div></div>
+        <div class="cta-label browse-label">أو تصفّح الفرص المتاحة الآن:</div>
         <div class="main-trigger-section">
-            <button type="button" class="btn btn-doctor-search" id="btnDoctor" onclick="startSearch('manager')">🏢 مجمعات طبية بحاجة للأطباء</button>
-            <button type="button" class="btn btn-hospital" id="btnHospital" onclick="startSearch('hospital')">🏥 مستشفيات أهلية بحاجة للأطباء</button>
-            <button type="button" class="btn btn-latest" id="btnAllClinics" onclick="showAllByDate('clinic')">🏢 كل المجمعات الباحثة عن أطباء</button>
-            <button type="button" class="btn btn-latest" id="btnCatalog" onclick="showCatalog('clinic')">📑 عرض الكتالوج</button>
+            <button type="button" class="btn btn-doctor-search main-go" id="btnDoctor" onclick="startSearch('manager')">🔎 اختر اختصاصك وشاهد الفرص المتاحة</button>
+        </div>
+        <div class="trigger-chips">
+            <button type="button" class="btn btn-latest" id="btnAllClinics" onclick="showAllByDate('clinic')">🆕 الأحدث أولاً</button>
+            <button type="button" class="btn btn-hospital" id="btnHospital" onclick="startSearch('hospital')">🏥 مستشفيات أهلية</button>
+            <button type="button" class="btn btn-latest" id="btnCatalog" onclick="showCatalog('clinic')">📑 كتالوج مصوّر</button>
         </div>
     </div>
 
     <!-- مسار صاحب المجمع/المستشفى -->
     <div class="aud-panel" id="panelComplex" style="display:none">
         <div class="aud-switch"><span class="lane-tag">🏢 مسار المجمع/المستشفى</span><button type="button" onclick="switchAudience()">🏠 الصفحة الرئيسية</button></div>
-        <div class="cta-label">سجّل طلبك أولاً:</div>
+        <div class="aud-steps"><div class="st"><b>1</b><span>سجّل احتياجك<br>(دقيقة واحدة)</span></div><i>←</i><div class="st"><b>2</b><span>نرشّح لك<br>الأطباء المناسبين</span></div><i>←</i><div class="st"><b>3</b><span>ننسّق لك<br>التواصل</span></div></div>
+        <div class="step1-box"><div class="step1-badge">⭐ ضروري — ابدأ من هنا</div><div class="step1-why">بدون تسجيل طلبك لا نستطيع ترشيح الأنسب لك ولا التنسيق</div>
+        
         <div class="cta-container">
             <a href="https://tally.so/r/gD6z6l" target="_blank" class="btn btn-secondary form-btn">
                 <span class="form-btn-title">📝 استمارة المجمعات والمستشفيات</span>
                 <span class="form-btn-sub">أنا صاحب مجمع طبي أو مستشفى أهلي وأبحث عن أطباء</span>
             </a>
-        </div>
+        </div></div>
+        <div class="cta-label browse-label">أو تصفّح الأطباء المتاحين الآن:</div>
         <div class="main-trigger-section">
-            <button type="button" class="btn btn-trigger" id="btnGeneral" onclick="startSearch('general')">👨‍⚕️ أطباء بحاجة لعيادات طبية</button>
-            <button type="button" class="btn btn-hospdoc" id="btnHospDoc" onclick="startSearch('hospdoc')">👨‍⚕️ أطباء يطلبون العمل في مستشفى أهلي</button>
-            <button type="button" class="btn btn-latest" id="btnAllDoctors" onclick="showAllByDate('doctor')">👨‍⚕️ كل الأطباء الباحثين عن عيادات</button>
-            <button type="button" class="btn btn-latest" id="btnDoctorCatalog" onclick="showCatalog('doctor')">📑 كتالوج الأطباء</button>
+            <button type="button" class="btn btn-trigger main-go" id="btnGeneral" onclick="startSearch('general')">🔎 اختر الاختصاص وشاهد الأطباء المتاحين</button>
+        </div>
+        <div class="trigger-chips">
+            <button type="button" class="btn btn-latest" id="btnAllDoctors" onclick="showAllByDate('doctor')">🆕 الأحدث أولاً</button>
+            <button type="button" class="btn btn-hospdoc" id="btnHospDoc" onclick="startSearch('hospdoc')">🏥 أطباء المستشفيات الأهلية</button>
+            <button type="button" class="btn btn-latest" id="btnDoctorCatalog" onclick="showCatalog('doctor')">📑 كتالوج مصوّر</button>
         </div>
     </div>
 
     <!-- أدوات مشتركة -->
     <div class="shared-tools" id="sharedTools" style="display:none">
         <div class="seq-search-wrap">
-            <input type="search" class="seq-search-input" id="seqSearchInput" placeholder="ابحث بالتسلسل أو المنطقة أو الاختصاص (مثال: 57 أو الأعظمية نسائية)" onkeydown="if(event.key==='Enter') searchBySeq()">
+            <input type="search" class="seq-search-input" id="seqSearchInput" placeholder="🔎 ابحث بالمنطقة أو الاختصاص أو رقم التسلسل (مثال: الأعظمية نسائية)" onkeydown="if(event.key==='Enter') searchBySeq()">
             <button type="button" class="seq-search-btn" onclick="searchBySeq()">بحث</button>
         </div>
-        <div class="seq-mode-wrap" id="seqModeWrap">
+        <div class="seq-mode-wrap admin-only" id="seqModeWrap">
             <button type="button" class="seq-mode-pill active" data-mode="all" onclick="setSeqMode('all')">الكل</button>
             <button type="button" class="seq-mode-pill" data-mode="doctor" onclick="setSeqMode('doctor')">👨‍⚕️ أطباء فقط</button>
             <button type="button" class="seq-mode-pill" data-mode="clinic" onclick="setSeqMode('clinic')">🏢 مجمعات فقط</button>
         </div>
-        <button type="button" class="btn btn-insta" id="btnInsta" onclick="instantSuggest()">⚡ اقتراح فوري — فرصة مثالية الآن</button>
-        <details class="more-tools" open>
-            <summary>📋 إجراءات أخرى (الإجازات • كتالوج الإجازات • التطابقات • آخر الإضافات)</summary>
+        <button type="button" class="btn btn-insta admin-only" id="btnInsta" onclick="instantSuggest()">⚡ اقتراح فوري — فرصة مثالية الآن</button>
+        <details class="more-tools">
+            <summary>📜 الإجازات الطبية — طلب وعرض <span class="mt-arrow">▾</span></summary>
             <div class="secondary-actions">
                 <button type="button" class="btn btn-license" id="btnLicense" onclick="startSearch('license')">📜 طلب وعرض الإجازات</button>
                 <button type="button" class="btn btn-latest" id="btnLicenseCatalog" onclick="showCatalog('license')">📑 كتالوج الإجازات</button>
-                <button type="button" class="btn btn-matches" id="btnMatches" onclick="startSearch('match')">🔗 التطابقات المحتملة</button>
-                <button type="button" class="btn btn-latest" id="btnLatest" onclick="showLatestAdditions()">🆕 آخر الإضافات</button>
-                <button type="button" class="btn btn-latest" id="btnPosters" onclick="postersOpen()">🎨 منشورات ترويجية جاهزة</button>
+                <button type="button" class="btn btn-matches admin-only" id="btnMatches" onclick="startSearch('match')">🔗 التطابقات المحتملة</button>
+                <button type="button" class="btn btn-latest admin-only" id="btnLatest" onclick="showLatestAdditions()">🆕 آخر الإضافات</button>
+                <button type="button" class="btn btn-latest admin-only" id="btnPosters" onclick="postersOpen()">🎨 منشورات ترويجية جاهزة</button>
             </div>
         </details>
     </div>
@@ -1898,7 +1935,7 @@
         "الرصافة": [33.335, 44.415], "الرصافة - المركز": [33.335, 44.415], "الكرادة": [33.305, 44.430], "الاعظمية": [33.375, 44.365],
         "الوزيرية": [33.345, 44.400], "الطالبية": [33.360, 44.390], "بغداد الجديدة": [33.345, 44.465], "البلديات": [33.330, 44.455],
         "المشتل": [33.310, 44.470], "العبيدي": [33.360, 44.480], "الكمالية": [33.350, 44.475],
-        "ناحية الوحدة": [33.240, 44.530], "مدينة الصدر": [33.370, 44.455], "الشعب": [33.385, 44.410],
+        "ناحية الوحدة": [33.105, 44.615], "مدينة الصدر": [33.370, 44.455], "الشعب": [33.385, 44.410],
         "الراشدية": [33.480, 44.420], "زيونة": [33.320, 44.440], "الطارمية": [33.650, 44.380],
         "الزعفرانية": [33.220, 44.460],
         // بغداد - الكرخ
@@ -1966,7 +2003,7 @@
         ['زيونة', 33.320, 44.440], ['شارع فلسطين', 33.345, 44.430, 'المستنصرية'], ['حي القاهرة', 33.370, 44.425], ['الحبيبية', 33.380, 44.440], ['جميلة', 33.375, 44.445],
         ['مدينة الصدر', 33.370, 44.455, 'الثورة'], ['الشعب', 33.385, 44.410], ['الصليخ', 33.387, 44.380], ['الأعظمية', 33.375, 44.365, 'راس الحواش'], ['الوزيرية', 33.345, 44.400],
         ['باب المعظم', 33.347, 44.385, 'مدينة الطب'], ['البتاوين', 33.325, 44.415], ['الكرادة', 33.305, 44.430, 'كرادة داخل'], ['العرصات', 33.300, 44.420], ['الجادرية', 33.280, 44.380],
-        ['الزعفرانية', 33.220, 44.460], ['جسر ديالى', 33.260, 44.520], ['بسماية', 33.190, 44.600], ['ناحية الوحدة', 33.240, 44.530], ['الراشدية', 33.480, 44.420], ['الطارمية', 33.650, 44.380],
+        ['الزعفرانية', 33.220, 44.460], ['جسر ديالى', 33.260, 44.520], ['بسماية', 33.105, 44.620], ['ناحية الوحدة', 33.105, 44.615], ['الراشدية', 33.480, 44.420], ['الطارمية', 33.650, 44.380],
         ['البنوك', 33.395, 44.425], ['الغزالية', 33.335, 44.310], ['العامرية', 33.295, 44.330], ['الخضراء', 33.325, 44.345], ['حي الجامعة', 33.310, 44.340], ['حي العدل', 33.320, 44.320],
         ['اليرموك', 33.305, 44.345, 'مستشفى اليرموك'], ['القادسية', 33.290, 44.345], ['الإسكان', 33.323, 44.345, 'مستشفى الطفل المركزي'], ['الطوبجي', 33.340, 44.340], ['الوشاش', 33.315, 44.360],
         ['المنصور', 33.313, 44.362], ['الحارثية', 33.320, 44.355, 'مدينة الحارثية'], ['الصالحية', 33.320, 44.385], ['العلاوي', 33.325, 44.385], ['الشالجية', 33.350, 44.360], ['العطيفية', 33.360, 44.355],
@@ -2112,7 +2149,7 @@
         { added: "2026-09-11", isNew: true, specialty: "عيون", gov: "بغداد", areas: ["حي الجهاد", "العامرية", "حي الجامعة", "الخضراء", "الغزالية"], statusLabel: "🟢 متوفرة مساءً", headerLabel: "طبيبة تسلسل 35", title: "طبيبة ممارسة عيون - تبحث عن مجمع طبي للعمل - تسلسل 35", details: "طبيبة ممارسة عيون، عملت في عدة مستشفيات وترغب بالانتقال بسبب بُعد مكان العمل عن السكن.<br>تبحث عن العمل في مجمع طبي في حي الجهاد أو العامرية أو حي الجامعة أو الخضراء أو الغزالية، في الفترة المسائية بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>تمتلك وسيلة نقل، وتعمل حالياً في مركز صحي للعيون.<br>لا يهم أن تكون العيادة شغالة أو جديدة.<br>نظام العمل المفضل: نظام الكشفية.<br>متاحة للاتفاق الفوري على كافة التفاصيل." },
         { added: "2026-09-11", isNew: true, specialty: "طب أسرة", gov: "بغداد", areas: ["الخضراء", "حي الجامعة", "اليرموك", "المنصور"], statusLabel: "🟢 متوفر للعمل", headerLabel: "طبيب تسلسل 36", title: "طبيب استشاري (دبلوم عالي طب أسرة) - يبحث عن عيادة للعمل - تسلسل 36", details: "طبيب استشاري (دبلوم عالي طب أسرة)، متقاعد.<br>يبحث عن العمل في الخضراء أو حي الجامعة أو اليرموك أو حي العدل أو المنصور، في أي وقت، بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>يمتلك وسيلة نقل.<br>نظام العمل المفضل: نظام الراتب المقطوع بشروط واتفاق، ولا مانع من أن يكون عدد المراجعين قليل أو كثير.<br>متاح للاتفاق الفوري على كافة التفاصيل." },
         { added: "2026-09-11", isNew: true, specialty: "أمراض نفسية وعصبية", gov: "بغداد", areas: ["الكرخ"], statusLabel: "🟢 متوفرة مساءً", headerLabel: "طبيبة تسلسل 38", title: "طبيبة أخصائية (تخطيط أعصاب ودماغ - بورد) - تبحث عن مجمع طبي للعمل - تسلسل 38", details: "طبيبة أخصائية بورد في تخطيط الأعصاب والدماغ.<br>تبحث عن العمل في مجمع طبي ضمن منطقة الكرخ، في الفترة المسائية بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>تمتلك وسيلة نقل.<br>لا يهم أن تكون العيادة شغالة أو جديدة.<br>نظام العمل المفضل: نظام الكشفية.<br>متاحة للاتفاق الفوري على كافة التفاصيل." },
-        { added: "2026-09-12", isNew: true, specialty: "جلدية", gov: "بغداد", areas: ["الكرخ", "الرصافة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "طبيب تسلسل 39", title: "طبيب استشاري جلدية وتجميل - يبحث عن عيادة للعمل - تسلسل 39", details: "طبيب استشاري جلدية وتجميل، خبرة 20 سنة، وليس موظفاً في الدوائر الحكومية.<br>يبحث عن العمل في عيادة في بغداد (أي منطقة)، في أي وقت، بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>يمتلك وسيلة نقل.<br>يبحث عن عيادة شغالة.<br>نظام العمل المفضل: نظام الراتب الثابت المقطوع.<br>متاح للاتفاق الفوري على كافة التفاصيل." },
+        { license: "offer", licNote: "إجازة فقط (دون تواجد)", added: "2026-09-12", isNew: true, specialty: "جلدية", gov: "بغداد", areas: ["الكرخ", "الرصافة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "طبيب تسلسل 39", title: "طبيب استشاري جلدية وتجميل - يبحث عن عيادة للعمل - تسلسل 39", details: "طبيب استشاري جلدية وتجميل، خبرة 20 سنة، وليس موظفاً في الدوائر الحكومية.<br>يبحث عن العمل في عيادة في بغداد (أي منطقة)، في أي وقت، بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>يمتلك وسيلة نقل.<br>يبحث عن عيادة شغالة.<br>نظام العمل المفضل: نظام الراتب الثابت المقطوع.<br>متاح للاتفاق الفوري على كافة التفاصيل." },
         { added: "2026-08-29", specialty: "نسائية وتوليد", gov: "بغداد", areas: ["الكرخ"], statusLabel: "🔴 غير متوفر حالياً / محجوز", headerLabel: "طبيبة تسلسل 40", title: "طبيبة أخصائية نسائية وتوليد (بورد) - تبحث عن عيادة للعمل - تسلسل 40", details: "تطلب العمل ضمن منطقة الكرخ، تبحث عن عيادة مؤثثة ومدفوعة الإيجار، ضمن نظام الكشفية." },
         { added: "2026-08-29", specialty: "نسائية وتوليد", gov: "بغداد", areas: ["الكرخ"], statusLabel: "🔴 غير متوفر حالياً / محجوز", headerLabel: "طبيبة تسلسل 41", title: "طبيبة أخصائية نسائية وتوليد (بورد) - تبحث عن عيادة للعمل - تسلسل 41", details: "تطلب العمل ضمن منطقة الكرخ، تبحث عن عيادة مؤثثة ومدفوعة الإيجار، ضمن نظام الراتب الثابت المقطوع." },
         { added: "2026-08-29", specialty: "جراحة عامة", gov: "بغداد", areas: ["حي العامل"], statusLabel: "🔴 غير متوفر حالياً / محجوز", headerLabel: "طبيب تسلسل 43", title: "طبيب أخصائي جراحة عامة (أخصائي بورد) - يبحث عن عيادة للعمل - تسلسل 43", details: "يرغب بالعمل في عيادة ضمن حي العامل، يبحث عن عيادة شغالة ومؤثثة ومدفوعة الإيجار، ضمن نظام الكشفية." },
@@ -2130,7 +2167,7 @@
         { added: "2026-09-23", isNew: true, specialty: "أمراض نفسية وعصبية", gov: "بغداد", areas: ["زيونة"], statusLabel: "🟢 متوفرة مساءً", headerLabel: "طبيبة تسلسل 55", title: "طبيبة ممارسة أمراض نفسية وعصبية - تبحث عن مجمع طبي للعمل - تسلسل 55", details: "طبيبة ممارسة أمراض نفسية وعصبية.<br>تبحث عن العمل في مجمع طبي ضمن زيونة، في الفترة المسائية، وهي من تتكفل بدفع الإيجار على أن تكون العيادة موثثة فقط.<br>تمتلك وسيلة نقل.<br>لا تشترط أن تكون العيادة شغالة.<br>نظام العمل المفضل: نظام الكشفية.<br>متاحة للاتفاق الفوري على كافة التفاصيل." },
         { added: "2026-09-23", isNew: true, specialty: "جلدية", gov: "بغداد", areas: ["الخضراء", "العامرية", "المنصور"], statusLabel: "🟢 متوفرة مساءً", headerLabel: "طبيبة تسلسل 56", title: "طبيبة أخصائية جلدية وتجميل (بورد) - تبحث عن عيادة للعمل - تسلسل 56", details: "طبيبة أخصائية جلدية وتجميل (بورد)، تعمل حالياً في مستشفى أبو غريب (حالياً في إجازة أمومة)، وليس لديها عيادة سابقة.<br>تبحث عن العمل في الخضراء أو العامرية أو المنصور (وأيضاً حي العدل وحي القادسية)، في الفترة المسائية بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>تمتلك وسيلة نقل.<br>تبحث عن عيادة شغالة.<br>نظام العمل المفضل: نظام الكشفية.<br>متاحة للاتفاق الفوري على كافة التفاصيل." },
         { isNew: true, specialty: "باطنية", gov: "بغداد", areas: ["الكرادة"], statusLabel: "🟢 متوفرة مساءً", added: "2026-09-25", headerLabel: "طبيبة تسلسل 57", title: "طبيبة مقيمة قدمى باطنية - تبحث عن مجمع طبي للعمل - تسلسل 57", details: "طبيبة مقيمة قدمى باطنية، عملت في طوارئ مستشفى العلوية الأهلي ومستشفى الزهراء الأهلي ومستشفى المؤيد الأهلي.<br>تبحث عن العمل في مجمع طبي ضمن الكرادة (جانب الرصافة)، في الفترة المسائية بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>تمتلك وسيلة نقل، وتعمل حالياً في مستشفى الفضيلية العام.<br>لا يهم أن تكون العيادة شغالة أو جديدة.<br>نظام العمل المفضل: نظام الراتب المقطوع وبدون مقطوعة لو العيادة شغالة.<br>متاحة للاتفاق الفوري على كافة التفاصيل." },
-        { isNew: true, specialty: "جراحة العظام والكسور", gov: "بغداد", areas: ["مدينة الحارثية"], statusLabel: "🟢 متوفر مساءً", added: "2026-09-25", headerLabel: "طبيب تسلسل 58", title: "طبيب أخصائي جراحة العظام والكسور (بورد) - يبحث عن مجمع طبي للعمل - تسلسل 58", details: "طبيب أخصائي جراحة العظام والكسور (بورد).<br>يبحث عن العمل في مجمع طبي ضمن الحارثية، في الفترة المسائية بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>يمتلك وسيلة نقل، ويعمل حالياً في مستشفى حكومي.<br>يبحث عن عيادة شغالة.<br>نظام العمل المفضل: نظام الكشفية.<br>متاح للاتفاق الفوري على كافة التفاصيل." },
+        { isNew: true, specialty: "جراحة العظام والكسور", gov: "بغداد", areas: ["مدينة الحارثية"], statusLabel: "🔴 غير متوفر (محجوز)", added: "2026-09-25", headerLabel: "طبيب تسلسل 58", title: "طبيب أخصائي جراحة العظام والكسور (بورد) - يبحث عن مجمع طبي للعمل - تسلسل 58", details: "طبيب أخصائي جراحة العظام والكسور (بورد).<br>يبحث عن العمل في مجمع طبي ضمن الحارثية، في الفترة المسائية بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>يمتلك وسيلة نقل، ويعمل حالياً في مستشفى حكومي.<br>يبحث عن عيادة شغالة.<br>نظام العمل المفضل: نظام الكشفية.<br>متاح للاتفاق الفوري على كافة التفاصيل." },
         { isNew: true, specialty: "نسائية وتوليد", gov: "أربيل", areas: ["أربيل"], statusLabel: "🟢 متوفرة مساءً", added: "2026-09-26", headerLabel: "طبيبة تسلسل 59", title: "طبيبة أخصائية نسائية وتوليد (بورد) - تبحث عن مجمع طبي للعمل - تسلسل 59", details: "طبيبة أخصائية نسائية وتوليد (بورد)، لديها عيادة خاصة منذ 4 سنوات وترغب بتغيير مكانها.<br>تبحث عن العمل في مجمع طبي في أربيل، شارع 40 أو شارع 100، في الفترة المسائية بشرط أن تكون العيادة موثثة ومدفوعة الإيجار.<br>تمتلك وسيلة نقل، وتعمل حالياً في مركز صحي بمنطقة هفالان.<br>تبحث عن عيادة شغالة.<br>نظام العمل المفضل: نظام الكشفية.<br>متاحة للاتفاق الفوري على كافة التفاصيل." },
         { specialty: "جراحة عامة", gov: "بغداد", areas: ["الكرخ"], statusLabel: "🔴 غير متوفر حالياً / محجوز", headerLabel: "طبيب Code A", title: "طبيب أخصائي (جراحة عامة وناظورية) - Code A", details: "سكن الغزالية، يطلب العمل في حي الجامعة، يشترط عيادة مؤثثة." },
         { specialty: "طب أسرة", gov: "بغداد", areas: ["الكرخ"], statusLabel: "🔴 غير متوفر حالياً / محجوز", headerLabel: "طبيب Code B", title: "طبيب أخصائي (طب أسرة) - Code B", details: "سكن علي الصالح، يطلب عيادة مؤثثة ومدفوعة الأجر، أوقات العمل مساءً." },
@@ -2338,10 +2375,10 @@
         { specialties: ["نسائية وتوليد", "تغذية وعلاج سكري", "الغدد الصماء والسكري"], gov: "بغداد", areas: ["الغدير"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، تغذية وعلاج سكري، الغدد الصماء والسكري) - مجمع طبي (بغداد - الغدير) - تسلسل 108", details: "بغداد - الغدير، ساحة ميسلون (فلكة الغدير).<br><strong>الحالة:</strong> فتح جديد.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق." },
         { specialties: ["جلدية"], gov: "ديالى", areas: ["المقدادية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (جلدية) - مجمع طبي (ديالى - المقدادية) - تسلسل 109", details: "ديالى - المقدادية، حي العصري، شارع البريد.<br><strong>الأطباء المتواجدون حالياً:</strong> المجمع شغّال.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق." }
     ,
-        { specialties: ["باطنية"], gov: "بغداد", areas: ["حي الجهاد"], statusLabel: "🔴 غير متوفر حالياً / محجوز", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة باطنية - مجمع طبي (بغداد - حي الجهاد) - تسلسل 110 (مكرر — نفس المجمع 53)", details: "بغداد - حي الجهاد، شارع الشارقة، فوق صيرفة الشارقة.<br><strong>ملاحظة:</strong> مكرر — نفس مجمع الإعتماد الطبي (تسلسل 53)." },
+        { specialties: ["باطنية"], gov: "بغداد", areas: ["حي الجهاد"], statusLabel: "🔴 غير متوفر حالياً / محجوز", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة باطنية - مجمع طبي (بغداد - حي الجهاد) - تسلسل 110 (مكرر — نفس المجمع 53)", details: "بغداد - حي الجهاد، شارع الشارقة، فوق صيرفة الشارقة.<br><strong>ملاحظة:</strong> مكرر — نفس المجمع (تسلسل 53)." },
         { isClass: true, specialties: ["تغذية وعلاج سكري", "باطنية", "مفاصل وروماتيزم"], gov: "بغداد", areas: ["المنصور"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (تغذية وعلاج سكري، باطنية، مفاصل وروماتيزم) - مجمع طبي (بغداد - المنصور) - تسلسل 111", details: "بغداد - الكرخ - المنصور، 14 رمضان.<br><strong>الحالة:</strong> طلب عاجل.<br><strong>الأطباء المتواجدون حالياً:</strong> موجودون مسبقاً في المجمع.<br><strong>أوقات العمل المطلوبة:</strong> أي وقت.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق." }
     ,
-        { specialties: ["باطنية", "جراحة عامة", "نسائية وتوليد", "جراحة أوعية دموية ودوالي", "تغذية وعلاج سكري", "الغدد الصماء والسكري", "أمراض نفسية وعصبية", "طبيب ممارس عام", "تخدير وعناية مركزة", "أشعة وسونار ومفراس", "مختبرات وتحليلات مرضية", "طوارئ وإصابات", "طب أسرة", "أطفال", "جراحة تجميلية", "جلدية", "قلبية واوعية دموية", "مفاصل وروماتيزم", "جراحة العظام والكسور", "أنف وأذن وحنجرة", "عيون", "جراحة الكلى والمسالك البولية", "جراحة الكبرى والعصبية"], gov: "بغداد", areas: ["الطالبية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب كافة الاختصاصات الطبية - مجمع طبي (بغداد - الطالبية) - تسلسل 112", details: "بغداد - الطالبية، فلكة 83.<br><strong>الحالة:</strong> مجمع جديد (فتح جديد).<br><strong>أوقات العمل المطلوبة:</strong> صباحاً.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق." }
+        { specialties: ["باطنية", "جراحة عامة", "نسائية وتوليد", "جراحة أوعية دموية ودوالي", "تغذية وعلاج سكري", "الغدد الصماء والسكري", "أمراض نفسية وعصبية", "طبيب ممارس عام", "تخدير وعناية مركزة", "أشعة وسونار ومفراس", "مختبرات وتحليلات مرضية", "طوارئ وإصابات", "طب أسرة", "أطفال", "جراحة تجميلية", "جلدية", "قلبية واوعية دموية", "مفاصل وروماتيزم", "جراحة العظام والكسور", "أنف وأذن وحنجرة", "عيون", "جراحة الكلى والمسالك البولية", "جراحة الكبرى والعصبية"], gov: "بغداد", areas: ["الطالبية"], statusLabel: "🟢 فرصة استثمارية — غير مفتوح بعد", headerLabel: "فرصة استثمار طبي", title: "بناية طبية كاملة (غير مفتوحة بعد) تبحث عن مستثمر طبي - بغداد - الطالبية - تسلسل 112", details: "<strong>فرصة استثمارية:</strong> بناية طبية كاملة حديثة <strong>غير مفتوحة بعد</strong>، متاحة لمستثمر طبي لتشغيلها وتقطيعها إلى عيادات متعددة.<br><strong>الموقع:</strong> بغداد - الطالبية، فلكة 83 - شارع الجميلة (موقع حيوي ومزدحم).<br><strong>المميزات:</strong> بناية كاملة بتشطيب ممتاز (فتح جديد) · تستوعب كل الاختصاصات الطبية · قابلة للتقطيع إلى عيادات · دعم إعلامي للمستثمر والأطباء.<br><strong>المطلوب:</strong> مستثمر طبي كامل (وليس طبيباً فردياً)." }
     ,
         { isNew: true, isClass: true, hours: "أي وقت", specialties: ["نسائية وتوليد", "باطنية", "قلبية واوعية دموية", "الغدد الصماء والسكري", "جراحة العظام والكسور", "أورام", "عيون", "أمراض نفسية وعصبية"], gov: "بغداد", areas: ["مدينة الحارثية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، باطنية، قلبية، الغدد والسكري، عظام، أورام، عيون، أعصاب) - مجمع طبي (بغداد - الكرخ - الحارثية، شارع الكندي) - تسلسل 114", details: "<strong>الموقع:</strong> بغداد - الكرخ - الحارثية - شارع الكندي، شارع كافتريا بن، قرب مذخر السنايا.<br><strong>الحالة الحالية:</strong> فتح جديد — تصنيف كلاس Z (أقل من 5 مراجعين يومياً).<br><strong>أوقات العمل المطلوبة:</strong> أي وقت.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق على صيغة العمل والاختصاص ودرجة الطبيب.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، باطنية، قلبية وأوعية دموية، الغدد الصماء والسكري، جراحة العظام والكسور، أورام، عيون، أعصاب.<br><strong>الأطباء المتواجدون حالياً:</strong> طبيبان (باطنية وقلبية) وطبيب أطفال، ويوجد صيدلاني." }
     ,
@@ -2351,7 +2388,7 @@
         { isNew: true, isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد"], gov: "بغداد", areas: ["مناطق أخرى"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة نسائية وتوليد - مجمع طبي (بغداد - الكرخ - التراث) - تسلسل 116", details: "<strong>الموقع:</strong> بغداد - الكرخ - التراث، قرب سوق التراث وجامع الحمزة.<br><strong>الحالة الحالية:</strong> فتح جديد — تصنيف كلاس A (من 20 إلى 30 مراجعاً يومياً، سمعة ممتازة)، والمجمع شغال.<br><strong>أوقات العمل المطلوبة:</strong> مساءً — يبدأ الدوام الساعة الرابعة طيلة أيام الأسبوع عدا الجمعة (للطبيبة حرية اختيار أيام دوامها).<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>العرض المقدَّم:</strong> العيادة جاهزة بالأجهزة والأدوات النسائية.<br><strong>الاختصاص المطلوب:</strong> نسائية وتوليد.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد اختصاص جراحة عصبية، وصيدلاني (بكالوريوس صيدلة ممارس سريري)." },
         { isNew: true, isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد", "جراحة عامة", "مفاصل وروماتيزم", "جراحة العظام والكسور", "طبيب ممارس عام", "جلدية", "أطفال", "باطنية"], gov: "بغداد", areas: ["حي أور"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، جراحة عامة، عظام ومفاصل، جلدية، أطفال، باطنية، ممارس عام) - مجمع طبي (بغداد - حي أور) - تسلسل 118", details: "<strong>الموقع:</strong> بغداد - حي أور - شارع المطعم الفلسطيني، مجاور سنتر حي أور.<br><strong>الحالة الحالية:</strong> مجمع موجود ومستقر — تصنيف كلاس B (من 10 إلى 20 مراجعاً يومياً، عمل مستقر).<br><strong>أوقات العمل المطلوبة:</strong> مسائي.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق، ويوجد عروض حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، جراحة عامة، مفاصل وروماتيزم، جراحة العظام والكسور، طبيب ممارس عام، جلدية، أطفال، باطنية.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد أطباء، وصيدلاني/طبيب." },
         { isNew: true, isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد"], gov: "النجف", areas: ["شارع الإسكان"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة نسائية وتوليد - مجمع طبي (النجف - شارع الإسكان) - تسلسل 119", details: "<strong>الموقع:</strong> النجف - شارع الإسكان، مجاور صيدلية أريدو.<br><strong>الحالة الحالية:</strong> فتح جديد — تصنيف كلاس Z (أقل من 5 مراجعين يومياً، جديد كلياً أو أيام دوام محدودة).<br><strong>أوقات العمل المطلوبة:</strong> مسائي.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق، ويوجد دعم للطبيب.<br><strong>الاختصاص المطلوب:</strong> نسائية وتوليد.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد أطباء بعد، ويوجد صيدلاني." },
-        { isNew: true, isClass: true, hours: "صباحاً", specialties: ["جلدية", "باطنية", "طب أسرة"], gov: "بغداد", areas: ["سوق التاجي"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (جلدية، باطنية، طب أسرة) - مجمع نجمة التاجي (بغداد - الكرخ - سوق التاجي) - تسلسل 120", details: "<strong>الموقع:</strong> بغداد - الكرخ - سوق التاجي، قرب المركز الصحي الثاني.<br><strong>الحالة الحالية:</strong> فتح جديد — تصنيف كلاس A+ (أكثر من 30 مراجعاً يومياً، مستوى استشاريين Top).<br><strong>أوقات العمل المطلوبة:</strong> صباحي.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق، ويوجد دعم للطبيب.<br><strong>الاختصاصات المطلوبة:</strong> جلدية، باطنية، طب أسرة.<br><strong>الأطباء المتواجدون حالياً:</strong> طبيبة نسائية (كلاس A+)، وصيدلاني." },
+        { isNew: true, isClass: true, hours: "صباحاً", specialties: ["جلدية", "باطنية", "طب أسرة"], gov: "بغداد", areas: ["سوق التاجي"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (جلدية، باطنية، طب أسرة) - مجمع طبي (بغداد - الكرخ - سوق التاجي) - تسلسل 120", details: "<strong>الموقع:</strong> بغداد - الكرخ - سوق التاجي، قرب المركز الصحي الثاني.<br><strong>الحالة الحالية:</strong> فتح جديد — تصنيف كلاس A+ (أكثر من 30 مراجعاً يومياً، مستوى استشاريين Top).<br><strong>أوقات العمل المطلوبة:</strong> صباحي.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق، ويوجد دعم للطبيب.<br><strong>الاختصاصات المطلوبة:</strong> جلدية، باطنية، طب أسرة.<br><strong>الأطباء المتواجدون حالياً:</strong> طبيبة نسائية (كلاس A+)، وصيدلاني." },
         { isNew: true, isClass: true, venueType: "hospital", hours: "أي وقت", specialties: ["جراحة تجميلية", "جراحة عامة", "عيون", "أنف وأذن وحنجرة"], gov: "بغداد", areas: ["الوزيرية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (جراحة تجميلية، جراحة عامة، عيون، أنف وأذن وحنجرة) - مستشفى أهلي (بغداد - الرصافة - الوزيرية) - تسلسل 121", details: "<strong>الموقع:</strong> بغداد - الرصافة - الوزيرية - خدمي محمد القاسم، قرب رعاية شؤون المرأة.<br><strong>الحالة الحالية:</strong> المستشفى شغّال — تصنيف كلاس A (من 20 إلى 30 مراجعاً يومياً، سمعة ممتازة).<br><strong>أوقات العمل المطلوبة:</strong> أي وقت.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> جراحة تجميلية، جراحة عامة، عيون، أنف وأذن وحنجرة.<br><strong>التجهيزات:</strong> متوفرة مسبقاً في المستشفى، ويوجد صيدلية.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد أطباء اختصاص آخرون." },
         { isNew: true, isClass: true, license: "want", licNote: "مع أو بدون تواجد — بكفاءة للطبيب أو الطبيبة المتواجدة", hours: "مساءً", specialties: ["جراحة تجميلية"], gov: "بغداد", areas: ["البنوك"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب-ة جراحة تجميلية ذو كفاءة (أو إجازة) - مجمع طبي (بغداد - الرصافة - البنوك) - تسلسل 122", details: "<strong>الموقع:</strong> بغداد - الرصافة - البنوك - شارع الميثاق.<br><strong>الحالة الحالية:</strong> المجمع شغّال — تصنيف كلاس A (من 20 إلى 30 مراجعاً يومياً، سمعة ممتازة) — طلب عاجل.<br><strong>أوقات العمل المطلوبة:</strong> مسائي (دوام جزئي).<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>المطلوب:</strong> يُفضّل طبيب/ة جراحة تجميلية ذو كفاءة للعمل والتواجد الفعلي في المجمع (وليس مجرد إجازة)، ويقبلون الإجازة إن تعذّر الحضور — وشغل الطبيب جيد (إقبال مرضى ممتاز).<br><strong>العرض المقدَّم:</strong> يوجد كادر تصوير وترويج للطبيب.<br><strong>التجهيزات:</strong> متوفرة مسبقاً في المجمع." },
         { isNew: true, isClass: true, hours: "أي وقت", specialties: ["نسائية وتوليد", "باطنية", "مفاصل وروماتيزم", "جراحة الكلى والمسالك البولية", "الغدد الصماء والسكري", "طبيب ممارس عام", "تغذية وعلاج سكري", "أشعة وسونار ومفراس", "طب أسرة", "قلبية واوعية دموية", "أطفال"], gov: "نينوى", areas: ["قضاء تلعفر"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء بعدة اختصاصات - مجمع طبي (نينوى - قضاء تلعفر) - تسلسل 123", details: "<strong>الموقع:</strong> نينوى - قضاء تلعفر، قرب مستشفى تلعفر.<br><strong>الحالة الحالية:</strong> فتح جديد — تصنيف كلاس A+ (أكثر من 30 مراجعاً يومياً، مستوى استشاريين Top) — طلب عاجل.<br><strong>أوقات العمل المطلوبة:</strong> أي وقت (السونار جميع أيام الأسبوع).<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، باطنية، مفاصل وروماتيزم، جراحة الكلى والمسالك البولية، الغدد الصماء والسكري، طبيب ممارس عام، تغذية وعلاج سكري، أشعة وسونار ومفراس، طب أسرة، قلبية وأوعية دموية، أطفال.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد (مجمع جديد)، ويوجد مكان جاهز لفتح صيدلية." },
@@ -2376,6 +2413,14 @@
         { isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال", "باطنية", "جراحة الكلى والمسالك البولية", "جراحة العظام والكسور", "جراحة عامة"], gov: "بغداد", areas: ["جسر ديالى"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء وطبيبات (نسائية وتوليد، أطفال، باطنية، جراحة الكلى والمسالك البولية، جراحة العظام والكسور، جراحة عامة) - مجمع طبي (بغداد - الرصافة - جسر ديالى) - تسلسل 133", details: "<strong>الموقع:</strong> بغداد - الرصافة - جسر ديالى، شارع المصرف، سنتر الأطباء.<br><strong>الحالة الحالية:</strong> مجمع كلاس (Z) جديد كلياً (أقل من 5 مراجعين يومياً)، فتح جديد، توجد عيادات مؤثثة ومدفوعة الإيجار مع سكرتير خاص وصيدلية بإشراف صيدلاني.<br><strong>أوقات العمل المطلوبة:</strong> مساءً — كل أيام الأسبوع عدا الجمعة.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، أطفال، باطنية، جراحة الكلى والمسالك البولية، جراحة العظام والكسور، جراحة عامة (يُشترط وجود الاختصاص)." }
     ,
         { isClass: true, license: "want", licNote: "إيجار الإجازة فقط (لترخيص المركز)", hours: "أي وقت", specialties: ["طب أسرة"], gov: "بغداد", areas: ["الطارمية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب إجازة طب أسرة - مجمع طبي (بغداد - الكرخ - الطارمية) - تسلسل 134", details: "<strong>الموقع:</strong> بغداد - الكرخ - الطارمية.<br><strong>الحالة الحالية:</strong> مركز شغّال تصنيف كلاس (C) (من 5 إلى 10 مراجعين يومياً) — طلب عاجل.<br><strong>نوع الطلب:</strong> إيجار إجازة طب أسرة فقط لترخيص المركز (لا يُشترط التواجد؛ درجة الطبيب لا تهم لأن المركز شغّال).<br><strong>أوقات العمل:</strong> أي وقت.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>المطلوب:</strong> إجازة مزاولة طب أسرة." }
+    ,
+        { isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد", "مفاصل وروماتيزم"], gov: "بغداد", areas: ["الزعفرانية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عاجلة", title: "مطلوب أطباء وطبيبات (نسائية وتوليد، مفاصل وروماتيزم) - مجمع طبي (بغداد - الرصافة - الزعفرانية) - تسلسل 135", details: "<strong>الموقع:</strong> بغداد - الرصافة - الزعفرانية، بداية الأربع شوارع.<br><strong>الحالة الحالية:</strong> مجمع كلاس (B) (من 10 إلى 20 مراجعاً يومياً، عمل مستقر)، العيادة أرضية مؤثثة ومدفوعة الإيجار والتكاليف، وتوجد صيدلية.<br><strong>أوقات العمل المطلوبة:</strong> مساءً (من الساعة ٤ إلى ٨).<br><strong>آلية الراتب والعمل:</strong> نظام الكشفية.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، مفاصل وروماتيزم (الطلب عاجل)." }
+    ,
+        
+    
+        { isClass: true, hours: "صباحاً ومساءً", specialties: ["نسائية وتوليد", "أطفال", "أشعة وسونار ومفراس", "جراحة الكبرى والعصبية"], gov: "بغداد", areas: ["حي الجهاد"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فتح جديد", title: "مطلوب أطباء وطبيبات (نسائية وتوليد، أطفال، أشعة وسونار ومفراس، جراحة كبرى وعصبية) - مجمع طبي (بغداد - الكرخ - حي الجهاد) - تسلسل 136", details: "<strong>الموقع:</strong> بغداد - الكرخ - حي الجهاد، الشارع التجاري (قرب نقطة دالّة معروفة في المنطقة).<br><strong>الحالة الحالية:</strong> مجمع طبي كلاس (B)، من 10 إلى 20 مراجعاً يومياً (عمل مستقر)، فتح جديد، ويوجد فيه أطباء اختصاص آخرون.<br><strong>أوقات العمل المطلوبة:</strong> صباحاً ومساءً.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، أطفال، أشعة وسونار ومفراس، جراحة كبرى وعصبية (حسب الطبيب المناسب)." }
+    ,
+        { isClass: true, hours: "صباحاً ومساءً", specialties: ["جلدية", "باطنية", "أطفال", "جراحة عامة", "أنف وأذن وحنجرة", "مفاصل وروماتيزم", "عيون", "جراحة العظام والكسور", "الغدد الصماء والسكري", "جراحة الكلى والمسالك البولية", "أشعة وسونار ومفراس"], gov: "بغداد", areas: ["الحرية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فتح جديد", title: "مطلوب أطباء وطبيبات بعدّة اختصاصات - مجمع طبي (بغداد - الكرخ - الحرية) - تسلسل 137", details: "<strong>الموقع:</strong> بغداد - الكرخ - الحرية (دور الضباط، قرب نقطة دالّة معروفة في المنطقة).<br><strong>الحالة الحالية:</strong> مجمع طبي كلاس (C)، من 5 إلى 10 مراجعين يومياً (حديث الافتتاح)، فتح جديد، توجد صيدلية، ويضم حالياً أطباء نسائية وتوليد وأطفال.<br><strong>أوقات العمل المطلوبة:</strong> أي وقت (صباحاً ومساءً).<br><strong>آلية الراتب والعمل:</strong> نظام الكشفية.<br><strong>الاختصاصات المطلوبة:</strong> جلدية، باطنية، أطفال، جراحة عامة، أنف وأذن وحنجرة، مفاصل وروماتيزم، عيون، جراحة العظام والكسور، الغدد الصماء والسكري، جراحة الكلى والمسالك البولية، أشعة وسونار ومفراس (حسب الطبيب المناسب).<br><strong>دعم المجمع:</strong> دعم إعلامي لإنجاح المجمع والطبيب حسب الإمكان." }
     ];
 
     const ALL_MODE_BTNS = ['btnGeneral', 'btnDoctor', 'btnHospital', 'btnHospDoc', 'btnLatest', 'btnMatches', 'btnLicense', 'btnAllDoctors', 'btnAllClinics', 'btnCatalog', 'btnLicenseCatalog', 'btnDoctorCatalog'];
@@ -3180,6 +3225,27 @@
     function adUrl(id) {
         return location.href.split('#')[0] + '#ad=' + id;
     }
+    // رسالة واتساب تحدّد الإعلان الذي يتصفحه الزائر بدقة (النوع + التسلسل + الموقع + الاختصاص + الرابط) وتُرسَل لرقم المنصة
+    function adWaMsg(item, type) {
+        const specs = specsOf(item).slice(0, 6).join('، ');
+        const isHosp = type === 'clinic' && item.venueType === 'hospital';
+        const kind = type === 'doctor' ? '👨‍⚕️ طبيب يبحث عن عيادة' : (isHosp ? '🏥 مستشفى أهلي يطلب أطباء' : '🏢 مجمع طبي يطلب أطباء');
+        const L = ['مرحباً، أستفسر عن هذا الإعلان في منصة عيادات طبية:', '',
+            kind + ' — تسلسل ' + seqOf(item),
+            '📍 ' + adLocation(item, type)];
+        if (specs) L.push('🩺 ' + specs);
+        if (item._id) L.push('🔗 ' + adUrl(item._id));
+        L.push('', 'أرغب بالتفاصيل والتنسيق.');
+        return L.join('\n');
+    }
+    // الشريط الثابت: عند فتح إعلان (#ad=) يصبح خاصاً بذلك الإعلان، وإلا يعود عاماً
+    function updateWaSticky() {
+        const el = document.querySelector('.wa-sticky'); if (!el) return;
+        const m = location.hash.match(/^#ad=([\w-]+)$/);
+        const a = m && adIndex[m[1]];
+        if (a) { el.href = buildWaLink(adWaMsg(a.item, a.type)); el.textContent = '💬 اسأل عن هذا الإعلان (تسلسل ' + seqOf(a.item) + ') عبر واتساب المنصة'; }
+        else { el.href = buildWaLink('مرحباً، أستفسر عن خدمات منصة التنسيق الطبي'); el.textContent = '💬 تواصل معنا مباشرة على واتساب'; }
+    }
 
     function adText(item, type, withUrl) {
         const specs = specsOf(item);
@@ -3340,8 +3406,8 @@
                     </div>
                     ${doctorAmountHtml(item, type)}
                     <div class="whatsapp-box">
-                        <a href="${buildWaLink('مرحباً، أستفسر عن التفاصيل بخصوص: ' + item.title)}" target="_blank" class="whatsapp-btn">
-                            💬 ${WHATSAPP_DISPLAY}
+                        <a href="${buildWaLink(adWaMsg(item, type))}" target="_blank" class="whatsapp-btn">
+                            💬 راسلنا عن هذا الإعلان (تسلسل ${seqOf(item)}) — ${WHATSAPP_DISPLAY}
                         </a>${extraPhoneHtml}
                     </div>
                     ${cardMoreOptions(item, type, isRed)}
@@ -5058,6 +5124,7 @@
     let catCustomMeta = {};
     let catExportFocus = false; // عند التصدير: صورة مركّزة على الاختصاص المختار
     let promoStory = false; // صيغة المنشور: false = مربّع للمنشور، true = ستوري عمودي 1080×1920
+    let promoPhoto = ''; // صورة حقيقية (data URI) تُحشر مكان رسم الطبيب في البوستر؛ فارغة = رسم SVG
     function showSuggestedCatalog(baseId) {
         const a = adIndex[baseId];
         if (!a) { showToast('العنصر غير موجود'); return; }
@@ -5085,19 +5152,39 @@
         if (/كلاس\s*\(?\s*Z/i.test(t)) return 1;
         return 0;
     }
+    // أقصى تسلسل مُسجّل (لكل نوع) — مؤشّر "الأحدث تسجيلاً"
+    function _maxSeq(type) { const arr = type === 'doctor' ? GENERAL_CLINICS_DATA : DOCTORS_DATA; let mx = 0; arr.forEach(x => { const s = seqNum(x); if (s != null && s > mx) mx = s; }); return mx; }
+    // دفعة أولوية للمسجّلين حديثاً: آخر ~20% من التسجيلات تأخذ دفعة متدرّجة (الأحدث أعلى)
+    function _recencyBoost(item, type, mx) {
+        const n = seqNum(item); if (n == null) return 0;
+        if (mx == null) mx = _maxSeq(type);
+        if (mx <= 0) return 0;
+        const cut = mx * 0.8;
+        if (n < cut) return 0;
+        const frac = (n - cut) / ((mx - cut) || 1); // 0..1
+        return 8 + frac * 12;                        // 8..20
+    }
+    function _isRecent(item, type) { const mx = _maxSeq(type); const n = seqNum(item); return n != null && mx > 0 && n >= mx * 0.8; }
+    const STRONG_MAX_KM = 15; // أقصى مسافة (كم) لاعتبار الفرصة «قريبة» في أقوى الفرص/الاقتراح الفوري
     function instantSuggestPairs() {
         const pairs = [];
+        const mxDoc = _maxSeq('doctor'), mxCx = _maxSeq('clinic');
         GENERAL_CLINICS_DATA.forEach(doc => {
             if (seqNum(doc) === null || !isAvailable(doc)) return;
             const ms = findMatches(doc, 'doctor', {}).filter(m => m.tier === 0 && m.otherType === 'clinic');
             ms.forEach(m => {
                 const venue = m.other;
                 if (seqNum(venue) === null || !isAvailable(venue)) return;
+                // استبعاد الفرص البعيدة فعلياً من «أقوى الفرص/الاقتراح الفوري» (ليست قريبة)
+                if (m.km != null && m.km > STRONG_MAX_KM && !m.areaOverlap) return;
                 let score = suggestScore(doc, 'doctor', m);
                 if (venue.isClass) score += 15;            // أفضلية قوية للمجمع كلاس
                 score += _classQuality(venue);              // A أعلى من B أعلى من C…
                 const gr = doctorGrade(doc);
                 if (gr && /استشاري|بورد/.test(gr)) score += 6;
+                score += _recencyBoost(doc, 'doctor', mxDoc) + _recencyBoost(venue, 'clinic', mxCx); // أولوية للمسجّلين حديثاً
+                if (m.km != null) score -= Math.min(20, m.km); // الأقرب أفضل (عقوبة متدرّجة للمسافة)
+                else if (!m.areaOverlap) score -= 6;           // مسافة غير معروفة (منطقة عامة) أقل أفضلية
                 if (matchConflicts(doc, venue).length) return; // الفرصة المثالية بلا تعارض
                 pairs.push({ doc, venue, m, score });
             });
@@ -5140,11 +5227,11 @@
         const dSpec = specsOf(d).join('، ');
         const vSpec = specsOf(v).join('، ');
         const gr = doctorGrade(d);
-        const miniDoc = '<div class="insta-side"><div class="insta-badge">👨‍⚕️ طبيب — تسلسل ' + seqOf(d) + '</div>'
+        const miniDoc = '<div class="insta-side"><div class="insta-badge">👨‍⚕️ طبيب — تسلسل ' + seqOf(d) + (_isRecent(d, 'doctor') ? ' <span class="insta-new">🆕 جديد</span>' : '') + '</div>'
             + '<div class="insta-loc">' + adLocation(d, 'doctor') + '</div>'
             + '<div class="insta-spec">' + dSpec + (gr ? ' · ' + gr : '') + '</div>'
             + (salaryPref(d) ? '<div class="insta-sal">💵 ' + salaryPref(d) + '</div>' : '') + '</div>';
-        const miniCx = '<div class="insta-side cx"><div class="insta-badge">🏢 مجمع — تسلسل ' + seqOf(v) + (v.isClass ? ' <span class="insta-cls">كلاس</span>' : '') + '</div>'
+        const miniCx = '<div class="insta-side cx"><div class="insta-badge">🏢 مجمع — تسلسل ' + seqOf(v) + (v.isClass ? ' <span class="insta-cls">كلاس</span>' : '') + (_isRecent(v, 'clinic') ? ' <span class="insta-new">🆕 جديد</span>' : '') + '</div>'
             + '<div class="insta-loc">' + adLocation(v, 'clinic') + '</div>'
             + '<div class="insta-spec">' + vSpec + '</div>'
             + (salaryPref(v) ? '<div class="insta-sal">💵 ' + salaryPref(v) + '</div>' : '') + '</div>';
@@ -5157,6 +5244,7 @@
             + '<div class="insta-actions">'
             + '<button type="button" class="pc-btn insta-reroll" onclick="instantReroll()">🔄 اقتراح آخر</button>'
             + '<a class="whatsapp-btn" target="_blank" href="' + buildWaLink(waMsg) + '">💬 نسّق عبر واتساب المنصة</a>'
+            + (typeof pvDelegateBtn === 'function' ? pvDelegateBtn(d._id, v._id) : '')
             + '</div>';
     }
     function instaInit() {
@@ -5258,8 +5346,10 @@
     function strongRow(pr, idx) {
         const d = pr.doc, v = pr.venue;
         const reasons = suggestReasons(d, 'doctor', pr.m, 0);
+        const dNew = _isRecent(d, 'doctor') ? ' <span class="insta-new">🆕 جديد</span>' : '';
+        const vNew = _isRecent(v, 'clinic') ? ' <span class="insta-new">🆕 جديد</span>' : '';
         return '<div class="strong-item"><div class="strong-row"><div class="strong-rank">' + (idx + 1) + '</div><div class="strong-main">'
-            + '<div class="strong-pair"><b>👨‍⚕️ طبيب ' + seqOf(d) + '</b> ↔ <b>🏢 مجمع ' + seqOf(v) + (v.isClass ? ' <span class="insta-cls">كلاس</span>' : '') + '</b></div>'
+            + '<div class="strong-pair"><b>👨‍⚕️ طبيب ' + seqOf(d) + dNew + '</b> ↔ <b>🏢 مجمع ' + seqOf(v) + (v.isClass ? ' <span class="insta-cls">كلاس</span>' : '') + vNew + '</b></div>'
             + '<div class="strong-loc">' + specsOf(d).slice(0, 2).join('، ') + ' · ' + adLocation(v, 'clinic') + '</div>'
             + (reasons ? '<div class="strong-reasons">' + reasons + '</div>' : '')
             + '</div><button type="button" class="strong-wa whatsapp-btn" onclick="strongToggle(' + idx + ')">💬 نسّق</button></div>'
@@ -5278,7 +5368,7 @@
         _strongTop = top;
         const body = document.getElementById('strongBody');
         body.innerHTML = top.length
-            ? '<div style="font-size:13px;color:#64748b;font-weight:700;margin-bottom:10px">أقوى ' + top.length + ' فرص تطابق مرتّبة حسب القوة (أفضلية للمجمعات كلاس) — تابعها قبل أن تضيع.</div>' + top.map((pr, i) => strongRow(pr, i)).join('')
+            ? '<div style="font-size:13px;color:#64748b;font-weight:700;margin-bottom:10px">أقوى ' + top.length + ' فرص تطابق مرتّبة حسب القوة (أفضلية للمجمعات كلاس والمسجّلين حديثاً 🆕) — تابعها قبل أن تضيع.</div>' + top.map((pr, i) => strongRow(pr, i)).join('')
             : '<div style="padding:20px;text-align:center;color:#64748b;font-weight:800">لا توجد فرص قوية حالياً.</div>';
         document.getElementById('strongPanel').style.display = 'flex';
     }
@@ -5373,7 +5463,7 @@
         });
         lines.push('', '✅ للتفاصيل والتقديم أرسل رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
         lines.push('🌐 https://medical-clinics-platform.vercel.app/');
-        lines.push('', catHashtags(data));
+        lines.push('', '➖➖➖➖➖➖➖➖➖➖', catHashtags(data));
         return lines.join('\n');
     }
     // توليد هاشتاكات شاملة: أساسية + حسب النوع + كل اختصاص + المحافظات
@@ -5394,6 +5484,76 @@
         [...govSet].slice(0, 6).forEach(g => out.push(tagify(g)));
         // إزالة التكرار
         return [...new Set(out)].join(' ');
+    }
+    // ===== كابشن إنستغرام (خطّاف قوي + لا رابط قابل للنقر → الرابط في البايو + حفظ/مشاركة + هاشتاكات أوسع) =====
+    function igDiff() { return ['✨ ليش منصتنا بالذات؟', '🔒 رقمك لا يظهر للعامة', '📍 مطابقة بالقرب والاختصاص', '⚡ تنسيق فوري بلا وسيط ولا سكرتيرة']; }
+    function igHashtags(data) {
+        const tagify = s => '#' + String(s).trim().replace(/[\/،,()]/g, ' ').replace(/\s+/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
+        const out = [];
+        const base = ['منصة_عيادات_طبية', 'اطباء_العراق', 'وظائف_طبية', 'فرص_عمل_طبية', 'مطلوب_اطباء', 'تنسيق_طبي', 'العراق', 'طبيب', 'طبيبة', 'مجمع_طبي', 'عيادة', 'صحة', 'طب'];
+        if (catType === 'license') base.push('اجازات_طبية', 'اجازة_فتح_عيادة');
+        else if (catType === 'doctor') base.push('طبيب_يبحث_عن_عيادة', 'وظائف_العراق');
+        else base.push('مستشفى_اهلي', 'العمل_الطبي');
+        base.forEach(t => out.push('#' + t));
+        const specsSet = new Set(); data.forEach(i => (catType === 'license' ? licenseSpecsOf(i) : specsOf(i)).forEach(s => specsSet.add(s)));
+        [...specsSet].slice(0, 12).forEach(s => out.push(tagify(catType === 'license' ? 'اجازة_' + s : s)));
+        const govSet = new Set(); data.forEach(i => { if (i.gov) govSet.add(i.gov); });
+        [...govSet].slice(0, 5).forEach(g => { out.push(tagify(g)); out.push(tagify('اطباء_' + g)); });
+        return [...new Set(out)].slice(0, 28).join(' ');
+    }
+    function igCaption(data) {
+        const single = data.length === 1, it0 = data[0], t = catItemType(it0);
+        let hook;
+        if (catType === 'license') hook = single ? ('📜 إجازة طبية — تسلسل ' + seqOf(it0)) : '📜 إجازات طبية — عدة فرص متاحة الآن';
+        else if (t === 'doctor') hook = single ? ('👨‍⚕️ طبيب يبحث عن عيادة — ' + adLocation(it0, 'doctor')) : '👨‍⚕️ أطباء جاهزون يبحثون عن عيادات الآن';
+        else hook = single ? ('🚨 فرصة عمل لأطباء — ' + adLocation(it0, 'clinic')) : '🚨 فرص عمل لأطباء — مجمعات تبحث عن كوادر الآن';
+        const L = [hook, ''];
+        if (single) {
+            const specs = (catType === 'license' ? licenseSpecsOf(it0) : specsOf(it0));
+            if (t === 'clinic') L.push('🏥 مجمع طبي يطلب الاختصاصات التالية:');
+            else if (t === 'doctor') L.push('👨‍⚕️ الاختصاص:');
+            specs.slice(0, 8).forEach(s => L.push('• ' + s));
+            L.push('', '📍 ' + adLocation(it0, t));
+        } else {
+            L.push(catType === 'doctor' ? 'أطباء بمختلف الاختصاصات وفي عدة محافظات:' : 'مجمعات ومستشفيات أهلية تبحث عن أطباء:', '');
+            data.slice(0, 8).forEach(i => {
+                const sp = (catType === 'license' ? licenseSpecsOf(i) : specsOf(i)).slice(0, 3).join('، ');
+                L.push('▪️ [تسلسل ' + seqOf(i) + '] ' + adLocation(i, catItemType(i)) + (sp ? ' — ' + sp : ''));
+            });
+            if (data.length > 8) L.push('…والمزيد على المنصة');
+        }
+        L.push('');
+        igDiff().forEach(x => L.push(x));
+        L.push('');
+        L.push('📩 للتقديم: أرسل رقم التسلسل' + (single ? ' (' + seqOf(it0) + ')' : '') + ' على واتساب');
+        L.push('📲 ' + WHATSAPP_DISPLAY, '🔗 الرابط في البايو');
+        L.push('', '———————————', '💾 احفظ المنشور 🔁 وشاركه مع طبيب يبحث عن فرصة');
+        L.push('', '➖➖➖➖➖➖➖➖➖➖', igHashtags(data));
+        return L.join('\n');
+    }
+    function igExpandTags(baseTagStr) {
+        const generic = ['#طبيب', '#طبيبة', '#عيادة', '#صحة', '#طب', '#وظائف_طبية', '#فرص_عمل_طبية', '#العراق', '#بغداد', '#وظائف_العراق', '#العمل_الطبي', '#اطباء_العراق'];
+        const set = new Set(String(baseTagStr).split(/\s+/).filter(Boolean).concat(generic));
+        return [...set].slice(0, 28).join(' ');
+    }
+    // ===== حالة صيغة الكابشن (فيسبوك/إنستغرام) المشتركة بين البوسترات والكتالوج =====
+    let _capFmt = 'fb', _capPromoKind = null, _capCatData = null;
+    function capText() {
+        if (_capPromoKind != null) return _capFmt === 'ig' ? promoIgCaption(_capPromoKind) : promoCaption(_capPromoKind);
+        if (_capCatData) return _capFmt === 'ig' ? igCaption(_capCatData) : catCaption(_capCatData);
+        return '';
+    }
+    function setCapFmt(f) {
+        _capFmt = f;
+        const t = document.getElementById('catCapArea'); if (t) t.value = capText();
+        document.querySelectorAll('.cap-fmt').forEach(b => b.classList.toggle('on', b.dataset.fmt === f));
+    }
+    function capFmtBar() {
+        return '<div class="cap-fmts">'
+            + '<button type="button" class="cap-fmt' + (_capFmt === 'fb' ? ' on' : '') + '" data-fmt="fb" onclick="setCapFmt(\'fb\')">📘 فيسبوك</button>'
+            + '<button type="button" class="cap-fmt' + (_capFmt === 'ig' ? ' on' : '') + '" data-fmt="ig" onclick="setCapFmt(\'ig\')">📸 إنستغرام</button>'
+            + '<button type="button" class="cat-print exp" onclick="copyCatCaption()">📋 نسخ الكابشن</button>'
+            + '</div>';
     }
     function copyCatalogText() { copyText(catCaption(catChosen()), 'تم نسخ الكابشن — الصقه في واتساب'); }
     function copyCatCaption() { const t = document.getElementById('catCapArea'); if (t) { copyText(t.value, 'تم نسخ الكابشن'); } }
@@ -5566,8 +5726,8 @@
         const licWant = DOCTORS_DATA.filter(i => av(i) && i.license === 'want' && licenseSpecsOf(i).length).length;
         const licOffer = GENERAL_CLINICS_DATA.filter(i => av(i) && i.license === 'offer' && licenseSpecsOf(i).length).length;
         const licList = (typeof LICENSE_SPECS !== 'undefined' ? LICENSE_SPECS : ['جلدية', 'جراحة تجميلية', 'طب أسرة', 'أشعة وسونار ومفراس']).join('، ');
-        const blue = { bg: '#15307e', bg2: '#2456e6', chip: '#1d4ed8', sub: '#d6e3ff', accent: '#ffd36b' };
-        const teal = { bg: '#0b5f56', bg2: '#0d9488', chip: '#0d9488', sub: '#d6fff6', accent: '#ffd36b' };
+        const blue = { bg: '#15307e', bg2: '#2456e6', chip: '#1d4ed8', sub: '#d6e3ff', accent: '#ffd36b', warm: '#ff7a3d' };
+        const teal = { bg: '#0b5f56', bg2: '#0d9488', chip: '#0d9488', sub: '#d6fff6', accent: '#ffd36b', warm: '#ff7a3d' };
         let P, title, sub, points, stat;
         if (kind === 'doctors-available') {
             P = teal;
@@ -5624,10 +5784,42 @@
         const header = '<div style="display:flex;align-items:center;gap:18px;justify-content:center">'
             + '<div style="width:' + (story ? 104 : 92) + 'px;height:' + (story ? 104 : 92) + 'px;background:#ffffff;border-radius:24px;display:flex;align-items:center;justify-content:center">' + logo + '</div>'
             + '<div style="font-weight:900;font-size:' + (story ? 48 : 42) + 'px">منصة عيادات طبية</div></div>';
-        const middle = '<div style="text-align:center;font-weight:900;font-size:' + tF + 'px;margin-top:' + (story ? 40 : 30) + 'px;line-height:1.08">' + esc(title) + '</div>'
+        // صورة/رسم الطبيب + شارة «للأطباء فقط»
+        const figD = story ? 300 : 200;
+        const docSvg = '<svg viewBox="0 0 200 200" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">'
+            + '<defs><linearGradient id="pbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + P.bg2 + '"/><stop offset="1" stop-color="' + P.bg + '"/></linearGradient></defs>'
+            + '<rect width="200" height="200" fill="url(#pbg)"/>'
+            + '<path d="M38 200 C38 148 60 128 100 128 C140 128 162 148 162 200 Z" fill="#ffffff"/>'
+            + '<path d="M100 128 L82 200 L92 200 L100 150 L108 200 L118 200 Z" fill="#dde6f0"/>'
+            + '<rect x="89" y="112" width="22" height="26" rx="7" fill="#e7ad84"/>'
+            + '<circle cx="100" cy="88" r="31" fill="#f2c19a"/>'
+            + '<ellipse cx="70" cy="92" rx="5" ry="7" fill="#e7ad84"/><ellipse cx="130" cy="92" rx="5" ry="7" fill="#e7ad84"/>'
+            + '<path d="M68 90 C68 62 132 62 132 90 C132 76 123 66 100 66 C77 66 68 76 68 90 Z" fill="#35271b"/>'
+            + '<ellipse cx="90" cy="88" rx="3" ry="4" fill="#3a2a22"/><ellipse cx="110" cy="88" rx="3" ry="4" fill="#3a2a22"/>'
+            + '<path d="M84 80 q6 -4 12 0" fill="none" stroke="#35271b" stroke-width="2.2" stroke-linecap="round"/>'
+            + '<path d="M104 80 q6 -4 12 0" fill="none" stroke="#35271b" stroke-width="2.2" stroke-linecap="round"/>'
+            + '<path d="M97 92 q3 5 6 0" fill="none" stroke="#d99a6c" stroke-width="2" stroke-linecap="round"/>'
+            + '<path d="M90 101 q10 8 20 0" fill="none" stroke="#b9674a" stroke-width="2.6" stroke-linecap="round"/>'
+            + '<path d="M85 130 C82 166 118 166 115 130" fill="none" stroke="' + P.chip + '" stroke-width="6"/>'
+            + '<circle cx="116" cy="150" r="9" fill="' + P.accent + '"/>'
+            + '</svg>';
+        const figInner = promoPhoto
+            ? '<img src="' + promoPhoto + '" style="width:100%;height:100%;object-fit:cover" alt=""/>'
+            : docSvg;
+        const figure = '<div style="width:' + figD + 'px;height:' + figD + 'px;border-radius:50%;overflow:hidden;margin:' + (story ? 30 : 20) + 'px auto 0;box-shadow:0 12px 32px rgba(0,0,0,.38);border:6px solid ' + P.accent + '">' + figInner + '</div>';
+        const onlyDocs = '<div style="text-align:center;margin:' + (story ? 22 : 16) + 'px 0 0"><span style="display:inline-flex;align-items:center;gap:10px;background:' + P.accent + ';color:#1b1b1b;font-weight:900;font-size:' + (cF - 2) + 'px;padding:' + (story ? '12px 30px' : '9px 24px') + ';border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.25)">👨‍⚕️ للأطباء فقط</span></div>';
+        const middle = figure + onlyDocs
+            + '<div style="text-align:center;font-weight:900;font-size:' + tF + 'px;margin-top:' + (story ? 40 : 30) + 'px;line-height:1.08">' + esc(title) + '</div>'
             + '<div style="text-align:center;font-size:' + sF + 'px;color:' + P.sub + ';margin-top:16px;font-weight:700;line-height:1.4">' + esc(sub) + '</div>'
             + '<div style="background:' + P.accent + ';color:#1b1b1b;font-weight:900;font-size:' + cF + 'px;text-align:center;border-radius:16px;padding:16px 28px;margin:' + (story ? 36 : 28) + 'px auto 0;width:fit-content">📊 ' + esc(stat) + '</div>'
             + '<div style="display:grid;grid-template-columns:' + (story ? '1fr' : '1fr 1fr') + ';gap:' + gap + 'px;margin-top:' + (story ? 36 : 30) + 'px">' + chips + '</div>';
+        // شريط التميّز: ما يفرّقنا عن المنافسين (خصوصية + مطابقة ذكية + فورية)
+        const diff = ['🔒 رقمك لا يظهر للعامة', '📍 مطابقة بالقرب والاختصاص', '⚡ تنسيق فوري موثوق', '🤝 لا سكرتيرة ولا وسيط — التنسيق علينا'];
+        const edge = '<div style="background:rgba(255,122,61,.12);border:2px solid rgba(255,122,61,.55);border-radius:22px;padding:' + (story ? '26px 24px' : '20px 20px') + ';margin-top:' + (story ? 34 : 26) + 'px">'
+            + '<div style="text-align:center;font-size:' + (cF - 3) + 'px;font-weight:900;color:' + P.warm + ';margin-bottom:' + (story ? 18 : 14) + 'px">⭐ لماذا منصتنا بالذات؟</div>'
+            + '<div style="display:flex;flex-wrap:wrap;gap:' + (story ? 16 : 12) + 'px;justify-content:center">'
+            + diff.map(x => '<div style="background:rgba(255,122,61,.18);border:1px solid rgba(255,122,61,.45);border-radius:999px;padding:' + (story ? '14px 26px' : '10px 20px') + ';font-size:' + (cF - 5) + 'px;font-weight:800;color:#fff;white-space:nowrap">' + x + '</div>').join('')
+            + '</div></div>';
         const footer = '<div style="margin-top:' + (story ? 44 : 34) + 'px;background:#ffffff;border-radius:20px;padding:' + (story ? '32px 34px' : '26px 30px') + ';display:flex;align-items:center;justify-content:space-between;gap:18px">'
             + '<div style="text-align:right"><div style="font-weight:900;font-size:' + (story ? 40 : 34) + 'px;color:' + P.chip + '">' + ctaTitle + '</div><div style="font-size:' + (story ? 28 : 24) + 'px;color:#555;font-weight:700">' + ctaSub + '</div></div>'
             + '<div style="background:' + P.chip + ';color:#fff;font-weight:900;font-size:' + (story ? 44 : 40) + 'px;padding:16px 26px;border-radius:14px;direction:ltr;white-space:nowrap">' + WHATSAPP_DISPLAY + '</div></div>'
@@ -5636,16 +5828,16 @@
         if (story) {
             html = '<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;height:1920px;background:linear-gradient(160deg,' + P.bg + ',' + P.bg2 + ');font-family:Tahoma,Arial,sans-serif;padding:96px 72px;box-sizing:border-box;direction:rtl;color:#fff;display:flex;flex-direction:column;justify-content:space-between">'
                 + '<div>' + header + '</div>'
-                + '<div>' + middle + '</div>'
+                + '<div>' + middle + edge + '</div>'
                 + '<div>' + footer + '</div>'
                 + '</div>';
             return { html, w: 1080, h: 1920 };
         }
         html = '<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;background:linear-gradient(160deg,' + P.bg + ',' + P.bg2 + ');font-family:Tahoma,Arial,sans-serif;padding:56px 54px;box-sizing:border-box;direction:rtl;color:#fff">'
-            + header + middle + footer + '</div>';
+            + header + middle + edge + footer + '</div>';
         return { html, w: 1080 };
     }
-    function promoCaption(kind) {
+    function promoCapParts(kind) {
         let lines, tags;
         if (kind === 'doctors-available') {
             lines = ['🏢 لأصحاب المجمعات والعيادات والمستشفيات الأهلية:', '', 'لدينا أطباء جاهزون يبحثون عن فرصة عمل — بكل الاختصاصات وفي كل المحافظات.', '✅ بورد وأخصائيون وممارسون.', '✅ نرشّح لكم الأنسب لمنطقتكم واختصاصكم بتنسيق سريع.'];
@@ -5670,8 +5862,21 @@
             tags = forDoc ? '#طبيب_يبحث_عن_عيادة #اطباء_العراق #فرص_عمل_طبية #منصة_عيادات_طبية #العراق'
                 : '#مطلوب_اطباء #مجمع_طبي #مستشفى_اهلي #وظائف_طبية #منصة_عيادات_طبية #العراق';
         }
-        lines.push('', '📲 راسلنا على واتساب: ' + WHATSAPP_DISPLAY, '🌐 https://medical-clinics-platform.vercel.app/', '', tags);
+        return { lines, tags };
+    }
+    function promoCaption(kind) {
+        const { lines, tags } = promoCapParts(kind);
+        lines.push('', '📲 راسلنا على واتساب: ' + WHATSAPP_DISPLAY, '🌐 https://medical-clinics-platform.vercel.app/', '', '➖➖➖➖➖➖➖➖➖➖', tags);
         return lines.join('\n');
+    }
+    // كابشن إنستغرام للبوستر: الرابط في البايو + حفظ/مشاركة + هاشتاكات أوسع
+    function promoIgCaption(kind) {
+        const { lines, tags } = promoCapParts(kind);
+        const L = lines.slice();
+        L.push('', '📩 راسلنا على واتساب: ' + WHATSAPP_DISPLAY, '🔗 الرابط في البايو');
+        L.push('', '———————————', '💾 احفظ المنشور 🔁 وشاركه مع من يبحث عن فرصة');
+        L.push('', '➖➖➖➖➖➖➖➖➖➖', igExpandTags(tags));
+        return L.join('\n');
     }
     function promoExport(kind) {
         const r = promoPosterHTML(kind); const html = r.html, w = r.w;
@@ -5694,12 +5899,13 @@
             const box = document.getElementById('promoExport') || document.getElementById('catExport') || document.getElementById('resExport');
             if (box) {
                 box.style.display = 'block';
+                _capPromoKind = kind; _capCatData = null; _capFmt = 'fb';
                 box.innerHTML = '<div style="font-weight:900;font-size:20px;color:#0d9488;margin-bottom:10px">✅ المنشور جاهز — احفظه وانشره</div>'
                     + '<img src="' + url + '" alt="منشور"/>'
                     + '<div><a class="dl" href="' + url + '" download="manasa-promo-' + kind + '.png">⬇️ تنزيل الصورة</a></div>'
                     + '<div style="font-weight:800;color:#0f766e;margin-top:16px">📝 الكابشن الجاهز:</div>'
-                    + '<textarea id="catCapArea" class="cat-cap" readonly>' + promoCaption(kind).replace(/</g, '&lt;') + '</textarea>'
-                    + '<div><button type="button" class="cat-print exp" onclick="copyCatCaption()">📋 نسخ الكابشن</button></div>';
+                    + '<textarea id="catCapArea" class="cat-cap" readonly>' + capText().replace(/</g, '&lt;') + '</textarea>'
+                    + capFmtBar();
                 box.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         };
@@ -5725,13 +5931,14 @@
             if (box) { box.style.display = 'block';
                 const unit = catType === 'license' ? 'إعلان' : catType === 'doctor' ? 'طبيب' : 'مجمع';
                 const head = single ? `✅ إعلان (تسلسل ${seqOf(imgData[0])}) جاهز — احفظه وانشره` : `✅ الصورة جاهزة (${imgData.length} ${unit}) — احفظها وانشرها`;
+                _capCatData = capData; _capPromoKind = null; _capFmt = 'fb';
                 box.innerHTML = (note || '') + `
                 <div style="font-weight:900;font-size:20px;color:#0d9488;margin-bottom:10px">${head}</div>
                 <img src="${url}" alt="إعلان"/>
                 <div><a class="dl" href="${url}" download="${fname || 'manasa-ad'}.png">⬇️ تنزيل الصورة</a></div>
                 <div style="font-weight:800;color:#0f766e;margin-top:16px">📝 الكابشن الجاهز:</div>
-                <textarea id="catCapArea" class="cat-cap" readonly>${catCaption(capData).replace(/</g, '&lt;')}</textarea>
-                <div><button type="button" class="cat-print exp" onclick="copyCatCaption()">📋 نسخ الكابشن</button></div>`;
+                <textarea id="catCapArea" class="cat-cap" readonly>${capText().replace(/</g, '&lt;')}</textarea>
+                ${capFmtBar()}`;
                 box.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         };
@@ -6460,6 +6667,17 @@
             el.href = buildWaLink('مرحباً، أستفسر عن خدمات منصة التنسيق الطبي');
         });
         ADMIN = checkAdmin();
+        document.body.classList.toggle('is-admin', !!ADMIN);
+        if (!ADMIN) { // شريط واتساب ثابت للزائر (لا يظهر في نسخة الأدمن)
+            const wa = document.createElement('a');
+            wa.className = 'wa-sticky'; wa.target = '_blank'; wa.rel = 'noopener';
+            wa.href = buildWaLink('مرحباً، أستفسر عن خدمات منصة التنسيق الطبي');
+            wa.textContent = '💬 تواصل معنا مباشرة على واتساب';
+            document.body.appendChild(wa);
+            document.body.classList.add('has-wa-sticky');
+            window.addEventListener('hashchange', updateWaSticky);
+            setTimeout(updateWaSticky, 0);
+        }
         renderHeroStats();
         const savedAud = sessionStorageGet('audience');
         if (savedAud === 'doctor' || savedAud === 'complex') setAudience(savedAud);
