@@ -1539,6 +1539,46 @@
     .cat-ad-btn { margin-top:8px; width:100%; font-family:inherit; font-weight:800; font-size:14px; padding:9px 12px; border:none; border-radius:10px; background:#0d9488; color:#fff; cursor:pointer; }
     .cat-ad-btn:hover { background:#0b7d73; }
     .cat-print.wa { background:#25D366; color:#053a1b; }
+    .cat-compact { background:#f0fdfa; border:2px solid #0d9488; border-radius:14px; padding:14px; margin:12px 0; }
+    .cc-head { font-weight:900; color:#0f766e; font-size:1.05rem; margin-bottom:10px; }
+    .cc-govt { font-weight:900; color:#16307e; margin:10px 0 4px; }
+    .cc-side { font-weight:800; color:#0d9488; margin:8px 0 4px; }
+    .cc-row { display:flex; align-items:center; justify-content:space-between; gap:10px; background:#fff; border:1px solid #cdeee9; border-radius:10px; padding:7px 12px; margin-bottom:6px; }
+    .cc-area { font-weight:800; color:#1e293b; }
+    .cc-seqs { display:flex; flex-wrap:wrap; gap:5px; justify-content:flex-end; }
+    .cc-chip { background:#ffd36b; color:#1b1b1b; font-weight:900; border-radius:8px; padding:2px 10px; text-decoration:none; font-size:.9rem; }
+    .cat-hub-fab { bottom:390px !important; background:#0e3350 !important; border-color:#ffd36b !important; }
+    .hub-note { font-weight:800; color:#475569; margin-bottom:10px; font-size:.92rem; }
+    .hub-card { background:#f8fafc; border:2px solid #cbd5e1; border-radius:14px; padding:12px; margin-bottom:10px; }
+    .hub-t { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+    .hub-t b { display:block; color:#16307e; font-size:1rem; }
+    .hub-t small { color:#64748b; font-weight:700; }
+    .hub-ic { font-size:1.6rem; }
+    .hub-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; align-items:center; }
+    .hub-in { font-family:inherit; font-size:.92rem; font-weight:700; padding:9px 10px; border:2px solid #cbd5e1; border-radius:10px; background:#fff; flex:1 1 120px; min-width:0; }
+    .hub-num { flex:1 1 110px; direction:rtl; }
+    .hub-go { background:#0d9488 !important; color:#fff !important; flex:0 0 auto; }
+    .cat-areas { background:#fff7ed; border:2px solid #ea580c; border-radius:14px; padding:0; margin:12px 0; overflow:hidden; }
+    .cat-areas > summary { cursor:pointer; list-style:none; padding:12px 14px; font-weight:900; color:#9a3412; background:#ffedd5; }
+    .cat-areas > summary::-webkit-details-marker { display:none; }
+    #catAreaBox { padding:12px 14px; }
+    .ca-hint { font-weight:800; color:#7c2d12; margin-bottom:8px; font-size:.9rem; }
+    .ca-chips { display:flex; flex-wrap:wrap; gap:7px; max-height:220px; overflow-y:auto; padding:2px; }
+    .ca-chip { font-family:inherit; font-weight:800; font-size:.88rem; padding:6px 12px; border-radius:999px; border:2px solid #fdba74; background:#fff; color:#7c2d12; cursor:pointer; }
+    .ca-chip small { opacity:.7; }
+    .ca-chip.on { background:#ea580c; border-color:#ea580c; color:#fff; }
+    .ca-res { margin-top:14px; border-top:2px dashed #fdba74; padding-top:12px; }
+    .ca-rh { font-weight:900; color:#16307e; margin-bottom:8px; }
+    .ca-modes { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+    .ca-mode { font-family:inherit; font-weight:800; font-size:.85rem; padding:6px 12px; border-radius:10px; border:2px solid #fdba74; background:#fff; color:#7c2d12; cursor:pointer; }
+    .ca-mode.on { background:#16307e; border-color:#16307e; color:#fff; }
+    .ca-tg { display:flex; align-items:center; gap:8px; font-weight:800; color:#7c2d12; margin-bottom:8px; font-size:.9rem; }
+    .ca-specs { display:flex; flex-wrap:wrap; gap:8px; }
+    .ca-spec { background:#fff; border:2px solid #cbd5e1; border-radius:12px; padding:7px 14px; font-weight:900; color:#1e293b; }
+    .ca-spec.com { border-color:#f59e0b; background:#fffbeb; }
+    .ca-spec small { color:#92400e; }
+    .ca-act { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .cc-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
     .cap-fmts { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; align-items:center; }
     .cap-fmt { font-family:inherit; font-size:15px; font-weight:800; padding:9px 18px; border-radius:12px; border:2px solid #cbd5d3; background:#fff; color:#334155; cursor:pointer; }
     .cap-fmt.on { background:#0e3350; color:#fff; border-color:#0e3350; }
@@ -1855,8 +1895,8 @@
 
     const areaHierarchy = {
         "بغداد": {
-            "الرصافة": ["الرصافة - المركز", "الكرادة", "الاعظمية", "الوزيرية", "بغداد الجديدة", "البلديات", "المشتل", "العبيدي", "الكمالية", "ناحية الوحدة", "مدينة الصدر", "الشعب", "الراشدية", "زيونة", "الطارمية", "الزعفرانية", "مناطق أخرى"],
-            "الكرخ": ["الكرخ - المركز", "المنصور", "الكاظمية", "الغزالية", "الدورة", "البياع", "حي الإعلام", "أبو غريب", "السيدية", "العامرية", "الخضراء", "التاجي", "الحرية", "الدولعي", "الرحمانية", "حي الجامعة", "اليرموك", "أطراف الكرخ", "حي الجهاد", "حي العامل", "شهداء البياع", "مدينة جكوك", "مدينة الحارثية", "الشرطة الرابعة", "حي الحسين", "علي الصالح", "أبو دشير", "الشماعية", "العطيفية", "المحمودية", "مناطق أخرى"]
+            "الرصافة": ["الرصافة - المركز", "الكرادة", "الاعظمية", "الوزيرية", "بغداد الجديدة", "البلديات", "المشتل", "العبيدي", "الكمالية", "ناحية الوحدة", "مدينة الصدر", "الشعب", "الراشدية", "زيونة", "الزعفرانية", "مناطق أخرى"],
+            "الكرخ": ["الكرخ - المركز", "الطارمية", "المنصور", "الكاظمية", "الغزالية", "الدورة", "البياع", "حي الإعلام", "أبو غريب", "السيدية", "العامرية", "الخضراء", "التاجي", "الحرية", "الدولعي", "الرحمانية", "حي الجامعة", "اليرموك", "أطراف الكرخ", "حي الجهاد", "حي العامل", "شهداء البياع", "مدينة جكوك", "مدينة الحارثية", "الشرطة الرابعة", "حي الحسين", "علي الصالح", "أبو دشير", "الشماعية", "العطيفية", "المحمودية", "مناطق أخرى"]
         },
         "نينوى": {
             "مركز الموصل": ["الجانب الأيمن - المركز", "الجانب الأيسر - المركز", "مناطق أخرى"],
@@ -5082,10 +5122,21 @@
     }
 
     // ===== عرض الكتالوج (شبكة بطاقات + تحديد + فلترة + تصدير صورة + كابشن) =====
+    let catSpecX = []; // اختصاصات إضافية لإعلان مشترك (أدمن)
+    function catSpecs() { return catSpec ? [catSpec].concat(catSpecX.filter(x => x !== catSpec)) : []; }
+    function catSpecLabel(sep) { return catSpecs().join(sep || ' + '); }
+    function catSpecXUI(specList) {
+        const opts = (specList || []).filter(x => x !== catSpec && !catSpecX.includes(x));
+        return '<span class="cat-specx no-print" style="display:inline-flex;flex-wrap:wrap;gap:6px;align-items:center;width:100%;margin-top:6px"><b style="color:#0f766e">➕ إعلان مشترك — أضف اختصاصاً:</b>'
+            + '<select class="cat-sel" onchange="catSpecAdd(this.value)"><option value="">— اختر اختصاصاً إضافياً —</option>' + opts.map(x => '<option>' + escHtml(x) + '</option>').join('') + '</select>'
+            + catSpecX.map(x => '<span style="background:#ffd36b;color:#111;font-weight:900;border-radius:999px;padding:3px 12px">' + escHtml(x) + ' <a href="javascript:void(0)" onclick="catSpecDel(\'' + x.replace(/'/g, "\\'") + '\')" style="color:#9b1c1c;text-decoration:none">✕</a></span>').join('') + '</span>';
+    }
+    function catSpecAdd(v) { if (v && v !== catSpec && !catSpecX.includes(v)) catSpecX.push(v); renderCatalog(); }
+    function catSpecDel(v) { catSpecX = catSpecX.filter(x => x !== v); renderCatalog(); }
     let catType = 'clinic', catGov = '', catSpec = '', catSide = '', catClass = '', catSel = new Set(), catShowSel = false, catLicSide = 'all';
     // وضع «الكتالوج المقترح»: قائمة ثابتة من المطابقات لطبيب/مجمع معيّن
     let catCustom = null, catCustomBase = null, catCustomBaseType = null;
-    function showCatalog(type) { catCustom = null; catCustomBase = null; catCustomBaseType = null; if (type) { catType = type; catGov = ''; catSpec = ''; catSide = ''; catClass = ''; catSel = new Set(); catShowSel = false; catLicSide = 'all'; } renderCatalog(); }
+    function showCatalog(type) { catCustom = null; catCustomBase = null; catCustomBaseType = null; if (type) { catType = type; catGov = ''; catSpec = ''; catSpecX = []; catAreaSel = new Set(); catSide = ''; catClass = ''; catSel = new Set(); catShowSel = false; catLicSide = 'all'; } renderCatalog(); }
     // يفتح كتالوجاً يحوي المجمعات/الأطباء المقترحين لعنصر معيّن (بنفس أدوات التحديد والإرسال والصورة)
     // درجة ترتيب الاقتراح: الأقرب + أكثر تطابقاً بالاختصاص + كلاس + الأعلى دفعاً (أجور التنسيق) − التعارض
     function suggestScore(base, baseType, m) {
@@ -5139,7 +5190,7 @@
         catCustomMeta = {};
         scored.forEach((x, idx) => { catCustomMeta[x.it._id] = suggestReasons(baseItem, baseType, x.m, idx); });
         catCustomBase = baseItem; catCustomBaseType = baseType;
-        catType = wantType; catGov = ''; catSpec = ''; catSide = ''; catClass = '';
+        catType = wantType; catGov = ''; catSpec = ''; catSpecX = []; catSide = ''; catClass = '';
         catSel = new Set(); catShowSel = false; catLicSide = 'all';
         renderCatalog();
     }
@@ -5374,7 +5425,7 @@
     }
 
     function catToggleShowSel() { catShowSel = !catShowSel; renderCatalog(); }
-    function catSet(which, val) { if (which === 'gov') catGov = val; else if (which === 'spec') catSpec = val; else if (which === 'side') catSide = val; else if (which === 'class') catClass = val; else if (which === 'licside') { catLicSide = val; catSel = new Set(); catShowSel = false; } renderCatalog(); }
+    function catSet(which, val) { if (which === 'gov') { catGov = val; catAreaSel = new Set(); } else if (which === 'spec') { catSpec = val; catSpecX = []; } else if (which === 'side') catSide = val; else if (which === 'class') catClass = val; else if (which === 'licside') { catLicSide = val; catSel = new Set(); catShowSel = false; } renderCatalog(); }
     // نوع العنصر داخل الكتالوج (في تبويب الإجازات يُحسب لكل عنصر حسب جهته)
     function catItemType(i) { return catType === 'license' ? (i.license === 'offer' ? 'doctor' : 'clinic') : catType; }
     // استخراج درجة الطبيب (بورد/أخصائي/ماجستير/مقيم/ممارس…) من العنوان والتفاصيل
@@ -5429,7 +5480,7 @@
             && !(i.statusLabel && i.statusLabel.includes('غير متوفر'))
             && !/محجوز مؤقت/.test(i.title || '')
             && (!catGov || govsOf(i).includes(catGov))
-            && (!catSpec || specsOf(i).includes(catSpec))
+            && (!catSpec || catSpecs().some(sp => specsOf(i).includes(sp)))
             && (!catSide || sidesOf(i).has(catSide))
             && (!catClass || !!i.isClass))
             .slice().sort((a, b) => seqNum(b) - seqNum(a));
@@ -5442,7 +5493,7 @@
             if (offers && !wants) licHead = (data.length === 1 ? '📜 عرض إجازة طبية' : '📜 أطباء يعرضون إجازاتهم') + ' — منصة عيادات طبية';
             else if (wants && !offers) licHead = '📜 مطلوب إجازات طبية — منصة عيادات طبية';
         }
-        const head = focus ? ('🩺 مطلوب أطباء وطبيبات اختصاص ' + catSpec + ' — منصة عيادات طبية')
+        const head = focus ? ('🩺 مطلوب أطباء وطبيبات اختصاص ' + catSpecLabel() + ' — منصة عيادات طبية')
             : catCustom ? ((catCustomBaseType === 'doctor' ? '📑 مجمعات مقترحة لك' : '📑 أطباء مقترحون لك') + ' — منصة عيادات طبية')
             : catType === 'license' ? licHead
             : catType === 'doctor' ? '👨‍⚕️ أطباء يبحثون عن عيادات — منصة عيادات طبية'
@@ -5555,6 +5606,291 @@
             + '<button type="button" class="cat-print exp" onclick="copyCatCaption()">📋 نسخ الكابشن</button>'
             + '</div>';
     }
+    // ===== 📑 مركز الكتالوج (أدمن): زر واحد يعرض كل أنواع الكتالوج لإنشاء إعلان =====
+    function catHubInit() {
+        if (document.getElementById('catHubPanel')) return;
+        const p = document.createElement('div');
+        p.id = 'catHubPanel'; p.className = 'pc-panel'; p.style.display = 'none';
+        p.innerHTML = '<div class="pc-card"><div class="pc-head"><span>📑 مركز الكتالوج — اختر نوع الإعلان</span><button type="button" class="pc-x" onclick="catHubClose()">✖</button></div><div class="pc-body" id="catHubBody"></div></div>';
+        document.body.appendChild(p);
+        p.addEventListener('click', e => { if (e.target === p) catHubClose(); });
+    }
+    function catHubClose() { const p = document.getElementById('catHubPanel'); if (p) p.style.display = 'none'; }
+    function catHubOpen() {
+        catHubInit();
+        const avail = i => seqNum(i) !== null && !(i.statusLabel && i.statusLabel.includes('غير متوفر'));
+        const govs = [...new Set(DOCTORS_DATA.filter(avail).map(i => i.gov).filter(Boolean))].sort((a, b) => a === 'بغداد' ? -1 : b === 'بغداد' ? 1 : 0);
+        const specs = [...new Set(DOCTORS_DATA.filter(avail).flatMap(i => specsOf(i)))].filter(Boolean).sort((a, b) => a.localeCompare(b, 'ar'));
+        const gOpt = '<option value="">كل المحافظات</option>' + govs.map(g => '<option>' + escHtml(g) + '</option>').join('');
+        const sOpt = '<option value="">— اختر الاختصاص —</option>' + specs.map(s => '<option>' + escHtml(s) + '</option>').join('');
+        const typeSel = id => '<select id="' + id + '" class="hub-in"><option value="clinic">🏢 مجمعات</option><option value="doctor">👨‍⚕️ أطباء</option></select>';
+        const card = (ic, ttl, sub, body) => '<div class="hub-card"><div class="hub-t"><span class="hub-ic">' + ic + '</span><div><b>' + ttl + '</b><small>' + sub + '</small></div></div>' + body + '</div>';
+        document.getElementById('catHubBody').innerHTML =
+            '<div class="hub-note">اختر نوع الكتالوج، وسيُفتح جاهزاً لتصدّره صورة بكابشن وهاشتاكات:</div>'
+            + card('🏢', 'كتالوج عام', 'كل الفلاتر: المحافظة، الجانب، الاختصاص، كلاس', '<div class="hub-row"><button class="pc-btn" onclick="catHubGo(\'clinic\')">🏢 المجمعات</button><button class="pc-btn" onclick="catHubGo(\'doctor\')">👨‍⚕️ الأطباء</button><button class="pc-btn" onclick="catHubGo(\'license\')">📜 الإجازات</button></div>')
+            + card('🩺', 'كتالوج الاختصاص', 'اختصاص + محافظة ← تُجمَع المناطق التي تحتاجه', '<div class="hub-row">' + typeSel('hubT1') + '<select id="hubG1" class="hub-in">' + gOpt + '</select><select id="hubS1" class="hub-in">' + sOpt + '</select><button class="pc-btn hub-go" onclick="catHubGo(\'spec\')">افتح ←</button></div>')
+            + card('🗺️', 'كتالوج المناطق', 'حدّد مناطق ← تظهر الاختصاصات المشتركة فيها', '<div class="hub-row">' + typeSel('hubT2') + '<select id="hubG2" class="hub-in">' + gOpt + '</select><button class="pc-btn hub-go" onclick="catHubGo(\'areas\')">افتح ←</button></div>')
+            + card('📌', 'كتالوج مقترح لطبيب أو مجمع', 'اكتب التسلسل ← أفضل المجمعات/الأطباء المناسبين له', '<div class="hub-row"><input id="hubSd" class="hub-in hub-num" type="number" placeholder="تسلسل الطبيب"><button class="pc-btn hub-go" onclick="catHubGo(\'sugDoc\')">مجمعات له ←</button></div><div class="hub-row"><input id="hubSc" class="hub-in hub-num" type="number" placeholder="تسلسل المجمع"><button class="pc-btn hub-go" onclick="catHubGo(\'sugCx\')">أطباء له ←</button></div>')
+            + card('📸', 'إعلان خاص بواحد', 'صورة إعلان لمجمع أو طبيب واحد', '<div class="hub-row"><input id="hubAd" class="hub-in hub-num" type="number" placeholder="التسلسل"><button class="pc-btn hub-go" onclick="catHubGo(\'adCx\')">🏢 مجمع</button><button class="pc-btn hub-go" onclick="catHubGo(\'adDoc\')">👨‍⚕️ طبيب</button></div>')
+            + card('🎨', 'منشورات ترويجية عامة', 'تعريف بالمنصة، جذب الأطباء أو المجمعات', '<div class="hub-row"><button class="pc-btn" onclick="catHubGo(\'posters\')">افتح مركز المنشورات</button></div>');
+        document.getElementById('catHubPanel').style.display = 'flex';
+    }
+    function catHubFind(n, type) {
+        const N = parseInt(n, 10); if (!N) return null;
+        return (type === 'doctor' ? GENERAL_CLINICS_DATA : DOCTORS_DATA).find(i => seqNum(i) === N) || null;
+    }
+    function catHubGo(kind) {
+        const v = id => { const e = document.getElementById(id); return e ? e.value : ''; };
+        if (kind === 'clinic' || kind === 'doctor' || kind === 'license') { catHubClose(); showCatalog(kind); return; }
+        if (kind === 'posters') { catHubClose(); postersOpen(); return; }
+        if (kind === 'spec') {
+            if (!v('hubS1')) { showToast('اختر الاختصاص أولاً'); return; }
+            catHubClose(); showCatalog(v('hubT1')); if (v('hubG1')) catSet('gov', v('hubG1')); catSet('spec', v('hubS1')); return;
+        }
+        if (kind === 'areas') {
+            catHubClose(); showCatalog(v('hubT2')); if (v('hubG2')) catSet('gov', v('hubG2'));
+            setTimeout(() => { const d = document.querySelector('.cat-areas'); if (d) { d.open = true; d.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }, 250);
+            return;
+        }
+        if (kind === 'sugDoc' || kind === 'sugCx') {
+            const it = catHubFind(v(kind === 'sugDoc' ? 'hubSd' : 'hubSc'), kind === 'sugDoc' ? 'doctor' : 'clinic');
+            if (!it) { showToast('لا يوجد ' + (kind === 'sugDoc' ? 'طبيب' : 'مجمع') + ' بهذا التسلسل'); return; }
+            catHubClose(); showSuggestedCatalog(it._id); return;
+        }
+        if (kind === 'adDoc' || kind === 'adCx') {
+            const it = catHubFind(v('hubAd'), kind === 'adDoc' ? 'doctor' : 'clinic');
+            if (!it) { showToast('لا يوجد ' + (kind === 'adDoc' ? 'طبيب' : 'مجمع') + ' بهذا التسلسل'); return; }
+            catHubClose(); showCatalog(kind === 'adDoc' ? 'doctor' : 'clinic');
+            setTimeout(() => exportSingleAd(it._id), 250);
+        }
+    }
+    // ===== كتالوج المناطق (أدمن): حدّد مناطق ← تظهر الاختصاصات المطلوبة فيها (مع المشترك بين منطقتين فأكثر) =====
+    let catAreaSel = new Set(), catAreaMode = 'all'; // all | two | every
+    function catAreaItems() { // نفس فلتر الكتالوج لكن بلا قيد الاختصاص
+        const keep = catSpec; catSpec = '';
+        try { return catFiltered(); } finally { catSpec = keep; }
+    }
+    function catAreaModel() {
+        const items = catAreaItems(), counts = new Map();
+        items.forEach(i => (i.areas || []).forEach(a => { if (a !== 'مناطق أخرى') counts.set(a, (counts.get(a) || 0) + 1); }));
+        const areas = [...counts.entries()].sort((x, y) => (y[1] - x[1]) || x[0].localeCompare(y[0], 'ar'));
+        const sel = [...catAreaSel].filter(a => counts.has(a));
+        const specMap = new Map();
+        items.forEach(i => {
+            const ia = (i.areas || []).filter(a => sel.includes(a)); if (!ia.length) return;
+            specsOf(i).forEach(s => {
+                if (!specMap.has(s)) specMap.set(s, { areas: new Set(), seqs: new Set() });
+                const o = specMap.get(s); ia.forEach(a => o.areas.add(a)); o.seqs.add(seqNum(i));
+            });
+        });
+        let specs = [...specMap.entries()].map(([s, o]) => ({ spec: s, areas: [...o.areas], n: o.seqs.size }))
+            .sort((x, y) => (y.areas.length - x.areas.length) || (y.n - x.n) || x.spec.localeCompare(y.spec, 'ar'));
+        const common = sel.length > 1 && catAreaMode !== 'all';
+        if (common) specs = specs.filter(x => catAreaMode === 'every' ? x.areas.length === sel.length : x.areas.length >= 2);
+        const matched = new Set(); items.forEach(i => { if ((i.areas || []).some(a => sel.includes(a))) matched.add(seqNum(i)); });
+        return { areas, sel, specs, common, total: matched.size, items };
+    }
+    function catAreaGovLabel() { return catGov || 'العراق'; }
+    function catAreaText(m) {
+        const doc = catType === 'doctor';
+        const L = [(doc ? '👨‍⚕️ أطباء يبحثون عن عيادات في ' : '🏢 مجمعات طبية في ') + catAreaGovLabel() + (doc ? '' : ' بحاجة إلى أطباء'), '',
+            (doc ? '🩺 الاختصاصات المتوفرة:' : '🩺 مطلوب الاختصاصات التالية:')];
+        m.specs.forEach(s => L.push('• ' + s.spec + (m.sel.length > 1 ? (s.areas.length > 1 ? ' ⭐ (' + s.areas.length + '/' + m.sel.length + ')' : '') : '')));
+        L.push('', '📍 في المناطق التالية:');
+        m.sel.forEach((a, k) => L.push((k + 1) + '. ' + a));
+        L.push('', '✅ للتفاصيل والتقديم أرسل رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
+        return L.join('\n');
+    }
+    function catAreaInner() {
+        const m = catAreaModel();
+        const chips = m.areas.map(([a, n]) => '<button type="button" class="ca-chip' + (catAreaSel.has(a) ? ' on' : '') + '" data-a="' + escHtml(a) + '" onclick="catAreaToggle(this.dataset.a)">' + escHtml(a) + ' <small>' + n + '</small></button>').join('');
+        let res = '';
+        if (m.sel.length) {
+            res = '<div class="ca-res"><div class="ca-rh">🩺 ' + (catType === 'doctor' ? 'الاختصاصات المتوفرة' : 'الاختصاصات المطلوبة') + ' في المناطق المحدّدة (' + m.sel.length + ' منطقة · ' + m.total + (catType === 'doctor' ? ' طبيب' : ' مجمع') + '):</div>'
+                + (m.sel.length > 1 ? '<div class="ca-modes">' + [['all', 'كل الاختصاصات'], ['two', '⭐ مشترك (منطقتان فأكثر)'], ['every', '🎯 في كل المناطق']].map(([k, l]) => '<button type="button" class="ca-mode' + (catAreaMode === k ? ' on' : '') + '" onclick="catAreaSetMode(\'' + k + '\')">' + l + '</button>').join('') + '</div>' : '')
+                + '<div class="ca-specs">' + (m.specs.length ? m.specs.map(s => '<span class="ca-spec' + (m.sel.length > 1 && s.areas.length > 1 ? ' com' : '') + '">' + escHtml(s.spec) + (m.sel.length > 1 ? ' <small>' + s.areas.length + '/' + m.sel.length + '</small>' : '') + '</span>').join('') : '<span style="color:#64748b;font-weight:800">لا توجد اختصاصات مشتركة بين هذه المناطق.</span>') + '</div>'
+                + '<div class="ca-act"><button type="button" class="cat-print" onclick="catAreaCopy()">📋 نسخ</button>'
+                + '<button type="button" class="cat-print wa" onclick="catAreaWa()">💬 إرسال واتساب</button>'
+                + '<button type="button" class="cat-print exp" onclick="catAreaExport()">📸 صورة الكتالوج</button>'
+                + '<button type="button" class="cat-print" onclick="catAreaClear()">✖ مسح الاختيار</button></div></div>';
+        }
+        return '<div class="ca-hint">اضغط على المناطق (الرقم = عدد ' + (catType === 'doctor' ? 'الأطباء' : 'المجمعات') + ' فيها):</div><div class="ca-chips">' + chips + '</div>' + res;
+    }
+    function catAreaPanel() {
+        return '<details class="cat-areas no-print"' + (catAreaSel.size ? ' open' : '') + '><summary>🗺️ كتالوج حسب المناطق — الاختصاصات المشتركة</summary><div id="catAreaBox">' + catAreaInner() + '</div></details>';
+    }
+    function catAreaRefresh() { const b = document.getElementById('catAreaBox'); if (b) b.innerHTML = catAreaInner(); }
+    function catAreaToggle(a) { if (catAreaSel.has(a)) catAreaSel.delete(a); else catAreaSel.add(a); catAreaRefresh(); }
+    function catAreaClear() { catAreaSel = new Set(); catAreaRefresh(); }
+    function catAreaSetMode(k) { catAreaMode = k; catAreaRefresh(); }
+    function catAreaCopy() { copyText(catAreaText(catAreaModel()), 'تم نسخ كتالوج المناطق'); }
+    function catAreaWa() { window.open('https://wa.me/?text=' + encodeURIComponent(catAreaText(catAreaModel())), '_blank', 'noopener'); }
+    function catAreaPosterHTML(m) {
+        const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const doc = catType === 'doctor';
+        const specCards = m.specs.map(s => '<div style="background:#fff;color:#0b3d38;border-radius:18px;padding:20px 12px;text-align:center;font-weight:900;font-size:34px;line-height:1.25;display:flex;align-items:center;justify-content:center;min-height:84px;box-sizing:border-box;position:relative">' + esc(s.spec)
+            + (m.sel.length > 1 && s.areas.length > 1 ? '<span style="position:absolute;top:6px;left:10px;font-size:22px;color:#f59e0b">⭐</span>' : '') + '</div>').join('');
+        const areaRows = m.sel.map((a, k) => '<div style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:14px 18px;display:flex;align-items:center;gap:14px;font-weight:900;font-size:34px"><span style="background:#ff7a3d;color:#fff;border-radius:10px;min-width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:26px;flex:0 0 auto">' + (k + 1) + '</span><span>' + esc(a) + '</span></div>').join('');
+        const html = '<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;background:linear-gradient(165deg,#0a3f3a,#0d9488);font-family:Tahoma,Arial,sans-serif;padding:60px 54px;box-sizing:border-box;direction:rtl;color:#fff">'
+            + '<div style="text-align:center"><span style="display:inline-block;background:#ffd36b;color:#1b1b1b;font-weight:900;font-size:28px;padding:8px 24px;border-radius:999px">' + (doc ? 'أطباء متاحون للعمل' : 'فرص عمل للأطباء') + '</span></div>'
+            + '<div style="text-align:center;font-weight:800;font-size:40px;color:#d6fff6;margin-top:26px">' + (doc ? 'أطباء يبحثون عن عيادات في ' : 'مجمعات طبية في ') + esc(catAreaGovLabel()) + (doc ? '' : ' بحاجة إلى أطباء') + '</div>'
+            + '<div style="text-align:center;font-weight:900;font-size:62px;margin-top:10px;line-height:1.15">' + (doc ? 'الاختصاصات المتوفرة' : 'مطلوب الاختصاصات التالية') + '</div>'
+            + '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px">' + specCards + '</div>'
+            + '<div style="margin-top:36px;font-weight:900;font-size:34px;color:#ffd36b">📍 في المناطق التالية</div>'
+            + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px">' + areaRows + '</div>'
+            + '<div style="margin-top:34px;background:#fff;border-radius:20px;padding:26px 30px;display:flex;align-items:center;justify-content:space-between;gap:18px"><div style="text-align:right"><div style="font-weight:900;font-size:36px;color:#0d9488">أرسل المنطقة والاختصاص للتفاصيل</div><div style="font-size:24px;color:#555;font-weight:700">تنسيق مباشر وخصوصية تامة</div></div><div style="background:#0d9488;color:#fff;font-weight:900;font-size:40px;padding:14px 24px;border-radius:14px;direction:ltr;white-space:nowrap">' + WHATSAPP_DISPLAY + '</div></div>'
+            + '<div style="text-align:center;font-size:26px;color:#d6fff6;margin-top:18px;font-weight:700">🌐 medical-clinics-platform.vercel.app</div></div>';
+        return { html, w: 1080 };
+    }
+    function catAreaExport() {
+        const m = catAreaModel();
+        if (!m.sel.length || !m.specs.length) { showToast('حدّد مناطق لها اختصاصات أولاً'); return; }
+        const r = catAreaPosterHTML(m), w = r.w;
+        const meas = document.createElement('div');
+        meas.style.cssText = 'position:absolute;left:-99999px;top:0;width:' + w + 'px;visibility:hidden';
+        meas.innerHTML = r.html; document.body.appendChild(meas);
+        const h = Math.ceil(meas.firstElementChild.getBoundingClientRect().height) || 1350;
+        document.body.removeChild(meas);
+        const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '"><foreignObject width="100%" height="100%">' + r.html + '</foreignObject></svg>';
+        const img = new Image();
+        img.onload = function () {
+            const c = document.createElement('canvas'); c.width = w * 2; c.height = h * 2;
+            const ctx = c.getContext('2d'); ctx.scale(2, 2); ctx.drawImage(img, 0, 0);
+            let url; try { url = c.toDataURL('image/png'); } catch (e) { showToast('تعذّر التصدير على هذا المتصفح'); return; }
+            const box = document.getElementById('catExport'); if (!box) return;
+            box.style.display = 'block';
+            const data = m.items.filter(i => (i.areas || []).some(a => m.sel.includes(a)));
+            _capCatData = data; _capPromoKind = null; _capFmt = 'fb';
+            box.innerHTML = '<div style="font-weight:900;font-size:20px;color:#0d9488;margin-bottom:10px">✅ كتالوج المناطق جاهز — احفظه وانشره</div>'
+                + '<img src="' + url + '" alt="كتالوج المناطق"/>'
+                + '<div><a class="dl" href="' + url + '" download="catalog-areas.png">⬇️ تنزيل الصورة</a></div>'
+                + '<div style="font-weight:800;color:#0f766e;margin-top:16px">📝 الكابشن الجاهز:</div>'
+                + '<textarea id="catCapArea" class="cat-cap" readonly>' + (catAreaText(m) + '\n\n➖➖➖➖➖➖➖➖➖➖\n' + catHashtags(data)).replace(/</g, '&lt;') + '</textarea>'
+                + '<div class="cap-fmts"><button type="button" class="cat-print exp" onclick="copyCatCaption()">📋 نسخ الكابشن</button></div>';
+            box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+        img.onerror = function () { showToast('تعذّر إنشاء الصورة'); };
+        img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    }
+    // ===== القائمة المختصرة (أدمن): تجميع المناطق التي تحتاج اختصاصاً معيّناً داخل المحافظة =====
+    function catCompactModel(data) {
+        const govs = new Map(), idOf = {};
+        data.forEach(i => {
+            const sq = seqNum(i); idOf[sq] = i._id;
+            (catGov ? [catGov] : govsOf(i)).forEach(g => {
+                (i.areas && i.areas.length ? i.areas : ['مناطق أخرى']).forEach(a => {
+                    let side = '';
+                    if (g === 'بغداد') {
+                        if (a === 'مناطق أخرى') { const s = [...sidesOf(i)]; side = s.length === 1 ? s[0] : ''; }
+                        else side = groupOf(g, a) || '';
+                    }
+                    if (!govs.has(g)) govs.set(g, new Map());
+                    const gm = govs.get(g);
+                    if (!gm.has(side)) gm.set(side, new Map());
+                    const sm = gm.get(side);
+                    if (!sm.has(a)) sm.set(a, []);
+                    if (!sm.get(a).includes(sq)) sm.get(a).push(sq);
+                });
+            });
+        });
+        const sideOrder = s => s === 'الكرخ' ? 0 : s === 'الرصافة' ? 1 : 2;
+        const out = [...govs.entries()].sort((x, y) => x[0] === 'بغداد' ? -1 : y[0] === 'بغداد' ? 1 : x[0].localeCompare(y[0], 'ar'))
+            .map(([g, gm]) => ({
+                gov: g,
+                sides: [...gm.entries()].sort((x, y) => sideOrder(x[0]) - sideOrder(y[0])).map(([s, sm]) => ({
+                    side: s,
+                    areas: [...sm.entries()].map(([a, seqs]) => ({ area: a, seqs: seqs.sort((p, q) => p - q) }))
+                        .sort((x, y) => (y.seqs.length - x.seqs.length) || x.area.localeCompare(y.area, 'ar'))
+                }))
+            }));
+        return { groups: out, idOf };
+    }
+    function catCompactTitle(data) {
+        const where = catGov ? catGov : 'كل المحافظات';
+        if (catType === 'doctor') return '👨‍⚕️ أطباء ' + catSpecLabel() + ' يبحثون عن عيادات — ' + where;
+        if (catType === 'license') return '📜 إجازات ' + catSpecLabel() + ' — ' + where;
+        return '🩺 مطلوب أطباء وطبيبات اختصاص ' + catSpecLabel() + ' — ' + where;
+    }
+    function catCompactText(data) {
+        const m = catCompactModel(data);
+        const L = [catCompactTitle(data) + ' (' + data.length + (catType === 'doctor' ? ' طبيب' : ' مجمع') + ')', ''];
+        m.groups.forEach(g => {
+            if (m.groups.length > 1 || !catGov) L.push('📍 ' + g.gov);
+            g.sides.forEach(s => {
+                if (s.side) L.push('🔹 ' + s.side + ':');
+                s.areas.forEach(a => L.push('• ' + a.area + ' — تسلسل ' + a.seqs.join('، ')));
+            });
+            L.push('');
+        });
+        L.push('✅ للتفاصيل والتقديم أرسل رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
+        return L.join('\n');
+    }
+    function catCompactPanel(data) {
+        const m = catCompactModel(data);
+        const body = m.groups.map(g => '<div class="cc-gov">' + (m.groups.length > 1 || !catGov ? '<div class="cc-govt">📍 ' + escHtml(g.gov) + '</div>' : '')
+            + g.sides.map(s => (s.side ? '<div class="cc-side">🔹 ' + escHtml(s.side) + '</div>' : '')
+                + s.areas.map(a => '<div class="cc-row"><span class="cc-area">' + escHtml(a.area) + '</span><span class="cc-seqs">'
+                    + a.seqs.map(q => '<a class="cc-chip" href="#ad=' + m.idOf[q] + '">' + q + '</a>').join('') + '</span></div>').join('')).join('') + '</div>').join('');
+        return '<div class="cat-compact no-print"><div class="cc-head">📋 قائمة مختصرة — ' + escHtml(catSpecLabel()) + ' · ' + escHtml(catGov || 'كل المحافظات') + ' <b>(' + data.length + ')</b></div>'
+            + '<div class="cc-body">' + body + '</div>'
+            + '<div class="cc-actions"><button type="button" class="cat-print" onclick="catCompactCopy()">📋 نسخ القائمة</button>'
+            + '<button type="button" class="cat-print wa" onclick="catCompactWa()">💬 إرسال واتساب</button>'
+            + '<button type="button" class="cat-print exp" onclick="catCompactExport()">📸 كتالوج مختصر كصورة</button>' + catBoldStyleSel() + '</div></div>';
+    }
+    function catCompactCopy() { copyText(catCompactText(catFiltered()), 'تم نسخ القائمة المختصرة'); }
+    function catCompactWa() { window.open('https://wa.me/?text=' + encodeURIComponent(catCompactText(catFiltered())), '_blank', 'noopener'); }
+    function catCompactPosterHTML(data) {
+        const m = catCompactModel(data);
+        const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const unit = catType === 'doctor' ? 'أطباء يبحثون عن عيادات' : catType === 'license' ? 'إجازات طبية' : 'مطلوب أطباء وطبيبات';
+        const chip = q => '<span style="display:inline-block;background:#ffd36b;color:#1b1b1b;font-weight:900;font-size:30px;border-radius:12px;padding:4px 16px;margin:4px 0 4px 8px">' + q + '</span>';
+        const rows = m.groups.map(g => {
+            let h = '';
+            if (m.groups.length > 1 || !catGov) h += '<div style="font-weight:900;font-size:36px;color:#ffd36b;margin:22px 0 8px">📍 ' + esc(g.gov) + '</div>';
+            g.sides.forEach(s => {
+                if (s.side) h += '<div style="font-weight:900;font-size:30px;color:#a9f0da;margin:14px 0 6px">🔹 ' + esc(s.side) + '</div>';
+                s.areas.forEach(a => { h += '<div style="background:rgba(255,255,255,.12);border-radius:16px;padding:14px 20px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:14px"><div style="font-weight:900;font-size:34px;flex:0 0 auto">' + esc(a.area) + '</div><div style="text-align:left;direction:ltr;flex:1 1 auto">' + a.seqs.map(chip).join('') + '</div></div>'; });
+            });
+            return h;
+        }).join('');
+        const html = '<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;background:linear-gradient(160deg,#0b5f56,#0d9488);font-family:Tahoma,Arial,sans-serif;padding:60px 54px;box-sizing:border-box;direction:rtl;color:#fff">'
+            + '<div style="text-align:center;font-weight:900;font-size:60px;line-height:1.15">' + unit + '</div>'
+            + '<div style="text-align:center;font-weight:900;font-size:46px;color:#ffd36b;margin-top:10px">اختصاص ' + esc(catSpecLabel()) + '</div>'
+            + '<div style="text-align:center;font-size:32px;color:#d6fff6;margin-top:8px;font-weight:700">' + esc(catGov || 'كل المحافظات') + ' — ' + data.length + (catType === 'doctor' ? ' طبيب' : ' مجمع') + '</div>'
+            + '<div style="margin-top:26px">' + rows + '</div>'
+            + '<div style="margin-top:30px;background:#ffffff;border-radius:20px;padding:26px 30px;display:flex;align-items:center;justify-content:space-between;gap:18px"><div style="text-align:right"><div style="font-weight:900;font-size:36px;color:#0d9488">أرسل رقم التسلسل للتفاصيل</div><div style="font-size:24px;color:#555;font-weight:700">تنسيق مباشر وخصوصية تامة</div></div><div style="background:#0d9488;color:#fff;font-weight:900;font-size:40px;padding:14px 24px;border-radius:14px;direction:ltr;white-space:nowrap">' + WHATSAPP_DISPLAY + '</div></div>'
+            + '<div style="text-align:center;font-size:26px;color:#d6fff6;margin-top:18px;font-weight:700">🌐 medical-clinics-platform.vercel.app</div></div>';
+        return { html, w: 1080 };
+    }
+    function catCompactExport() {
+        const data = catFiltered();
+        if (!data.length) { showToast('لا يوجد ضمن هذا الفلتر'); return; }
+        const r = (catType !== 'license') ? catBoldPosterAny(data) : catCompactPosterHTML(data), w = r.w;
+        const meas = document.createElement('div');
+        meas.style.cssText = 'position:absolute;left:-99999px;top:0;width:' + w + 'px;visibility:hidden';
+        meas.innerHTML = r.html; document.body.appendChild(meas);
+        const h = Math.ceil(meas.firstElementChild.getBoundingClientRect().height) || 1350;
+        document.body.removeChild(meas);
+        const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '"><foreignObject width="100%" height="100%">' + r.html + '</foreignObject></svg>';
+        const img = new Image();
+        img.onload = function () {
+            const c = document.createElement('canvas'); c.width = w * 2; c.height = h * 2;
+            const ctx = c.getContext('2d'); ctx.scale(2, 2); ctx.drawImage(img, 0, 0);
+            let url; try { url = c.toDataURL('image/png'); } catch (e) { showToast('تعذّر التصدير على هذا المتصفح'); return; }
+            const box = document.getElementById('catExport'); if (!box) return;
+            box.style.display = 'block';
+            _capCatData = data; _capPromoKind = null; _capFmt = 'fb';
+            box.innerHTML = '<div style="font-weight:900;font-size:20px;color:#0d9488;margin-bottom:10px">✅ الكتالوج المختصر جاهز — احفظه وانشره</div>'
+                + '<img src="' + url + '" alt="كتالوج مختصر"/>'
+                + '<div><a class="dl" href="' + url + '" download="catalog-' + (catSpecLabel('-') || 'compact') + '.png">⬇️ تنزيل الصورة</a></div>'
+                + '<div style="font-weight:800;color:#0f766e;margin-top:16px">📝 الكابشن الجاهز:</div>'
+                + '<textarea id="catCapArea" class="cat-cap" readonly>' + (catCompactText(data) + '\n\n➖➖➖➖➖➖➖➖➖➖\n' + catHashtags(data)).replace(/</g, '&lt;') + '</textarea>'
+                + '<div class="cap-fmts"><button type="button" class="cat-print exp" onclick="copyCatCaption()">📋 نسخ الكابشن</button></div>';
+            box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+        img.onerror = function () { showToast('تعذّر إنشاء الصورة'); };
+        img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    }
     function copyCatalogText() { copyText(catCaption(catChosen()), 'تم نسخ الكابشن — الصقه في واتساب'); }
     function copyCatCaption() { const t = document.getElementById('catCapArea'); if (t) { copyText(t.value, 'تم نسخ الكابشن'); } }
 
@@ -5638,7 +5974,86 @@
     // بناء بوستر HTML (XHTML) لمجموعة مجمعات بأسلوب البلوكات
     // أقصى عدد في الصورة ودفعة التحديد: الأطباء بطاقات مختصرة فتتسع 16، المجمعات 10
     function catBatch() { return catType === 'doctor' ? 12 : catType === 'license' ? 8 : 6; }
+    // ===== تصميم «البطاقة الزرقاء»: عنوان أبيض كبير على خلفية زرقاء + بطاقة بيضاء بالمواقع =====
+    let catBoldStyle = 'card';
+    function catBoldStyleSel() {
+        return '<label class="cat-style-sel no-print" style="font-weight:800;color:#0f766e">🎨 تصميم الإعلان: <select onchange="catBoldStyle=this.value;renderCatalog()" class="cat-sel"><option value="card"' + (catBoldStyle === 'card' ? ' selected' : '') + '>بطاقة زرقاء (مربع)</option><option value="tiles"' + (catBoldStyle === 'tiles' ? ' selected' : '') + '>بلاطات بيضاء</option></select></label>';
+    }
+    function catBoldPosterAny(data) { return catBoldStyle === 'card' ? catCardPosterHTML(data) : catBoldPosterHTML(data); }
+    function catCardPosterHTML(data) {
+        const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const m = catCompactModel(data);
+        const tiles = [];
+        m.groups.forEach(g => g.sides.forEach(sd => {
+            if (catSide && g.gov === 'بغداد' && sd.side !== catSide) return;
+            sd.areas.forEach(a => { if (a.area !== 'مناطق أخرى') tiles.push({ area: a.area, seqs: a.seqs }); });
+        }));
+        if (!tiles.length) m.groups.forEach(g => g.sides.forEach(sd => sd.areas.forEach(a => tiles.push({ area: a.area === 'مناطق أخرى' ? g.gov : a.area, seqs: a.seqs }))));
+        const specsL = catSpecs(), doc = catType === 'doctor';
+        const small = doc ? 'طبيب يبحث عن عيادة في' : 'مجمع طبي بحاجة إلى';
+        const one = specsL.length === 1;
+        const lineTxt = sp => doc ? sp : ((/نسائ|توليد/.test(sp) ? 'طبيبة ' : 'طبيب ') + sp);
+        const maxLen = Math.max.apply(null, specsL.map(x => lineTxt(x).length));
+        const bf = specsL.length >= 3 ? (maxLen > 18 ? 62 : 76) : specsL.length === 2 ? (maxLen > 18 ? 78 : 98) : (maxLen > 22 ? 84 : maxLen > 15 ? 104 : 124);
+        const big = specsL.map((sp, k) => (k ? '<span style="color:#ffd36b">+</span> ' : '') + esc(lineTxt(sp))).join('<br/>');
+        const where = (catGov || 'العراق') + (catSide ? ' · ' + catSide : '') + ' · ' + (doc ? 'أطباء' : 'مجمعات طبية');
+        const plus = encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90"><path d="M45 33v24M33 45h24" stroke="#ffffff" stroke-opacity=".08" stroke-width="9" stroke-linecap="round"/></svg>');
+        const chip = t => '<div style="position:relative;background:#eef3ff;border:3px solid #c9d8ff;border-radius:18px;padding:22px 8px 14px;text-align:center;font-weight:900;font-size:' + (t.area.length > 12 ? 26 : 32) + 'px;color:#10285f;line-height:1.2">' + esc(t.area)
+            + '<span style="position:absolute;top:-13px;right:12px;background:#ffd36b;color:#111;border-radius:999px;font-weight:900;font-size:20px;padding:0 12px;line-height:1.5;direction:ltr">' + t.seqs.slice(0, 3).join(' · ') + '</span></div>';
+        const cols = tiles.length >= 7 ? 3 : tiles.length >= 2 ? 2 : 1;
+        const html = '<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;background:#e9eefc;font-family:Tahoma,Arial,sans-serif;box-sizing:border-box;direction:rtl">'
+            + '<div style="background:linear-gradient(160deg,#0b2a86,#1f5cf0);background-image:url(&quot;data:image/svg+xml;charset=utf-8,' + plus + '&quot;),linear-gradient(160deg,#0b2a86,#1f5cf0);border-radius:0 0 90px 90px;padding:64px 64px 150px;color:#fff;position:relative">'
+            + '<div style="display:flex;justify-content:space-between;align-items:center">'
+            + '<div style="background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.35);border-radius:999px;padding:10px 30px;font-weight:800;font-size:32px">📍 ' + esc(where) + '</div>'
+            + '<div style="background:#ffd36b;color:#1b1b1b;border-radius:999px;padding:10px 34px;font-weight:900;font-size:34px">مطلوب فوراً</div></div>'
+            + '<div style="margin-top:70px;text-align:right;font-weight:800;font-size:50px;color:#dbe6ff">' + small + '</div>'
+            + '<div style="margin-top:10px;text-align:right;font-weight:900;font-size:' + bf + 'px;line-height:1.12;color:#fff;letter-spacing:-2px">' + big + '</div>'
+            + '</div>'
+            + '<div style="margin:-100px 44px 0;background:#fff;border-radius:40px;padding:36px 34px 38px;box-shadow:0 18px 40px rgba(16,40,95,.22);position:relative">'
+            + '<div style="font-weight:900;font-size:36px;color:#1546c9;margin-bottom:30px">✓ ' + (doc ? 'جاهز للتنسيق في المواقع التالية' : 'مجمعات جاهزة في المواقع التالية') + '</div>'
+            + '<div style="display:grid;grid-template-columns:repeat(' + cols + ',1fr);gap:28px 18px">' + tiles.map(chip).join('') + '</div></div>'
+            + '<div style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:40px 54px 46px">'
+            + '<div style="display:flex;align-items:center;gap:16px"><div style="width:84px;height:84px;border-radius:22px;background:linear-gradient(160deg,#0b2a86,#1f5cf0);color:#fff;font-weight:900;font-size:62px;display:flex;align-items:center;justify-content:center;line-height:1">+</div>'
+            + '<div><div style="font-weight:900;font-size:40px;color:#0b2a86">منصة عيادات طبية</div><div style="font-weight:700;font-size:24px;color:#475a8f">اطلب الفرصة برقم التسلسل</div></div></div>'
+            + '<div style="background:#0f3fb8;color:#fff;font-weight:900;font-size:40px;padding:20px 34px;border-radius:999px;direction:ltr;white-space:nowrap;box-shadow:0 10px 22px rgba(15,63,184,.35)">💬 ' + WHATSAPP_DISPLAY + '</div></div>'
+            + '</div>';
+        return { html, w: 1080 };
+    }
+    // ===== بوستر «الاختصاص المركّز» بأسلوب الإعلان المختصر: عنوان ضخم + بلاطات مناطق فقط =====
+    function catBoldPosterHTML(data) {
+        const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const m = catCompactModel(data);
+        const tiles = [];
+        m.groups.forEach(g => g.sides.forEach(sd => {
+            if (catSide && g.gov === 'بغداد' && sd.side !== catSide) return;
+            sd.areas.forEach(a => { if (a.area !== 'مناطق أخرى') tiles.push({ area: a.area, seqs: a.seqs }); });
+        }));
+        if (!tiles.length) m.groups.forEach(g => g.sides.forEach(sd => sd.areas.forEach(a => tiles.push({ area: a.area === 'مناطق أخرى' ? g.gov : a.area, seqs: a.seqs }))));
+        const spec = catSpecLabel(), fem = catSpecs().length === 1 && /نسائ|توليد/.test(spec);
+        const l1 = catType === 'doctor' ? (fem ? 'طبيبة تبحث عن عيادة' : 'طبيب يبحث عن عيادة') : (fem ? 'مطلوب طبيبة' : 'مطلوب أطباء');
+        const where = (catGov || 'كل المحافظات') + (catSide ? ' — ' + catSide : '');
+        const sub = catType === 'doctor' ? 'اختصاص ' + spec + ' — جاهز للتنسيق' : 'مجمعات طبية مميزة بحاجة إلى ' + (fem ? 'طبيبة ' : 'اختصاص ') + spec;
+        const two = tiles.length > 1;
+        const tf = n => n.length > 14 ? 34 : n.length > 9 ? 42 : 52;
+        const tileHtml = tiles.map(t => '<div style="position:relative;background:linear-gradient(180deg,#ffffff,#e9ecf4);border:7px solid #111;border-radius:30px;box-shadow:10px 10px 0 #4338ca;min-height:128px;display:flex;align-items:center;justify-content:center;padding:18px 14px 14px;box-sizing:border-box;text-align:center">'
+            + '<div style="font-weight:900;font-size:' + tf(t.area) + 'px;line-height:1.15;color:#10142e">' + esc(t.area) + '</div>'
+            + '<div style="position:absolute;top:-16px;right:18px;background:#ffd36b;color:#111;border:4px solid #111;border-radius:999px;font-weight:900;font-size:24px;padding:0 14px;line-height:1.5;direction:ltr">' + t.seqs.slice(0, 3).join(' · ') + '</div>'
+            + '</div>').join('');
+        const html = '<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;background:radial-gradient(circle at 85% 8%,#dfe4ff 0,#f7f8ff 38%,#ffffff 70%);font-family:Tahoma,Arial,sans-serif;padding:70px 64px 56px;box-sizing:border-box;direction:rtl;position:relative">'
+            + '<div style="text-align:center;font-weight:900;font-size:112px;line-height:1.02;color:#2a1fb8;letter-spacing:-3px">' + l1 + '</div>'
+            + '<div style="text-align:center;font-weight:900;font-size:' + (spec.length > 30 ? 62 : spec.length > 16 ? 84 : 118) + 'px;line-height:1.05;color:#2a1fb8;letter-spacing:-3px;margin-top:6px">' + esc(spec) + '</div>'
+            + '<div style="width:220px;height:10px;border-radius:9px;background:linear-gradient(90deg,#ff7a3d,#ffd36b);margin:26px auto 22px"></div>'
+            + '<div style="text-align:center;font-weight:800;font-size:42px;line-height:1.3;color:#1b1b2f">' + esc(sub) + '</div>'
+            + '<div style="text-align:center;margin-top:14px"><span style="display:inline-block;background:#10142e;color:#ffd36b;font-weight:900;font-size:32px;border-radius:999px;padding:6px 28px">📍 ' + esc(where) + '</span></div>'
+            + '<div style="display:grid;grid-template-columns:' + (two ? '1fr 1fr' : '1fr') + ';gap:34px 30px;margin-top:50px;padding:0 6px">' + tileHtml + '</div>'
+            + '<div style="margin-top:46px;background:#10142e;border-radius:24px;padding:24px 30px;display:flex;align-items:center;justify-content:space-between;gap:18px;color:#fff">'
+            + '<div style="text-align:right"><div style="font-weight:900;font-size:34px">اطلب الفرصة برقم التسلسل</div><div style="font-size:22px;color:#c7cdf5;font-weight:700">منصة عيادات طبية — تنسيق مباشر وخصوصية تامة</div></div>'
+            + '<div style="background:#ffd36b;color:#111;font-weight:900;font-size:40px;padding:12px 22px;border-radius:16px;direction:ltr;white-space:nowrap">' + WHATSAPP_DISPLAY + '</div></div>'
+            + '</div>';
+        return { html, w: 1080 };
+    }
     function catPosterHTML(data) {
+        if (catExportFocus && catSpec && !catCustom && catType !== 'license') return catBoldPosterAny(data);
         const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         const n = data.length;
         // خطوط وأحجام متكيّفة حسب العدد ليبقى الكل واضحاً على الموبايل
@@ -5697,7 +6112,7 @@
             else if (wants && !offers) licTitle = 'مطلوب إجازات طبية';
             else licTitle = 'إجازات طبية — طلب وعرض';
         }
-        const posterTitle = (catExportFocus && catSpec) ? ('مطلوب أطباء وطبيبات اختصاص ' + catSpec)
+        const posterTitle = (catExportFocus && catSpec) ? ('مطلوب أطباء وطبيبات اختصاص ' + catSpecLabel())
             : catCustom ? (catCustomBaseType === 'doctor' ? 'مجمعات مقترحة لك' : 'أطباء مقترحون لك')
             : catType === 'license' ? licTitle : catType === 'doctor' ? 'أطباء يبحثون عن عيادات طبية' : 'مطلوب أطباء';
         const footTitle = catCustom ? 'للتنسيق أرسل رقم التسلسل'
@@ -6062,6 +6477,8 @@
                 ${catCustom ? '' : `<div class="cat-tabs no-print">${tab('clinic', '🏢 المجمعات')}${tab('doctor', '👨‍⚕️ الأطباء')}${tab('license', '📜 الإجازات')}</div>`}
                 ${catCustom ? '' : licSideRow}
                 ${catCustom ? '' : `<div class="cat-filters no-print">${govSel}${sideSel}${specSel}${catType === 'license' ? '' : classSel}</div>`}
+                ${(ADMIN && !catCustom && catSpec && data.length) ? catCompactPanel(data) : ''}
+                ${(ADMIN && !catCustom && catType !== 'license') ? catAreaPanel() : ''}
                 <div class="cat-filters no-print" style="align-items:center">
                     <span style="font-weight:800;color:#0f766e">تحديد سريع لأول:</span>
                     <button type="button" class="cat-print" onclick="catSelectFirst(6)">6</button>
@@ -6092,9 +6509,10 @@
                         <button type="button" class="cat-print wa" onclick="catShareWhatsApp()">📤 مشاركة مع زميل</button>
                         <button type="button" class="cat-print" onclick="copyDoctorMsg()">📋 نسخ القائمة</button>
                         <button type="button" class="cat-print exp" onclick="exportCatalogImage()">📸 حفظ كصورة (بكل الاختصاصات)</button>
-                        ${catSpec ? `<button type="button" class="cat-print exp cat-focus-btn" onclick="exportCatalogImage(true)">🎯 صورة خاصة باختصاص «${escHtml(catSpec)}» فقط</button>` : ''}
+                        ${(ADMIN && catSpec) ? catSpecXUI(specList) : ''}
+                        ${catSpec ? `<button type="button" class="cat-print exp cat-focus-btn" onclick="exportCatalogImage(true)">🎯 إعلان مختصر باختصاص «${escHtml(catSpecLabel())}» فقط</button> ${catBoldStyleSel()}` : ''}
                     </div>
-                    ${catSpec ? `<div class="cat-focus-hint">🎯 «صورة الاختصاص» تُظهر عنوانها «مطلوب أطباء وطبيبات اختصاص ${escHtml(catSpec)}» وتعرض العنوان ورقم التسلسل فقط لكل مجمع (بلا بقية الاختصاصات).</div>` : ''}
+                    ${catSpec ? `<div class="cat-focus-hint">🎯 «صورة الاختصاص» بتصميم مختصر: عنوان ضخم للاختصاص + بلاطات المناطق مع رقم التسلسل فقط (بلا بقية الاختصاصات).</div>` : ''}
                 </div>`}
                 <div class="cat-grid">${cards || (catShowSel ? '<p style="padding:16px">لم تؤشّر على أي عنصر بعد — ارجع لـ«عرض الكل» وأشّر على ما يهمّك.</p>' : '<p style="padding:16px">لا يوجد ضمن هذا الفلتر.</p>')}</div>
                 <div class="cat-export-box" id="catExport" style="display:none"></div>
@@ -6696,6 +7114,10 @@
             sf.textContent = '🏆 أقوى الفرص';
             sf.onclick = () => strongOppsOpen();
             document.body.appendChild(sf);
+            const hf = document.createElement('button');
+            hf.type = 'button'; hf.className = 'admin-fab cat-hub-fab'; hf.id = 'catHubFab'; hf.textContent = '📑 مركز الكتالوج';
+            hf.onclick = () => catHubOpen();
+            document.body.appendChild(hf);
             setTimeout(() => { try { strongOppsOpen(); } catch (e) {} }, 900); // فتح تلقائي مرة عند دخول المدير
         }
         handleHash();
