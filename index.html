@@ -848,8 +848,8 @@
     .strong-loc { font-size:13px; color:#475569; font-weight:700; margin-top:3px; line-height:1.4; }
     .strong-reasons { margin-top:6px; }
     .strong-btns{display:flex;flex-direction:column;gap:6px;align-self:center;flex:0 0 auto}
-    .strong-deleg{display:inline-flex;align-items:center;justify-content:center;background:#ea580c;color:#fff!important;border:2px solid #c2410c;border-radius:10px;padding:7px 12px;font-weight:900;font-size:13px;text-decoration:none;white-space:nowrap}
-    .sd-deleg{display:block;text-align:center;background:#ea580c;color:#fff!important;border:3px solid #c2410c;border-radius:14px;padding:14px;font-weight:900;font-size:18px;text-decoration:none;margin:10px 0}
+    .strong-deleg{cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;background:#ea580c;color:#fff!important;border:2px solid #c2410c;border-radius:10px;padding:7px 12px;font-weight:900;font-size:13px;text-decoration:none;white-space:nowrap}
+    .sd-deleg{width:100%;cursor:pointer;font-family:inherit;display:block;text-align:center;background:#ea580c;color:#fff!important;border:3px solid #c2410c;border-radius:14px;padding:14px;font-weight:900;font-size:18px;text-decoration:none;margin:10px 0}
     .strong-wa.whatsapp-btn { flex:0 0 auto; width:auto !important; display:inline-flex !important; align-items:center; align-self:center; padding:10px 14px !important; font-size:14px; white-space:nowrap; margin:0 !important; cursor:pointer; border:none; }
     .strong-det { margin:-4px 0 10px; background:#ffffff; border:1.5px solid #fcd34d; border-top:none; border-radius:0 0 12px 12px; padding:12px; }
     .sd-pair { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
@@ -1898,7 +1898,7 @@
 
     const areaHierarchy = {
         "بغداد": {
-            "الرصافة": ["الرصافة - المركز", "الكرادة", "الاعظمية", "الوزيرية", "بغداد الجديدة", "البلديات", "المشتل", "العبيدي", "الكمالية", "ناحية الوحدة", "مدينة الصدر", "الشعب", "الراشدية", "زيونة", "الزعفرانية", "مناطق أخرى"],
+            "الرصافة": ["الرصافة - المركز", "البنوك", "الكرادة", "الاعظمية", "الوزيرية", "بغداد الجديدة", "البلديات", "المشتل", "العبيدي", "الكمالية", "ناحية الوحدة", "مدينة الصدر", "الشعب", "الراشدية", "زيونة", "الزعفرانية", "مناطق أخرى"],
             "الكرخ": ["الكرخ - المركز", "الطارمية", "المنصور", "الكاظمية", "الغزالية", "الدورة", "البياع", "حي الإعلام", "أبو غريب", "السيدية", "العامرية", "الخضراء", "التاجي", "الحرية", "الدولعي", "الرحمانية", "حي الجامعة", "اليرموك", "أطراف الكرخ", "حي الجهاد", "حي العامل", "شهداء البياع", "مدينة جكوك", "مدينة الحارثية", "الشرطة الرابعة", "حي الحسين", "علي الصالح", "أبو دشير", "الشماعية", "العطيفية", "المحمودية", "مناطق أخرى"]
         },
         "نينوى": {
@@ -2468,6 +2468,12 @@
         { isNew: true, added: "2026-10-25", isClass: true, hours: "مساءً", specialties: ["باطنية", "نسائية وتوليد", "أطفال"], gov: "بغداد", areas: ["الدورة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عاجلة", title: "مطلوب أطباء وطبيبات (باطنية، نسائية وتوليد، أطفال) - مجمع طبي (بغداد - الكرخ - الدورة) - تسلسل 138", details: "<strong>الموقع:</strong> بغداد - الكرخ - الدورة (البوعيثة، الشارع الرئيسي).<br><strong>الحالة الحالية:</strong> مجمع طبي كلاس (C)، من 5 إلى 10 مراجعين يومياً (حديث الافتتاح)، فتح جديد.<br><strong>أوقات العمل المطلوبة:</strong> مساءً.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> باطنية، نسائية وتوليد، أطفال.<br><strong>الدعم:</strong> نعمل على إنجاح المجمع والطبيب إعلامياً وحسب ما نقدر." }
     ,
         { isNew: true, added: "2026-10-25", isClass: true, furnished: true, rentPaid: true, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال", "باطنية"], gov: "أربيل", areas: ["أربيل"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عاجلة", title: "مطلوب أطباء وطبيبات (نسائية وتوليد، أطفال، باطنية) - مجمع طبي (أربيل - هفالان) - تسلسل 139", details: "<strong>الموقع:</strong> أربيل - هفالان، شارع 20 (قرب جامع سيد طيب).<br><strong>الحالة الحالية:</strong> مجمع كلاس (Z) جديد كلياً (أقل من 5 مراجعين يومياً)، فتح جديد، توجد صيدلية بإدارة صيدلاني.<br><strong>تسهيلات للطبيب:</strong> تأثيث العيادة ودفع الإيجار.<br><strong>أوقات العمل المطلوبة:</strong> مساءً.<br><strong>آلية الراتب والعمل:</strong> نظام الكشفية.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، أطفال، باطنية.<br><strong>الدعم:</strong> نعمل على إنجاح المجمع والطبيب إعلامياً وحسب ما نقدر." }
+    ,
+        { isNew: true, added: "2026-10-27", isClass: true, hours: "صباحاً ومساءً", specialties: ["جراحة تجميلية", "تغذية وعلاج سكري"], gov: "بغداد", areas: ["البنوك"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء وطبيبات (جراحة تجميلية، تغذية وعلاج سكري) - مجمع طبي (بغداد - الرصافة - البنوك) - تسلسل 140", details: "<strong>الموقع:</strong> بغداد - الرصافة - البنوك، مقابل كلية الإدارة والاقتصاد.<br><strong>الحالة الحالية:</strong> مجمع طبي كلاس (C)، من 5 إلى 10 مراجعين يومياً (حديث الافتتاح)، فتح جديد.<br><strong>أوقات العمل المطلوبة:</strong> صباحاً ومساءً.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> جراحة تجميلية، تغذية وعلاج سكري (حسب الطبيب المناسب).<br><strong>الدعم:</strong> نعمل على إنجاح المجمع والطبيب إعلامياً وحسب ما نقدر." }
+    ,
+        { isNew: true, added: "2026-10-27", isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد", "باطنية", "جراحة الكلى والمسالك البولية"], gov: "بغداد", areas: ["الدورة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عاجلة", title: "مطلوب أطباء وطبيبات (نسائية وتوليد، باطنية، جراحة الكلى والمسالك البولية) - مجمع طبي (بغداد - الكرخ - الدورة) - تسلسل 141", details: "<strong>الموقع:</strong> بغداد - الكرخ - الدورة، شارع أبو طيارة.<br><strong>الحالة الحالية:</strong> مجمع طبي كلاس (C)، من 5 إلى 10 مراجعين يومياً (حديث الافتتاح)، فتح جديد، توجد صيدلية.<br><strong>أوقات العمل المطلوبة:</strong> مساءً.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، باطنية، جراحة الكلى والمسالك البولية.<br><strong>الأطباء المتواجدون حالياً:</strong> تغذية.<br><strong>الدعم:</strong> نعمل على إنجاح المجمع والطبيب إعلامياً وحسب ما نقدر." }
+    ,
+        { isNew: true, added: "2026-10-27", isClass: true, hours: "أي وقت (صباحاً أو مساءً)", specialties: ["جلدية", "جراحة تجميلية", "طب أسرة"], gov: "بغداد", areas: ["الكرادة", "المنصور"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عاجلة", title: "مطلوب أطباء وطبيبات (جلدية، جراحة تجميلية، طب أسرة) - عيادة مجهزة (بغداد - الكرادة / المنصور) - تسلسل 142", details: "<strong>الموقع:</strong> بغداد - الكرادة (شارع 62) / المنصور (شارع 14 رمضان).<br><strong>الحالة الحالية:</strong> مجمع كلاس (Z) جديد كلياً (أقل من 5 مراجعين يومياً)، فتح جديد، عيادة مجهزة، توجد صيدلية بإدارة صيدلاني.<br><strong>أوقات العمل المطلوبة:</strong> أي وقت (صباحاً أو مساءً).<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> جلدية، جراحة تجميلية، طب أسرة.<br><strong>الدعم:</strong> نعمل على إنجاح المجمع والطبيب إعلامياً وحسب ما نقدر." }
     ];
 
     const ALL_MODE_BTNS = ['btnGeneral', 'btnDoctor', 'btnHospital', 'btnHospDoc', 'btnLatest', 'btnMatches', 'btnLicense', 'btnAllDoctors', 'btnAllClinics', 'btnCatalog', 'btnLicenseCatalog', 'btnDoctorCatalog'];
@@ -5377,7 +5383,7 @@
                 + '<div class="sd-line"><b>الموقع:</b> ' + adLocation(v, 'clinic') + '</div>' + sdFullBlock(v, idx, 'v') + pvCardBlock(v._id) + '</div>';
             return '<div class="sd-pair">' + docBlk + cxBlk + '</div>'
                 + pairMapHtml(pr)
-                + ((typeof pvDelegateLink === 'function' && pvDelegateLink(d._id, v._id)) ? '<a class="sd-deleg" target="_blank" href="' + pvDelegateLink(d._id, v._id) + '">📩 أرسل هذا التنسيق للمندوب (بالتفاصيل والأرقام)</a>' : '')
+                + ((typeof pvDelegateLink === 'function' && pvDelegateLink(d._id, v._id)) ? '<button type="button" class="sd-deleg" onclick="pvDelegateImage(\'' + d._id + '\',\'' + v._id + '\')">🖼️ أرسل التنسيق للمندوب كصورة (بالتفاصيل والأرقام)</button>' : '')
                 + pvPairButtons(d._id, v._id)
                 + '<a class="whatsapp-btn sd-plat" target="_blank" href="' + buildWaLink(instantMsg(pr)) + '">📩 تنسيق عام عبر واتساب المنصة</a>'
                 + backBtn;
@@ -5412,7 +5418,7 @@
             + '<div class="strong-loc">' + specsOf(d).slice(0, 2).join('، ') + ' · ' + adLocation(v, 'clinic') + '</div>'
             + (reasons ? '<div class="strong-reasons">' + reasons + '</div>' : '')
             + '</div><div class="strong-btns"><button type="button" class="strong-wa whatsapp-btn" onclick="strongToggle(' + idx + ')">💬 نسّق</button>'
-            + ((ADMIN && typeof pvDelegateLink === 'function' && pvDelegateLink(d._id, v._id)) ? '<a class="strong-deleg" target="_blank" href="' + pvDelegateLink(d._id, v._id) + '" onclick="event.stopPropagation()">📩 للمندوب</a>' : '')
+            + ((ADMIN && typeof pvDelegateLink === 'function' && pvDelegateLink(d._id, v._id)) ? '<button type="button" class="strong-deleg" onclick="pvDelegateImage(\'' + d._id + '\',\'' + v._id + '\')">🖼️ صورة للمندوب</button>' : '')
             + '</div></div>'
             + '<div class="strong-det" id="strong-det-' + idx + '" style="display:none"></div></div>';
     }
