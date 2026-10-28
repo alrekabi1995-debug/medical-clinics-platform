@@ -5996,11 +5996,11 @@
     // أقصى عدد في الصورة ودفعة التحديد: الأطباء بطاقات مختصرة فتتسع 16، المجمعات 10
     function catBatch() { return catType === 'doctor' ? 12 : catType === 'license' ? 8 : 6; }
     // ===== تصميم «البطاقة الزرقاء»: عنوان أبيض كبير على خلفية زرقاء + بطاقة بيضاء بالمواقع =====
-    let catBoldStyle = 'card';
+    let catBoldStyle = 'combo';
     function catBoldStyleSel() {
-        return '<label class="cat-style-sel no-print" style="font-weight:800;color:#0f766e">🎨 تصميم الإعلان: <select onchange="catBoldStyle=this.value;renderCatalog()" class="cat-sel"><option value="card"' + (catBoldStyle === 'card' ? ' selected' : '') + '>بطاقة زرقاء (مربع)</option><option value="tiles"' + (catBoldStyle === 'tiles' ? ' selected' : '') + '>بلاطات بيضاء</option></select></label>';
+        return '<label class="cat-style-sel no-print" style="font-weight:800;color:#0f766e">🎨 تصميم الإعلان: <select onchange="catBoldStyle=this.value;renderCatalog()" class="cat-sel"><option value="combo"' + (catBoldStyle === 'combo' ? ' selected' : '') + '>قائمة مدمجة (اختصاصات + مناطق)</option><option value="card"' + (catBoldStyle === 'card' ? ' selected' : '') + '>بطاقة زرقاء (مربع)</option><option value="tiles"' + (catBoldStyle === 'tiles' ? ' selected' : '') + '>بلاطات بيضاء</option></select></label>';
     }
-    function catBoldPosterAny(data) { return catBoldStyle === 'card' ? catCardPosterHTML(data) : catBoldPosterHTML(data); }
+    function catBoldPosterAny(data) { return catBoldStyle === 'combo' ? catComboPosterHTML(data) : catBoldStyle === 'card' ? catCardPosterHTML(data) : catBoldPosterHTML(data); }
     function catCardPosterHTML(data) {
         const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         const m = catCompactModel(data);
@@ -6037,6 +6037,48 @@
             + '<div style="display:flex;align-items:center;gap:16px"><div style="width:84px;height:84px;border-radius:22px;background:linear-gradient(160deg,#0b2a86,#1f5cf0);color:#fff;font-weight:900;font-size:62px;display:flex;align-items:center;justify-content:center;line-height:1">+</div>'
             + '<div><div style="font-weight:900;font-size:40px;color:#0b2a86">منصة عيادات طبية</div><div style="font-weight:700;font-size:24px;color:#475a8f">اطلب الفرصة برقم التسلسل</div></div></div>'
             + '<div style="background:#0f3fb8;color:#fff;font-weight:900;font-size:40px;padding:20px 34px;border-radius:999px;direction:ltr;white-space:nowrap;box-shadow:0 10px 22px rgba(15,63,184,.35)">💬 ' + WHATSAPP_DISPLAY + '</div></div>'
+            + '</div>';
+        return { html, w: 1080 };
+    }
+
+    // ===== «قائمة مدمجة»: كل الاختصاصات بلاطات + كل المناطق مرقّمة مع أرقام تسلسل المجمعات الطالبة =====
+    function catComboPosterHTML(data) {
+        const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const m = catCompactModel(data);
+        const rows = [];
+        m.groups.forEach(g => g.sides.forEach(sd => {
+            if (catSide && g.gov === 'بغداد' && sd.side !== catSide) return;
+            sd.areas.forEach(a => { if (a.area !== 'مناطق أخرى') rows.push({ area: a.area, seqs: a.seqs }); });
+        }));
+        if (!rows.length) m.groups.forEach(g => g.sides.forEach(sd => sd.areas.forEach(a => rows.push({ area: a.area === 'مناطق أخرى' ? g.gov : a.area, seqs: a.seqs }))));
+        rows.sort((x, y) => y.seqs.length - x.seqs.length || x.area.localeCompare(y.area, 'ar'));
+        const MAXR = 12, extra = Math.max(0, rows.length - MAXR); if (extra) rows.length = MAXR;
+        const doc = catType === 'doctor', specsL = catSpecs();
+        const n = specsL.length, cols = n >= 3 ? 3 : n;
+        const maxLen = Math.max.apply(null, specsL.map(x => x.length));
+        const tf = (n === 1 ? (maxLen > 18 ? 66 : 84) : n === 2 ? (maxLen > 14 ? 46 : 58) : (maxLen > 14 ? 38 : maxLen > 9 ? 46 : 54));
+        const tile = sp => '<div style="background:#fff;color:#0b2230;border-radius:30px;min-height:' + (n === 1 ? 190 : 150) + 'px;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px 12px;box-sizing:border-box;font-weight:900;font-size:' + tf + 'px;line-height:1.2;box-shadow:0 10px 24px rgba(0,0,0,.25)">' + esc(sp) + '</div>';
+        const rf = rows.length > 12 ? 32 : 38;
+        const row = (r, i) => '<div style="background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.22);border-radius:22px;padding:14px 16px;display:flex;align-items:center;gap:14px;box-sizing:border-box;min-height:84px">'
+            + '<span style="flex:none;width:46px;height:46px;border-radius:14px;background:#ff8a3d;color:#fff;font-weight:900;font-size:28px;display:flex;align-items:center;justify-content:center">' + (i + 1) + '</span>'
+            + '<span style="flex:1;font-weight:900;font-size:' + (r.area.length > 14 ? rf - 8 : rf) + 'px;line-height:1.15;color:#fff">' + esc(r.area) + '</span>'
+            + '<span style="flex:none;background:#ffd36b;color:#111;border-radius:999px;font-weight:900;font-size:24px;padding:3px 14px;direction:ltr;white-space:nowrap">' + r.seqs.slice(0, 4).join(' · ') + '</span></div>';
+        const where = (catGov || 'العراق') + (catSide ? ' · ' + catSide : '');
+        const head = doc ? 'أطباء جاهزون للتنسيق' : 'مجمعات طبية في ' + where + ' بحاجة إلى أطباء';
+        const title = doc ? 'الاختصاصات المتوفرة' : 'مطلوب الاختصاصات التالية';
+        const pill = (t, bg, fg) => '<div style="background:' + bg + ';color:' + fg + ';border-radius:999px;padding:8px 26px;font-weight:800;font-size:28px;border:2px solid rgba(255,255,255,.3)">' + t + '</div>';
+        const html = '<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;background:linear-gradient(170deg,#06303c,#0a4a52 55%,#08333d);font-family:Tahoma,Arial,sans-serif;padding:60px 60px 50px;box-sizing:border-box;direction:rtl;color:#fff">'
+            + '<div style="display:flex;justify-content:flex-start">' + pill((doc ? '🩺 أطباء' : '🩺 فرص عمل للأطباء'), 'rgba(255,255,255,.14)', '#fff') + '</div>'
+            + '<div style="margin-top:40px;font-weight:800;font-size:' + (head.length > 36 ? 38 : 46) + 'px;color:#9de8e0;line-height:1.3">' + esc(head) + '</div>'
+            + '<div style="margin-top:8px;font-weight:900;font-size:80px;line-height:1.1;color:#fff;letter-spacing:-2px">' + title + '</div>'
+            + '<div style="margin-top:34px;display:grid;grid-template-columns:repeat(' + cols + ',1fr);gap:22px">' + specsL.map(tile).join('') + '</div>'
+            + '<div style="margin-top:44px;display:flex;align-items:center;gap:14px;font-weight:900;font-size:34px;color:#fff"><span style="color:#ff8a3d">📍</span> ' + (doc ? 'في المناطق التالية' : 'في المناطق التالية') + '<div style="flex:1;height:2px;background:rgba(255,255,255,.3)"></div></div>'
+            + '<div style="margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:16px 18px">' + rows.map(row).join('') + '</div>'
+            + (extra ? '<div style="margin-top:18px;text-align:center;font-weight:800;font-size:30px;color:#ffd36b">+ ' + extra + ' منطقة أخرى — اسأل عن منطقتك</div>' : '')
+            + '<div style="margin-top:30px;display:flex;gap:14px;justify-content:space-between;flex-wrap:wrap">' + pill('تنسيق مباشر', 'rgba(255,255,255,.12)', '#d6fff6') + pill('خصوصية تامة', 'rgba(255,255,255,.12)', '#d6fff6') + pill('اطلب برقم التسلسل', 'rgba(255,255,255,.12)', '#ffd36b') + '</div>'
+            + '<div style="margin-top:30px;background:#fff;border-radius:26px;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px">'
+            + '<div style="display:flex;align-items:center;gap:14px"><div style="width:70px;height:70px;border-radius:18px;background:linear-gradient(160deg,#0b2a86,#1f5cf0);color:#fff;font-weight:900;font-size:52px;display:flex;align-items:center;justify-content:center;line-height:1">+</div><div style="font-weight:900;font-size:36px;color:#0b2a86">منصة عيادات طبية</div></div>'
+            + '<div style="background:#0d9488;color:#fff;font-weight:900;font-size:38px;padding:14px 26px;border-radius:999px;direction:ltr;white-space:nowrap">💬 ' + WHATSAPP_DISPLAY + '</div></div>'
             + '</div>';
         return { html, w: 1080 };
     }
