@@ -1898,8 +1898,8 @@
 
     const areaHierarchy = {
         "بغداد": {
-            "الرصافة": ["الرصافة - المركز", "البنوك", "الكرادة", "الاعظمية", "الوزيرية", "بغداد الجديدة", "البلديات", "المشتل", "العبيدي", "الكمالية", "ناحية الوحدة", "مدينة الصدر", "الشعب", "الراشدية", "زيونة", "الزعفرانية", "مناطق أخرى"],
-            "الكرخ": ["الكرخ - المركز", "الطارمية", "المنصور", "الكاظمية", "الغزالية", "الدورة", "البياع", "حي الإعلام", "أبو غريب", "السيدية", "العامرية", "الخضراء", "التاجي", "الحرية", "الدولعي", "الرحمانية", "حي الجامعة", "اليرموك", "أطراف الكرخ", "حي الجهاد", "حي العامل", "شهداء البياع", "مدينة جكوك", "مدينة الحارثية", "الشرطة الرابعة", "حي الحسين", "علي الصالح", "أبو دشير", "الشماعية", "العطيفية", "المحمودية", "مناطق أخرى"]
+            "الرصافة": ["الرصافة - المركز", "البنوك", "الشماعية", "السعدون", "المعامل", "الكرادة", "الاعظمية", "الوزيرية", "بغداد الجديدة", "البلديات", "المشتل", "العبيدي", "الكمالية", "ناحية الوحدة", "مدينة الصدر", "الشعب", "الراشدية", "زيونة", "الزعفرانية", "مناطق أخرى"],
+            "الكرخ": ["الكرخ - المركز", "الطارمية", "المنصور", "الكاظمية", "الغزالية", "الدورة", "البياع", "حي الإعلام", "أبو غريب", "السيدية", "العامرية", "الخضراء", "التاجي", "الحرية", "الدولعي", "الرحمانية", "حي الجامعة", "اليرموك", "أطراف الكرخ", "حي الجهاد", "حي العامل", "شهداء البياع", "مدينة جكوك", "مدينة الحارثية", "الشرطة الرابعة", "حي الحسين", "علي الصالح", "أبو دشير", "العطيفية", "المحمودية", "مناطق أخرى"]
         },
         "نينوى": {
             "مركز الموصل": ["الجانب الأيمن - المركز", "الجانب الأيسر - المركز", "مناطق أخرى"],
@@ -1975,7 +1975,7 @@
     // وليست عناوين GPS دقيقة)
     const AREA_COORDS = {
         // بغداد - الرصافة
-        "الرصافة": [33.335, 44.415], "الرصافة - المركز": [33.335, 44.415], "الكرادة": [33.305, 44.430], "الاعظمية": [33.375, 44.365],
+        "الرصافة": [33.335, 44.415], "الرصافة - المركز": [33.335, 44.415], "السعدون": [33.318, 44.412], "المعامل": [33.350, 44.470], "الكرادة": [33.305, 44.430], "الاعظمية": [33.375, 44.365],
         "الوزيرية": [33.345, 44.400], "الطالبية": [33.360, 44.390], "بغداد الجديدة": [33.345, 44.465], "البلديات": [33.330, 44.455],
         "المشتل": [33.310, 44.470], "العبيدي": [33.360, 44.480], "الكمالية": [33.350, 44.475],
         "ناحية الوحدة": [33.105, 44.615], "مدينة الصدر": [33.370, 44.455], "الشعب": [33.385, 44.410],
@@ -1991,7 +1991,7 @@
         "حي الجهاد": [33.290, 44.330], "حي العامل": [33.275, 44.340], "شهداء البياع": [33.280, 44.360],
         "مدينة جكوك": [33.270, 44.345], "مدينة الحارثية": [33.320, 44.355], "الشرطة الرابعة": [33.315, 44.350],
         "حي الحسين": [33.295, 44.360], "علي الصالح": [33.260, 44.390], "أبو دشير": [33.240, 44.395],
-        "الشماعية": [33.235, 44.400], "العطيفية": [33.360, 44.355], "المحمودية": [33.050, 44.350],
+        "الشماعية": [33.326, 44.484], "العطيفية": [33.360, 44.355], "المحمودية": [33.050, 44.350],
         // مناطق ذُكرت في السجلات ولم تكن ضمن القوائم الرسمية
         "حي العسكري": [32.616, 44.024], "مشروع المسيب": [32.780, 44.310], "موصل حي النجار": [36.335, 43.128],
         "قضاء جلولاء": [34.320, 44.930], "الموصل الجديدة": [36.310, 43.150], "ذي قار قضاء الغراف": [31.380, 46.130],
@@ -2053,7 +2053,7 @@
         ['الكاظمية', 33.378, 44.339], ['الحرية', 33.370, 44.345], ['الدولعي', 33.380, 44.350], ['الشعلة', 33.390, 44.300], ['الرحمانية', 33.395, 44.320], ['التاجي', 33.520, 44.340],
         ['البياع', 33.285, 44.355], ['شهداء البياع', 33.280, 44.360], ['حي العامل', 33.275, 44.340], ['حي الجهاد', 33.290, 44.330], ['حي الإعلام', 33.350, 44.320, 'الاعلام'], ['السيدية', 33.265, 44.375],
         ['الدورة', 33.250, 44.400], ['أبو دشير', 33.240, 44.395], ['البوعيثة', 33.230, 44.430], ['المهدية', 33.245, 44.380], ['الشرطة الرابعة', 33.315, 44.350], ['حي الحسين', 33.295, 44.360],
-        ['علي الصالح', 33.260, 44.390], ['أبو غريب', 33.305, 44.185], ['الشماعية', 33.235, 44.400], ['المحمودية', 33.050, 44.350], ['ناحية الرشيد', 33.200, 44.380], ['مدينة جكوك', 33.270, 44.345]
+        ['علي الصالح', 33.260, 44.390], ['أبو غريب', 33.305, 44.185], ['الشماعية', 33.326, 44.484], ['المحمودية', 33.050, 44.350], ['ناحية الرشيد', 33.200, 44.380], ['مدينة جكوك', 33.270, 44.345]
     ];
     function placeNorm(s) {
         return String(s || '').toLowerCase().replace(/<[^>]+>/g, ' ').replace(/[\u064B-\u0652\u0640]/g, '')
@@ -2303,6 +2303,8 @@
         { amount: "١٠٠-١٥٠ يومياً", specialties: ["نسائية وتوليد"], gov: "بغداد", areas: ["أبو غريب", "التاجي", "الطارمية"], statusLabel: "🟢 متوفرة صباحاً", headerLabel: "طبيبة تسلسل 75", title: "طبيبة أخصائية نسائية وتوليد (بورد) - تبحث عن عيادة للعمل - تسلسل 75", details: "طبيبة أخصائية نسائية وتوليد (بورد / دبلوم عالي)، تعمل حالياً في مستشفى أبو غريب العام.<br>تبحث عن عيادة شغالة في <strong>الفترة الصباحية</strong> (لا تملك عيادة صباحية حالياً)، ضمن مناطق أبو غريب والتاجي والطارمية، مع توفير خط نقل.<br><strong>شروطها:</strong> عيادة مؤثثة ومدفوعة الإيجار.<br><strong>آلية الراتب والعمل:</strong> نظام الكشفية.<br><strong>الطلب عاجل.</strong>" }
     ,
         { specialties: ["جراحة أوعية دموية ودوالي"], gov: "بغداد", areas: ["الشعب", "البنوك", "الصليخ"], statusLabel: "🟢 متوفر مساءً", headerLabel: "طبيب تسلسل 76", title: "طبيب أخصائي جراحة أوعية دموية ودوالي (بورد) - يبحث عن عيادة للعمل - تسلسل 76", details: "طبيب أخصائي جراحة أوعية دموية ودوالي (بورد)، طبيب اختصاص في مستشفى الشعب.<br>يبحث عن عيادة للعمل في الفترة المسائية ضمن مناطق الشعب والبنوك والصليخ (الرصافة).<br><strong>شروطه:</strong> عيادة مؤثثة ومدفوعة الإيجار. يمتلك وسيلة نقل، ولا يُشترط أن تكون العيادة شغالة (يقبل الجديدة والشغالة).<br><strong>آلية الراتب والعمل:</strong> نظام الراتب المقطوع، وبدون مقطوعة إن كانت العيادة شغالة (حسب الاتفاق)." }
+    ,
+        { isNew: true, added: "2026-10-26", specialties: ["نسائية وتوليد"], gov: "بغداد", areas: ["السعدون", "المعامل"], statusLabel: "🟢 متوفرة مساءً", headerLabel: "طبيبة تسلسل 77", title: "طبيبة أخصائية نسائية وتوليد (بورد) - تبحث عن عيادة للعمل - تسلسل 77", details: "طبيبة أخصائية نسائية وتوليد (بورد)، تعمل حالياً في مستشفى.<br>تبحث عن عيادة شغالة في <strong>الفترة المسائية</strong> ضمن مناطق السعدون والمعامل (الرصافة)، وهي أول عيادة لها.<br><strong>شروطها:</strong> عيادة مؤثثة ومدفوعة الإيجار.<br><strong>آلية الراتب والعمل:</strong> نظام الكشفية." }
     ];
 
     const DOCTORS_DATA = [
@@ -2474,6 +2476,8 @@
         { isNew: true, added: "2026-10-27", isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد", "باطنية", "جراحة الكلى والمسالك البولية"], gov: "بغداد", areas: ["الدورة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عاجلة", title: "مطلوب أطباء وطبيبات (نسائية وتوليد، باطنية، جراحة الكلى والمسالك البولية) - مجمع طبي (بغداد - الكرخ - الدورة) - تسلسل 141", details: "<strong>الموقع:</strong> بغداد - الكرخ - الدورة، شارع أبو طيارة.<br><strong>الحالة الحالية:</strong> مجمع طبي كلاس (C)، من 5 إلى 10 مراجعين يومياً (حديث الافتتاح)، فتح جديد، توجد صيدلية.<br><strong>أوقات العمل المطلوبة:</strong> مساءً.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، باطنية، جراحة الكلى والمسالك البولية.<br><strong>الأطباء المتواجدون حالياً:</strong> تغذية.<br><strong>الدعم:</strong> نعمل على إنجاح المجمع والطبيب إعلامياً وحسب ما نقدر." }
     ,
         { isNew: true, added: "2026-10-27", isClass: true, hours: "أي وقت (صباحاً أو مساءً)", specialties: ["جلدية", "جراحة تجميلية", "طب أسرة"], gov: "بغداد", areas: ["الكرادة", "المنصور"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عاجلة", title: "مطلوب أطباء وطبيبات (جلدية، جراحة تجميلية، طب أسرة) - عيادة مجهزة (بغداد - الكرادة / المنصور) - تسلسل 142", details: "<strong>الموقع:</strong> بغداد - الكرادة (شارع 62) / المنصور (شارع 14 رمضان).<br><strong>الحالة الحالية:</strong> مجمع كلاس (Z) جديد كلياً (أقل من 5 مراجعين يومياً)، فتح جديد، عيادة مجهزة، توجد صيدلية بإدارة صيدلاني.<br><strong>أوقات العمل المطلوبة:</strong> أي وقت (صباحاً أو مساءً).<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> جلدية، جراحة تجميلية، طب أسرة.<br><strong>الدعم:</strong> نعمل على إنجاح المجمع والطبيب إعلامياً وحسب ما نقدر." }
+    ,
+        { isNew: true, added: "2026-10-28", isClass: true, furnished: true, rentPaid: true, hours: "مساءً", specialties: ["طب أسرة", "نسائية وتوليد"], gov: "بغداد", areas: ["الشماعية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيبة أخصائية نسائية وتوليد وطب أسرة - مجمع طبي (بغداد - الرصافة - الشماعية) - تسلسل 143", details: "<strong>الموقع:</strong> بغداد - الرصافة - الشماعية، شارع الكهرباء.<br><strong>الحالة الحالية:</strong> مجمع طبي كلاس (B)، من 10 إلى 20 مراجعاً يومياً (عمل مستقر)، توجد صيدلية بإدارة صيدلاني ومختبر وسونار.<br><strong>تسهيلات للطبيب:</strong> العيادة مؤثثة ومجهزة ومدفوعة التكاليف.<br><strong>أوقات العمل المطلوبة:</strong> مساءً.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> طب أسرة، نسائية وتوليد (المطلوب طبيبة أخصائية نسائية).<br><strong>الدعم:</strong> نعمل على إنجاح المجمع والطبيب إعلامياً وحسب ما نقدر." }
     ];
 
     const ALL_MODE_BTNS = ['btnGeneral', 'btnDoctor', 'btnHospital', 'btnHospDoc', 'btnLatest', 'btnMatches', 'btnLicense', 'btnAllDoctors', 'btnAllClinics', 'btnCatalog', 'btnLicenseCatalog', 'btnDoctorCatalog'];
@@ -3387,6 +3391,7 @@
         const adWho = (GENERAL_CLINICS_DATA.indexOf(item) !== -1) ? 'الطبيب' : (item.venueType === 'hospital' ? 'المستشفى' : 'المجمع');
         return `
                         <button type="button" class="ad-export-btn" onclick="exportSingleAd('${id}')">📸 إعلان خاص لهذا ${adWho} (صورة للنشر)</button>
+                        <button type="button" class="ad-export-btn" onclick="copyAdShort('${id}')">✂️ منشور مختصر لهذا ${adWho} (نص للنسخ)</button>
                         <button type="button" class="share-btn" onclick="toggleShare('${id}')">🔗 مشاركة هذا الإعلان</button>
                         <div class="share-menu" id="share-menu-${id}">
                             ${native}
@@ -6008,7 +6013,7 @@
         const specsL = catSpecs(), doc = catType === 'doctor';
         const small = doc ? 'طبيب يبحث عن عيادة في' : 'مجمع طبي بحاجة إلى';
         const one = specsL.length === 1;
-        const lineTxt = sp => doc ? sp : ((/نسائ|توليد/.test(sp) ? 'طبيبة ' : 'طبيب ') + sp);
+        const lineTxt = sp => doc ? sp : (/^طب /.test(sp) ? sp : ((/نسائ|توليد/.test(sp) ? 'طبيبة ' : 'طبيب ') + sp));
         const maxLen = Math.max.apply(null, specsL.map(x => lineTxt(x).length));
         const bf = specsL.length >= 3 ? (maxLen > 18 ? 62 : 76) : specsL.length === 2 ? (maxLen > 18 ? 78 : 98) : (maxLen > 22 ? 84 : maxLen > 15 ? 104 : 124);
         const big = specsL.map((sp, k) => (k ? '<span style="color:#ffd36b">+</span> ' : '') + esc(lineTxt(sp))).join('<br/>');
@@ -6068,7 +6073,99 @@
             + '</div>';
         return { html, w: 1080 };
     }
+    // ===== إعلان بطاقة لعنصر واحد (طبيب أو مجمع) — بتصميم البطاقة الزرقاء، بضغطة زر =====
+    // منشور مختصر (نص) بتفاصيل صورة البطاقة — الكابشن الأصلي بالهاشتاكات يبقى كما هو
+    function adShortText(item) {
+        adCardPosterHTML(item);
+        const m = window._adCardModel;
+        const L = ['🔔 ' + m.badge, '', m.small, m.bigTxt, '🗺️ ' + m.where.replace(' · ', ' - ')];
+        if (m.chips.length) { L.push(''); m.chips.forEach(c => { const t = c.replace(/^[^\u0600-\u06FFA-Za-z0-9]+\s*/, ''); L.push(/^📍/.test(c) ? '📍 المنطقة: ' + t : '✅ ' + t); }); }
+        L.push('', '🔢 للتنسيق أرسل رقم التسلسل: ' + m.seq, '📲 واتساب المنصة: ' + WHATSAPP_DISPLAY);
+        return L.join('\n');
+    }
+    function copyAdShort(id) {
+        const item = (adIndex[id] && adIndex[id].item) || DOCTORS_DATA.concat(GENERAL_CLINICS_DATA).find(x => x._id === id);
+        if (!item) { showToast('العنصر غير موجود'); return; }
+        copyText(adShortText(item), 'تم نسخ المنشور المختصر');
+    }
+    function copyShortArea() { const t = document.getElementById('catShortArea'); if (t) copyText(t.value, 'تم نسخ المنشور المختصر'); }
+    function adCardPosterHTML(item) {
+        const esc = x => String(x == null ? '' : x).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const isDoc = GENERAL_CLINICS_DATA.indexOf(item) !== -1;
+        const det = (item.details || '').replace(/[أإآ]/g, 'ا');
+        const urgent = /عاجل/.test((item.headerLabel || '') + det);
+        const sideTxt = (() => { try { const sd = [...sidesOf(item)]; return sd.length ? ' · ' + sd.join(' و') : ''; } catch (e) { return ''; } })();
+        const where = (item.gov || 'العراق') + sideTxt;
+        const specs = specsOf(item);
+        const hoursTxt = (() => { const t = (item.statusLabel || '') + ' ' + (item.hours || ''); if (/صباحا|صباحاً/.test(t) && /مساء/.test(t)) return 'صباحاً ومساءً'; if (/مساء/.test(t)) return 'دوام مسائي'; if (/صباح/.test(t)) return 'دوام صباحي'; if (/اي وقت|أي وقت/.test(t)) return 'أي وقت'; return ''; })();
+        const sal = salaryPref(item);
+        const chips = [];
+        let small, bigHtml, badge, bigTxt = '';
+        if (isDoc) {
+            const fem = /^طبيبة/.test(item.headerLabel || '') || /طبيبة/.test(item.title || '');
+            const gr = doctorGrade(item);
+            const grW = (gr === 'أخصائي' || gr === 'بورد') ? (fem ? 'أخصائية' : 'أخصائي') : gr === 'استشاري' ? (fem ? 'استشارية' : 'استشاري') : gr === 'مقيم أقدم' ? (fem ? 'مقيمة أقدم' : 'مقيم أقدم') : (gr || '');
+            small = (fem ? 'طبيبة' : 'طبيب') + (grW ? ' ' + grW : '') + (gr === 'بورد' ? ' (بورد)' : '') + (fem ? ' تبحث' : ' يبحث') + ' عن عيادة في';
+            const ar = item.areas || [];
+            const areaTxt = ar.length <= 2 ? ar.join(' و ') : ar.slice(0, 2).join(' و ') + ' …';
+            const af = areaTxt.length > 16 ? 96 : areaTxt.length > 9 ? 124 : 150;
+            bigTxt = '📍 ' + areaTxt + '\n🩺 ' + specs.join(' + ');
+            bigHtml = '<div style="font-weight:900;font-size:' + af + 'px;line-height:1.1;letter-spacing:-3px">' + esc(areaTxt) + '</div>'
+                + '<div style="margin-top:10px;font-weight:900;font-size:' + (specs.join(' + ').length > 22 ? 56 : 76) + 'px;color:#ffd36b;line-height:1.15">' + esc(specs.join(' + ')) + '</div>';
+            badge = urgent ? 'طلب عاجل' : (/مساء/.test(item.statusLabel || '') ? 'متاحة مساءً'.replace('متاحة', fem ? 'متاحة' : 'متاح') : (/صباح/.test(item.statusLabel || '') ? (fem ? 'متاحة صباحاً' : 'متاح صباحاً') : (fem ? 'متاحة للعمل' : 'متاح للعمل')));
+            if (gr) chips.push('🎓 ' + (gr === 'بورد' ? (fem ? 'أخصائية بورد' : 'أخصائي بورد') : grW));
+            if (hoursTxt) chips.push('🌙 ' + hoursTxt);
+            if (sal) chips.push('💰 ' + sal);
+            const rq = doctorRequires(item);
+            if (rq.furnished && rq.rentPaid) chips.push('🏥 عيادة مؤثثة ومدفوعة الإيجار'); else if (rq.furnished) chips.push('🏥 عيادة مؤثثة'); else if (rq.rentPaid) chips.push('🏥 إيجار مدفوع');
+            doctorFlags(item).forEach(f => chips.push('✅ ' + f));
+            if (ar.length > 2) chips.push('📍 ' + ar.join('، '));
+        } else {
+            const hosp = item.venueType === 'hospital';
+            small = hosp ? 'مستشفى أهلي بحاجة إلى' : 'مجمع طبي بحاجة إلى';
+            const lineTxt = sp => /^طب /.test(sp) ? sp : (/نسائ|توليد/.test(sp) ? 'طبيبة ' : 'طبيب ') + sp;
+            const few = specs.length <= 3;
+            bigTxt = few ? ('🩺 ' + specs.map(lineTxt).join(' + ')) : '🩺 أطباء بعدّة اختصاصات';
+            if (few) {
+                const mx = Math.max.apply(null, specs.map(x => lineTxt(x).length));
+                const bf = specs.length >= 3 ? (mx > 18 ? 62 : 76) : specs.length === 2 ? (mx > 18 ? 78 : 98) : (mx > 22 ? 84 : mx > 15 ? 104 : 124);
+                bigHtml = '<div style="font-weight:900;font-size:' + bf + 'px;line-height:1.12;letter-spacing:-2px">' + specs.map((sp, k) => (k ? '<span style="color:#ffd36b">+</span> ' : '') + esc(lineTxt(sp))).join('<br/>') + '</div>';
+            } else {
+                bigHtml = '<div style="font-weight:900;font-size:96px;line-height:1.12;letter-spacing:-2px">أطباء بعدّة اختصاصات</div>';
+                specs.forEach(sp => chips.push('🩺 ' + sp));
+            }
+            badge = urgent ? 'مطلوب فوراً' : 'فرصة عمل';
+            const ar = (item.areas || []).filter(a => a !== 'مناطق أخرى');
+            if (ar.length) chips.unshift('📍 ' + ar.join('، '));
+            if (item.isClass) chips.push('⭐ ' + (hosp ? 'مستشفى كلاس' : 'مجمع كلاس'));
+            if (/فتح جديد|جديد/.test(det)) chips.push('🆕 فتح جديد');
+            if (hoursTxt) chips.push('🕒 ' + hoursTxt);
+            if (sal) chips.push('💰 ' + sal);
+            if (/مؤثث/.test(det) && /مدفوع/.test(det) && venueFlags(item).length === 0) chips.push('🏥 عيادات مؤثثة ومدفوعة الإيجار');
+        }
+        const plus = encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90"><path d="M45 33v24M33 45h24" stroke="#ffffff" stroke-opacity=".08" stroke-width="9" stroke-linecap="round"/></svg>');
+        const chipH = c => '<div style="background:#eef3ff;border:3px solid #c9d8ff;border-radius:20px;padding:18px 12px;text-align:center;font-weight:900;font-size:' + (c.length > 26 ? 26 : 31) + 'px;color:#10285f;line-height:1.3">' + esc(c) + '</div>';
+        const cols = chips.length === 1 ? 1 : 2;
+        const html = '<div xmlns="http://www.w3.org/1999/xhtml" style="width:1080px;background:#e9eefc;font-family:Tahoma,Arial,sans-serif;box-sizing:border-box;direction:rtl">'
+            + '<div style="background-image:url(&quot;data:image/svg+xml;charset=utf-8,' + plus + '&quot;),linear-gradient(160deg,#0b2a86,#1f5cf0);border-radius:0 0 90px 90px;padding:64px 64px 180px;color:#fff">'
+            + '<div style="display:flex;justify-content:space-between;align-items:center">'
+            + '<div style="background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.35);border-radius:999px;padding:10px 30px;font-weight:800;font-size:32px">📍 ' + esc(where) + '</div>'
+            + '<div style="background:#ffd36b;color:#1b1b1b;border-radius:999px;padding:10px 34px;font-weight:900;font-size:34px">' + esc(badge) + '</div></div>'
+            + '<div style="margin-top:60px;font-weight:800;font-size:48px;color:#dbe6ff">' + esc(small) + '</div>'
+            + '<div style="margin-top:8px">' + bigHtml + '</div></div>'
+            + '<div style="margin:-110px 44px 0;background:#fff;border-radius:40px;padding:36px 34px 38px;box-shadow:0 18px 40px rgba(16,40,95,.22)">'
+            + '<div style="font-weight:900;font-size:36px;color:#1546c9;margin-bottom:24px">✓ ' + (isDoc ? 'مواصفات الطلب' : 'تفاصيل الفرصة') + '</div>'
+            + (chips.length ? '<div style="display:grid;grid-template-columns:repeat(' + cols + ',1fr);gap:18px">' + chips.map(chipH).join('') + '</div>' : '')
+            + '<div style="margin-top:26px;background:#10142e;color:#fff;border-radius:24px;padding:20px 30px;display:flex;justify-content:space-between;align-items:center;font-weight:900;font-size:36px"><span>للتنسيق أرسل رقم التسلسل</span><b style="background:#ffd36b;color:#111;border-radius:16px;padding:2px 26px;font-size:58px">' + seqOf(item) + '</b></div></div>'
+            + '<div style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:38px 54px 44px">'
+            + '<div style="display:flex;align-items:center;gap:16px"><div style="width:84px;height:84px;border-radius:22px;background:linear-gradient(160deg,#0b2a86,#1f5cf0);color:#fff;font-weight:900;font-size:62px;display:flex;align-items:center;justify-content:center;line-height:1">+</div>'
+            + '<div><div style="font-weight:900;font-size:40px;color:#0b2a86">منصة عيادات طبية</div><div style="font-weight:700;font-size:24px;color:#475a8f">تنسيق مباشر وخصوصية تامة</div></div></div>'
+            + '<div style="background:#0f3fb8;color:#fff;font-weight:900;font-size:40px;padding:20px 34px;border-radius:999px;direction:ltr;white-space:nowrap;box-shadow:0 10px 22px rgba(15,63,184,.35)">💬 ' + WHATSAPP_DISPLAY + '</div></div></div>';
+        window._adCardModel = { where, badge, small, bigTxt, chips, seq: seqOf(item) };
+        return { html, w: 1080 };
+    }
     function catPosterHTML(data) {
+        if (data.length === 1 && !catCustom && catType !== 'license') return adCardPosterHTML(data[0]);
         if (catExportFocus && catSpec && !catCustom && catType !== 'license') return catBoldPosterAny(data);
         const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         const n = data.length;
@@ -6367,7 +6464,10 @@
                 <div style="font-weight:900;font-size:20px;color:#0d9488;margin-bottom:10px">${head}</div>
                 <img src="${url}" alt="إعلان"/>
                 <div><a class="dl" href="${url}" download="${fname || 'manasa-ad'}.png">⬇️ تنزيل الصورة</a></div>
-                <div style="font-weight:800;color:#0f766e;margin-top:16px">📝 الكابشن الجاهز:</div>
+                ${(single && imgData.length === 1 && !catCustom && catType !== 'license') ? `<div style="font-weight:800;color:#ea580c;margin-top:16px">✂️ المنشور المختصر (تفاصيل الصورة كنص قصير):</div>
+                <textarea id="catShortArea" class="cat-cap" readonly style="min-height:150px">${adShortText(imgData[0]).replace(/</g, '&lt;')}</textarea>
+                <div class="cap-fmts"><button type="button" class="cat-print exp" onclick="copyShortArea()">📋 نسخ المنشور المختصر</button></div>` : ''}
+                <div style="font-weight:800;color:#0f766e;margin-top:16px">📝 الكابشن الجاهز (بالهاشتاكات):</div>
                 <textarea id="catCapArea" class="cat-cap" readonly>${capText().replace(/</g, '&lt;')}</textarea>
                 ${capFmtBar()}`;
                 box.scrollIntoView({ behavior: 'smooth', block: 'start' });
