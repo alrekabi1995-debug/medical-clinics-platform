@@ -299,6 +299,8 @@
         .main-trigger-section { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; }
     }
     .main-trigger-section .btn { justify-content: center; text-align: center; }
+    .main-trigger-section.single-go { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; justify-items: center; }
+    .main-trigger-section.single-go .main-go { margin: 0 auto; }
 
     /* زرّا آخر الإضافات والتطابقات تحت شريط الأخبار */
     .secondary-actions {
@@ -1723,8 +1725,8 @@
             </a>
         </div></div>
         <div class="cta-label browse-label">أو تصفّح الفرص المتاحة الآن:</div>
-        <div class="main-trigger-section">
-            <button type="button" class="btn btn-doctor-search main-go" id="btnDoctor" onclick="startSearch('manager')">🔎 اختر اختصاصك وشاهد الفرص المتاحة</button>
+        <div class="main-trigger-section single-go">
+            <button type="button" class="btn btn-doctor-search main-go" id="btnDoctor" onclick="startSearch('manager')">🔎 اضغط هنا لاختيار اختصاصك ومشاهدة الفرص المتاحة</button>
         </div>
         <div class="trigger-chips">
             <button type="button" class="btn btn-latest" id="btnAllClinics" onclick="showAllByDate('clinic')">🆕 الأحدث أولاً</button>
@@ -1746,8 +1748,8 @@
             </a>
         </div></div>
         <div class="cta-label browse-label">أو تصفّح الأطباء المتاحين الآن:</div>
-        <div class="main-trigger-section">
-            <button type="button" class="btn btn-trigger main-go" id="btnGeneral" onclick="startSearch('general')">🔎 اختر الاختصاص وشاهد الأطباء المتاحين</button>
+        <div class="main-trigger-section single-go">
+            <button type="button" class="btn btn-trigger main-go" id="btnGeneral" onclick="startSearch('general')">🔎 اضغط هنا لاختيار الاختصاص ومشاهدة الأطباء المتاحين</button>
         </div>
         <div class="trigger-chips">
             <button type="button" class="btn btn-latest" id="btnAllDoctors" onclick="showAllByDate('doctor')">🆕 الأحدث أولاً</button>
