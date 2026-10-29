@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20200%20200%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%230b2a86%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%231f5cf0%22/%3E%3C/linearGradient%3E%3CclipPath%20id%3D%22c%22%3E%3Ccircle%20cx%3D%2276%22%20cy%3D%22100%22%20r%3D%2256%22/%3E%3C/clipPath%3E%3C/defs%3E%3Crect%20width%3D%22200%22%20height%3D%22200%22%20rx%3D%2244%22%20fill%3D%22url%28%23g%29%22/%3E%3Cg%20transform%3D%22translate%28100%20100%29%20scale%28.78%29%20translate%28-100%20-100%29%22%3E%3Ccircle%20cx%3D%2276%22%20cy%3D%22100%22%20r%3D%2256%22%20fill%3D%22%23fff%22/%3E%3Ccircle%20cx%3D%22124%22%20cy%3D%22100%22%20r%3D%2256%22%20fill%3D%22%23ffbf3f%22/%3E%3Ccircle%20cx%3D%22124%22%20cy%3D%22100%22%20r%3D%2256%22%20fill%3D%22%231f4fe0%22%20clip-path%3D%22url%28%23c%29%22/%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%229%22%20fill%3D%22%23fff%22/%3E%3C/g%3E%3C/svg%3E">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>منصة عيادات طبية للتنسيق الطبي</title>
@@ -124,10 +125,10 @@
     .brand-logo {
         width: 64px; height: 64px; border-radius: 16px; flex: 0 0 auto;
         display: flex; align-items: center; justify-content: center;
-        background: linear-gradient(140deg, #14b8a6, #1aa39a 55%, #2456e6);
+        background: linear-gradient(160deg, #0b2a86, #1f5cf0);
         box-shadow: 0 10px 26px rgba(10, 60, 90, 0.45);
     }
-    .brand-logo svg { width: 42px; height: 42px; }
+    .brand-logo svg { width: 54px; height: 54px; }
     @media (max-width: 600px) { .brand-row { gap: 10px; } .brand-logo { width: 50px; height: 50px; border-radius: 13px; } .brand-logo svg { width: 33px; height: 33px; } }
     .badge {
         background-color: rgba(34, 201, 154, 0.22);
@@ -1692,7 +1693,7 @@
         <span class="badge">وساطة وتنسيق موقعي متخصص</span>
         <div class="brand-row">
             <div class="brand-logo" aria-label="شعار منصة عيادات طبية">
-                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 104c-78 0-141 60-141 138 0 96 120 166 141 166s141-70 141-166c0-78-63-138-141-138z" fill="#ffffff"/><path d="M170 238h34l16-34 28 72 20-46 14 26h50" fill="none" stroke="#14b8a6" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 200 200"  xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="lcS"><circle cx="76" cy="100" r="56"/></clipPath></defs><circle cx="76" cy="100" r="56" fill="#fff"/><circle cx="124" cy="100" r="56" fill="#ffbf3f"/><circle cx="124" cy="100" r="56" fill="#1f4fe0" clip-path="url(#lcS)"/><circle cx="100" cy="100" r="9" fill="#fff"/></svg>
             </div>
             <h1>منصة عيادات طبية</h1>
         </div>
@@ -1907,7 +1908,7 @@
 
     const areaHierarchy = {
         "بغداد": {
-            "الرصافة": ["الرصافة - المركز", "البنوك", "الشماعية", "السعدون", "المعامل", "الكرادة", "الاعظمية", "الوزيرية", "بغداد الجديدة", "البلديات", "المشتل", "العبيدي", "الكمالية", "ناحية الوحدة", "مدينة الصدر", "الشعب", "الراشدية", "زيونة", "الزعفرانية", "مناطق أخرى"],
+            "الرصافة": ["الرصافة - المركز", "البنوك", "الشماعية", "الشهداء", "ساحة بيروت", "السعدون", "المعامل", "الكرادة", "الاعظمية", "الوزيرية", "بغداد الجديدة", "البلديات", "المشتل", "العبيدي", "الكمالية", "ناحية الوحدة", "مدينة الصدر", "الشعب", "الراشدية", "زيونة", "الزعفرانية", "مناطق أخرى"],
             "الكرخ": ["الكرخ - المركز", "الطارمية", "المنصور", "الكاظمية", "الغزالية", "الدورة", "البياع", "حي الإعلام", "أبو غريب", "السيدية", "العامرية", "الخضراء", "التاجي", "الحرية", "الدولعي", "الرحمانية", "حي الجامعة", "اليرموك", "أطراف الكرخ", "حي الجهاد", "حي العامل", "شهداء البياع", "مدينة جكوك", "مدينة الحارثية", "الشرطة الرابعة", "حي الحسين", "علي الصالح", "أبو دشير", "العطيفية", "المحمودية", "مناطق أخرى"]
         },
         "نينوى": {
@@ -2000,7 +2001,7 @@
         "حي الجهاد": [33.290, 44.330], "حي العامل": [33.275, 44.340], "شهداء البياع": [33.280, 44.360],
         "مدينة جكوك": [33.270, 44.345], "مدينة الحارثية": [33.320, 44.355], "الشرطة الرابعة": [33.315, 44.350],
         "حي الحسين": [33.295, 44.360], "علي الصالح": [33.260, 44.390], "أبو دشير": [33.240, 44.395],
-        "الشماعية": [33.326, 44.484], "العطيفية": [33.360, 44.355], "المحمودية": [33.050, 44.350],
+        "الشماعية": [33.326, 44.484], "الشهداء": [33.345, 44.437], "ساحة بيروت": [33.338, 44.452], "العطيفية": [33.360, 44.355], "المحمودية": [33.050, 44.350],
         // مناطق ذُكرت في السجلات ولم تكن ضمن القوائم الرسمية
         "حي العسكري": [32.616, 44.024], "مشروع المسيب": [32.780, 44.310], "موصل حي النجار": [36.335, 43.128],
         "قضاء جلولاء": [34.320, 44.930], "الموصل الجديدة": [36.310, 43.150], "ذي قار قضاء الغراف": [31.380, 46.130],
@@ -2062,7 +2063,7 @@
         ['الكاظمية', 33.378, 44.339], ['الحرية', 33.370, 44.345], ['الدولعي', 33.380, 44.350], ['الشعلة', 33.390, 44.300], ['الرحمانية', 33.395, 44.320], ['التاجي', 33.520, 44.340],
         ['البياع', 33.285, 44.355], ['شهداء البياع', 33.280, 44.360], ['حي العامل', 33.275, 44.340], ['حي الجهاد', 33.290, 44.330], ['حي الإعلام', 33.350, 44.320, 'الاعلام'], ['السيدية', 33.265, 44.375],
         ['الدورة', 33.250, 44.400], ['أبو دشير', 33.240, 44.395], ['البوعيثة', 33.230, 44.430], ['المهدية', 33.245, 44.380], ['الشرطة الرابعة', 33.315, 44.350], ['حي الحسين', 33.295, 44.360],
-        ['علي الصالح', 33.260, 44.390], ['أبو غريب', 33.305, 44.185], ['الشماعية', 33.326, 44.484], ['المحمودية', 33.050, 44.350], ['ناحية الرشيد', 33.200, 44.380], ['مدينة جكوك', 33.270, 44.345]
+        ['علي الصالح', 33.260, 44.390], ['أبو غريب', 33.305, 44.185], ['الشهداء', 33.345, 44.437], ['ساحة بيروت', 33.338, 44.452], ['الشماعية', 33.326, 44.484], ['المحمودية', 33.050, 44.350], ['ناحية الرشيد', 33.200, 44.380], ['مدينة جكوك', 33.270, 44.345]
     ];
     function placeNorm(s) {
         return String(s || '').toLowerCase().replace(/<[^>]+>/g, ' ').replace(/[\u064B-\u0652\u0640]/g, '')
@@ -2487,6 +2488,10 @@
         { isNew: true, added: "2026-10-27", isClass: true, hours: "أي وقت (صباحاً أو مساءً)", specialties: ["جلدية", "جراحة تجميلية", "طب أسرة"], gov: "بغداد", areas: ["الكرادة", "المنصور"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عاجلة", title: "مطلوب أطباء وطبيبات (جلدية، جراحة تجميلية، طب أسرة) - عيادة مجهزة (بغداد - الكرادة / المنصور) - تسلسل 142", details: "<strong>الموقع:</strong> بغداد - الكرادة (شارع 62) / المنصور (شارع 14 رمضان).<br><strong>الحالة الحالية:</strong> مجمع كلاس (Z) جديد كلياً (أقل من 5 مراجعين يومياً)، فتح جديد، عيادة مجهزة، توجد صيدلية بإدارة صيدلاني.<br><strong>أوقات العمل المطلوبة:</strong> أي وقت (صباحاً أو مساءً).<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> جلدية، جراحة تجميلية، طب أسرة.<br><strong>الدعم:</strong> نعمل على إنجاح المجمع والطبيب إعلامياً وحسب ما نقدر." }
     ,
         { isNew: true, added: "2026-10-28", isClass: true, furnished: true, rentPaid: true, hours: "مساءً", specialties: ["طب أسرة", "نسائية وتوليد"], gov: "بغداد", areas: ["الشماعية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيبة أخصائية نسائية وتوليد وطب أسرة - مجمع طبي (بغداد - الرصافة - الشماعية) - تسلسل 143", details: "<strong>الموقع:</strong> بغداد - الرصافة - الشماعية، شارع الكهرباء.<br><strong>الحالة الحالية:</strong> مجمع طبي كلاس (B)، من 10 إلى 20 مراجعاً يومياً (عمل مستقر)، توجد صيدلية بإدارة صيدلاني ومختبر وسونار.<br><strong>تسهيلات للطبيب:</strong> العيادة مؤثثة ومجهزة ومدفوعة التكاليف.<br><strong>أوقات العمل المطلوبة:</strong> مساءً.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> طب أسرة، نسائية وتوليد (المطلوب طبيبة أخصائية نسائية).<br><strong>الدعم:</strong> نعمل على إنجاح المجمع والطبيب إعلامياً وحسب ما نقدر." }
+    ,
+        { isNew: true, added: "2026-10-28", isClass: true, furnished: true, hours: "مساءً", specialties: ["نسائية وتوليد"], gov: "بغداد", areas: ["الشهداء"], statusLabel: "🟢 متوفر للعمل", headerLabel: "مطلوب عاجل", title: "مطلوب طبيبة أخصائية نسائية وتوليد - مجمع طبي (بغداد - الرصافة - الشهداء) - تسلسل 144", details: "<strong>الموقع:</strong> بغداد - الرصافة - الشهداء، مقابل ملعب علاء البدري.<br><strong>الحالة الحالية:</strong> مجمع طبي كلاس (B)، من 10 إلى 20 مراجعاً يومياً (عمل مستقر)، ويضم ممرضاً ومختبراً وعيادة أسنان تعمل، وصيدلية قائمة منذ أكثر من عشر سنوات، وفيه عيادة طبيبة.<br><strong>تسهيلات للطبيب:</strong> العيادة موجودة ومجهزة مسبقاً في المجمع.<br><strong>أوقات العمل المطلوبة:</strong> مساءً، من الرابعة إلى الثامنة والنصف.<br><strong>آلية الراتب والعمل:</strong> كشفية فقط.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد.<br><strong>الدعم:</strong> نعمل على إنجاح المجمع والطبيب إعلامياً وحسب ما نقدر." }
+    ,
+        { isNew: true, added: "2026-10-28", isClass: true, furnished: true, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال", "جراحة العظام والكسور", "جلدية"], gov: "بغداد", areas: ["ساحة بيروت"], statusLabel: "🟢 متوفر للعمل", headerLabel: "مطلوب عاجل", title: "مطلوب أطباء اختصاص نسائية وتوليد وأطفال وجراحة العظام والكسور وجلدية - مجمع طبي (بغداد - الرصافة - ساحة بيروت) - تسلسل 145", details: "<strong>الموقع:</strong> بغداد - الرصافة - ساحة بيروت، قرب حلويات المن والسلوى.<br><strong>الحالة الحالية:</strong> مجمع طبي كلاس (C)، من 5 إلى 10 مراجعين يومياً، وفيه صيدلاني، ويضم اختصاصات أنف وأذن وحنجرة وجهاز هضمي وأعصاب.<br><strong>تسهيلات للطبيب:</strong> العيادة موجودة ومجهزة مسبقاً في المجمع، ويوجد تقدير خاص للطبيب المتميز.<br><strong>أوقات العمل المطلوبة:</strong> مساءً.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، أطفال، جراحة العظام والكسور، جلدية (المطلوب أطباء بمستوى عالٍ).<br><strong>الدعم:</strong> نعمل على إنجاح المجمع والطبيب إعلامياً وحسب ما نقدر." }
     ];
 
     const ALL_MODE_BTNS = ['btnGeneral', 'btnDoctor', 'btnHospital', 'btnHospDoc', 'btnLatest', 'btnMatches', 'btnLicense', 'btnAllDoctors', 'btnAllClinics', 'btnCatalog', 'btnLicenseCatalog', 'btnDoctorCatalog'];
@@ -6068,7 +6073,7 @@
             + '<div style="font-weight:900;font-size:36px;color:#1546c9;margin-bottom:30px">✓ ' + (doc ? 'جاهز للتنسيق في المواقع التالية' : 'مجمعات جاهزة في المواقع التالية') + '</div>'
             + '<div style="display:grid;grid-template-columns:repeat(' + cols + ',1fr);gap:28px 18px">' + tiles.map(chip).join('') + '</div></div>'
             + '<div style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:40px 54px 46px">'
-            + '<div style="display:flex;align-items:center;gap:16px"><div style="width:84px;height:84px;border-radius:22px;background:linear-gradient(160deg,#0b2a86,#1f5cf0);color:#fff;font-weight:900;font-size:62px;display:flex;align-items:center;justify-content:center;line-height:1">+</div>'
+            + '<div style="display:flex;align-items:center;gap:16px"><div style="width:84px;height:84px;border-radius:22px;background:linear-gradient(160deg,#0b2a86,#1f5cf0);display:flex;align-items:center;justify-content:center;padding:10px"><svg viewBox="0 0 200 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="lcS"><circle cx="76" cy="100" r="56"/></clipPath></defs><circle cx="76" cy="100" r="56" fill="#fff"/><circle cx="124" cy="100" r="56" fill="#ffbf3f"/><circle cx="124" cy="100" r="56" fill="#1f4fe0" clip-path="url(#lcS)"/><circle cx="100" cy="100" r="9" fill="#fff"/></svg></div>'
             + '<div><div style="font-weight:900;font-size:40px;color:#0b2a86">منصة عيادات طبية</div><div style="font-weight:700;font-size:24px;color:#475a8f">اطلب الفرصة برقم التسلسل</div></div></div>'
             + '<div style="background:#0f3fb8;color:#fff;font-weight:900;font-size:40px;padding:20px 34px;border-radius:999px;direction:ltr;white-space:nowrap;box-shadow:0 10px 22px rgba(15,63,184,.35)">💬 ' + WHATSAPP_DISPLAY + '</div></div>'
             + '</div>';
@@ -6111,7 +6116,7 @@
             + (extra ? '<div style="margin-top:18px;text-align:center;font-weight:800;font-size:30px;color:#ffd36b">+ ' + extra + ' منطقة أخرى — اسأل عن منطقتك</div>' : '')
             + '<div style="margin-top:30px;display:flex;gap:14px;justify-content:space-between;flex-wrap:wrap">' + pill('تنسيق مباشر', 'rgba(255,255,255,.12)', '#d6fff6') + pill('خصوصية تامة', 'rgba(255,255,255,.12)', '#d6fff6') + pill('اطلب برقم التسلسل', 'rgba(255,255,255,.12)', '#ffd36b') + '</div>'
             + '<div style="margin-top:30px;background:#fff;border-radius:26px;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px">'
-            + '<div style="display:flex;align-items:center;gap:14px"><div style="width:70px;height:70px;border-radius:18px;background:linear-gradient(160deg,#0b2a86,#1f5cf0);color:#fff;font-weight:900;font-size:52px;display:flex;align-items:center;justify-content:center;line-height:1">+</div><div style="font-weight:900;font-size:36px;color:#0b2a86">منصة عيادات طبية</div></div>'
+            + '<div style="display:flex;align-items:center;gap:14px"><div style="width:70px;height:70px;border-radius:18px;background:linear-gradient(160deg,#0b2a86,#1f5cf0);display:flex;align-items:center;justify-content:center;padding:10px"><svg viewBox="0 0 200 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="lcS"><circle cx="76" cy="100" r="56"/></clipPath></defs><circle cx="76" cy="100" r="56" fill="#fff"/><circle cx="124" cy="100" r="56" fill="#ffbf3f"/><circle cx="124" cy="100" r="56" fill="#1f4fe0" clip-path="url(#lcS)"/><circle cx="100" cy="100" r="9" fill="#fff"/></svg></div><div style="font-weight:900;font-size:36px;color:#0b2a86">منصة عيادات طبية</div></div>'
             + '<div style="background:#0d9488;color:#fff;font-weight:900;font-size:38px;padding:14px 26px;border-radius:999px;direction:ltr;white-space:nowrap">💬 ' + WHATSAPP_DISPLAY + '</div></div>'
             + '</div>';
         return { html, w: 1080 };
@@ -6234,7 +6239,7 @@
             + (chips.length ? '<div style="display:grid;grid-template-columns:repeat(' + cols + ',1fr);gap:18px">' + chips.map(chipH).join('') + '</div>' : '')
             + '<div style="margin-top:26px;background:#10142e;color:#fff;border-radius:24px;padding:20px 30px;display:flex;justify-content:space-between;align-items:center;font-weight:900;font-size:36px"><span>للتنسيق أرسل رقم التسلسل</span><b style="background:#ffd36b;color:#111;border-radius:16px;padding:2px 26px;font-size:58px">' + seqOf(item) + '</b></div></div>'
             + '<div style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:38px 54px 44px">'
-            + '<div style="display:flex;align-items:center;gap:16px"><div style="width:84px;height:84px;border-radius:22px;background:linear-gradient(160deg,#0b2a86,#1f5cf0);color:#fff;font-weight:900;font-size:62px;display:flex;align-items:center;justify-content:center;line-height:1">+</div>'
+            + '<div style="display:flex;align-items:center;gap:16px"><div style="width:84px;height:84px;border-radius:22px;background:linear-gradient(160deg,#0b2a86,#1f5cf0);display:flex;align-items:center;justify-content:center;padding:10px"><svg viewBox="0 0 200 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="lcS"><circle cx="76" cy="100" r="56"/></clipPath></defs><circle cx="76" cy="100" r="56" fill="#fff"/><circle cx="124" cy="100" r="56" fill="#ffbf3f"/><circle cx="124" cy="100" r="56" fill="#1f4fe0" clip-path="url(#lcS)"/><circle cx="100" cy="100" r="9" fill="#fff"/></svg></div>'
             + '<div><div style="font-weight:900;font-size:40px;color:#0b2a86">منصة عيادات طبية</div><div style="font-weight:700;font-size:24px;color:#475a8f">تنسيق مباشر وخصوصية تامة</div></div></div>'
             + '<div style="background:#0f3fb8;color:#fff;font-weight:900;font-size:40px;padding:20px 34px;border-radius:999px;direction:ltr;white-space:nowrap;box-shadow:0 10px 22px rgba(15,63,184,.35)">💬 ' + WHATSAPP_DISPLAY + '</div></div></div>';
         window._adCardModel = { where, badge, small, bigTxt, chips, seq: seqOf(item) };
