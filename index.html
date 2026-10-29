@@ -1645,6 +1645,13 @@
     /* ================= تحسينات الهواتف ================= */
     body { padding-bottom: 80px; }
     .home-fab.hidden-fab { display: none; }
+    /* شريط تنقّل دائم: الصفحة الرئيسية + رجوع خطوة */
+    .nav-dock { position: fixed; left: 14px; bottom: 14px; z-index: 65; display: flex; gap: 8px; direction: rtl; }
+    .nav-dock .home-fab { position: static; display: inline-flex; box-shadow: 0 6px 16px rgba(15, 23, 42, 0.35); }
+    .nav-dock .back-fab { background-color: #fff; color: #16307e; border-color: #16307e; }
+    body.has-wa-sticky .nav-dock { bottom: 62px; }
+    @media print { .nav-dock { display: none !important; } }
+
     @media (max-width: 600px) {
         .hero { padding: 28px 16px 32px; }
         .hero h1 { font-size: 1.7rem; margin: 8px 0 10px; }
@@ -1841,7 +1848,7 @@
     <section class="container" id="resultsContainer">
         <div class="grid" id="resultsGrid"></div>
     </section>
-    <button type="button" class="home-fab" id="homeFab" onclick="goHome()">الصفحة الرئيسية</button>
+    <div class="nav-dock no-print" id="navDock"><button type="button" class="home-fab" id="homeFab" onclick="goHome()">🏠 الصفحة الرئيسية</button><button type="button" class="home-fab back-fab" id="backFab" onclick="goBackStep()">↩ رجوع</button></div>
 </main>
 
 <script>
@@ -2315,6 +2322,10 @@
         { specialties: ["جراحة أوعية دموية ودوالي"], gov: "بغداد", areas: ["الشعب", "البنوك", "الصليخ"], statusLabel: "🟢 متوفر مساءً", headerLabel: "طبيب تسلسل 76", title: "طبيب أخصائي جراحة أوعية دموية ودوالي (بورد) - يبحث عن عيادة للعمل - تسلسل 76", details: "طبيب أخصائي جراحة أوعية دموية ودوالي (بورد)، طبيب اختصاص في مستشفى الشعب.<br>يبحث عن عيادة للعمل في الفترة المسائية ضمن مناطق الشعب والبنوك والصليخ (الرصافة).<br><strong>شروطه:</strong> عيادة مؤثثة ومدفوعة الإيجار. يمتلك وسيلة نقل، ولا يُشترط أن تكون العيادة شغالة (يقبل الجديدة والشغالة).<br><strong>آلية الراتب والعمل:</strong> نظام الراتب المقطوع، وبدون مقطوعة إن كانت العيادة شغالة (حسب الاتفاق)." }
     ,
         { isNew: true, added: "2026-10-26", specialties: ["نسائية وتوليد"], gov: "بغداد", areas: ["السعدون", "المعامل"], statusLabel: "🟢 متوفرة مساءً", headerLabel: "طبيبة تسلسل 77", title: "طبيبة أخصائية نسائية وتوليد (بورد) - تبحث عن عيادة للعمل - تسلسل 77", details: "طبيبة أخصائية نسائية وتوليد (بورد)، تعمل حالياً في مستشفى.<br>تبحث عن عيادة شغالة في <strong>الفترة المسائية</strong> ضمن مناطق السعدون والمعامل (الرصافة)، وهي أول عيادة لها.<br><strong>شروطها:</strong> عيادة مؤثثة ومدفوعة الإيجار.<br><strong>آلية الراتب والعمل:</strong> نظام الكشفية." }
+    ,
+        { isNew: true, added: "2026-10-29", specialties: ["طب أسرة", "نسائية وتوليد"], gov: "بغداد", areas: ["الاعظمية"], statusLabel: "🟢 متوفرة مساءً", headerLabel: "طبيبة تسلسل 78", title: "طبيبة ممارسة (طب أسرة) - تبحث عن مجمع طبي للعمل - تسلسل 78", details: "طبيبة ممارسة في اختصاص طب الأسرة (حالياً ضمن بورد طب الأسرة)، وتمارس النسائية والتوليد ضمن عملها العام كطبيبة أسرة بمعرفة عالية، وتعمل في أكثر من مستشفى وعيادة.<br>تبحث عن عمل في مجمع طبي في <strong>الفترة المسائية</strong> ضمن منطقة الأعظمية (الرصافة).<br><strong>شروطها:</strong> عيادة مؤثثة ومدفوعة الإيجار، ولديها وسيلة نقل خاصة.<br><strong>آلية الراتب والعمل:</strong> نظام الراتب الثابت المقطوع." }
+    ,
+        { isNew: true, added: "2026-10-29", specialties: ["أنف وأذن وحنجرة"], gov: "بغداد", areas: ["مناطق أخرى"], statusLabel: "🟢 متوفرة للعمل", headerLabel: "طبيبة تسلسل 79", title: "طبيبة أخصائية أنف وأذن وحنجرة (بورد) - تبحث عن مجمع طبي للعمل (الرصافة) - تسلسل 79", details: "طبيبة أخصائية بورد في الأنف والأذن والحنجرة، ولديها خبرة في أمراض وجراحات الأنف والأذن والحنجرة للكبار والصغار.<br>تبحث عن عمل في مجمع طبي ضمن <strong>جانب الرصافة</strong> في بغداد، وبأي وقت (صباحاً أو مساءً).<br><strong>شروطها:</strong> عيادة مؤثثة ومدفوعة الإيجار، ولديها وسيلة نقل خاصة، ولا مانع لديها من قلّة المراجعين أو كثرتهم.<br><strong>آلية الراتب والعمل:</strong> نظام الراتب الثابت المقطوع." }
     ];
 
     const DOCTORS_DATA = [
@@ -2726,6 +2737,21 @@
         goHome();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+    // ===== رجوع خطوة للخلف (يرافق الزائر دائماً) =====
+    const NAV_STACK = [location.hash || ''];
+    window.addEventListener('hashchange', () => {
+        const h = location.hash || '';
+        if (NAV_STACK.length >= 2 && NAV_STACK[NAV_STACK.length - 2] === h) NAV_STACK.pop(); else NAV_STACK.push(h);
+    });
+    function goBackStep() {
+        if (NAV_STACK.length >= 2) { history.back(); return; }
+        const vis = id => { const el = document.getElementById(id); return el && el.style.display !== 'none' && getComputedStyle(el).display !== 'none'; };
+        if (vis('panelDoctor') || vis('panelComplex')) { switchAudience(); return; }
+        const rc = document.getElementById('resultsContainer');
+        if (rc && rc.style.display === 'block') { goHome(); return; }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     function goHome() {
         try { if (location.hash) history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
         document.getElementById('filterSection').style.display = 'none';
@@ -7061,7 +7087,7 @@
     function updateHomeFab() {
         const fab = document.getElementById('homeFab');
         const rc = document.getElementById('resultsContainer');
-        if (fab && rc) fab.classList.toggle('hidden-fab', rc.style.display !== 'block');
+        if (fab) fab.classList.remove('hidden-fab');
         if (rc && rc.style.display !== 'block') { const b = document.getElementById('resSendBar'); if (b) b.classList.remove('show'); }
     }
 
