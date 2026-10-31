@@ -1701,7 +1701,77 @@
         .home-fab { left: 14px; bottom: 14px; }
         .admin-fab { right: 14px; bottom: 266px; }
     }
-</style>
+
+    /* ===== خريطة الترشيحات (مخطط شبكي) ===== */
+    .net-wrap{margin:10px 0 14px;border:1px solid #dbe4ff;border-radius:18px;background:linear-gradient(180deg,#f7f9ff,#fff);overflow:hidden}
+    .net-wrap>summary{cursor:pointer;padding:12px 16px;font-weight:900;color:#0b2a86;font-size:15px;list-style:none}
+    .net-wrap>summary::-webkit-details-marker{display:none}
+    .net-box{padding:0 10px 14px}
+    .net-svg{width:100%;height:auto;display:block;max-height:78vh;touch-action:manipulation}
+    .net-edge{fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:netDraw .7s ease-out forwards}
+    .net-edge2{fill:none;stroke:#cbd5e1;stroke-width:1.6;stroke-dasharray:5 5;opacity:0;animation:netFade .6s ease-out .5s forwards}
+    .net-node{cursor:pointer;opacity:0;transform-box:fill-box;transform-origin:center;animation:netIn .5s cubic-bezier(.2,1.2,.3,1) forwards;transition:filter .2s}
+    .net-node:hover{filter:drop-shadow(0 4px 10px #1346d855)}
+    .net-node.sel circle.nb{stroke:#0b2a86;stroke-width:5}
+    .net-halo{fill:#1346d822;transform-box:fill-box;transform-origin:center;animation:netPulse 2.4s ease-in-out infinite}
+    .net-lbl{font-size:23px;font-weight:800;fill:#1e293b;paint-order:stroke;stroke:#fff;stroke-width:5px;stroke-linejoin:round}
+    .net-lbl.s{font-size:19px;font-weight:700;fill:#64748b}
+    .net-elbl{font-size:19px;font-weight:800;paint-order:stroke;stroke:#fff;stroke-width:5px;stroke-linejoin:round}
+    .net-legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;font-size:12.5px;font-weight:800;color:#475569;margin:2px 0 8px}
+    .net-legend i{display:inline-block;width:22px;height:5px;border-radius:3px;vertical-align:middle;margin-left:5px}
+    .net-info{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:12px 14px;margin:0 4px}
+    .net-info .ni-h{font-weight:900;color:#0b2a86;font-size:15px}
+    .net-info .ni-l{color:#475569;font-weight:700;font-size:13.5px;margin-top:3px;line-height:1.6}
+    .net-info .ni-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+    .net-info .ni-tag{background:#eef3ff;color:#1346d8;border-radius:20px;padding:3px 10px;font-size:12.5px;font-weight:800}
+    .net-info .ni-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .net-btn{border:0;border-radius:12px;padding:9px 14px;font-weight:900;font-size:13.5px;cursor:pointer;background:#1346d8;color:#fff;text-decoration:none;display:inline-block;font-family:inherit}
+    .net-btn.g{background:#eef3ff;color:#1346d8}
+    .net-empty{padding:22px;text-align:center;color:#64748b;font-weight:800}
+    @keyframes netDraw{to{stroke-dashoffset:0}}
+    @keyframes netFade{to{opacity:1}}
+    @keyframes netIn{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+    @keyframes netPulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.18);opacity:.35}}
+    @media (prefers-reduced-motion:reduce){.net-edge,.net-edge2,.net-node,.net-halo{animation:none;opacity:1;stroke-dashoffset:0}}
+    
+    /* ===== زر أدوات موحّد (الأدمن): يجمع كل الأزرار العائمة في زر واحد ===== */
+    .dial-hide { display: none !important; }
+    #toolsDial { position: fixed; right: 14px; bottom: 84px; z-index: 2147482990; border: 0; border-radius: 30px; padding: 13px 18px; background: linear-gradient(135deg,#0b2a86,#2f6bff); color: #fff; font: 900 15px/1 inherit; font-family: inherit; box-shadow: 0 10px 26px rgba(11,42,134,.45); cursor: pointer; display: none; align-items: center; gap: 8px; }
+    #toolsDial.show { display: inline-flex; }
+    #toolsDial .dn { background: #ffbf3f; color: #3a2600; border-radius: 20px; padding: 2px 8px; font-size: 12.5px; }
+    #toolsMenu { position: fixed; right: 14px; bottom: 140px; z-index: 2147482991; width: min(300px, calc(100vw - 28px)); max-height: calc(100vh - 170px); overflow: auto; background: #fff; border: 1px solid #dbe4ff; border-radius: 20px; box-shadow: 0 18px 44px rgba(15,23,42,.35); padding: 10px; display: none; direction: rtl; }
+    #toolsMenu.open { display: block; animation: dialIn .18s ease-out; }
+    #toolsMenu .tm-i { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 8px; border: 0; background: #f4f7ff; color: #0b2a86; border-radius: 14px; padding: 13px 14px; margin: 0 0 7px; font: 800 15px/1.3 inherit; font-family: inherit; cursor: pointer; text-align: right; }
+    #toolsMenu .tm-i:last-child { margin-bottom: 0; }
+    #toolsMenu .tm-i:hover, #toolsMenu .tm-i:active { background: #e3ebff; }
+    #toolsMenu .tm-net { background: #eefaf1; color: #0f5132; }
+    #toolsMenu .tm-lbl { all: unset; cursor: pointer; flex: 1; }
+    #toolsMenu .tm-in { flex: 1; min-width: 0; border: 1px solid #b7e4c7; border-radius: 10px; padding: 9px 10px; font: 800 15px inherit; font-family: inherit; direction: rtl; }
+    #toolsMenu .tm-go { border: 0; border-radius: 10px; padding: 10px 14px; background: #16a34a; color: #fff; font: 900 14px inherit; font-family: inherit; cursor: pointer; }
+    @keyframes dialIn { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: none; } }
+    @media print { #toolsDial, #toolsMenu { display: none !important; } }
+    
+    /* ===== أفضل الاقتراحات: اقتراح أول + بدائل (مخطط عنكبوتي) ===== */
+    #bestDial { position: fixed; right: 14px; bottom: 140px; z-index: 2147482992; border: 0; border-radius: 30px; padding: 13px 18px; background: linear-gradient(135deg,#b45309,#f59e0b); color: #fff; font: 900 15px/1 inherit; font-family: inherit; box-shadow: 0 10px 26px rgba(180,83,9,.45); cursor: pointer; display: none; align-items: center; gap: 8px; }
+    #bestDial.show { display: inline-flex; }
+    #toolsMenu { bottom: 196px !important; max-height: calc(100vh - 226px) !important; }
+    .bp-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
+    .bp-chip { border: 1px solid #dbe4ff; background: #fff; color: #0b2a86; border-radius: 20px; padding: 6px 12px; font: 800 13px inherit; font-family: inherit; cursor: pointer; }
+    .bp-chip.on { background: #0b2a86; color: #fff; border-color: #0b2a86; }
+    .bp-hint { font-size: 12.5px; color: #64748b; font-weight: 700; margin: 0 0 8px; line-height: 1.6; }
+    .bp-first { fill: #fff7e0; stroke: #f59e0b; stroke-width: 2; }
+    .bp-rk { fill: #fff; stroke: #0b2a86; stroke-width: 3; }
+    .bp-rkt { font-size: 19px; font-weight: 900; fill: #0b2a86; }
+    .bp-tag { font-size: 20px; font-weight: 900; fill: #b45309; paint-order: stroke; stroke: #fff; stroke-width: 6px; stroke-linejoin: round; }
+    .bp-actions { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 12px; }
+    .bp-actions .net-btn { text-align: center; padding: 12px 14px; font-size: 14.5px; }
+    .bp-actions .net-btn.o { background: #ea580c; }
+    .bp-actions .net-btn.w { background: #16a34a; }
+    .bp-sub { font-size: 13px; font-weight: 900; color: #0b2a86; margin: 14px 0 6px; }
+    .bp-pvbtns { margin-top: 4px; }
+    .bp-head { font-weight: 900; font-size: 16px; color: #0b2a86; }
+    .bp-line { color: #475569; font-weight: 700; font-size: 13.5px; margin-top: 4px; line-height: 1.6; }
+    </style>
 </head>
 <body>
 
@@ -1734,7 +1804,7 @@
     <div class="aud-panel" id="panelDoctor" style="display:none">
         <div class="aud-switch"><span class="lane-tag">👨‍⚕️ مسار الطبيب</span><button type="button" onclick="switchAudience()">🏠 الصفحة الرئيسية</button></div>
         <div class="aud-steps"><div class="st"><b>1</b><span>سجّل طلبك<br>(دقيقة واحدة)</span></div><i>←</i><div class="st"><b>2</b><span>نرشّح لك<br>المجمع الأنسب</span></div><i>←</i><div class="st"><b>3</b><span>ننسّق لك<br>التواصل</span></div></div>
-        <div class="step1-box"><div class="step1-badge">⭐ ضروري — ابدأ من هنا</div><div class="step1-why">بدون تسجيل طلبك لا نستطيع ترشيح الأنسب لك ولا التنسيق</div>
+        <div class="step1-box"><div class="step1-badge">⭐ ضروري — ابدأ من هنا</div><div class="step1-why">بدون تسجيل طلبك لا نستطيع ترشيح العيادة أو المجمع الطبي الأنسب لك ولا التنسيق معهم لأجلك</div>
         
         <div class="cta-container">
             <a href="https://tally.so/r/7RrE0Z" target="_blank" class="btn btn-primary form-btn">
@@ -1757,7 +1827,7 @@
     <div class="aud-panel" id="panelComplex" style="display:none">
         <div class="aud-switch"><span class="lane-tag">🏢 مسار المجمع/المستشفى</span><button type="button" onclick="switchAudience()">🏠 الصفحة الرئيسية</button></div>
         <div class="aud-steps"><div class="st"><b>1</b><span>سجّل احتياجك<br>(دقيقة واحدة)</span></div><i>←</i><div class="st"><b>2</b><span>نرشّح لك<br>الأطباء المناسبين</span></div><i>←</i><div class="st"><b>3</b><span>ننسّق لك<br>التواصل</span></div></div>
-        <div class="step1-box"><div class="step1-badge">⭐ ضروري — ابدأ من هنا</div><div class="step1-why">بدون تسجيل طلبك لا نستطيع ترشيح الأنسب لك ولا التنسيق</div>
+        <div class="step1-box"><div class="step1-badge">⭐ ضروري — ابدأ من هنا</div><div class="step1-why">بدون تسجيل طلبك لا نستطيع ترشيح الطبيب الأنسب لمجمعك ولا التنسيق معه لأجلك</div>
         
         <div class="cta-container">
             <a href="https://tally.so/r/gD6z6l" target="_blank" class="btn btn-secondary form-btn">
@@ -1873,6 +1943,7 @@
 <script>
     const WHATSAPP_NUMBER = "9647766529755";
     const WHATSAPP_DISPLAY = "07766529755";
+    const COMMUNITY_LINES = ['', '📢 تابعونا على قنواتنا وكروباتنا:', '• قناتنا على واتساب (1): https://whatsapp.com/channel/0029VbDtiDAJpe8hTGVo1n2a', '• قناتنا على واتساب (2): https://whatsapp.com/channel/0029VbE02zlG8l5OH1Gm1A1g', '• قناتنا على تلكرام: https://t.me/Iraqi_Doctors_job', '• كروبنا على فيسبوك (1): https://web.facebook.com/groups/834154704834806', '• كروبنا على فيسبوك (2): https://web.facebook.com/groups/605285294304306'];
 
     function buildWaLink(text) {
         return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
@@ -2345,6 +2416,10 @@
         { isNew: true, added: "2026-10-29", specialties: ["طب أسرة", "نسائية وتوليد"], gov: "بغداد", areas: ["الاعظمية"], statusLabel: "🟢 متوفرة مساءً", headerLabel: "طبيبة تسلسل 78", title: "طبيبة ممارسة (طب أسرة) - تبحث عن مجمع طبي للعمل - تسلسل 78", details: "طبيبة ممارسة في اختصاص طب الأسرة (حالياً ضمن بورد طب الأسرة)، وتمارس النسائية والتوليد ضمن عملها العام كطبيبة أسرة بمعرفة عالية، وتعمل في أكثر من مستشفى وعيادة.<br>تبحث عن عمل في مجمع طبي في <strong>الفترة المسائية</strong> ضمن منطقة الأعظمية (الرصافة).<br><strong>شروطها:</strong> عيادة مؤثثة ومدفوعة الإيجار، ولديها وسيلة نقل خاصة.<br><strong>آلية الراتب والعمل:</strong> نظام الراتب الثابت المقطوع." }
     ,
         { isNew: true, added: "2026-10-29", specialties: ["أنف وأذن وحنجرة"], gov: "بغداد", areas: ["مناطق أخرى"], statusLabel: "🟢 متوفرة للعمل", headerLabel: "طبيبة تسلسل 79", title: "طبيبة أخصائية أنف وأذن وحنجرة (بورد) - تبحث عن مجمع طبي للعمل (الرصافة) - تسلسل 79", details: "طبيبة أخصائية بورد في الأنف والأذن والحنجرة، ولديها خبرة في أمراض وجراحات الأنف والأذن والحنجرة للكبار والصغار.<br>تبحث عن عمل في مجمع طبي ضمن <strong>جانب الرصافة</strong> في بغداد، وبأي وقت (صباحاً أو مساءً).<br><strong>شروطها:</strong> عيادة مؤثثة ومدفوعة الإيجار، ولديها وسيلة نقل خاصة، ولا مانع لديها من قلّة المراجعين أو كثرتهم.<br><strong>آلية الراتب والعمل:</strong> نظام الراتب الثابت المقطوع." }
+    ,
+        { isNew: true, added: "2026-10-31", specialties: ["باطنية", "قلبية واوعية دموية"], gov: "بغداد", areas: ["الدورة"], statusLabel: "🟢 متوفر مساءً", headerLabel: "طبيب تسلسل 80", title: "طبيب مقيم أقدم باطنية وقلبية (بورد) - يبحث عن عيادة للعمل (الدورة) - تسلسل 80", details: "طبيب مقيم أقدم بورد مرحلة ثانية في الباطنية والقلبية، ويعمل في مستشفى تعليمي في بغداد (مقيم أقدم أمراض القلب والباطنية).<br>يبحث عن عيادة للعمل في <strong>الفترة المسائية</strong> ضمن منطقة الدورة (البوعيثة / المعالف) - جانب الكرخ.<br><strong>شروطه:</strong> عيادة مؤثثة ومدفوعة الإيجار، ويمتلك وسيلة نقل، ولا مانع لديه من قلّة المراجعين أو كثرتهم.<br><strong>آلية الراتب والعمل:</strong> نظام الراتب المقطوع بشروط واتفاق." }
+    ,
+        { isNew: true, added: "2026-10-31", specialties: ["جراحة العظام والكسور"], gov: "بغداد", areas: ["مدينة الحارثية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "طبيب تسلسل 81", title: "طبيب أخصائي جراحة العظام والكسور (بورد) - يبحث عن عيادة شغالة للعمل (الحارثية) - تسلسل 81", details: "طبيب أخصائي بورد في جراحة العظام والكسور، ويعمل حالياً في القطاع الحكومي.<br>يبحث عن <strong>عيادة شغالة</strong> في منطقة الحارثية (الكرخ) وبأي وقت، ويرغب بالانتقال إلى مركز بغداد.<br><strong>شروطه:</strong> عيادة مؤثثة فقط (الإيجار على الطبيب)، ويمتلك وسيلة نقل.<br><strong>آلية الراتب والعمل:</strong> نظام الكشفية." }
     ];
 
     const DOCTORS_DATA = [
@@ -2421,7 +2496,7 @@
         { isNew: true, isClass: true, hours: "مساءً", specialties: ["جلدية", "مفاصل وروماتيزم", "أنف وأذن وحنجرة", "الغدد الصماء والسكري", "جراحة عامة"], gov: "بغداد", areas: ["بغداد الجديدة"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (جلدية، مفاصل وروماتيزم، أنف وأذن وحنجرة، الغدد الصماء والسكري، جراحة عامة) - مجمع طبي (بغداد - الرصافة - بغداد الجديدة) - تسلسل 70", details: "<strong>الموقع:</strong> بغداد - الرصافة - بغداد الجديدة - فرع فالح أبو العمبة، مركز سكان بغداد.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس).<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> كشفية فقط.<br><strong>الاختصاصات المطلوبة:</strong> جلدية، مفاصل وروماتيزم، أنف وأذن وحنجرة، الغدد الصماء والسكري، جراحة عامة.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد أطباء اختصاص آخرون في المجمع (دون تفاصيل إضافية)." },
         { isNew: true, hours: "مساءً", specialties: ["نسائية وتوليد", "باطنية", "جراحة عامة"], gov: "ذي قار", areas: ["ذي قار قضاء الغراف"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، باطنية، جراحة عامة) - مجمع طبي (ذي قار قضاء الغراف) - تسلسل 71", details: "<strong>الموقع:</strong> ذي قار - قضاء الغراف، قرب مركز الغراف الرئيسي الصحي.<br><strong>الحالة الحالية:</strong> المجمع أو العيادة جديدة.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، باطنية، جراحة عامة.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد أطباء اختصاص آخرون حالياً." },
         { isNew: true, hours: "مساءً", specialties: ["نسائية وتوليد"], gov: "بغداد", areas: ["مدينة الصدر"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة نسائية وتوليد - مجمع طبي (بغداد - الرصافة - مدينة الصدر) - تسلسل 72", details: "<strong>الموقع:</strong> بغداد - الرصافة - مدينة الصدر - قطاع 74، قرب سوق العورة.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد.<br><strong>الأطباء المتواجدون حالياً:</strong> طبيب باطنية." },
-        { isNew: true, isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال", "باطنية", "جلدية", "أنف وأذن وحنجرة"], gov: "بغداد", areas: ["المشتل"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، أطفال، باطنية، جلدية، أنف وأذن وحنجرة) - مجمع طبي (بغداد - الرصافة - المشتل) - تسلسل 73", details: "<strong>الموقع:</strong> بغداد - الرصافة - المشتل - شارع المطبك.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس).<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> كشفية فقط.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، أطفال، باطنية، جلدية، أنف وأذن وحنجرة.<br><strong>الأطباء المتواجدون حالياً:</strong> مختبرات طبية و طيبي اسنان و طبيب مفاصل وروماتيزم." },
+        { isNew: true, isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال", "باطنية", "جلدية", "أنف وأذن وحنجرة", "عيون"], gov: "بغداد", areas: ["المشتل"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، أطفال، باطنية، جلدية، أنف وأذن وحنجرة، عيون) - مجمع طبي (بغداد - الرصافة - المشتل) - تسلسل 73", details: "<strong>الموقع:</strong> بغداد - الرصافة - المشتل - شارع المطبك، قرب صيدلية السفر.<br><strong>الحالة الحالية:</strong> مجمع طبي جديد، كلاس (B) من 10 إلى 20 مراجعاً يومياً (عمل مستقر)، وفيه صيدلية.<br><strong>أوقات العمل المطلوبة:</strong> مساءً، من الساعة 4 إلى الساعة 8.<br><strong>آلية الراتب والعمل:</strong> كشفية فقط.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، أطفال، باطنية، جلدية، أنف وأذن وحنجرة، عيون.<br><strong>الأطباء والخدمات المتواجدة حالياً:</strong> طبيب أسنان وطبيب مفاصل ومختبر.<br><strong>الدعم:</strong> نعمل على إنجاح المجمع والطبيب إعلامياً وحسب ما نقدر." },
         { isNew: true, isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال", "باطنية", "جلدية", "طب أسرة", "طبيب ممارس عام", "قلبية واوعية دموية", "أنف وأذن وحنجرة"], gov: "بغداد", areas: ["مناطق أخرى"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء بعدة اختصاصات - مجمع طبي (بغداد - الرصافة - مناطق أخرى - جسر ديالى القديم) - تسلسل 74", details: "<strong>الموقع:</strong> بغداد - الرصافة - مناطق أخرى - جسر ديالى القديم - الشارع العام.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس).<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الأطباء المتواجدون حالياً:</strong> تحتوي على صيدلية مالك الصيدلة دكتور صيدلاني." },
         { isNew: true, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال", "باطنية", "جلدية", "مختبرات وتحليلات مرضية"], gov: "بغداد", areas: ["الزعفرانية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء بعدة اختصاصات - مجمع طبي (بغداد - الرصافة - الزعفرانية، شارع المعهد) - تسلسل 75", details: "<strong>الموقع:</strong> بغداد - الرصافة - الزعفرانية - شارع المعهد.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد أطباء اختصاص آخرون حالياً." },
         { isNew: true, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال"], gov: "بغداد", areas: ["مناطق أخرى"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، أطفال) - مجمع طبي (بغداد - الكرخ - مناطق أخرى - الإسكان) - تسلسل 76", details: "<strong>الموقع:</strong> بغداد - الكرخ - مناطق أخرى - الإسكان - شارع مستشفى الطفل المركزي، قرب الباب الرئيسي للمستشفى.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، أطفال.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد مختبر كلاس A وعيادة للسونار." },
@@ -3425,6 +3500,7 @@
         lines.push('');
         if (ADMIN && item.extraPhone) lines.push('📞 (خاص للمدير) ' + item.extraPhone);
         lines.push('💬 واتساب المنصة: ' + WHATSAPP_DISPLAY);
+        lines.push(...COMMUNITY_LINES);
         if (withUrl !== false) lines.push('🔗 ' + adUrl(item._id));
         return lines.join('\n');
     }
@@ -4002,6 +4078,131 @@
                 </details>`;
     }
 
+
+    // ================= خريطة الترشيحات: مخطط شبكي (طبيب ↔ مجمعات مرشّحة، والعكس) =================
+    function netEsc(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+    function netBoxHtml(item) {
+        if (!item || !item._id) return '';
+        return '<details class="net-wrap" open><summary>🕸 خريطة الترشيحات — اضغط أي نقطة لمعرفة التفاصيل أو لجعلها المركز</summary><div class="net-box" data-id="' + item._id + '"></div></details>';
+    }
+    function netCandidates(item, type, limit, excludeId) {
+        const want = type === 'doctor' ? 'clinic' : 'doctor';
+        const all = findMatches(item, type, { includeReserved: ADMIN }).filter(m => m.otherType === want && m.tier !== 2 && m.other && m.other._id && m.other._id !== excludeId);
+        let ms = all.filter(m => !m.tier);
+        if (!ms.length) ms = all;
+        const seen = new Set(), out = [];
+        ms.forEach(m => { if (!seen.has(m.other._id)) { seen.add(m.other._id); out.push({ m, score: suggestScore(item, type, m) }); } });
+        out.sort((a, b) => b.score - a.score);
+        return out.slice(0, limit);
+    }
+    function netEdgeStyle(m) {
+        if (m.areaOverlap) return { c: '#16a34a', w: 5.5, t: 'نفس المنطقة' };
+        if (m.sameGroup || (m.km != null && m.km <= 7)) return { c: '#2f6bff', w: 3.8, t: m.sameGroup ? 'نفس الجانب' : 'قريب' };
+        return { c: '#94a3b8', w: 2.4, t: m.sameGov ? 'نفس المحافظة' : 'مطابقة' };
+    }
+    function netRender(box, id) {
+        const st = box._net || (box._net = { hist: [], sel: null });
+        st.id = id; st.sel = st.sel || id;
+        const a = adIndex[id];
+        if (!a) { box.innerHTML = '<div class="net-empty">العنصر غير متاح.</div>'; return; }
+        const center = a.item, ctype = a.type, otype = ctype === 'doctor' ? 'clinic' : 'doctor';
+        const ring1 = netCandidates(center, ctype, 6, null);
+        if (!ring1.length) { box.innerHTML = '<div class="net-empty">لا توجد ترشيحات مطابقة حالياً.' + (st.hist.length ? '<div style="margin-top:10px"><button class="net-btn g" data-act="back">↩ رجوع</button></div>' : '') + '</div>'; return; }
+        const W = 720, cx = 360, cy = 372, R1 = 215, R2 = 322;
+        const ico = t => t === 'doctor' ? '🩺' : '🏢';
+        const col = t => t === 'doctor' ? ['#1346d8', '#2f6bff'] : ['#d98a00', '#ffbf3f'];
+        const short = (t, n) => { t = String(t || '').replace(/\s+/g, ' ').trim(); return t.length > n ? t.slice(0, n - 1) + '…' : t; };
+        const nodes = {}; // id -> {item,type,m,idx}
+        nodes[id] = { item: center, type: ctype, center: true };
+        let svg = '<defs><linearGradient id="ngc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b2a86"/><stop offset="1" stop-color="#2f6bff"/></linearGradient>'
+            + '<linearGradient id="ngd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1346d8"/><stop offset="1" stop-color="#2f6bff"/></linearGradient>'
+            + '<linearGradient id="ngk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e29a00"/><stop offset="1" stop-color="#ffbf3f"/></linearGradient></defs>';
+        let edges = '', edges2 = '', nodeSvg = '', labels = '';
+        const n = ring1.length;
+        ring1.forEach((r, i) => {
+            const it = r.m.other, ang = -Math.PI / 2 + (2 * Math.PI * i) / n;
+            const x = cx + R1 * Math.cos(ang), y = cy + R1 * Math.sin(ang);
+            nodes[it._id] = { item: it, type: otype, m: r.m, idx: i, x, y };
+            const es = netEdgeStyle(r.m);
+            edges += '<path class="net-edge" pathLength="1" style="animation-delay:' + (0.15 + i * 0.08) + 's" d="M' + cx + ' ' + cy + ' L' + x.toFixed(1) + ' ' + y.toFixed(1) + '" stroke="' + es.c + '" stroke-width="' + es.w + '"/>';
+            const lx = cx + (R1 * 0.37) * Math.cos(ang), ly = cy + (R1 * 0.37) * Math.sin(ang);
+            labels += '<text class="net-elbl" x="' + lx.toFixed(1) + '" y="' + ly.toFixed(1) + '" text-anchor="middle" fill="' + es.c + '">' + (r.m.km != null && r.m.km < 60 ? Math.max(1, Math.round(r.m.km)) + ' كم' : '') + '</text>';
+            // الحلقة الثانية: ترشيحات عكسية لهذه النقطة (من نوع المركز) — تُظهر الارتباط المتبادل
+            const sub = netCandidates(it, otype, 2, id);
+            sub.forEach((sr, j) => {
+                const off = sub.length === 1 ? 0 : (j === 0 ? -0.2 : 0.2);
+                const a2 = ang + off, x2 = cx + R2 * Math.cos(a2), y2 = cy + R2 * Math.sin(a2);
+                const sid = sr.m.other._id;
+                if (!nodes[sid]) nodes[sid] = { item: sr.m.other, type: ctype, m: sr.m, idx: -1, x: x2, y: y2, ring2: true };
+                else if (nodes[sid].ring2) { /* مكرّر: نكتفي برسم الخط */ }
+                edges2 += '<path class="net-edge2" d="M' + x.toFixed(1) + ' ' + y.toFixed(1) + ' L' + x2.toFixed(1) + ' ' + y2.toFixed(1) + '"/>';
+            });
+        });
+        // رسم العقد (الثانوية أولاً ثم الأساسية ثم المركز)
+        Object.keys(nodes).forEach(k => {
+            const o = nodes[k]; if (!o.ring2) return;
+            const c = col(o.type);
+            nodeSvg += '<g class="net-node" data-nid="' + k + '" style="animation-delay:.7s"><circle class="nb" cx="' + o.x.toFixed(1) + '" cy="' + o.y.toFixed(1) + '" r="26" fill="' + c[1] + '" opacity=".8" stroke="#fff" stroke-width="3"/>'
+                + '<text x="' + o.x.toFixed(1) + '" y="' + (o.y + 7).toFixed(1) + '" text-anchor="middle" font-size="18" font-weight="900" fill="#fff">' + netEsc(seqOf(o.item)) + '</text><title>' + netEsc(short(adLocation(o.item, o.type), 60)) + '</title></g>';
+        });
+        Object.keys(nodes).forEach(k => {
+            const o = nodes[k]; if (o.center || o.ring2) return;
+            const c = col(o.type);
+            const sp = specsOf(o.item), spT = sp.length ? short(sp[0], 12) + (sp.length > 1 ? ' +' + (sp.length - 1) : '') : '';
+            nodeSvg += '<g class="net-node" data-nid="' + k + '" style="animation-delay:' + (0.3 + o.idx * 0.08) + 's"><circle class="nb" cx="' + o.x.toFixed(1) + '" cy="' + o.y.toFixed(1) + '" r="44" fill="url(#' + (o.type === 'doctor' ? 'ngd' : 'ngk') + ')" stroke="#fff" stroke-width="4"/>'
+                + '<text x="' + o.x.toFixed(1) + '" y="' + (o.y - 8).toFixed(1) + '" text-anchor="middle" font-size="22">' + ico(o.type) + '</text>'
+                + '<text x="' + o.x.toFixed(1) + '" y="' + (o.y + 22).toFixed(1) + '" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">' + netEsc(seqOf(o.item)) + '</text>'
+                + '<text class="net-lbl" x="' + o.x.toFixed(1) + '" y="' + (o.y + 70).toFixed(1) + '" text-anchor="middle">' + netEsc(short(o.type === 'doctor' ? (o.item.areas || []).join('، ') : adLocation(o.item, o.type).replace(/^[^-]*-\s*/, '').replace(/^[^-]*-\s*/, ''), 13)) + '</text>'
+                + '<text class="net-lbl s" x="' + o.x.toFixed(1) + '" y="' + (o.y + 94).toFixed(1) + '" text-anchor="middle">' + netEsc(spT) + '</text></g>';
+        });
+        const cc = col(ctype);
+        nodeSvg += '<g class="net-node" data-nid="' + id + '" style="animation-delay:0s"><circle class="net-halo" cx="' + cx + '" cy="' + cy + '" r="74"/><circle class="nb" cx="' + cx + '" cy="' + cy + '" r="58" fill="url(#ngc)" stroke="#fff" stroke-width="5"/>'
+            + '<text x="' + cx + '" y="' + (cy - 8) + '" text-anchor="middle" font-size="30">' + ico(ctype) + '</text>'
+            + '<text x="' + cx + '" y="' + (cy + 26) + '" text-anchor="middle" font-size="28" font-weight="900" fill="#fff">' + netEsc(seqOf(center)) + '</text></g>';
+        const sel = nodes[st.sel] ? st.sel : id;
+        const svgFull = '<svg class="net-svg" viewBox="0 0 ' + W + ' 760" xmlns="http://www.w3.org/2000/svg" direction="rtl">' + svg + edges2 + edges + labels + nodeSvg + '</svg>';
+        const legend = '<div class="net-legend"><span><i style="background:#16a34a"></i>نفس المنطقة</span><span><i style="background:#2f6bff"></i>نفس الجانب / قريب</span><span><i style="background:#94a3b8"></i>نفس المحافظة</span><span>🩺 طبيب</span><span>🏢 مجمع</span></div>';
+        box.innerHTML = svgFull + legend + '<div class="net-info" id="netInfo"></div>';
+        box.querySelectorAll('.net-node').forEach(g => { if (g.getAttribute('data-nid') === sel) g.classList.add('sel'); });
+        box._nodes = nodes; netInfo(box, sel);
+    }
+    function netInfo(box, nid) {
+        const o = box._nodes && box._nodes[nid]; if (!o) return;
+        const st = box._net, isC = nid === st.id;
+        const sp = specsOf(o.item);
+        let reasons = '';
+        if (o.m && o.idx >= 0) { try { reasons = suggestReasons(adIndex[st.id].item, adIndex[st.id].type, o.m, o.idx); } catch (e) { reasons = ''; } }
+        const info = box.querySelector('#netInfo'); if (!info) return;
+        const ttl = o.type === 'doctor' ? rowTitle(o.item, 'doctor') : 'مجمع طبي';
+        info.innerHTML = '<div class="ni-h">' + (o.type === 'doctor' ? '👨‍⚕️ ' : '🏢 ') + netEsc(ttl) + ' <span style="color:#64748b;font-weight:800">(تسلسل ' + netEsc(seqOf(o.item)) + ')</span></div>'
+            + '<div class="ni-l">📍 ' + netEsc(adLocation(o.item, o.type)) + '</div>'
+            + (sp.length ? '<div class="ni-tags">' + sp.map(x => '<span class="ni-tag">' + netEsc(x) + '</span>').join('') + '</div>' : '')
+            + (reasons ? '<div class="ni-tags" style="margin-top:6px">' + reasons + '</div>' : '')
+            + '<div class="ni-btns"><a class="net-btn" href="#ad=' + o.item._id + '">📄 فتح الإعلان</a>'
+            + (isC ? '' : '<button class="net-btn g" data-act="center" data-nid="' + nid + '">🎯 اجعله المركز (اعرض ترشيحاته)</button>')
+            + (st.hist.length ? '<button class="net-btn g" data-act="back">↩ رجوع</button>' : '') + '</div>';
+    }
+    document.addEventListener('click', ev => {
+        const box = ev.target.closest && ev.target.closest('.net-box'); if (!box || !box._net) return;
+        const btn = ev.target.closest('[data-act]');
+        if (btn) {
+            const act = btn.getAttribute('data-act'), st = box._net;
+            if (act === 'back' && st.hist.length) { const prev = st.hist.pop(); st.sel = prev; netRender(box, prev); }
+            else if (act === 'center') { const nid = btn.getAttribute('data-nid'); st.hist.push(st.id); st.sel = nid; netRender(box, nid); }
+            return;
+        }
+        const g = ev.target.closest('.net-node'); if (!g) return;
+        const nid = g.getAttribute('data-nid'), st = box._net;
+        st.sel = nid;
+        box.querySelectorAll('.net-node').forEach(x => x.classList.toggle('sel', x === g));
+        netInfo(box, nid);
+    });
+    let _netRaf = 0;
+    function netInitAll() {
+        document.querySelectorAll('.net-box:not([data-init])').forEach(b => { b.setAttribute('data-init', '1'); try { netRender(b, b.getAttribute('data-id')); } catch (e) { b.innerHTML = '<div class="net-empty">تعذّر رسم الخريطة.</div>'; } });
+    }
+    new MutationObserver(() => { if (_netRaf) return; _netRaf = requestAnimationFrame(() => { _netRaf = 0; netInitAll(); }); }).observe(document.documentElement, { childList: true, subtree: true });
+
     function matchesHtml(item, type) {
         const all = findMatches(item, type, { includeReserved: ADMIN });
         const matches = all.filter(m => m.tier !== 2);
@@ -4036,6 +4237,7 @@
         return `
             <div class="matches-box">
                 <div class="matches-title">${heading} (${matches.length})</div>
+                ${matches.length ? netBoxHtml(item) : ''}
                 ${matches.length ? `<button type="button" class="cat-suggest-btn" onclick="showSuggestedCatalog('${item._id}')">📑 افتح كتالوج ${type === 'doctor' ? 'المجمعات المقترحة' : 'الأطباء المقترحين'} — حدّد وأرسل كصورة ${type === 'doctor' ? 'للطبيب' : 'للمجمع'}</button>` : ''}
                 ${matches.length ? sugShareHtml(item, type) : ''}
                 ${base.length ? strictHtml : ''}
@@ -4124,6 +4326,7 @@
         }
         lines.push('');
         lines.push('للتفاصيل والتنسيق أرسلوا رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
+        lines.push(...COMMUNITY_LINES);
         lines.push('🔗 المقترحات كاملة: ' + sugUrl(item._id));
         return lines.join('\n');
     }
@@ -4468,6 +4671,7 @@
             });
             lines.push('');
             lines.push('💬 للتواصل وطلب التفاصيل: واتساب المنصة ' + WHATSAPP_DISPLAY);
+            lines.push(...COMMUNITY_LINES);
             lines.push('🔗 القائمة كاملة: ' + url);
             return lines.join('\n');
         }
@@ -4487,6 +4691,7 @@
         });
         lines.push('');
         lines.push('💬 للتواصل وطلب التفاصيل: واتساب المنصة ' + WHATSAPP_DISPLAY);
+        lines.push(...COMMUNITY_LINES);
         lines.push('🔗 القائمة كاملة: ' + url);
         return lines.join('\n');
     }
@@ -4567,6 +4772,7 @@
         pairs.forEach(p => lines.push(pairText(p, sp)));
         lines.push('');
         lines.push('💬 للتواصل: واتساب المنصة ' + WHATSAPP_DISPLAY);
+        lines.push(...COMMUNITY_LINES);
         lines.push('🔗 القائمة كاملة: ' + url);
         return lines.join('\n');
     }
@@ -5471,6 +5677,136 @@
     }
 
     // ===== لوحة «أقوى الفرص» للمدير =====
+
+    // ================= أفضل الاقتراحات: اقتراح أول + بدائل بمخطط عنكبوتي مع تصدير الربط للمندوب =================
+    let _bp = null;
+    function bestInit() {
+        if (document.getElementById('bestPanel')) return;
+        const pn = document.createElement('div');
+        pn.id = 'bestPanel'; pn.className = 'pc-panel';
+        pn.innerHTML = '<div class="pc-card"><div class="pc-head"><span>🏆 أفضل الاقتراحات</span><button type="button" class="pc-x" onclick="bestClose()">✖</button></div><div class="pc-body" id="bestBody"></div></div>';
+        document.body.appendChild(pn);
+        pn.addEventListener('click', e => { if (e.target === pn) bestClose(); });
+        pn.addEventListener('click', bestClick);
+    }
+    function bestClose() { const p = document.getElementById('bestPanel'); if (p) p.style.display = 'none'; }
+    function bestPair(doc, venue) {
+        const ms = findMatches(doc, 'doctor', { includeReserved: true });
+        const m = ms.find(x => x.other === venue) || { other: venue, otherType: 'clinic', km: null, tier: 0 };
+        return { doc: doc, venue: venue, m: m, score: suggestScore(doc, 'doctor', m) };
+    }
+    function bestOpen() {
+        bestInit();
+        const pairs = instantSuggestPairs(), seenD = new Set(), seenC = new Set(), top = [];
+        for (const pr of pairs) {
+            if (top.length >= 5) break;
+            if (seenD.has(pr.doc._id) || seenC.has(pr.venue._id)) continue;
+            seenD.add(pr.doc._id); seenC.add(pr.venue._id); top.push(pr);
+        }
+        _bp = { top: top, i: 0, sel: null, d: top[0] ? top[0].doc : null, v: top[0] ? top[0].venue : null };
+        bestRender();
+        document.getElementById('bestPanel').style.display = 'flex';
+    }
+    function bestAlts() {
+        const d = _bp.d, v = _bp.v;
+        const venues = netCandidates(d, 'doctor', 3, v._id).filter(x => seqNum(x.m.other) !== null && isAvailable(x.m.other)).map(x => ({ item: x.m.other, m: x.m }));
+        const docs = netCandidates(v, 'clinic', 6, d._id).filter(x => seqNum(x.m.other) !== null && isAvailable(x.m.other) && salaryPref(x.m.other) !== 'راتب مقطوع ثابت').slice(0, 3).map(x => ({ item: x.m.other, m: x.m }));
+        return { venues: venues, docs: docs };
+    }
+    function bestCurrent() {
+        const sel = _bp.sel;
+        if (sel) {
+            const a = adIndex[sel];
+            if (a && a.type === 'clinic') return bestPair(_bp.d, a.item);
+            if (a && a.type === 'doctor') return bestPair(a.item, _bp.v);
+        }
+        return bestPair(_bp.d, _bp.v);
+    }
+    function bestRender() {
+        const body = document.getElementById('bestBody');
+        if (!_bp || !_bp.d) { body.innerHTML = '<div class="net-empty">لا توجد اقتراحات قوية حالياً.</div>'; return; }
+        const d = _bp.d, v = _bp.v, alts = bestAlts();
+        const short = (t, n) => { t = String(t || '').replace(/\s+/g, ' ').trim(); return t.length > n ? t.slice(0, n - 1) + '…' : t; };
+        const first = bestPair(d, v), km = first.m && first.m.km != null ? Math.max(1, Math.round(first.m.km)) + ' كم' : '';
+        const D = { x: 300, y: 275 }, C = { x: 300, y: 515 }, RA = 165;
+        const angL = alts.venues.length === 1 ? [-90] : alts.venues.length === 2 ? [-135, -45] : [-155, -90, -25];
+        const angR = alts.docs.length === 1 ? [90] : alts.docs.length === 2 ? [135, 45] : [155, 90, 25];
+        const pos = (c, ang) => ({ x: c.x + RA * Math.cos(ang * Math.PI / 180) * (c === D ? 1 : 1), y: c.y + RA * Math.sin(ang * Math.PI / 180) });
+        let edges = '', nodes = '', i = 0;
+        _bp.ranks = {};
+        const altNode = (c, ang, it, m, type, rank) => {
+            _bp.ranks[it._id] = rank;
+            const q = pos(c, ang), es = netEdgeStyle(m), id = it._id, on = _bp.sel === id;
+            const sp = specsOf(it), spT = sp.length ? short(sp[0], 12) + (sp.length > 1 ? ' +' + (sp.length - 1) : '') : '';
+            const loc = type === 'doctor' ? (it.areas || []).join('، ') : adLocation(it, 'clinic').replace(/^[^-]*-\s*/, '').replace(/^[^-]*-\s*/, '');
+            edges += '<path class="net-edge" pathLength="1" style="animation-delay:' + (0.3 + i * 0.1) + 's" d="M' + c.x + ' ' + c.y + ' L' + q.x.toFixed(1) + ' ' + q.y.toFixed(1) + '" stroke="' + es.c + '" stroke-width="' + es.w + '"/>';
+            nodes += '<g class="net-node' + (on ? ' sel' : '') + '" data-bnid="' + id + '" style="animation-delay:' + (0.4 + i * 0.1) + 's"><circle class="nb" cx="' + q.x.toFixed(1) + '" cy="' + q.y.toFixed(1) + '" r="42" fill="url(#' + (type === 'doctor' ? 'ngd' : 'ngk') + ')" stroke="#fff" stroke-width="4"/>'
+                + '<text x="' + q.x.toFixed(1) + '" y="' + (q.y - 7).toFixed(1) + '" text-anchor="middle" font-size="21">' + (type === 'doctor' ? '🩺' : '🏢') + '</text>'
+                + '<text x="' + q.x.toFixed(1) + '" y="' + (q.y + 21).toFixed(1) + '" text-anchor="middle" font-size="21" font-weight="900" fill="#fff">' + netEsc(seqOf(it)) + '</text>'
+                + '<text class="net-lbl" x="' + q.x.toFixed(1) + '" y="' + (type === 'doctor' ? q.y + 68 : q.y - 58).toFixed(1) + '" text-anchor="middle">' + netEsc(short(loc, 13)) + '</text>'
+                + '<text class="net-lbl s" x="' + q.x.toFixed(1) + '" y="' + (type === 'doctor' ? q.y + 90 : q.y - 80).toFixed(1) + '" text-anchor="middle">' + netEsc(spT) + '</text>'
+                + '<circle class="bp-rk" cx="' + (q.x + 34).toFixed(1) + '" cy="' + (q.y - 34).toFixed(1) + '" r="16"/><text class="bp-rkt" x="' + (q.x + 34).toFixed(1) + '" y="' + (q.y - 27).toFixed(1) + '" text-anchor="middle">' + rank + '</text></g>';
+            i++;
+        };
+        alts.venues.forEach((a, k) => altNode(D, angL[k], a.item, a.m, 'clinic', k + 1));
+        alts.docs.forEach((a, k) => altNode(C, angR[k], a.item, a.m, 'doctor', k + 1));
+        const defs = '<defs><linearGradient id="ngd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1346d8"/><stop offset="1" stop-color="#2f6bff"/></linearGradient><linearGradient id="ngk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e29a00"/><stop offset="1" stop-color="#ffbf3f"/></linearGradient><linearGradient id="ngc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b2a86"/><stop offset="1" stop-color="#2f6bff"/></linearGradient></defs>';
+        const mid = (D.y + C.y) / 2;
+        const core = '<path class="net-edge" pathLength="1" d="M' + D.x + ' ' + (D.y + 62) + ' L' + C.x + ' ' + (C.y - 62) + '" stroke="#f59e0b" stroke-width="9"/>'
+            + '<text class="bp-tag" x="' + (D.x + 95) + '" y="' + (mid + 4) + '" text-anchor="middle">⭐ الأول</text>'
+            + (km ? '<text class="net-elbl" x="' + (D.x + 95) + '" y="' + (mid + 32) + '" text-anchor="middle" fill="#b45309">' + km + '</text>' : '')
+            + '<g class="net-node' + (!_bp.sel ? ' sel' : '') + '" data-bnid=""><circle class="net-halo" cx="' + D.x + '" cy="' + D.y + '" r="76"/><circle class="nb" cx="' + D.x + '" cy="' + D.y + '" r="60" fill="url(#ngd)" stroke="#fff" stroke-width="5"/><text x="' + D.x + '" y="' + (D.y - 8) + '" text-anchor="middle" font-size="28">🩺</text><text x="' + D.x + '" y="' + (D.y + 24) + '" text-anchor="middle" font-size="28" font-weight="900" fill="#fff">' + netEsc(seqOf(d)) + '</text></g>'
+            + '<g class="net-node" data-bnid=""><circle class="net-halo" cx="' + C.x + '" cy="' + C.y + '" r="76"/><circle class="nb" cx="' + C.x + '" cy="' + C.y + '" r="60" fill="url(#ngk)" stroke="#fff" stroke-width="5"/><text x="' + C.x + '" y="' + (C.y - 8) + '" text-anchor="middle" font-size="28">🏢</text><text x="' + C.x + '" y="' + (C.y + 24) + '" text-anchor="middle" font-size="28" font-weight="900" fill="#fff">' + netEsc(seqOf(v)) + '</text></g>';
+        const svg = '<svg class="net-svg" viewBox="0 0 600 790" xmlns="http://www.w3.org/2000/svg" direction="rtl">' + defs + edges + core + nodes + '</svg>';
+        const chips = '<div class="bp-chips">' + _bp.top.map((pr, k) => '<button type="button" class="bp-chip' + (pr.doc === _bp.top[_bp.i].doc && pr.venue === _bp.top[_bp.i].venue ? ' on' : '') + '" data-bi="' + k + '">' + (k + 1) + '. طبيب ' + seqOf(pr.doc) + ' ↔ مجمع ' + seqOf(pr.venue) + '</button>').join('') + '</div>';
+        const hint = '<div class="bp-hint">الاقتراح الأول في الوسط (طبيب 🩺 فوق ↔ مجمع 🏢 تحته). حول الطبيب <b>مجمعات بديلة</b> له، وحول المجمع <b>أطباء بدلاء</b> له. اضغط أي بديل لتجهيز ربطه وتصديره للمندوب.</div>';
+        body.innerHTML = chips + hint + svg + '<div class="net-info" id="bestInfo"></div>';
+        bestInfo();
+    }
+    function bestInfo() {
+        const box = document.getElementById('bestInfo'); if (!box) return;
+        const pr = bestCurrent(), d = pr.doc, v = pr.venue, gr = doctorGrade(d);
+        const isFirst = d === _bp.d && v === _bp.v;
+        let h = '<div class="bp-head">' + (isFirst ? '⭐ الاقتراح الأول' : '🔁 اقتراح بديل رقم ' + ((_bp.ranks && _bp.ranks[_bp.sel]) || '')) + ' — طبيب ' + netEsc(seqOf(d)) + ' ↔ مجمع ' + netEsc(seqOf(v)) + '</div>'
+            + '<div class="bp-line">👨‍⚕️ ' + netEsc(specsOf(d).slice(0, 4).join('، ')) + (gr ? ' · ' + netEsc(gr) : '') + ' — ' + netEsc(adLocation(d, 'doctor')) + '</div>'
+            + '<div class="bp-line">🏢 ' + netEsc(specsOf(v).slice(0, 4).join('، ') + (specsOf(v).length > 4 ? ' +' + (specsOf(v).length - 4) : '')) + ' — ' + netEsc(adLocation(v, 'clinic')) + '</div>';
+        h += pairMapHtml(pr);
+        h += '<div class="bp-actions">';
+        if (typeof pvDelegateLink === 'function' && pvDelegateLink(d._id, v._id)) h += '<button type="button" class="net-btn o" onclick="pvDelegateImage(\'' + d._id + '\',\'' + v._id + '\')">🖼️ أرسل الربط للمندوب كصورة (بالتفاصيل والأرقام)</button>';
+        h += '<button type="button" class="net-btn" data-bcopy="1">📋 انسخ نص الربط للمندوب</button>';
+        h += '<a class="net-btn w" target="_blank" href="' + buildWaLink(instantMsg(pr)) + '">📩 تنسيق عبر واتساب المنصة</a>';
+        if (!isFirst) h += '<button type="button" class="net-btn g" data-bfirst="1">🎯 اجعله الاقتراح الأول</button>';
+        h += '</div>';
+        if (typeof pvPairButtons === 'function') h += '<div class="bp-sub">💬 رسائل جاهزة للطرفين</div><div class="bp-pvbtns">' + pvPairButtons(d._id, v._id) + '</div>';
+        h += '<div style="margin-top:12px"><button type="button" class="net-btn g" onclick="bestClose();strongOppsOpen()">📋 عرض قائمة كل الفرص</button></div>';
+        box.innerHTML = h;
+    }
+    function bestCopyText(pr) {
+        const d = pr.doc, v = pr.venue, gr = doctorGrade(d), km = pr.m && pr.m.km != null ? ' (المسافة ≈ ' + Math.max(1, Math.round(pr.m.km)) + ' كم)' : '';
+        return '🔗 ربط مقترح' + km + '\n\n👨‍⚕️ طبيب تسلسل ' + seqOf(d) + (gr ? ' (' + gr + ')' : '') + '\nالاختصاص: ' + specsOf(d).join('، ') + '\nالمنطقة: ' + adLocation(d, 'doctor')
+            + '\n\n🏢 مجمع تسلسل ' + seqOf(v) + (v.isClass ? ' (كلاس)' : '') + '\nيطلب: ' + specsOf(v).join('، ') + '\nالموقع: ' + adLocation(v, 'clinic');
+    }
+    function bestClick(ev) {
+        const t = ev.target;
+        const chip = t.closest && t.closest('.bp-chip');
+        if (chip && _bp) { const k = parseInt(chip.getAttribute('data-bi'), 10); _bp.i = k; _bp.d = _bp.top[k].doc; _bp.v = _bp.top[k].venue; _bp.sel = null; bestRender(); return; }
+        if (t.closest && t.closest('[data-bcopy]')) {
+            const txt = bestCopyText(bestCurrent());
+            const done = () => { if (typeof showToast === 'function') showToast('تم نسخ نص الربط ✅'); };
+            if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, () => { prompt('انسخ النص:', txt); });
+            else prompt('انسخ النص:', txt);
+            return;
+        }
+        if (t.closest && t.closest('[data-bfirst]')) {
+            const pr = bestCurrent(); _bp.d = pr.doc; _bp.v = pr.venue; _bp.sel = null; bestRender(); return;
+        }
+        const g = t.closest && t.closest('.net-node[data-bnid]');
+        if (g && _bp) {
+            const id = g.getAttribute('data-bnid'); _bp.sel = id || null;
+            document.querySelectorAll('#bestBody .net-node').forEach(x => x.classList.toggle('sel', x === g));
+            bestInfo();
+        }
+    }
     function strongOppsInit() {
         if (document.getElementById('strongPanel')) return;
         const p = document.createElement('div');
@@ -5669,6 +6005,7 @@
             lines.push(`▪️ ${tag}[تسلسل ${seqOf(i)}] ${adLocation(i, catItemType(i))}${hosp}${show ? ' — ' + show + gr : ''}${warn}`);
         });
         lines.push('', '✅ للتفاصيل والتقديم أرسل رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
+        lines.push(...COMMUNITY_LINES);
         lines.push('🌐 https://medical-clinics-platform.vercel.app/');
         lines.push('', '➖➖➖➖➖➖➖➖➖➖', catHashtags(data));
         return lines.join('\n');
@@ -5734,6 +6071,7 @@
         L.push('');
         L.push('📩 للتقديم: أرسل رقم التسلسل' + (single ? ' (' + seqOf(it0) + ')' : '') + ' على واتساب');
         L.push('📲 ' + WHATSAPP_DISPLAY, '🔗 الرابط في البايو');
+        L.push('', '📢 قنواتنا وكروباتنا على واتساب وتلكرام وفيسبوك — الروابط في البايو');
         L.push('', '———————————', '💾 احفظ المنشور 🔁 وشاركه مع طبيب يبحث عن فرصة');
         L.push('', '➖➖➖➖➖➖➖➖➖➖', igHashtags(data));
         return L.join('\n');
@@ -5786,7 +6124,7 @@
             + card('🏢', 'كتالوج عام', 'كل الفلاتر: المحافظة، الجانب، الاختصاص، كلاس', '<div class="hub-row"><button class="pc-btn" onclick="catHubGo(\'clinic\')">🏢 المجمعات</button><button class="pc-btn" onclick="catHubGo(\'doctor\')">👨‍⚕️ الأطباء</button><button class="pc-btn" onclick="catHubGo(\'license\')">📜 الإجازات</button></div>')
             + card('🩺', 'كتالوج الاختصاص', 'اختصاص + محافظة ← تُجمَع المناطق التي تحتاجه', '<div class="hub-row">' + typeSel('hubT1') + '<select id="hubG1" class="hub-in">' + gOpt + '</select><select id="hubS1" class="hub-in">' + sOpt + '</select><button class="pc-btn hub-go" onclick="catHubGo(\'spec\')">افتح ←</button></div>')
             + card('🗺️', 'كتالوج المناطق', 'حدّد مناطق ← تظهر الاختصاصات المشتركة فيها', '<div class="hub-row">' + typeSel('hubT2') + '<select id="hubG2" class="hub-in">' + gOpt + '</select><button class="pc-btn hub-go" onclick="catHubGo(\'areas\')">افتح ←</button></div>')
-            + card('📌', 'كتالوج مقترح لطبيب أو مجمع', 'اكتب التسلسل ← أفضل المجمعات/الأطباء المناسبين له', '<div class="hub-row"><input id="hubSd" class="hub-in hub-num" type="number" placeholder="تسلسل الطبيب"><button class="pc-btn hub-go" onclick="catHubGo(\'sugDoc\')">مجمعات له ←</button></div><div class="hub-row"><input id="hubSc" class="hub-in hub-num" type="number" placeholder="تسلسل المجمع"><button class="pc-btn hub-go" onclick="catHubGo(\'sugCx\')">أطباء له ←</button></div>')
+            + card('📌', 'كتالوج مقترح لطبيب أو مجمع', 'اكتب التسلسل ← أفضل المجمعات/الأطباء المناسبين له', '<div class="hub-row"><input id="hubSd" class="hub-in hub-num" type="number" placeholder="تسلسل الطبيب"><button class="pc-btn hub-go" onclick="catHubGo(\'sugDoc\')">مجمعات له ←</button><button class="pc-btn hub-go" onclick="catHubGo(\'netDoc\')">🕸 خريطة</button></div><div class="hub-row"><input id="hubSc" class="hub-in hub-num" type="number" placeholder="تسلسل المجمع"><button class="pc-btn hub-go" onclick="catHubGo(\'sugCx\')">أطباء له ←</button><button class="pc-btn hub-go" onclick="catHubGo(\'netCx\')">🕸 خريطة</button></div>')
             + card('📸', 'إعلان خاص بواحد', 'صورة إعلان لمجمع أو طبيب واحد', '<div class="hub-row"><input id="hubAd" class="hub-in hub-num" type="number" placeholder="التسلسل"><button class="pc-btn hub-go" onclick="catHubGo(\'adCx\')">🏢 مجمع</button><button class="pc-btn hub-go" onclick="catHubGo(\'adDoc\')">👨‍⚕️ طبيب</button></div>')
             + card('🎨', 'منشورات ترويجية عامة', 'تعريف بالمنصة، جذب الأطباء أو المجمعات', '<div class="hub-row"><button class="pc-btn" onclick="catHubGo(\'posters\')">افتح مركز المنشورات</button></div>');
         document.getElementById('catHubPanel').style.display = 'flex';
@@ -5807,6 +6145,11 @@
             catHubClose(); showCatalog(v('hubT2')); if (v('hubG2')) catSet('gov', v('hubG2'));
             setTimeout(() => { const d = document.querySelector('.cat-areas'); if (d) { d.open = true; d.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }, 250);
             return;
+        }
+        if (kind === 'netDoc' || kind === 'netCx') {
+            const it = catHubFind(v(kind === 'netDoc' ? 'hubSd' : 'hubSc'), kind === 'netDoc' ? 'doctor' : 'clinic');
+            if (!it) { showToast('لا يوجد ' + (kind === 'netDoc' ? 'طبيب' : 'مجمع') + ' بهذا التسلسل'); return; }
+            catHubClose(); location.hash = '#sug=' + it._id; return;
         }
         if (kind === 'sugDoc' || kind === 'sugCx') {
             const it = catHubFind(v(kind === 'sugDoc' ? 'hubSd' : 'hubSc'), kind === 'sugDoc' ? 'doctor' : 'clinic');
@@ -5855,6 +6198,7 @@
         L.push('', '📍 في المناطق التالية:');
         m.sel.forEach((a, k) => L.push((k + 1) + '. ' + a));
         L.push('', '✅ للتفاصيل والتقديم أرسل رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
+        L.push(...COMMUNITY_LINES);
         return L.join('\n');
     }
     function catAreaInner() {
@@ -5979,6 +6323,7 @@
             L.push('');
         });
         L.push('✅ للتفاصيل والتقديم أرسل رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
+        L.push(...COMMUNITY_LINES);
         return L.join('\n');
     }
     function catCompactPanel(data) {
@@ -6087,6 +6432,7 @@
             lines.push(`▪️ تسلسل ${seqOf(i)} — ${adLocation(i, catItemType(i))}${show ? ' (' + show + ')' : ''}`);
         });
         lines.push('', '✅ للتفاصيل أرسل رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
+        lines.push(...COMMUNITY_LINES);
         lines.push('🌐 https://medical-clinics-platform.vercel.app/');
         return lines.join('\n');
     }
@@ -6113,6 +6459,7 @@
             lines.push(`▪️ تسلسل ${seqOf(i)} — ${adLocation(i, catItemType(i))}${hosp}${show ? ' — ' + show + gr : ''}${note}`);
         });
         lines.push('', '✅ للتنسيق على أيٍّ منها أرسل رقم التسلسل على واتساب المنصة: ' + WHATSAPP_DISPLAY);
+        lines.push(...COMMUNITY_LINES);
         lines.push('🌐 https://medical-clinics-platform.vercel.app/');
         return lines.join('\n');
     }
@@ -6258,6 +6605,7 @@
         const L = ['🔔 ' + m.badge, '', m.small, m.bigTxt, '🗺️ ' + m.where.replace(' · ', ' - ')];
         if (m.chips.length) { L.push(''); m.chips.forEach(c => { const t = c.replace(/^[^\u0600-\u06FFA-Za-z0-9]+\s*/, ''); L.push(/^📍/.test(c) ? '📍 المنطقة: ' + t : '✅ ' + t); }); }
         L.push('', '🔢 للتنسيق أرسل رقم التسلسل: ' + m.seq, '📲 واتساب المنصة: ' + WHATSAPP_DISPLAY);
+        L.push(...COMMUNITY_LINES);
         return L.join('\n');
     }
     function copyAdShort(id) {
@@ -6571,6 +6919,7 @@
     }
     function promoCaption(kind) {
         const { lines, tags } = promoCapParts(kind);
+        lines.push(...COMMUNITY_LINES);
         lines.push('', '📲 راسلنا على واتساب: ' + WHATSAPP_DISPLAY, '🌐 https://medical-clinics-platform.vercel.app/', '', '➖➖➖➖➖➖➖➖➖➖', tags);
         return lines.join('\n');
     }
@@ -6579,6 +6928,7 @@
         const { lines, tags } = promoCapParts(kind);
         const L = lines.slice();
         L.push('', '📩 راسلنا على واتساب: ' + WHATSAPP_DISPLAY, '🔗 الرابط في البايو');
+        L.push('', '📢 قنواتنا وكروباتنا على واتساب وتلكرام وفيسبوك — الروابط في البايو');
         L.push('', '———————————', '💾 احفظ المنشور 🔁 وشاركه مع من يبحث عن فرصة');
         L.push('', '➖➖➖➖➖➖➖➖➖➖', igExpandTags(tags));
         return L.join('\n');
@@ -7406,19 +7756,95 @@
             const sf = document.createElement('button');
             sf.type = 'button'; sf.className = 'admin-fab strong-fab'; sf.id = 'strongFab';
             sf.textContent = '🏆 أقوى الفرص';
-            sf.onclick = () => strongOppsOpen();
+            sf.onclick = () => bestOpen();
             document.body.appendChild(sf);
             const hf = document.createElement('button');
             hf.type = 'button'; hf.className = 'admin-fab cat-hub-fab'; hf.id = 'catHubFab'; hf.textContent = '📑 مركز الكتالوج';
             hf.onclick = () => catHubOpen();
             document.body.appendChild(hf);
-            setTimeout(() => { try { strongOppsOpen(); } catch (e) {} }, 900); // فتح تلقائي مرة عند دخول المدير
+            setTimeout(() => { try { bestOpen(); } catch (e) {} }, 900); // فتح تلقائي مرة عند دخول المدير
         }
         handleHash();
         window.addEventListener('hashchange', handleHash);
         chatInit();
         postersInit();
     };
+</script>
+<script>
+(function () {
+    var SEL = '#negFab,#catHubFab,#pvVipFab,.pv-tools-fab,#aiFab';
+    var btn = null, menu = null;
+    function adminOn() { return !!document.getElementById('catHubFab'); }
+    function items() {
+        var l = Array.prototype.slice.call(document.querySelectorAll(SEL));
+        var c = document.getElementById('chatFab');
+        if (c && l.length) l.push(c);
+        return l;
+    }
+    function build() {
+        if (!adminOn()) return;
+        var its = items();
+        its.forEach(function (e) { e.classList.add('dial-hide'); });
+        var sfb = document.getElementById('strongFab'); if (sfb) sfb.classList.add('dial-hide');
+        if (!document.getElementById('bestDial')) {
+            var bd = document.createElement('button'); bd.id = 'bestDial'; bd.type = 'button';
+            bd.innerHTML = '\ud83c\udfc6 \u0623\u0641\u0636\u0644 \u0627\u0644\u0627\u0642\u062a\u0631\u0627\u062d\u0627\u062a';
+            bd.onclick = function (ev) { ev.stopPropagation(); close(); if (typeof bestOpen === 'function') bestOpen(); };
+            document.body.appendChild(bd); bd.classList.add('show');
+        }
+        if (!btn) {
+            btn = document.createElement('button'); btn.id = 'toolsDial'; btn.type = 'button';
+            menu = document.createElement('div'); menu.id = 'toolsMenu';
+            btn.onclick = function (ev) { ev.stopPropagation(); toggle(); };
+            document.body.appendChild(menu); document.body.appendChild(btn);
+            document.addEventListener('click', function (ev) { if (menu.classList.contains('open') && !menu.contains(ev.target) && ev.target !== btn) close(); });
+        }
+        btn.innerHTML = '\ud83e\uddf0 \u0627\u0644\u0623\u062f\u0648\u0627\u062a <span class="dn">' + (its.length + 2) + '</span>';
+        btn.classList.add('show');
+    }
+    function label(e) { return (e.innerText || e.textContent || '').trim().replace(/\s+/g, ' '); }
+    function netEntry(kind) {
+        var isDoc = kind === 'doctor';
+        var row = document.createElement('div'); row.className = 'tm-i tm-net';
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'tm-lbl';
+        b.textContent = isDoc ? '\ud83d\udd78 \u062e\u0631\u064a\u0637\u0629 \u062a\u0631\u0634\u064a\u062d\u0627\u062a \u0637\u0628\u064a\u0628 (\u0645\u062c\u0645\u0639\u0627\u062a \u0644\u0647)' : '\ud83d\udd78 \u062e\u0631\u064a\u0637\u0629 \u062a\u0631\u0634\u064a\u062d\u0627\u062a \u0645\u062c\u0645\u0639 (\u0623\u0637\u0628\u0627\u0621 \u0644\u0647)';
+        row.appendChild(b);
+        b.onclick = function (ev) {
+            ev.stopPropagation();
+            row.innerHTML = '<input type="number" inputmode="numeric" class="tm-in" placeholder="' + (isDoc ? 'تسلسل الطبيب' : 'تسلسل المجمع') + '"><button type="button" class="tm-go">افتح ←</button>';
+            var inp = row.querySelector('input'), go = row.querySelector('button');
+            inp.focus();
+            function run() {
+                var v = inp.value; if (!v) return;
+                var it = (typeof catHubFind === 'function') ? catHubFind(v, kind) : null;
+                if (!it) { if (typeof showToast === 'function') showToast('لا يوجد ' + (isDoc ? 'طبيب' : 'مجمع') + ' بهذا التسلسل'); return; }
+                close(); location.hash = '#sug=' + it._id;
+            }
+            go.onclick = function (e2) { e2.stopPropagation(); run(); };
+            inp.onkeydown = function (e2) { if (e2.key === 'Enter') run(); };
+            inp.onclick = function (e2) { e2.stopPropagation(); };
+        };
+        return row;
+    }
+    function toggle() {
+        if (menu.classList.contains('open')) { close(); return; }
+        var its = items();
+        menu.innerHTML = '';
+        menu.appendChild(netEntry('doctor')); menu.appendChild(netEntry('clinic'));
+        its.forEach(function (e) {
+            var b = document.createElement('button'); b.type = 'button'; b.className = 'tm-i'; b.textContent = label(e);
+            b.onclick = function (ev) { ev.stopPropagation(); close(); setTimeout(function () { e.click(); }, 60); };
+            menu.appendChild(b);
+        });
+        menu.classList.add('open');
+    }
+    function close() { if (menu) menu.classList.remove('open'); }
+    var t = 0;
+    function sched() { if (t) return; t = setTimeout(function () { t = 0; build(); }, 150); }
+    new MutationObserver(sched).observe(document.body, { childList: true });
+    var n = 0, iv = setInterval(function () { build(); if (++n > 40) clearInterval(iv); }, 500);
+    build();
+})();
 </script>
 </body>
 </html>
