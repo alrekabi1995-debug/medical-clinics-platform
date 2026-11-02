@@ -410,6 +410,10 @@
     .wa-channel-btn:hover{background:#f0fdf4}
     .wa-channel-btn.fb{color:#1e3a8a!important;border-color:#1877f2}.wa-channel-btn.fb:hover{background:#eff6ff}
     .wa-channel-btn.tg{color:#075985!important;border-color:#229ed9}.wa-channel-btn.tg:hover{background:#f0f9ff}
+    .social-btn{background:#fff;color:#0b2a86;border:2px solid #1346d8;border-radius:30px;padding:12px 26px;font-weight:900;font-size:17px;font-family:inherit;cursor:pointer;box-shadow:0 4px 14px #1346d822}.social-btn i{font-style:normal;font-size:13px;margin-right:6px}
+    .social-title{margin:14px 0 6px;text-align:center;font-weight:900;font-size:17px;color:#0b2a86}
+    .wa-channel-btn.ig{color:#9d174d!important;border-color:#e1306c}.wa-channel-btn.ig:hover{background:#fdf2f8}
+    .wa-channel-btn.tt{color:#111!important;border-color:#fe2c55}.wa-channel-btn.tt:hover{background:#fff1f3}
     .option-pill {
         background-color: #f1f5f9;
         border: 1px solid #cbd5e1;
@@ -1755,6 +1759,8 @@
     #bestDial { position: fixed; right: 14px; bottom: 140px; z-index: 2147482992; border: 0; border-radius: 30px; padding: 13px 18px; background: linear-gradient(135deg,#b45309,#f59e0b); color: #fff; font: 900 15px/1 inherit; font-family: inherit; box-shadow: 0 10px 26px rgba(180,83,9,.45); cursor: pointer; display: none; align-items: center; gap: 8px; }
     #bestDial.show { display: inline-flex; }
     #toolsMenu { bottom: 196px !important; max-height: calc(100vh - 226px) !important; }
+    .rt-fee { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:8px 0 } .rt-fee input { width:150px; padding:7px 10px; border:1.5px solid #cbd5e1; border-radius:10px; font:700 14px inherit; font-family:inherit }
+    .bp-sel-wrap { margin: 0 0 10px; } .bp-sel-wrap label { display: block; font-weight: 800; font-size: 13px; color: #0b2a86; margin-bottom: 6px; } .bp-sel { width: 100%; padding: 11px 12px; border: 2px solid #1346d8; border-radius: 12px; background: #fff; color: #0b2a86; font: 800 15px inherit; font-family: inherit; }
     .bp-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
     .bp-chip { border: 1px solid #dbe4ff; background: #fff; color: #0b2a86; border-radius: 20px; padding: 6px 12px; font: 800 13px inherit; font-family: inherit; cursor: pointer; }
     .bp-chip.on { background: #0b2a86; color: #fff; border-color: #0b2a86; }
@@ -1762,6 +1768,11 @@
     .bp-first { fill: #fff7e0; stroke: #f59e0b; stroke-width: 2; }
     .bp-rk { fill: #fff; stroke: #0b2a86; stroke-width: 3; }
     .bp-rkt { font-size: 19px; font-weight: 900; fill: #0b2a86; }
+    .bp-detbtns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .bp-detbtns .net-btn.on { background: #1346d8; color: #fff; }
+    .bp-det { background: #f8faff; border: 1px solid #dbe4ff; border-radius: 12px; padding: 10px 12px; margin-top: 8px; }
+    .bp-det-t { font-weight: 900; color: #0b2a86; margin-bottom: 4px; }
+    .bp-det .details-list { margin: 8px 0 0; padding-inline-start: 18px; font-size: 13.5px; line-height: 1.8; color: #334155; }
     .bp-tag { font-size: 20px; font-weight: 900; fill: #b45309; paint-order: stroke; stroke: #fff; stroke-width: 6px; stroke-linejoin: round; }
     .bp-actions { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 12px; }
     .bp-actions .net-btn { text-align: center; padding: 12px 14px; font-size: 14.5px; }
@@ -1771,6 +1782,42 @@
     .bp-pvbtns { margin-top: 4px; }
     .bp-head { font-weight: 900; font-size: 16px; color: #0b2a86; }
     .bp-line { color: #475569; font-weight: 700; font-size: 13.5px; margin-top: 4px; line-height: 1.6; }
+    
+    /* ===== تقييم المجمعات (أدمن) ===== */
+    .rt-top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+    .rt-top select { border: 1px solid #cbd5e1; border-radius: 10px; padding: 8px 10px; font: 800 14px inherit; font-family: inherit; background: #fff; }
+    .rt-top label { font-size: 13px; font-weight: 800; color: #475569; display: flex; align-items: center; gap: 5px; }
+    .rt-sum { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .rt-sum span { border-radius: 20px; padding: 4px 11px; font-size: 12.5px; font-weight: 900; }
+    .rt-meth { background: #f8faff; border: 1px solid #dbe4ff; border-radius: 12px; padding: 8px 12px; margin-bottom: 12px; font-size: 13px; color: #475569; font-weight: 700; line-height: 1.8; }
+    .rt-meth summary { cursor: pointer; font-weight: 900; color: #0b2a86; }
+    .rt-card { border: 1px solid #e2e8f0; border-radius: 16px; padding: 12px; margin-bottom: 10px; background: #fff; }
+    .rt-card.res { opacity: .62; }
+    .rt-h { display: flex; align-items: center; gap: 10px; }
+    .rt-rank { flex: 0 0 38px; height: 38px; border-radius: 50%; background: #0b2a86; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 16px; }
+    .rt-rank.t1 { background: #f59e0b; } .rt-rank.t2 { background: #64748b; } .rt-rank.t3 { background: #b45309; }
+    .rt-main { flex: 1; min-width: 0; }
+    .rt-name { font-weight: 900; color: #0b2a86; font-size: 15px; line-height: 1.4; }
+    .rt-loc { font-size: 12.5px; color: #64748b; font-weight: 700; margin-top: 2px; line-height: 1.5; }
+    .rt-score { text-align: center; flex: 0 0 64px; }
+    .rt-score b { display: block; font-size: 22px; font-weight: 900; line-height: 1; }
+    .rt-score small { font-size: 11.5px; font-weight: 900; }
+    .rt-bar { height: 8px; border-radius: 6px; background: #e8edf7; margin: 10px 0 8px; overflow: hidden; }
+    .rt-bar i { display: block; height: 100%; border-radius: 6px; }
+    .rt-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+    .rt-chip { background: #eef3ff; color: #1346d8; border-radius: 14px; padding: 3px 9px; font-size: 12px; font-weight: 800; }
+    .rt-det { margin-top: 8px; } .rt-det summary { cursor: pointer; font-size: 13px; font-weight: 900; color: #0b2a86; }
+    .rt-det ul { margin: 6px 0 0; padding-inline-start: 18px; font-size: 13px; line-height: 1.8; color: #334155; font-weight: 700; }
+    .rt-acts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .rt-acts a { font-size: 12.5px; }
+    
+    /* ===== علامة جودة المجمع (من تقييم المنصة) ===== */
+    .q-badge { display: inline-flex; align-items: center; gap: 5px; border-radius: 20px; padding: 3px 11px; font-size: 12.5px; font-weight: 900; color: #fff; vertical-align: middle; margin: 2px 0 2px 6px; white-space: nowrap; box-shadow: 0 2px 6px rgba(15,23,42,.18); }
+    .q-badge.q1 { background: linear-gradient(135deg,#15803d,#22c55e); }
+    .q-badge.q2 { background: linear-gradient(135deg,#1d4ed8,#3b82f6); }
+    .q-badge.q3 { background: linear-gradient(135deg,#b45309,#f59e0b); }
+    .q-badge.q4 { background: linear-gradient(135deg,#b91c1c,#ef4444); }
+    .q-badge b { background: #ffffff33; border-radius: 12px; padding: 0 7px; font-size: 12px; }
     </style>
 </head>
 <body>
@@ -1887,12 +1934,16 @@
             </div>
             <a href="#" target="_blank" class="wa-direct-btn js-wa-link">💬 <span class="js-wa-display"></span></a>
         </div>
-        <div class="wa-channel-row">
+        <div style="text-align:center;margin-top:12px"><button type="button" class="social-btn" id="socialBtn" aria-expanded="false" onclick="var r=document.getElementById('socialRow'),o=r.style.display==='none';r.style.display=o?'flex':'none';this.setAttribute('aria-expanded',o);this.querySelector('i').textContent=o?'▲':'▼'">🌐 حساباتنا على وسائل التواصل الاجتماعي <i>▼</i></button></div>
+        <div class="wa-channel-row" id="socialRow" style="display:none">
             <a href="https://whatsapp.com/channel/0029VbDtiDAJpe8hTGVo1n2a" target="_blank" rel="noopener" class="wa-channel-btn">📢 قناتنا الأولى على واتساب</a>
             <a href="https://whatsapp.com/channel/0029VbE02zlG8l5OH1Gm1A1g" target="_blank" rel="noopener" class="wa-channel-btn">📢 قناتنا الثانية على واتساب</a>
             <a href="https://t.me/Iraqi_Doctors_job" target="_blank" rel="noopener" class="wa-channel-btn tg">✈️ قناتنا على تلكرام (1,300+ مشترك)</a>
             <a href="https://web.facebook.com/groups/834154704834806" target="_blank" rel="noopener" class="wa-channel-btn fb">👥 كروبنا الأول على فيسبوك</a>
             <a href="https://web.facebook.com/groups/605285294304306" target="_blank" rel="noopener" class="wa-channel-btn fb">👥 كروبنا الثاني على فيسبوك</a>
+            <a href="https://web.facebook.com/groups/1793327068570242" target="_blank" rel="noopener" class="wa-channel-btn fb">👥 كروبنا الثالث على فيسبوك</a>
+            <a href="https://www.tiktok.com/@iraqi_doctors_jobs" target="_blank" rel="noopener" class="wa-channel-btn tt">🎵 حسابنا على تيك توك</a>
+            <a href="https://www.instagram.com/doctors_jobs.iq" target="_blank" rel="noopener" class="wa-channel-btn ig">📸 حسابنا على إنستغرام</a>
         </div>
     </div>
 
@@ -1943,7 +1994,7 @@
 <script>
     const WHATSAPP_NUMBER = "9647766529755";
     const WHATSAPP_DISPLAY = "07766529755";
-    const COMMUNITY_LINES = ['', '📢 تابعونا على قنواتنا وكروباتنا:', '• قناتنا على واتساب (1): https://whatsapp.com/channel/0029VbDtiDAJpe8hTGVo1n2a', '• قناتنا على واتساب (2): https://whatsapp.com/channel/0029VbE02zlG8l5OH1Gm1A1g', '• قناتنا على تلكرام: https://t.me/Iraqi_Doctors_job', '• كروبنا على فيسبوك (1): https://web.facebook.com/groups/834154704834806', '• كروبنا على فيسبوك (2): https://web.facebook.com/groups/605285294304306'];
+    const COMMUNITY_LINES = ['', '📢 تابعونا على حساباتنا على وسائل التواصل الاجتماعي:', '• قناتنا على واتساب (1): https://whatsapp.com/channel/0029VbDtiDAJpe8hTGVo1n2a', '• قناتنا على واتساب (2): https://whatsapp.com/channel/0029VbE02zlG8l5OH1Gm1A1g', '• قناتنا على تلكرام: https://t.me/Iraqi_Doctors_job', '• كروبنا على فيسبوك (1): https://web.facebook.com/groups/834154704834806', '• كروبنا على فيسبوك (2): https://web.facebook.com/groups/605285294304306', '• كروبنا على فيسبوك (3): https://web.facebook.com/groups/1793327068570242', '• حسابنا على تيك توك: https://www.tiktok.com/@iraqi_doctors_jobs', '• حسابنا على إنستغرام: https://www.instagram.com/doctors_jobs.iq'];
 
     function buildWaLink(text) {
         return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
@@ -2497,7 +2548,7 @@
         { isNew: true, hours: "مساءً", specialties: ["نسائية وتوليد", "باطنية", "جراحة عامة"], gov: "ذي قار", areas: ["ذي قار قضاء الغراف"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، باطنية، جراحة عامة) - مجمع طبي (ذي قار قضاء الغراف) - تسلسل 71", details: "<strong>الموقع:</strong> ذي قار - قضاء الغراف، قرب مركز الغراف الرئيسي الصحي.<br><strong>الحالة الحالية:</strong> المجمع أو العيادة جديدة.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، باطنية، جراحة عامة.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد أطباء اختصاص آخرون حالياً." },
         { isNew: true, hours: "مساءً", specialties: ["نسائية وتوليد"], gov: "بغداد", areas: ["مدينة الصدر"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب طبيب/ة نسائية وتوليد - مجمع طبي (بغداد - الرصافة - مدينة الصدر) - تسلسل 72", details: "<strong>الموقع:</strong> بغداد - الرصافة - مدينة الصدر - قطاع 74، قرب سوق العورة.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد.<br><strong>الأطباء المتواجدون حالياً:</strong> طبيب باطنية." },
         { isNew: true, isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال", "باطنية", "جلدية", "أنف وأذن وحنجرة", "عيون"], gov: "بغداد", areas: ["المشتل"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، أطفال، باطنية، جلدية، أنف وأذن وحنجرة، عيون) - مجمع طبي (بغداد - الرصافة - المشتل) - تسلسل 73", details: "<strong>الموقع:</strong> بغداد - الرصافة - المشتل - شارع المطبك، قرب صيدلية السفر.<br><strong>الحالة الحالية:</strong> مجمع طبي جديد، كلاس (B) من 10 إلى 20 مراجعاً يومياً (عمل مستقر)، وفيه صيدلية.<br><strong>أوقات العمل المطلوبة:</strong> مساءً، من الساعة 4 إلى الساعة 8.<br><strong>آلية الراتب والعمل:</strong> كشفية فقط.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، أطفال، باطنية، جلدية، أنف وأذن وحنجرة، عيون.<br><strong>الأطباء والخدمات المتواجدة حالياً:</strong> طبيب أسنان وطبيب مفاصل ومختبر.<br><strong>الدعم:</strong> نعمل على إنجاح المجمع والطبيب إعلامياً وحسب ما نقدر." },
-        { isNew: true, isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال", "باطنية", "جلدية", "طب أسرة", "طبيب ممارس عام", "قلبية واوعية دموية", "أنف وأذن وحنجرة"], gov: "بغداد", areas: ["مناطق أخرى"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء بعدة اختصاصات - مجمع طبي (بغداد - الرصافة - مناطق أخرى - جسر ديالى القديم) - تسلسل 74", details: "<strong>الموقع:</strong> بغداد - الرصافة - مناطق أخرى - جسر ديالى القديم - الشارع العام.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس).<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الأطباء المتواجدون حالياً:</strong> تحتوي على صيدلية مالك الصيدلة دكتور صيدلاني." },
+        { isNew: true, isClass: true, hours: "صباحاً ومساءً", furnished: true, specialties: ["جلدية", "نسائية وتوليد", "جراحة عامة", "باطنية", "جراحة الكلى والمسالك البولية", "طب أسرة", "طبيب ممارس عام"], gov: "بغداد", areas: ["الزعفرانية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (جلدية، نسائية وتوليد، جراحة عامة، باطنية، مسالك بولية، طب أسرة، ممارس عام) - مجمع طبي (بغداد - الرصافة - الزعفرانية - جسر ديالى القديم) - تسلسل 74", details: "<strong>الموقع:</strong> بغداد - الرصافة - الزعفرانية - منطقة جسر ديالى القديم.<br><strong>الحالة الحالية:</strong> مجمع شغال، كلاس (B) من 10 إلى 20 مراجعاً يومياً (عمل مستقر)، وفيه صيدلية.<br><strong>تسهيلات للطبيب:</strong> كل شيء متوفر، ولا يُشترط أن يكون للطبيب مراجعون لأن المجمع شغال.<br><strong>أوقات العمل المطلوبة:</strong> صباحاً أو مساءً.<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق، مع نسب من الصيدلية والمختبر.<br><strong>الاختصاصات المطلوبة:</strong> جلدية، نسائية وتوليد، جراحة عامة، باطنية، جراحة الكلى والمسالك البولية، طب أسرة، طبيب ممارس عام.<br><strong>الأطباء المتواجدون حالياً:</strong> طبيب كسور أطفال، وتوجد صيدلية يملكها صيدلاني." },
         { isNew: true, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال", "باطنية", "جلدية", "مختبرات وتحليلات مرضية"], gov: "بغداد", areas: ["الزعفرانية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء بعدة اختصاصات - مجمع طبي (بغداد - الرصافة - الزعفرانية، شارع المعهد) - تسلسل 75", details: "<strong>الموقع:</strong> بغداد - الرصافة - الزعفرانية - شارع المعهد.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الأطباء المتواجدون حالياً:</strong> لا يوجد أطباء اختصاص آخرون حالياً." },
         { isNew: true, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال"], gov: "بغداد", areas: ["مناطق أخرى"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، أطفال) - مجمع طبي (بغداد - الكرخ - مناطق أخرى - الإسكان) - تسلسل 76", details: "<strong>الموقع:</strong> بغداد - الكرخ - مناطق أخرى - الإسكان - شارع مستشفى الطفل المركزي، قرب الباب الرئيسي للمستشفى.<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، أطفال.<br><strong>الأطباء المتواجدون حالياً:</strong> يوجد مختبر كلاس A وعيادة للسونار." },
         { isNew: true, isClass: true, hours: "مساءً", specialties: ["نسائية وتوليد", "أطفال", "باطنية"], gov: "بغداد", areas: ["مناطق أخرى"], statusLabel: "🟢 متوفر للعمل", headerLabel: "فرصة عمل مميزة", title: "مطلوب أطباء (نسائية وتوليد، أطفال، باطنية) - مجمع طبي (بغداد - الكرخ - مناطق أخرى - الإسكان) - تسلسل 77", details: "<strong>الموقع:</strong> بغداد - الكرخ - مناطق أخرى - الإسكان - شارع مستشفى الطفل المركزي، قرب باب طوارئ المستشفى.<br><strong>الحالة الحالية:</strong> المجمع مصنّف (كلاس).<br><strong>أوقات العمل المطلوبة:</strong> مساءً<br><strong>آلية الراتب والعمل:</strong> حسب الاتفاق.<br><strong>الاختصاصات المطلوبة:</strong> نسائية وتوليد، أطفال، باطنية.<br><strong>الأطباء المتواجدون حالياً:</strong> يحتوي على مختبر وعيادة سونار." },
@@ -3636,7 +3687,7 @@
                     <span>${item.statusLabel}${item.isClass ? ' <span class="class-badge"><span class="dot"></span>مجمع كلاس</span>' : ''}</span>
                 </div>
                 <div class="card-body">
-                    ${opts.selectable && !isRed ? resPickHtml(item) : ''}${typeTag}${hospitalTag}${salaryTagHtml(item, type)}${type === 'clinic' ? venueWarnHtml(item) : doctorFlagHtml(item)}${addedLabel(item) ? `<div class="added-tag">🕒 ${addedLabel(item)}</div>` : ''}${ADMIN && !isRed && daysSinceAdded(item) !== null && daysSinceAdded(item) > STALE_DAYS ? `<div class="stale-tag">⚠️ مرّ أكثر من ${STALE_DAYS} يوماً — تأكد أنه ما زال متاحاً</div>` : ''}
+                    ${opts.selectable && !isRed ? resPickHtml(item) : ''}${typeTag}${hospitalTag}${type === 'clinic' ? qBadgeHtml(item) : dBadgeHtml(item)}${salaryTagHtml(item, type)}${type === 'clinic' ? venueWarnHtml(item) : doctorFlagHtml(item)}${addedLabel(item) ? `<div class="added-tag">🕒 ${addedLabel(item)}</div>` : ''}${ADMIN && !isRed && daysSinceAdded(item) !== null && daysSinceAdded(item) > STALE_DAYS ? `<div class="stale-tag">⚠️ مرّ أكثر من ${STALE_DAYS} يوماً — تأكد أنه ما زال متاحاً</div>` : ''}
                     <h3>${type === 'clinic' ? ((isHospVenue ? 'مستشفى أهلي' : 'مجمع طبي') + (item.license === 'want' ? ' (يطلب إجازة)' : '') + ' — تسلسل ' + seqOf(item)) : item.title}</h3>
                     <ul class="card-info">
                         ${specInfoHtml(item, !!opts.highlight)}
@@ -4008,6 +4059,7 @@
         if (salaryPref(it)) badges.push(`<span class="list-tag match-salary">💵 ${salaryPref(it)}</span>`);
         if (m.otherType === 'clinic' && ADMIN && isNotYetOpen(it)) badges.push(`<span class="list-tag match-wait">🚧 قيد الإنشاء - يفتح خلال ${daysUntilOpen(it)} يوم</span>`);
         if (m.otherType === 'clinic' && ADMIN && coordFeeOf(it) > 0) badges.push(`<span class="list-tag match-fee">💰 أجور تنسيق أعلى</span>`);
+        { const qb = m.otherType === 'clinic' ? qBadgeHtml(it) : dBadgeHtml(it); if (qb) badges.push(qb); }
         if (m.otherType === 'clinic' && ADMIN && isWorkingClass(it)) badges.push(`<span class="list-tag match-good">🏆 مجمع شغال كلاس</span>`);
         const distLabel = distanceLabel(m.km, m.eqPts);
         if (distLabel) badges.push(`<span class="list-tag match-dist">📍 ${distLabel}</span>`);
@@ -4174,7 +4226,7 @@
         if (o.m && o.idx >= 0) { try { reasons = suggestReasons(adIndex[st.id].item, adIndex[st.id].type, o.m, o.idx); } catch (e) { reasons = ''; } }
         const info = box.querySelector('#netInfo'); if (!info) return;
         const ttl = o.type === 'doctor' ? rowTitle(o.item, 'doctor') : 'مجمع طبي';
-        info.innerHTML = '<div class="ni-h">' + (o.type === 'doctor' ? '👨‍⚕️ ' : '🏢 ') + netEsc(ttl) + ' <span style="color:#64748b;font-weight:800">(تسلسل ' + netEsc(seqOf(o.item)) + ')</span></div>'
+        info.innerHTML = '<div class="ni-h">' + (o.type === 'doctor' ? '👨‍⚕️ ' : '🏢 ') + netEsc(ttl) + ' <span style="color:#64748b;font-weight:800">(تسلسل ' + netEsc(seqOf(o.item)) + ')</span> ' + (o.type === 'clinic' ? qBadgeHtml(o.item) : dBadgeHtml(o.item)) + '</div>'
             + '<div class="ni-l">📍 ' + netEsc(adLocation(o.item, o.type)) + '</div>'
             + (sp.length ? '<div class="ni-tags">' + sp.map(x => '<span class="ni-tag">' + netEsc(x) + '</span>').join('') + '</div>' : '')
             + (reasons ? '<div class="ni-tags" style="margin-top:6px">' + reasons + '</div>' : '')
@@ -5688,6 +5740,7 @@
         document.body.appendChild(pn);
         pn.addEventListener('click', e => { if (e.target === pn) bestClose(); });
         pn.addEventListener('click', bestClick);
+        pn.addEventListener('change', e => { const t = e.target; if (t && t.id === 'bpSel' && _bp) { const k = parseInt(t.value, 10); _bp.i = k; _bp.d = _bp.top[k].doc; _bp.v = _bp.top[k].venue; _bp.sel = null; _bp.open = null; bestRender(); } });
     }
     function bestClose() { const p = document.getElementById('bestPanel'); if (p) p.style.display = 'none'; }
     function bestPair(doc, venue) {
@@ -5697,13 +5750,13 @@
     }
     function bestOpen() {
         bestInit();
-        const pairs = instantSuggestPairs(), seenD = new Set(), seenC = new Set(), top = [];
-        for (const pr of pairs) {
-            if (top.length >= 5) break;
-            if (seenD.has(pr.doc._id) || seenC.has(pr.venue._id)) continue;
-            seenD.add(pr.doc._id); seenC.add(pr.venue._id); top.push(pr);
-        }
-        _bp = { top: top, i: 0, sel: null, d: top[0] ? top[0].doc : null, v: top[0] ? top[0].venue : null };
+        const adm = (typeof ADMIN !== 'undefined') && ADMIN;
+        const comb = pr => { const q = qScore(pr.venue), dq = adm ? dScore(pr.doc) : null; return pr.score + 0.6 * (q ? q.total : 50) + (dq ? 0.6 * dq.total : 0); };
+        const pairs = instantSuggestPairs(), bestOf = new Map();
+        pairs.forEach(pr => { pr.comb = comb(pr); const arr = bestOf.get(pr.doc._id) || []; arr.push(pr); bestOf.set(pr.doc._id, arr); });
+        const all = []; bestOf.forEach(arr => { arr.sort((x, y) => y.comb - x.comb); const seenV = new Set(); arr.forEach(pr => { if (all.filter(z => z.doc === pr.doc).length < 2 && !seenV.has(pr.venue._id)) { seenV.add(pr.venue._id); all.push(pr); } }); });
+        const top = all.sort((x, y) => y.comb - x.comb).slice(0, 60);
+        _bp = { top: top, i: 0, sel: null, open: null, d: top[0] ? top[0].doc : null, v: top[0] ? top[0].venue : null };
         bestRender();
         document.getElementById('bestPanel').style.display = 'flex';
     }
@@ -5755,10 +5808,11 @@
         const core = '<path class="net-edge" pathLength="1" d="M' + D.x + ' ' + (D.y + 62) + ' L' + C.x + ' ' + (C.y - 62) + '" stroke="#f59e0b" stroke-width="9"/>'
             + '<text class="bp-tag" x="' + (D.x + 95) + '" y="' + (mid + 4) + '" text-anchor="middle">⭐ الأول</text>'
             + (km ? '<text class="net-elbl" x="' + (D.x + 95) + '" y="' + (mid + 32) + '" text-anchor="middle" fill="#b45309">' + km + '</text>' : '')
-            + '<g class="net-node' + (!_bp.sel ? ' sel' : '') + '" data-bnid=""><circle class="net-halo" cx="' + D.x + '" cy="' + D.y + '" r="76"/><circle class="nb" cx="' + D.x + '" cy="' + D.y + '" r="60" fill="url(#ngd)" stroke="#fff" stroke-width="5"/><text x="' + D.x + '" y="' + (D.y - 8) + '" text-anchor="middle" font-size="28">🩺</text><text x="' + D.x + '" y="' + (D.y + 24) + '" text-anchor="middle" font-size="28" font-weight="900" fill="#fff">' + netEsc(seqOf(d)) + '</text></g>'
-            + '<g class="net-node" data-bnid=""><circle class="net-halo" cx="' + C.x + '" cy="' + C.y + '" r="76"/><circle class="nb" cx="' + C.x + '" cy="' + C.y + '" r="60" fill="url(#ngk)" stroke="#fff" stroke-width="5"/><text x="' + C.x + '" y="' + (C.y - 8) + '" text-anchor="middle" font-size="28">🏢</text><text x="' + C.x + '" y="' + (C.y + 24) + '" text-anchor="middle" font-size="28" font-weight="900" fill="#fff">' + netEsc(seqOf(v)) + '</text></g>';
+            + '<g class="net-node' + (!_bp.sel ? ' sel' : '') + '" data-bnid="" data-bopen="d"><circle class="net-halo" cx="' + D.x + '" cy="' + D.y + '" r="76"/><circle class="nb" cx="' + D.x + '" cy="' + D.y + '" r="60" fill="url(#ngd)" stroke="#fff" stroke-width="5"/><text x="' + D.x + '" y="' + (D.y - 8) + '" text-anchor="middle" font-size="28">🩺</text><text x="' + D.x + '" y="' + (D.y + 24) + '" text-anchor="middle" font-size="28" font-weight="900" fill="#fff">' + netEsc(seqOf(d)) + '</text></g>'
+            + '<g class="net-node" data-bnid="" data-bopen="v"><circle class="net-halo" cx="' + C.x + '" cy="' + C.y + '" r="76"/><circle class="nb" cx="' + C.x + '" cy="' + C.y + '" r="60" fill="url(#ngk)" stroke="#fff" stroke-width="5"/><text x="' + C.x + '" y="' + (C.y - 8) + '" text-anchor="middle" font-size="28">🏢</text><text x="' + C.x + '" y="' + (C.y + 24) + '" text-anchor="middle" font-size="28" font-weight="900" fill="#fff">' + netEsc(seqOf(v)) + '</text></g>';
         const svg = '<svg class="net-svg" viewBox="0 0 600 790" xmlns="http://www.w3.org/2000/svg" direction="rtl">' + defs + edges + core + nodes + '</svg>';
-        const chips = '<div class="bp-chips">' + _bp.top.map((pr, k) => '<button type="button" class="bp-chip' + (pr.doc === _bp.top[_bp.i].doc && pr.venue === _bp.top[_bp.i].venue ? ' on' : '') + '" data-bi="' + k + '">' + (k + 1) + '. طبيب ' + seqOf(pr.doc) + ' ↔ مجمع ' + seqOf(pr.venue) + '</button>').join('') + '</div>';
+        const adm2 = (typeof ADMIN !== 'undefined') && ADMIN;
+        const chips = '<div class="bp-sel-wrap"><label for="bpSel">📋 اختر الاقتراح (مرتبة حسب التقييمات — ' + _bp.top.length + ' اقتراح):</label><select id="bpSel" class="bp-sel">' + _bp.top.map((pr, k) => { const q = qScore(pr.venue), dq = adm2 ? dScore(pr.doc) : null; return '<option value="' + k + '"' + (k === _bp.i ? ' selected' : '') + '>' + (k + 1) + '. طبيب ' + seqOf(pr.doc) + (dq ? ' (' + Math.round(dq.total) + ')' : '') + ' ↔ مجمع ' + seqOf(pr.venue) + (q ? (adm2 ? ' (' + Math.round(q.total) + ')' : (q.total >= 60 ? ' ⭐ ' + rateGrade(q.total)[0] : '')) : '') + '</option>'; }).join('') + '</select></div>';
         const hint = '<div class="bp-hint">الاقتراح الأول في الوسط (طبيب 🩺 فوق ↔ مجمع 🏢 تحته). حول الطبيب <b>مجمعات بديلة</b> له، وحول المجمع <b>أطباء بدلاء</b> له. اضغط أي بديل لتجهيز ربطه وتصديره للمندوب.</div>';
         body.innerHTML = chips + hint + svg + '<div class="net-info" id="bestInfo"></div>';
         bestInfo();
@@ -5768,8 +5822,20 @@
         const pr = bestCurrent(), d = pr.doc, v = pr.venue, gr = doctorGrade(d);
         const isFirst = d === _bp.d && v === _bp.v;
         let h = '<div class="bp-head">' + (isFirst ? '⭐ الاقتراح الأول' : '🔁 اقتراح بديل رقم ' + ((_bp.ranks && _bp.ranks[_bp.sel]) || '')) + ' — طبيب ' + netEsc(seqOf(d)) + ' ↔ مجمع ' + netEsc(seqOf(v)) + '</div>'
-            + '<div class="bp-line">👨‍⚕️ ' + netEsc(specsOf(d).slice(0, 4).join('، ')) + (gr ? ' · ' + netEsc(gr) : '') + ' — ' + netEsc(adLocation(d, 'doctor')) + '</div>'
-            + '<div class="bp-line">🏢 ' + netEsc(specsOf(v).slice(0, 4).join('، ') + (specsOf(v).length > 4 ? ' +' + (specsOf(v).length - 4) : '')) + ' — ' + netEsc(adLocation(v, 'clinic')) + '</div>';
+            + '<div class="bp-line">' + dBadgeHtml(d) + ' 👨‍⚕️ ' + netEsc(specsOf(d).slice(0, 4).join('، ')) + (gr ? ' · ' + netEsc(gr) : '') + ' — ' + netEsc(adLocation(d, 'doctor')) + '</div>'
+            + '<div class="bp-line">' + qBadgeHtml(v) + ' 🏢 ' + netEsc(specsOf(v).slice(0, 4).join('، ') + (specsOf(v).length > 4 ? ' +' + (specsOf(v).length - 4) : '')) + ' — ' + netEsc(adLocation(v, 'clinic')) + '</div>';
+        const blk = (it, type, key) => {
+            const ttl = type === 'doctor' ? '👨‍⚕️ تفاصيل الطبيب — تسلسل ' + seqOf(it) : '🏢 تفاصيل المجمع — تسلسل ' + seqOf(it);
+            const dt = String(Array.isArray(it.details) ? it.details.join(' ') : (it.details || ''));
+            const hasSp = /الاختصاص/.test(dt), hasLoc = /الموقع:|المحافظة:/.test(dt);
+            const body = (hasSp ? '' : '<div class="bp-line"><b>' + (type === 'doctor' ? 'الاختصاص:' : 'الاختصاصات المطلوبة:') + '</b> ' + netEsc(specsOf(it).join('، ')) + '</div>')
+                + (hasLoc ? '' : '<div class="bp-line"><b>الموقع:</b> ' + netEsc(adLocation(it, type)) + '</div>')
+                + '<ul class="details-list">' + formatDetailsAsList(it.details) + '</ul>'
+                + ((typeof pvCardBlock === 'function') ? pvCardBlock(it._id) : '');
+            return '<div class="bp-det" id="bpDet' + key + '" style="display:' + (_bp.open === key ? 'block' : 'none') + '"><div class="bp-det-t">' + ttl + '</div>' + body + '</div>';
+        };
+        h += '<div class="bp-detbtns"><button type="button" class="net-btn g' + (_bp.open === 'd' ? ' on' : '') + '" data-bdet="d">👨‍⚕️ تفاصيل الطبيب ' + netEsc(seqOf(d)) + '</button><button type="button" class="net-btn g' + (_bp.open === 'v' ? ' on' : '') + '" data-bdet="v">🏢 تفاصيل المجمع ' + netEsc(seqOf(v)) + '</button></div>';
+        h += blk(d, 'doctor', 'd') + blk(v, 'clinic', 'v');
         h += pairMapHtml(pr);
         h += '<div class="bp-actions">';
         if (typeof pvDelegateLink === 'function' && pvDelegateLink(d._id, v._id)) h += '<button type="button" class="net-btn o" onclick="pvDelegateImage(\'' + d._id + '\',\'' + v._id + '\')">🖼️ أرسل الربط للمندوب كصورة (بالتفاصيل والأرقام)</button>';
@@ -5789,7 +5855,7 @@
     function bestClick(ev) {
         const t = ev.target;
         const chip = t.closest && t.closest('.bp-chip');
-        if (chip && _bp) { const k = parseInt(chip.getAttribute('data-bi'), 10); _bp.i = k; _bp.d = _bp.top[k].doc; _bp.v = _bp.top[k].venue; _bp.sel = null; bestRender(); return; }
+        if (chip && _bp) { const k = parseInt(chip.getAttribute('data-bi'), 10); _bp.i = k; _bp.d = _bp.top[k].doc; _bp.v = _bp.top[k].venue; _bp.sel = null; _bp.open = null; bestRender(); return; }
         if (t.closest && t.closest('[data-bcopy]')) {
             const txt = bestCopyText(bestCurrent());
             const done = () => { if (typeof showToast === 'function') showToast('تم نسخ نص الربط ✅'); };
@@ -5800,12 +5866,347 @@
         if (t.closest && t.closest('[data-bfirst]')) {
             const pr = bestCurrent(); _bp.d = pr.doc; _bp.v = pr.venue; _bp.sel = null; bestRender(); return;
         }
+        const dbtn = t.closest && t.closest('[data-bdet]');
+        if (dbtn && _bp) {
+            const k = dbtn.getAttribute('data-bdet'); _bp.open = (_bp.open === k) ? null : k; bestInfo();
+            const el = document.getElementById('bpDet' + k); if (el && _bp.open) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            return;
+        }
         const g = t.closest && t.closest('.net-node[data-bnid]');
         if (g && _bp) {
             const id = g.getAttribute('data-bnid'); _bp.sel = id || null;
+            const ad = id ? adIndex[id] : null;
+            _bp.open = g.getAttribute('data-bopen') || (ad ? (ad.type === 'doctor' ? 'd' : 'v') : null);
             document.querySelectorAll('#bestBody .net-node').forEach(x => x.classList.toggle('sel', x === g));
             bestInfo();
         }
+    }
+
+    // ================= تقييم المجمعات الطبية (أدمن): ترتيب من الأول للأخير بمعايير موزونة من 100 =================
+    const RT_W = { level: 30, fee: 20, supply: 20, breadth: 10, facil: 10, recent: 10 };
+    let _rate = null;
+    function rateNum(t) { return parseFloat(String(t).replace(/[,٬]/g, '')); }
+    // مبلغ التنسيق اليدوي (للمدير فقط): يُحفظ في متصفح المدير ويتقدّم على المبلغ المستخرج من نموذج المجمع
+    function feeManual(c) {
+        try { const v = parseFloat(localStorage.getItem('adm_fee_' + c._id)); return isFinite(v) && v > 0 ? v : null; } catch (e) { return null; }
+    }
+    function feeSet(id, v) {
+        try { v = parseFloat(String(v).replace(/[,٬]/g, '')); if (isFinite(v) && v > 0) localStorage.setItem('adm_fee_' + id, String(v)); else localStorage.removeItem('adm_fee_' + id); } catch (e) { }
+        _qCache.clear();
+        if (_rate && document.getElementById('ratePanel') && document.getElementById('ratePanel').style.display !== 'none') {
+            const mx = _maxSeq('clinic');
+            _rate.rows = DOCTORS_DATA.filter(c => seqNum(c) !== null).map(c => qScore(c) || rateOne(c, mx));
+            _rate.rows.sort((a, b) => (a.reserved - b.reserved) || (b.total - a.total) || (a.seq - b.seq));
+            ratingRender();
+        }
+        if (typeof showToast === 'function') showToast('تم حفظ المبلغ ✅');
+    }
+    // مستوى الدفع: 1 عالٍ (600$+) · 2 متوسط (300–599$) · 3 قليل (أقل من 300$) · 0 غير محدد
+    function feeTier(c) {
+        const f = rateFeeOf(c); if (!f) return { t: 0, amt: null };
+        return { t: f.mid >= 600 ? 1 : f.mid >= 300 ? 2 : 3, amt: f.mid };
+    }
+    function feeChipHtml(c) {
+        if (!((typeof ADMIN !== 'undefined') && ADMIN)) return '';
+        const x = feeTier(c), L = ['⚪ دفع غير محدد', '🟢 دفع عالٍ', '🟡 دفع متوسط', '🔴 دفع قليل'][x.t];
+        return '<span class="q-badge" style="background:#f1f5f9;color:#334155" title="مستوى أجر التنسيق المسجّل لهذا المجمع (للمدير فقط)">' + L + (x.amt ? ' ' + Math.round(x.amt) + '$' : '') + '</span>';
+    }
+    function rateFeeOf(c) {
+        const man = feeManual(c); if (man) return { lo: man, hi: man, mid: man, manual: true };
+        const r = (typeof PV !== 'undefined') ? PV[c._id] : null; if (!r) return null;
+        const txt = r.answers.map(a => a[1]).join(' | ');
+        let m = txt.match(/(\d[\d,٬]*)\s*(?:الى|إلى|الي|-|–)\s*(\d[\d,٬]*)\s*(?:دولار|\$)/);
+        if (m) return { lo: rateNum(m[1]), hi: rateNum(m[2]), mid: (rateNum(m[1]) + rateNum(m[2])) / 2 };
+        m = txt.match(/(\d[\d,٬]*)\s*(?:دولار|\$)/);
+        if (m) { const v = rateNum(m[1]); return { lo: v, hi: v, mid: v }; }
+        return null;
+    }
+    function rateOne(c, mxSeq) {
+        const det = String(c.details || '') + ' ' + String(c.title || '');
+        const notes = [], parts = {};
+        // 1) المستوى والحجم (30)
+        const cl = det.match(/كلاس\s*\(?\s*([ABCZ])/i), L = cl ? cl[1].toUpperCase() : '';
+        let lv = { A: 24, B: 17, C: 10, Z: 5 }[L]; if (lv == null) lv = 6;
+        let vol = null, mv = det.match(/من\s*(\d+)\s*(?:إلى|الى)\s*(\d+)\s*مراجع/);
+        if (mv) vol = (+mv[1] + +mv[2]) / 2; else { mv = det.match(/أقل من\s*(\d+)/); if (mv) vol = +mv[1] / 2; }
+        const vb = vol == null ? 0 : vol >= 25 ? 6 : vol >= 15 ? 4.5 : vol >= 7 ? 3 : 1.5;
+        parts.level = Math.min(RT_W.level, lv + vb);
+        notes.push('المستوى: ' + (L ? 'كلاس ' + L : 'غير مصنّف') + (vol != null ? ' · نحو ' + Math.round(vol) + ' مراجع يومياً' : ' · حجم المراجعين غير مذكور') + ' ← ' + parts.level.toFixed(1) + '/' + RT_W.level);
+        // 2) الأتعاب (20)
+        const fee = rateFeeOf(c), prio = ((typeof ADMIN !== 'undefined') && ADMIN) ? Math.min(3, Math.max(0, coordFeeOf(c))) : 0;
+        let f = fee ? (fee.mid >= 800 ? 20 : fee.mid >= 600 ? 17 : fee.mid >= 450 ? 14 : fee.mid >= 300 ? 11 : 7) : 8;
+        f = Math.min(RT_W.fee, f + prio);
+        parts.fee = f;
+        notes.push('الأتعاب: ' + (fee ? (fee.lo === fee.hi ? fee.lo + '$' : fee.lo + '–' + fee.hi + '$') : 'غير محددة (تقدير محايد)') + (prio ? ' · أولوية يدوية +' + prio : '') + ' ← ' + f.toFixed(1) + '/' + RT_W.fee);
+        // 3) اتساع الطلب (10)
+        const n = specsOf(c).length;
+        parts.breadth = n >= 13 ? 10 : n >= 7 ? 8 : n >= 4 ? 6 : n >= 2 ? 4 : n >= 1 ? 2 : 0;
+        notes.push('الطلب: ' + n + ' اختصاصاً ← ' + parts.breadth + '/' + RT_W.breadth);
+        // 4) توفّر أطباء مناسبين قريبين (20)
+        let near = 0, all = 0;
+        try {
+            const seen = new Set();
+            findMatches(c, 'clinic', {}).forEach(m => {
+                if (m.tier !== 0 || m.otherType !== 'doctor' || !m.other || seen.has(m.other._id)) return;
+                seen.add(m.other._id); if (!isAvailable(m.other)) return; all++;
+                if (!m.sideDiff && (m.areaOverlap || m.sameGroup || (m.km != null && m.km <= STRONG_MAX_KM))) near++;
+            });
+        } catch (e) {}
+        parts.supply = Math.min(1, near / 6) * RT_W.supply;
+        notes.push('أطباء مرشحون قريبون: ' + near + ' (من ' + all + ' مطابقاً بالاختصاص) ← ' + parts.supply.toFixed(1) + '/' + RT_W.supply);
+        // 5) التجهيز والخدمات (10)
+        let fa = 0; const fl = [];
+        if (c.furnished === true || /موجودة مسبقاً|مجهز|مؤثث/.test(det)) { fa += 3; fl.push('عيادة جاهزة'); }
+        if (/صيدل/.test(det)) { fa += 2; fl.push('صيدلية'); }
+        if (/مختبر|تحاليل/.test(det)) { fa += 2; fl.push('مختبر'); }
+        if (/أسنان/.test(det)) { fa += 1; fl.push('أسنان'); }
+        if (/الأطباء المتواجدون|أطباء متواجدون|يوجد أطباء/.test(det)) { fa += 2; fl.push('أطباء حاليون'); }
+        parts.facil = Math.min(RT_W.facil, fa);
+        notes.push('التجهيز والخدمات: ' + (fl.join('، ') || 'غير مذكورة') + ' ← ' + parts.facil + '/' + RT_W.facil);
+        // 6) الحداثة (10)
+        const sq = seqNum(c), pct = (sq != null && mxSeq) ? sq / mxSeq : 0;
+        parts.recent = Math.min(RT_W.recent, pct * 8 + (c.isNew ? 2 : 0));
+        notes.push('حداثة التسجيل: تسلسل ' + sq + (c.isNew ? ' · جديد' : '') + ' ← ' + parts.recent.toFixed(1) + '/' + RT_W.recent);
+        const total = Object.keys(parts).reduce((a, k) => a + parts[k], 0);
+        const r = (typeof PV !== 'undefined') ? PV[c._id] : null;
+        return { c: c, seq: sq, name: (r && r.name) || '', total: total, parts: parts, notes: notes, reserved: !!(c.statusLabel && c.statusLabel.includes('غير متوفر')), kind: c.venueType === 'hospital' ? 'مستشفى' : 'مجمع' };
+    }
+    function rateGrade(t) { return t >= 75 ? ['ممتاز', '#16a34a'] : t >= 60 ? ['جيد', '#2563eb'] : t >= 45 ? ['متوسط', '#d97706'] : ['ضعيف', '#dc2626']; }
+    function ratingInit() {
+        if (document.getElementById('ratePanel')) return;
+        const pn = document.createElement('div'); pn.id = 'ratePanel'; pn.className = 'pc-panel';
+        pn.innerHTML = '<div class="pc-card"><div class="pc-head"><span>📊 تقييم المجمعات الطبية</span><button type="button" class="pc-x" onclick="ratingClose()">✖</button></div><div class="pc-body" id="rateBody"></div></div>';
+        document.body.appendChild(pn);
+        pn.addEventListener('click', e => { if (e.target === pn) ratingClose(); });
+    }
+    function ratingClose() { const p = document.getElementById('ratePanel'); if (p) p.style.display = 'none'; }
+    function ratingOpen() {
+        ratingInit();
+        document.getElementById('ratePanel').style.display = 'flex';
+        document.getElementById('rateBody').innerHTML = '<div class="net-empty">⏳ جارٍ حساب التقييم…</div>';
+        setTimeout(() => {
+            const mx = _maxSeq('clinic');
+            const rows = DOCTORS_DATA.filter(c => seqNum(c) !== null).map(c => qScore(c) || rateOne(c, mx));
+            rows.sort((a, b) => (a.reserved - b.reserved) || (b.total - a.total) || (a.seq - b.seq));
+            _rate = { rows: rows, gov: '', res: false, tier: '', byfee: false };
+            ratingRender();
+        }, 30);
+    }
+    function ratingRender() {
+        const body = document.getElementById('rateBody'); if (!body || !_rate) return;
+        const govs = Array.from(new Set(_rate.rows.map(r => r.c.gov))).sort((a, b) => (a === 'بغداد' ? -1 : b === 'بغداد' ? 1 : a.localeCompare(b, 'ar')));
+        let list = _rate.rows.filter(r => (!_rate.gov || r.c.gov === _rate.gov) && (_rate.res || !r.reserved) && (!_rate.tier || String(feeTier(r.c).t) === _rate.tier));
+        if (_rate.byfee) list = list.slice().sort((a, b) => (a.reserved - b.reserved) || ((feeTier(b.c).amt || 0) - (feeTier(a.c).amt || 0)) || (b.total - a.total));
+        const cnt = { 'ممتاز': 0, 'جيد': 0, 'متوسط': 0, 'ضعيف': 0 };
+        list.forEach(r => { cnt[rateGrade(r.total)[0]]++; });
+        const meth = '<details class="rt-meth"><summary>ℹ️ كيف يُحسب التقييم؟ (من 100)</summary>'
+            + '<b>المستوى والحجم (30):</b> كلاس A=24 وB=17 وC=10 وZ=5، مع إضافة حتى 6 حسب عدد المراجعين اليومي.<br>'
+            + '<b>الأتعاب (20):</b> (يُعدَّل المبلغ يدوياً من خانة «مبلغ التنسيق» تحت كل مجمع) من 800$ فأكثر=20، 600+=17، 450+=14، 300+=11، أقل=7، غير محددة=8، مع أولوية يدوية حتى +3.<br>'
+            + '<b>أطباء مرشحون قريبون (20):</b> عدد الأطباء المتوفرين المطابقين بالاختصاص في نفس المنطقة أو القريبين؛ ستة أطباء فأكثر = الدرجة الكاملة.<br>'
+            + '<b>اتساع الطلب (10):</b> عدد الاختصاصات المطلوبة (13+=10، 7+=8، 4+=6، 2+=4، 1=2).<br>'
+            + '<b>التجهيز والخدمات (10):</b> عيادة جاهزة 3، صيدلية 2، مختبر 2، أسنان 1، أطباء حاليون 2.<br>'
+            + '<b>الحداثة (10):</b> الأحدث تسجيلاً أعلى، مع +2 للمسجّل «جديداً».<br>'
+            + 'المحجوز/غير المتوفر يُرتَّب في النهاية. التقييم يعتمد على البيانات المسجّلة فقط، فالمجمع الذي لم تُذكر معلوماته يأخذ درجة محايدة وليس صفراً.</details>';
+        const top = '<div class="rt-top"><select onchange="_rate.gov=this.value;ratingRender()"><option value="">كل المحافظات</option>' + govs.map(g => '<option' + (_rate.gov === g ? ' selected' : '') + '>' + netEsc(g) + '</option>').join('') + '</select>'
+            + '<label><input type="checkbox" ' + (_rate.res ? 'checked' : '') + ' onchange="_rate.res=this.checked;ratingRender()"> إظهار المحجوز</label>'
+            + '<select onchange="_rate.tier=this.value;ratingRender()"><option value="">كل مستويات الدفع</option><option value="1"' + (_rate.tier === '1' ? ' selected' : '') + '>🟢 دفع عالٍ (600$+)</option><option value="2"' + (_rate.tier === '2' ? ' selected' : '') + '>🟡 دفع متوسط (300–599$)</option><option value="3"' + (_rate.tier === '3' ? ' selected' : '') + '>🔴 دفع قليل (أقل من 300$)</option><option value="0"' + (_rate.tier === '0' ? ' selected' : '') + '>⚪ غير محدد</option></select>'
+            + '<label><input type="checkbox" ' + (_rate.byfee ? 'checked' : '') + ' onchange="_rate.byfee=this.checked;ratingRender()"> ترتيب حسب الدفع</label>'
+            + '<button type="button" class="net-btn g" onclick="ratingCopy()">📋 نسخ الترتيب</button></div>';
+        const sum = '<div class="rt-sum"><span style="background:#e6f7ec;color:#15803d">ممتاز ' + cnt['ممتاز'] + '</span><span style="background:#e0ecff;color:#1d4ed8">جيد ' + cnt['جيد'] + '</span><span style="background:#fff3dc;color:#b45309">متوسط ' + cnt['متوسط'] + '</span><span style="background:#fde4e4;color:#b91c1c">ضعيف ' + cnt['ضعيف'] + '</span><span style="background:#eef2f7;color:#475569">الإجمالي ' + list.length + '</span></div>';
+        const lab = { level: 'المستوى', fee: 'الأتعاب', supply: 'الأطباء', breadth: 'الطلب', facil: 'التجهيز', recent: 'الحداثة' };
+        const cards = list.map((r, i) => {
+            const g = rateGrade(r.total), c = r.c;
+            return '<div class="rt-card' + (r.reserved ? ' res' : '') + '"><div class="rt-h"><div class="rt-rank' + (i < 3 && !r.reserved ? ' t' + (i + 1) : '') + '">' + (i + 1) + '</div>'
+                + '<div class="rt-main"><div class="rt-name">' + netEsc(r.kind) + ' ' + netEsc(seqOf(c)) + (r.name ? ' — ' + netEsc(r.name) : '') + (r.reserved ? ' 🔒 محجوز' : '') + '</div><div class="rt-loc">📍 ' + netEsc(adLocation(c, 'clinic')) + '</div></div>'
+                + '<div class="rt-score"><b style="color:' + g[1] + '">' + Math.round(r.total) + '</b><small style="color:' + g[1] + '">' + g[0] + '</small></div></div>'
+                + '<div class="rt-bar"><i style="width:' + Math.min(100, r.total) + '%;background:' + g[1] + '"></i></div>'
+                + '<div class="rt-chips">' + Object.keys(lab).map(k => '<span class="rt-chip">' + lab[k] + ' ' + (Math.round(r.parts[k] * 10) / 10) + '/' + RT_W[k] + '</span>').join('') + '</div>'
+                + '<details class="rt-det"><summary>📋 تفاصيل التقييم</summary><ul>' + r.notes.map(n => '<li>' + netEsc(n) + '</li>').join('') + '</ul></details>'
+                + '<div class="rt-fee">' + feeChipHtml(c) + ' <input type="number" min="0" inputmode="numeric" placeholder="مبلغ التنسيق $" value="' + (feeManual(c) || '') + '" onchange="feeSet(\'' + c._id + '\',this.value)"></div>'
+                + '<div class="rt-acts"><a class="net-btn" href="#ad=' + c._id + '" onclick="ratingClose()">📄 الإعلان</a><a class="net-btn g" href="#sug=' + c._id + '" onclick="ratingClose()">🕸 خريطة ترشيحاته</a></div></div>';
+        }).join('');
+        body.innerHTML = top + sum + meth + (cards || '<div class="net-empty">لا توجد مجمعات.</div>');
+        _rate.list = list;
+    }
+    function ratingCopy() {
+        if (!_rate || !_rate.list) return;
+        const txt = '📊 تقييم المجمعات (من 100)\n\n' + _rate.list.map((r, i) => (i + 1) + '. ' + r.kind + ' ' + seqOf(r.c) + (r.name ? ' — ' + r.name : '') + ' — ' + Math.round(r.total) + '/100 (' + rateGrade(r.total)[0] + ')').join('\n');
+        const done = () => { if (typeof showToast === 'function') showToast('تم نسخ الترتيب ✅'); };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, () => prompt('انسخ النص:', txt)); else prompt('انسخ النص:', txt);
+    }
+
+    // ================= علامة جودة المجمع: تُحسب بنفس معادلة «تقييم المجمعات» وتُخزَّن مؤقتاً =================
+    const _qCache = new Map(); let _qMx = 0;
+    function qScore(c) {
+        if (!c || !c._id) return null;
+        if (_qCache.has(c._id)) return _qCache.get(c._id);
+        if (!_qMx) _qMx = _maxSeq('clinic');
+        let r = null;
+        try { if (seqNum(c) !== null) r = rateOne(c, _qMx); } catch (e) { r = null; }
+        _qCache.set(c._id, r);
+        return r;
+    }
+    // للمدير: الدرجة والتصنيف دائماً. للزائر: التصنيف فقط وللممتاز والجيد فقط (لا نُظهر «متوسط/ضعيف» علناً ولا أي رقم)
+    function qBadgeHtml(c) {
+        const r = qScore(c); if (!r) return '';
+        const g = rateGrade(r.total), cls = r.total >= 75 ? 'q1' : r.total >= 60 ? 'q2' : r.total >= 45 ? 'q3' : 'q4';
+        const adm = (typeof ADMIN !== 'undefined') && ADMIN;
+        if (!adm && r.total < 60) return '';
+        return '<span class="q-badge ' + cls + '" title="تقييم المنصة للمجمع (مستوى المجمع وحجم المراجعين وتوفر الأطباء وتجهيزه)">⭐ ' + (adm ? 'جودة ' : 'تقييم المنصة: ') + g[0] + (adm ? ' <b>' + Math.round(r.total) + '</b>' : '') + '</span>' + (adm ? feeChipHtml(c) : '');
+    }
+
+    // ================= تقييم الأطباء (أدمن فقط) =================
+    const RD_PEN = 12;
+    const RD_W = { qual: 25, match: 20, flex: 15, ready: 10, demand: 10, coord: 20 };
+    let _rateD = null; const _dCache = new Map(); let _dMx = 0;
+    // موقف الطبيب من أجور التنسيق الطبي: يقرأ الأسئلة المعنية في الاستمارة (الجديدة والقديمة) ويصنّفها
+    function rateCoordOf(pr) {
+        if (!pr || !pr.answers) return { score: 8, level: 'unknown', text: 'لا توجد إجابة مسجّلة (درجة محايدة)' };
+        const norm = t => String(t || '').replace(/[أإآ]/g, 'ا').replace(/ى/g, 'ي').trim();
+        let best = null;
+        const set = (lvl, sc, txt) => { if (!best || sc > best.score) best = { score: sc, level: lvl, text: txt }; };
+        let worst = null; const neg = (sc, txt) => { if (!worst) worst = { score: sc, level: 'reserve', text: txt }; };
+        pr.answers.forEach(a => {
+            const k = norm(a[0]), v = norm(a[1]); if (!v) return;
+            const feeKey = /اجور التنسيق|الموقف من اجور|^الاتفاق$|نظام العمل/.test(k);
+            if (/لدي تحفظ|تحفظ/.test(v) && /التنسيق|الموقف/.test(k)) { neg(3, 'لديه تحفظ على الأجور'); return; }
+            if (/اتفق(ع)?\s*معكم|ولا مانع لدي|لا مانع لدي|اتفهم ذلك/.test(v) && (feeKey || /الاتفاق/.test(k))) { set('agree', 20, 'لا يمانع ويتفق معكم'); return; }
+            if (/اوافق|لا يهمني|افعلوا ما يناسبكم/.test(v) && /اجور التنسيق/.test(k)) { set('lite', 17, 'لا يهمه الأمر ويترك لكم التقدير'); return; }
+            if (/اجور التنسيق \(اجابه قديمه\)/.test(k.replace('ة', 'ه'))) {
+                if (/^(تم|نعم|معكم|اوك|لا مانع|لا مانع لدي|حسب الاتفاق|ok)$/i.test(v)) set('old', 14, 'إجابة قديمة إيجابية («' + v + '»)');
+                else if (/^(كلا|ل|لا)(\s|$)/.test(v)) neg(0, 'إجابة قديمة سلبية («' + v + '»)');
+            }
+        });
+        if (best) return best;
+        if (worst) return worst;
+        return { score: 8, level: 'unknown', text: 'لا توجد إجابة واضحة (درجة محايدة)' };
+    }
+    function rateDocOne(d, mx) {
+        const det = String(d.details || '') + ' ' + String(d.title || '');
+        const notes = [], parts = {};
+        // 1) المؤهل (30)
+        const gr = doctorGrade(d), qv = { 'استشاري': 30, 'بورد': 27, 'ماجستير': 24, 'دبلوم': 20, 'أخصائي': 18, 'مقيم أقدم': 14, 'مقيم': 10, 'ممارس عام': 6 }[gr];
+        parts.qual = (qv != null ? qv : 8) * RD_W.qual / 30;
+        notes.push('المؤهل: ' + (gr || 'غير مذكور (تقدير محايد)') + ' ← ' + parts.qual.toFixed(1) + '/' + RD_W.qual);
+        // 2) مجمعات مرشحة قريبة (25) + 5) الطلب على الاختصاص (10)
+        let near = 0, all = 0, nearA = 0;
+        try {
+            const seen = new Set();
+            findMatches(d, 'doctor', {}).forEach(m => {
+                if (m.tier !== 0 || m.otherType !== 'clinic' || !m.other || seen.has(m.other._id)) return;
+                seen.add(m.other._id); if (!isAvailable(m.other)) return; all++;
+                if (!m.sideDiff && (m.areaOverlap || m.sameGroup || (m.km != null && m.km <= STRONG_MAX_KM))) { near++; if (m.other.isClass) nearA++; }
+            });
+        } catch (e) {}
+        parts.match = Math.min(1, near / 6) * RD_W.match;
+        notes.push('مجمعات مرشحة قريبة: ' + near + (nearA ? ' (منها ' + nearA + ' كلاس)' : '') + ' ← ' + parts.match.toFixed(1) + '/' + RD_W.match);
+        parts.demand = Math.min(1, all / 10) * RD_W.demand;
+        notes.push('الطلب على الاختصاص: ' + all + ' مجمعاً يطلبه ← ' + parts.demand.toFixed(1) + '/' + RD_W.demand);
+        // 3) المرونة (20)
+        let fx = 0; const fl = [];
+        const t = (typeof timeOfDoctor === 'function') ? timeOfDoctor(d) : '';
+        if (/أي وقت|صباحاً ومساءً|صباحا ومساء/.test(det + ' ' + (d.statusLabel || '') + ' ' + t) && !/مساءً فقط|صباحاً فقط/.test(d.statusLabel || '')) { fx += 6; fl.push('دوام مرن'); } else if (t || /صباح|مساء/.test(d.statusLabel || '')) { fx += 3; fl.push('فترة محددة'); }
+        if (/وسيلة نقل/.test(det)) { fx += 4; fl.push('لديه وسيلة نقل'); }
+        const na = (d.areas || []).filter(a => a !== 'مناطق أخرى').length || ((d.areas || []).length ? 1 : 0);
+        fx += na >= 3 ? 4 : na === 2 ? 2 : 1; fl.push(na + ' منطقة');
+        const sp = salaryPref(d);
+        if (sp === 'نظام الكشفية' || sp === 'حسب الاتفاق' || sp === 'راتب مقطوع أو كشفية') { fx += 4; fl.push('نظام عمل مرن'); } else if (sp === 'راتب مقطوع ثابت') fl.push('راتب مقطوع فقط');
+        if (/لا مانع.*(قلة|قليل|كثر)|قلة المراجعين|ولا يُشترط/.test(det)) { fx += 2; fl.push('يقبل قلة المراجعين'); }
+        parts.flex = Math.min(RD_W.flex, fx * RD_W.flex / 20);
+        notes.push('المرونة: ' + fl.join('، ') + ' ← ' + parts.flex.toFixed(1) + '/' + RD_W.flex);
+        // 4) الجاهزية (15)
+        let rd = 0; const rl = [];
+        const avail = isAvailable(d); if (avail) { rd += 6; rl.push('متوفر الآن'); }
+        const pr = (typeof PV !== 'undefined') ? PV[d._id] : null;
+        const urgent = pr && pr.answers.some(a => /^عاجل/.test(String(a[1]).trim()));
+        if (urgent) { rd += 4; rl.push('طلبه عاجل'); }
+        const sq = seqNum(d), pct = (sq != null && mx) ? sq / mx : 0;
+        rd += pct * 5; rl.push('حداثة التسجيل (تسلسل ' + sq + ')');
+        parts.ready = Math.min(RD_W.ready, rd * RD_W.ready / 15);
+        notes.push('الجاهزية: ' + rl.join('، ') + ' ← ' + parts.ready.toFixed(1) + '/' + RD_W.ready);
+        // 6) قبول أجور التنسيق الطبي (20): من إجابات الاستمارة الخاصة بالمدير
+        const cd = rateCoordOf(pr);
+        parts.coord = cd.score * RD_W.coord / 20;
+        notes.push('أجور التنسيق: ' + cd.text + ' ← ' + parts.coord.toFixed(1) + '/' + RD_W.coord);
+        // خصم الراتب المقطوع الثابت: يضيّق الفرص ويقلّل قابلية التنسيق (−12)
+        const fixedAns = pr && pr.answers.some(a => /مقطوع/.test(String(a[0]) + ' ' + String(a[1])) && !/كشف/.test(String(a[1])));
+        const isFixed = salaryPref(d) === 'راتب مقطوع ثابت' || !!fixedAns;
+        if (isFixed) { parts.penalty = -RD_PEN; notes.push('خصم: يطلب راتباً مقطوعاً ثابتاً ← −' + RD_PEN); }
+        const total = Math.max(0, Object.keys(parts).reduce((a, k) => a + parts[k], 0));
+        return { c: d, seq: sq, name: (pr && pr.name) || '', total: total, parts: parts, notes: notes, reserved: !avail, grade: gr, coord: cd.level, fixed: isFixed };
+    }
+    function dScore(d) {
+        if (!d || !d._id) return null;
+        if (_dCache.has(d._id)) return _dCache.get(d._id);
+        if (!_dMx) _dMx = _maxSeq('doctor');
+        let r = null; try { if (seqNum(d) !== null) r = rateDocOne(d, _dMx); } catch (e) { r = null; }
+        _dCache.set(d._id, r); return r;
+    }
+    function dBadgeHtml(d) {
+        if (!((typeof ADMIN !== 'undefined') && ADMIN)) return '';
+        const r = dScore(d); if (!r) return '';
+        const g = rateGrade(r.total), cls = r.total >= 75 ? 'q1' : r.total >= 60 ? 'q2' : r.total >= 45 ? 'q3' : 'q4';
+        return '<span class="q-badge ' + cls + '" title="تقييم المنصة للطبيب (المؤهل وتوفر مجمعات مناسبة والمرونة والجاهزية) — للمدير فقط">⭐ تقييم الطبيب: ' + g[0] + ' <b>' + Math.round(r.total) + '</b></span>';
+    }
+    function ratingDocInit() {
+        if (document.getElementById('rateDocPanel')) return;
+        const pn = document.createElement('div'); pn.id = 'rateDocPanel'; pn.className = 'pc-panel';
+        pn.innerHTML = '<div class="pc-card"><div class="pc-head"><span>👨‍⚕️ تقييم الأطباء</span><button type="button" class="pc-x" onclick="ratingDocClose()">✖</button></div><div class="pc-body" id="rateDocBody"></div></div>';
+        document.body.appendChild(pn);
+        pn.addEventListener('click', e => { if (e.target === pn) ratingDocClose(); });
+    }
+    function ratingDocClose() { const p = document.getElementById('rateDocPanel'); if (p) p.style.display = 'none'; }
+    function ratingDocOpen() {
+        ratingDocInit();
+        document.getElementById('rateDocPanel').style.display = 'flex';
+        document.getElementById('rateDocBody').innerHTML = '<div class="net-empty">⏳ جارٍ حساب التقييم…</div>';
+        setTimeout(() => {
+            const rows = GENERAL_CLINICS_DATA.filter(d => seqNum(d) !== null && !d.license).map(d => dScore(d)).filter(Boolean);
+            rows.sort((a, b) => (a.reserved - b.reserved) || (b.total - a.total) || (a.seq - b.seq));
+            _rateD = { rows: rows, gov: '', spec: '', res: false, coord: false };
+            ratingDocRender();
+        }, 30);
+    }
+    function ratingDocRender() {
+        const body = document.getElementById('rateDocBody'); if (!body || !_rateD) return;
+        const govs = Array.from(new Set(_rateD.rows.map(r => r.c.gov))).sort((a, b) => (a === 'بغداد' ? -1 : b === 'بغداد' ? 1 : a.localeCompare(b, 'ar')));
+        const specs = Array.from(new Set([].concat.apply([], _rateD.rows.map(r => specsOf(r.c))))).sort((a, b) => a.localeCompare(b, 'ar'));
+        const list = _rateD.rows.filter(r => (!_rateD.gov || r.c.gov === _rateD.gov) && (!_rateD.spec || specsOf(r.c).includes(_rateD.spec)) && (_rateD.res || !r.reserved) && (!_rateD.coord || r.coord === 'agree' || r.coord === 'lite' || r.coord === 'old'));
+        const cnt = { 'ممتاز': 0, 'جيد': 0, 'متوسط': 0, 'ضعيف': 0 }; list.forEach(r => { cnt[rateGrade(r.total)[0]]++; });
+        const meth = '<details class="rt-meth"><summary>ℹ️ كيف يُحسب التقييم؟ (من 100)</summary>'
+            + '<b>المؤهل (25):</b> استشاري 25، بورد 22.5، ماجستير 20، دبلوم 16.7، أخصائي 15، مقيم أقدم 11.7، مقيم 8.3، ممارس 5، غير مذكور 6.7.<br>'
+            + '<b>مجمعات مرشحة قريبة (20):</b> عدد المجمعات المتوفرة المطابقة باختصاصه في منطقته أو القريبة؛ ستة فأكثر = الدرجة الكاملة.<br>'
+            + '<b>المرونة (15):</b> دوام مرن، وسيلة نقل، تعدد المناطق، نظام عمل مرن (كشفية/اتفاق)، قبول قلة المراجعين. ويأخذ «راتب مقطوع فقط» صفراً في بند نظام العمل لأنه يضيّق الفرص.<br>'
+            + '<b>الجاهزية (10):</b> متوفر الآن، وطلبه عاجل، وحداثة التسجيل.<br>'
+            + '<b>قبول أجور التنسيق الطبي (20):</b> يتفق ولا يمانع = 20، يترك التقدير لكم = 17، إجابة قديمة إيجابية = 14، لا توجد إجابة = 8 (محايد)، له تحفظ = 3، إجابة قديمة سلبية (مثل «كلا») = 0.<br>'
+            + '<b>خصم الراتب المقطوع:</b> الطبيب الذي يطلب راتباً مقطوعاً ثابتاً يُخصم من تقييمه 12 درجة.<br>'
+            + '<b>الطلب على الاختصاص (10):</b> عدد المجمعات التي تطلب اختصاصه؛ عشرة فأكثر = الدرجة الكاملة.<br>'
+            + 'هذا التقييم لأغراض التنسيق الداخلي ويقيس سهولة وفرصة التوظيف، وليس كفاءة الطبيب المهنية، ولا يظهر للزائر.</details>';
+        const top = '<div class="rt-top"><select onchange="_rateD.gov=this.value;ratingDocRender()"><option value="">كل المحافظات</option>' + govs.map(g => '<option' + (_rateD.gov === g ? ' selected' : '') + '>' + netEsc(g) + '</option>').join('') + '</select>'
+            + '<select onchange="_rateD.spec=this.value;ratingDocRender()"><option value="">كل الاختصاصات</option>' + specs.map(g => '<option' + (_rateD.spec === g ? ' selected' : '') + '>' + netEsc(g) + '</option>').join('') + '</select>'
+            + '<label><input type="checkbox" ' + (_rateD.res ? 'checked' : '') + ' onchange="_rateD.res=this.checked;ratingDocRender()"> إظهار غير المتوفر</label>'
+            + '<label><input type="checkbox" ' + (_rateD.coord ? 'checked' : '') + ' onchange="_rateD.coord=this.checked;ratingDocRender()"> 💵 لا يمانع أجور التنسيق فقط</label>'
+            + '<button type="button" class="net-btn g" onclick="ratingDocCopy()">📋 نسخ الترتيب</button></div>';
+        const sum = '<div class="rt-sum"><span style="background:#e6f7ec;color:#15803d">ممتاز ' + cnt['ممتاز'] + '</span><span style="background:#e0ecff;color:#1d4ed8">جيد ' + cnt['جيد'] + '</span><span style="background:#fff3dc;color:#b45309">متوسط ' + cnt['متوسط'] + '</span><span style="background:#fde4e4;color:#b91c1c">ضعيف ' + cnt['ضعيف'] + '</span><span style="background:#eef2f7;color:#475569">الإجمالي ' + list.length + '</span></div>';
+        const lab = { qual: 'المؤهل', match: 'المجمعات', flex: 'المرونة', ready: 'الجاهزية', demand: 'الطلب', coord: 'أجور التنسيق' };
+        const cards = list.map((r, i) => {
+            const g = rateGrade(r.total), c = r.c;
+            return '<div class="rt-card' + (r.reserved ? ' res' : '') + '"><div class="rt-h"><div class="rt-rank' + (i < 3 && !r.reserved ? ' t' + (i + 1) : '') + '">' + (i + 1) + '</div>'
+                + '<div class="rt-main"><div class="rt-name">طبيب ' + netEsc(seqOf(c)) + (r.name ? ' — ' + netEsc(r.name) : '') + (r.reserved ? ' 🔒 غير متوفر' : '') + '</div><div class="rt-loc">' + netEsc(specsOf(c).slice(0, 3).join('، ')) + (r.grade ? ' · ' + netEsc(r.grade) : '') + '<br>📍 ' + netEsc(adLocation(c, 'doctor')) + '</div></div>'
+                + '<div class="rt-score"><b style="color:' + g[1] + '">' + Math.round(r.total) + '</b><small style="color:' + g[1] + '">' + g[0] + '</small></div></div>'
+                + '<div class="rt-bar"><i style="width:' + Math.min(100, r.total) + '%;background:' + g[1] + '"></i></div>'
+                + '<div class="rt-chips">' + Object.keys(lab).map(k => '<span class="rt-chip">' + lab[k] + ' ' + (Math.round(r.parts[k] * 10) / 10) + '/' + RD_W[k] + '</span>').join('') + (r.fixed ? '<span class="rt-chip" style="background:#fde4e4;color:#b91c1c">⚠️ راتب مقطوع −' + RD_PEN + '</span>' : '') + (r.coord === 'reserve' ? '<span class="rt-chip" style="background:#fde4e4;color:#b91c1c">⚠️ تحفظ على الأجور</span>' : '') + '</div>'
+                + '<details class="rt-det"><summary>📋 تفاصيل التقييم</summary><ul>' + r.notes.map(n => '<li>' + netEsc(n) + '</li>').join('') + '</ul></details>'
+                + '<div class="rt-acts"><a class="net-btn" href="#ad=' + c._id + '" onclick="ratingDocClose()">📄 الإعلان</a><a class="net-btn g" href="#sug=' + c._id + '" onclick="ratingDocClose()">🕸 خريطة ترشيحاته</a></div></div>';
+        }).join('');
+        body.innerHTML = top + sum + meth + (cards || '<div class="net-empty">لا يوجد أطباء بهذه المعايير.</div>');
+        _rateD.list = list;
+    }
+    function ratingDocCopy() {
+        if (!_rateD || !_rateD.list) return;
+        const txt = '📊 تقييم الأطباء (من 100)\n\n' + _rateD.list.map((r, i) => (i + 1) + '. طبيب ' + seqOf(r.c) + (r.name ? ' — ' + r.name : '') + ' — ' + specsOf(r.c).slice(0, 2).join('، ') + ' — ' + Math.round(r.total) + '/100 (' + rateGrade(r.total)[0] + ')').join('\n');
+        const done = () => { if (typeof showToast === 'function') showToast('تم نسخ الترتيب ✅'); };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, () => prompt('انسخ النص:', txt)); else prompt('انسخ النص:', txt);
     }
     function strongOppsInit() {
         if (document.getElementById('strongPanel')) return;
@@ -5891,7 +6292,7 @@
         const vNew = _isRecent(v, 'clinic') ? ' <span class="insta-new">🆕 جديد</span>' : '';
         return '<div class="strong-item"><div class="strong-row"><div class="strong-rank">' + (idx + 1) + '</div><div class="strong-main">'
             + '<div class="strong-pair"><b>👨‍⚕️ طبيب ' + seqOf(d) + dNew + '</b> ↔ <b>🏢 مجمع ' + seqOf(v) + (v.isClass ? ' <span class="insta-cls">كلاس</span>' : '') + vNew + '</b></div>'
-            + '<div class="strong-loc">' + specsOf(d).slice(0, 2).join('، ') + ' · ' + adLocation(v, 'clinic') + '</div>'
+            + '<div style="margin:2px 0">' + dBadgeHtml(d) + qBadgeHtml(v) + '</div><div class="strong-loc">' + specsOf(d).slice(0, 2).join('، ') + ' · ' + adLocation(v, 'clinic') + '</div>'
             + (reasons ? '<div class="strong-reasons">' + reasons + '</div>' : '')
             + '</div><div class="strong-btns"><button type="button" class="strong-wa whatsapp-btn" onclick="strongToggle(' + idx + ')">💬 نسّق</button>'
             + ((ADMIN && typeof pvDelegateLink === 'function' && pvDelegateLink(d._id, v._id)) ? '<button type="button" class="strong-deleg" onclick="pvDelegateImage(\'' + d._id + '\',\'' + v._id + '\')">🖼️ صورة للمندوب</button>' : '')
@@ -7766,7 +8167,6 @@
         }
         handleHash();
         window.addEventListener('hashchange', handleHash);
-        chatInit();
         postersInit();
     };
 </script>
@@ -7799,7 +8199,7 @@
             document.body.appendChild(menu); document.body.appendChild(btn);
             document.addEventListener('click', function (ev) { if (menu.classList.contains('open') && !menu.contains(ev.target) && ev.target !== btn) close(); });
         }
-        btn.innerHTML = '\ud83e\uddf0 \u0627\u0644\u0623\u062f\u0648\u0627\u062a <span class="dn">' + (its.length + 2) + '</span>';
+        btn.innerHTML = '\ud83e\uddf0 \u0627\u0644\u0623\u062f\u0648\u0627\u062a <span class="dn">' + (its.length + 4) + '</span>';
         btn.classList.add('show');
     }
     function label(e) { return (e.innerText || e.textContent || '').trim().replace(/\s+/g, ' '); }
@@ -7831,6 +8231,12 @@
         var its = items();
         menu.innerHTML = '';
         menu.appendChild(netEntry('doctor')); menu.appendChild(netEntry('clinic'));
+        var rb = document.createElement('button'); rb.type = 'button'; rb.className = 'tm-i'; rb.textContent = '\ud83d\udcca \u062a\u0642\u064a\u064a\u0645 \u0627\u0644\u0645\u062c\u0645\u0639\u0627\u062a \u0627\u0644\u0637\u0628\u064a\u0629';
+        rb.onclick = function (ev) { ev.stopPropagation(); close(); setTimeout(function () { if (typeof ratingOpen === 'function') ratingOpen(); }, 60); };
+        menu.appendChild(rb);
+        var rd = document.createElement('button'); rd.type = 'button'; rd.className = 'tm-i'; rd.textContent = '\ud83d\udc68\u200d\u2695\ufe0f \u062a\u0642\u064a\u064a\u0645 \u0627\u0644\u0623\u0637\u0628\u0627\u0621';
+        rd.onclick = function (ev) { ev.stopPropagation(); close(); setTimeout(function () { if (typeof ratingDocOpen === 'function') ratingDocOpen(); }, 60); };
+        menu.appendChild(rd);
         its.forEach(function (e) {
             var b = document.createElement('button'); b.type = 'button'; b.className = 'tm-i'; b.textContent = label(e);
             b.onclick = function (ev) { ev.stopPropagation(); close(); setTimeout(function () { e.click(); }, 60); };
