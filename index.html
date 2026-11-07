@@ -354,6 +354,7 @@
         margin-top: 2px;
     }
 
+    .wa-call { margin-top:8px; font-size:15px !important; background:#1346d8 !important; border:2px solid #fff !important; color:#fff !important; box-shadow:none !important }
     .wa-backup { margin-top:8px; font-size:15px !important; opacity:.92; background:transparent !important; border:2px solid #25d366 !important; color:#fff !important; box-shadow:none !important }
     .wa-direct-btn {
         background-color: #25d366;
@@ -411,6 +412,15 @@
     .wa-channel-btn:hover{background:#f0fdf4}
     .wa-channel-btn.fb{color:#1e3a8a!important;border-color:#1877f2}.wa-channel-btn.fb:hover{background:#eff6ff}
     .wa-channel-btn.tg{color:#075985!important;border-color:#229ed9}.wa-channel-btn.tg:hover{background:#f0f9ff}
+
+    .pk-ov{position:fixed;inset:0;z-index:2147483000;background:rgba(7,22,52,.72);display:none;align-items:center;justify-content:center;padding:14px}
+    .pk-box{background:#fff;color:#0f1d45;border-radius:22px;max-width:640px;width:100%;max-height:90vh;overflow:auto;padding:20px 18px;direction:rtl;box-shadow:0 20px 60px #0008}
+    .pk-box h2{margin:0 0 6px;font-size:22px;color:#0b2a86}.pk-box .pk-sub{font-size:14px;color:#44527a;margin-bottom:12px;line-height:1.6}
+    .pk-t{width:100%;border-collapse:collapse;font-size:14.5px}.pk-t th{background:#0b2a86;color:#fff;padding:9px 6px;font-weight:800}.pk-t td{padding:9px 6px;border-bottom:1px solid #e3e9f7;text-align:center}.pk-t td:first-child{text-align:right;font-weight:700;line-height:1.5}
+    .pk-t .pk-n{display:block;font-weight:900;color:#b45309;font-size:13px}.pk-t b{color:#0b2a86}
+    .pk-note{margin-top:12px;background:#fff7e0;border-radius:12px;padding:10px 12px;font-size:13.5px;line-height:1.7}
+    .pk-pol p{margin:0 0 10px;font-size:14.5px;line-height:1.75}.pk-pol b{color:#0b2a86}
+    .pk-x{margin-top:14px;width:100%;padding:12px;border:0;border-radius:12px;background:#0b2a86;color:#fff;font-weight:900;font-size:16px;font-family:inherit;cursor:pointer}
     .social-btn{background:#fff;color:#0b2a86;border:2px solid #1346d8;border-radius:30px;padding:12px 26px;font-weight:900;font-size:17px;font-family:inherit;cursor:pointer;box-shadow:0 4px 14px #1346d822}.social-btn i{font-style:normal;font-size:13px;margin-right:6px}
     .social-title{margin:14px 0 6px;text-align:center;font-weight:900;font-size:17px;color:#0b2a86}
     .wa-channel-btn.ig{color:#9d174d!important;border-color:#e1306c}.wa-channel-btn.ig:hover{background:#fdf2f8}
@@ -1934,9 +1944,11 @@
                 <span>خدمة التنسيق الطبي متاحة عبر الواتساب</span>
             </div>
             <a href="#" target="_blank" class="wa-direct-btn js-wa-link">💬 <span class="js-wa-display"></span></a>
-            <a href="https://wa.me/9647819548284?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D9%85%D9%86%D8%B5%D8%A9%20%D8%A7%D9%84%D8%AA%D9%86%D8%B3%D9%8A%D9%82%20%D8%A7%D9%84%D8%B7%D8%A8%D9%8A" target="_blank" rel="noopener" class="wa-direct-btn wa-backup">💬 رقم احتياطي: 07819548284</a>
+            <a href="https://wa.me/9647819548284?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D9%85%D9%86%D8%B5%D8%A9%20%D8%A7%D9%84%D8%AA%D9%86%D8%B3%D9%8A%D9%82%20%D8%A7%D9%84%D8%B7%D8%A8%D9%8A" target="_blank" rel="noopener" class="wa-direct-btn wa-backup">💬 رقم احتياطي للمراسلة: 07819548284</a>
+            <a href="tel:07819548284" class="wa-direct-btn wa-call">📞 للاتصال فقط: 07819548284</a>
         </div>
-        <div style="text-align:center;margin-top:12px"><button type="button" class="social-btn" id="socialBtn" aria-expanded="false" onclick="var r=document.getElementById('socialRow'),o=r.style.display==='none';r.style.display=o?'flex':'none';this.setAttribute('aria-expanded',o);this.querySelector('i').textContent=o?'▲':'▼'">🌐 حساباتنا على وسائل التواصل الاجتماعي <i>▼</i></button></div>
+        <div style="text-align:center;margin-top:12px"><button type="button" class="social-btn" id="pkgBtn" onclick="pkgOpen()">💰 أجور وشروط</button></div>
+        <div style="text-align:center;margin-top:10px"><button type="button" class="social-btn" id="socialBtn" aria-expanded="false" onclick="var r=document.getElementById('socialRow'),o=r.style.display==='none';r.style.display=o?'flex':'none';this.setAttribute('aria-expanded',o);this.querySelector('i').textContent=o?'▲':'▼'">🌐 حساباتنا على وسائل التواصل الاجتماعي <i>▼</i></button></div>
         <div class="wa-channel-row" id="socialRow" style="display:none">
             <a href="https://whatsapp.com/channel/0029VbDtiDAJpe8hTGVo1n2a" target="_blank" rel="noopener" class="wa-channel-btn">📢 قناتنا الأولى على واتساب</a>
             <a href="https://whatsapp.com/channel/0029VbE02zlG8l5OH1Gm1A1g" target="_blank" rel="noopener" class="wa-channel-btn">📢 قناتنا الثانية على واتساب</a>
@@ -2446,7 +2458,7 @@
     ,
         { workplace: "hospital", specialty: "طب أسرة", gov: "بغداد", areas: ["الرصافة"], statusLabel: "🟢 متوفرة للعمل", headerLabel: "طبيبة تسلسل 67", title: "طبيبة مقيمة أقدم (طب أسرة) - تبحث عن مستشفى أهلي للعمل - تسلسل 67", details: "طبيبة مقيمة أقدم طب أسرة.<br>تبحث عن العمل في <strong>مستشفى أهلي</strong> ضمن الرصافة، في أي وقت — <strong>طلب عاجل</strong>، بشرط أن تكون العيادة مؤثثة ومدفوعة الإيجار.<br><strong>آلية الراتب والعمل:</strong> نظام الراتب الثابت المقطوع." }
     ,
-        { specialty: "جراحة عامة", gov: "بغداد", areas: ["مدينة الصدر"], statusLabel: "🟢 متوفرة مساءً", headerLabel: "طبيبة تسلسل 68", amount: "1,000$", title: "طبيبة أخصائية جراحة عامة (بورد) - تبحث عن مجمع طبي للعمل - تسلسل 68", details: "طبيبة أخصائية جراحة عامة (بورد)، أنهت فترة التدريب في البورد، ودوامها الحكومي صباحي فقط.<br>تبحث عن العمل في <strong>مجمع طبي</strong> ضمن مدينة الصدر (جانب الرصافة)، في الفترة المسائية — <strong>طلب عاجل</strong>، بشرط أن تكون العيادة مؤثثة ومدفوعة الإيجار وشغّالة.<br>تمتلك وسيلة نقل.<br><strong>آلية الراتب والعمل:</strong> نظام الراتب المقطوع، وبدون مقطوعة إذا كانت العيادة شغّالة." }
+        { specialty: "جراحة عامة", gov: "بغداد", areas: ["مدينة الصدر"], statusLabel: "🔴 غير متوفر حالياً / محجوز", headerLabel: "طبيبة تسلسل 68", amount: "1,000$", title: "طبيبة أخصائية جراحة عامة (بورد) - تبحث عن مجمع طبي للعمل - تسلسل 68", details: "طبيبة أخصائية جراحة عامة (بورد)، أنهت فترة التدريب في البورد، ودوامها الحكومي صباحي فقط.<br>تبحث عن العمل في <strong>مجمع طبي</strong> ضمن مدينة الصدر (جانب الرصافة)، في الفترة المسائية — <strong>طلب عاجل</strong>، بشرط أن تكون العيادة مؤثثة ومدفوعة الإيجار وشغّالة.<br>تمتلك وسيلة نقل.<br><strong>آلية الراتب والعمل:</strong> نظام الراتب المقطوع، وبدون مقطوعة إذا كانت العيادة شغّالة.<br><strong>ملاحظة:</strong> تم تحديث طلبها وتسجيله برقم 82." }
     ,
         { workplace: "hospital", specialty: "مختبرات وتحليلات مرضية", gov: "بغداد", areas: ["العامرية"], statusLabel: "🟢 متوفرة للعمل", headerLabel: "طبيبة تسلسل 69", amount: "حسب عدد الحالات", title: "طبيبة أخصائية مختبرات وتحليلات مرضية (بورد) - تبحث عن مستشفى أهلي للعمل - تسلسل 69", details: "طبيبة أخصائية في علم الأمراض التشريحي / النسيج المرضي (histopathology) — بورد.<br>تبحث عن العمل في مختبر نسيج مرضي، ويُفضّل في <strong>مستشفى أهلي</strong> ضمن مناطق الكرخ ببغداد، صباحاً ومساءً — <strong>طلب عاجل</strong>.<br>تعمل حالياً في دائرة مدينة الطب / مستشفى الشهيد غازي الحريري، وتمتلك وسيلة نقل.<br><strong>آلية الراتب والعمل:</strong> نظام الراتب المقطوع بشروط واتفاق (تُناقش التفاصيل عند الاتفاق لأنه مختبر وليس عيادة)." }
     ,
@@ -2473,6 +2485,10 @@
         { isNew: true, added: "2026-10-31", specialties: ["باطنية", "قلبية واوعية دموية"], gov: "بغداد", areas: ["الدورة"], statusLabel: "🟢 متوفر مساءً", headerLabel: "طبيب تسلسل 80", title: "طبيب مقيم أقدم باطنية وقلبية (بورد) - يبحث عن عيادة للعمل (الدورة) - تسلسل 80", details: "طبيب مقيم أقدم بورد مرحلة ثانية في الباطنية والقلبية، ويعمل في مستشفى تعليمي في بغداد (مقيم أقدم أمراض القلب والباطنية).<br>يبحث عن عيادة للعمل في <strong>الفترة المسائية</strong> ضمن منطقة الدورة (البوعيثة / المعالف) - جانب الكرخ.<br><strong>شروطه:</strong> عيادة مؤثثة ومدفوعة الإيجار، ويمتلك وسيلة نقل، ولا مانع لديه من قلّة المراجعين أو كثرتهم.<br><strong>آلية الراتب والعمل:</strong> نظام الراتب المقطوع بشروط واتفاق." }
     ,
         { isNew: true, added: "2026-10-31", specialties: ["جراحة العظام والكسور"], gov: "بغداد", areas: ["مدينة الحارثية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "طبيب تسلسل 81", title: "طبيب أخصائي جراحة العظام والكسور (بورد) - يبحث عن عيادة شغالة للعمل (الحارثية) - تسلسل 81", details: "طبيب أخصائي بورد في جراحة العظام والكسور، ويعمل حالياً في القطاع الحكومي.<br>يبحث عن <strong>عيادة شغالة</strong> في منطقة الحارثية (الكرخ) وبأي وقت، ويرغب بالانتقال إلى مركز بغداد.<br><strong>شروطه:</strong> عيادة مؤثثة فقط (الإيجار على الطبيب)، ويمتلك وسيلة نقل.<br><strong>آلية الراتب والعمل:</strong> نظام الكشفية." }
+    ,
+        { isNew: true, added: "2026-11-02", specialties: ["جراحة عامة"], gov: "بغداد", areas: ["أطراف الكرخ"], statusLabel: "🟢 متوفر للعمل", headerLabel: "طبيبة تسلسل 82", title: "طبيبة أخصائية جراحة عامة (بورد) - تبحث عن مجمع طبي للعمل - تسلسل 82", details: "طبيبة أخصائية بورد في الجراحة العامة، أنهت فترة التدريب في البورد، ولها خبرة بالعمل في عيادات ومجمعات طبية أثناء فترة البورد، ودوامها الحكومي صباحي فقط بانتظار التوزيع على مستشفى في الكرخ.<br>تبحث عن <strong>مجمع طبي</strong> في أطراف الكرخ بدوام مسائي — <strong>طلب عاجل</strong>.<br><strong>شروطها:</strong> عيادة مؤثثة ومدفوعة الإيجار، وتمتلك وسيلة نقل.<br><strong>آلية الراتب والعمل:</strong> نظام الراتب الثابت المقطوع، ولا مانع من أن يكون عدد المراجعين قليلاً أو كثيراً." }
+    ,
+        { isNew: true, added: "2026-11-04", specialties: ["أمراض نفسية وعصبية"], gov: "بغداد", areas: ["العطيفية"], statusLabel: "🟢 متوفر للعمل", headerLabel: "طبيبة تسلسل 83", title: "طبيبة ممارسة (أمراض نفسية وعصبية) - تبحث عن مجمع طبي للعمل - تسلسل 83", details: "طبيبة ممارسة في الطب النفسي، ولها خبرة 12 سنة في الطب النفسي للبالغين والأطفال وكبار السن، وطب الإدمان وجلسات الدعم النفسي، وقد أنهت مراحل متقدمة من التدريب التخصصي. مستقيلة من القطاع الحكومي.<br>تبحث عن <strong>عيادة شغالة</strong> في العطيفية - المنصور (الكرخ) بدوام مسائي.<br><strong>شروطها:</strong> عيادة مؤثثة ومدفوعة الإيجار، وتمتلك وسيلة نقل، وتنتظر العيادة المناسبة.<br><strong>آلية الراتب والعمل:</strong> نظام نسبة من الكشفية." }
     ];
 
     const DOCTORS_DATA = [
@@ -8270,5 +8286,33 @@
     build();
 })();
 </script>
+
+<div class="pk-ov" id="pkOv" onclick="if(event.target===this)pkgClose()"><div class="pk-box"><h2>💰 أجور وشروط التنسيق</h2><div class="pk-sub"><b>أولاً: الأجور.</b> الأسعار بالدولار الأمريكي، وتُدفع <b>بعد نجاح الصفقة</b> وليس قبلها. السعر حسب اختصاص الطبيب ودرجته.</div><div id="pkBody"></div>
+<div class="pk-note">• الممارس أرخص من الأخصائي (البورد) بـ 150$، والدبلوم أرخص من البورد بـ 100$.<br>• الأسعار لبغداد وأربيل، وتُضاف 20% لبقية المحافظات، أما الأقضية والنواحي فيُقدّر السعر حسب الحالة.<br>• المنصة وسيط تنسيقي فقط، والتحقق من الشهادات والإجازات على المجمع والطبيب.</div>
+<h3 style="margin:18px 0 8px;color:#0b2a86;font-size:18px">📋 ثانياً: شروط التنسيق والترشيح</h3><div class="pk-pol">
+<p><b>١. الدفع بعد النجاح.</b> نوفّر لك مقترحاً (طبيباً واحداً) دون أي مبلغ مقدّم، ولا يُستحق الأجر إلا بعد أن يتفق المجمع مع الطبيب.</p>
+<p><b>٢. المقترح البديل.</b> إذا لم يحصل توافق مع المقترح الأول، فتقديم مقترح بديل يحتاج تأكيد الجدية بعربون متفق عليه يُخصم من أجر الباقة.</p>
+<p><b>٣. الأولوية والسرعة.</b> الطلبات التي يُدفع لها عربون أو تُسدَّد قيمة الباقة مقدماً تُعطى أولوية في التنفيذ وسقفاً زمنياً محدداً لتوفير الطبيب، أما الطلبات بلا مقدّم فتُنفَّذ بحسب الإمكان.</p>
+<p><b>٤. الاستحقاق عند الترشيح.</b> أي طبيب نرشّحه ويتم الاتفاق معه يستحق عنه المجمع أجر الباقة كاملاً، ولا يُقبل الاعتذار بأنه كان معروفاً من قبل إلا إذا أُبلغت المنصة بذلك وثُبّت كتابةً قبل تقديم الطلب.</p>
+<p><b>٥. الرسوم والمحافظات.</b> الأسعار لبغداد وأربيل، وتُضاف 20% لبقية المحافظات، أما الأقضية والنواحي فيُقدَّر السعر حسب الحالة وقد يُطلب عربون مسبق.</p>
+<p><b>٦. دور المنصة.</b> المنصة حلقة وصل وتنسيق وإعلان فقط، وليست طرفاً في أي عقد أو اتفاق أو التزام مالي أو قانوني بين المجمع والطبيب.</p>
+<p><b>٧. التحقق من البيانات.</b> المنصة لا تتحقق من الهويات والشهادات والإجازات، ولا تُعدّ جهة ترخيص طبي. والتحقق الكامل من ذلك مسؤولية المجمع والطبيب.</p>
+<p><b>٨. المتابعة.</b> نتابع معك نتيجة التواصل مع الطبيب المرشح، ونبلغك بكل جديد عبر واتساب المنصة <span style="direction:ltr;display:inline-block">07766529755</span>.</p>
+</div><button class="pk-x" onclick="pkgClose()">إغلاق</button></div></div>
+<script>
+const PKG=[
+ {n:'الباقة الأولى · الكوادر المساندة',d:'صيدلة، مختبر، أسنان عام، فني أشعة وسونار، ليزر، حقن، زراعة شعر',f:250},
+ {n:'الباقة الثانية',d:'نسائية وتوليد، باطنية، أطفال، كسور، جراحة عامة، عيون، مفاصل، تغذية، طب أسرة، أشعة وسونار',b:500},
+ {n:'الباقة الثالثة',d:'جلدية، جراحة تجميلية، مسالك بولية',b:700},
+ {n:'الباقة الرابعة',d:'جراحة الجهاز الهضمي والقلب والأعصاب والأورام، عقم وأنابيب',b:1000},
+ {n:'الباقة الخامسة',d:'جراحة تجميلية وتقويمية دقيقة، تبديل مفصل، كلى، نواظير، استشاري قلب وقسطرة، أمراض الدم',b:1500},
+ {n:'الباقة السادسة',d:'تنظير القنوات الصفراوية، جراحة القلب بلا فتح صدر، شبكية',b:3000}];
+function pkgOpen(){var h='<table class="pk-t"><tr><th>الباقة والاختصاص</th><th>أخصائي بورد</th><th>دبلوم</th><th>ممارس</th></tr>';
+ PKG.forEach(function(x){h+='<tr><td><span class="pk-n">'+x.n+'</span>'+x.d+'</td>'+(x.f?'<td colspan="3"><b>'+x.f+'$</b> سعر موحّد</td>':'<td><b>'+x.b+'$</b></td><td>'+(x.b-100)+'$</td><td>'+(x.b-150)+'$</td>')+'</tr>'});
+ document.getElementById('pkBody').innerHTML=h+'</table>';document.getElementById('pkOv').style.display='flex'}
+function pkgClose(){document.getElementById('pkOv').style.display='none'}
+</script>
+
+
 </body>
 </html>
